@@ -30,7 +30,10 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             $scope.details = data;
             $scope.schemas = data;
             $scope.tableName = data.values.name;
-            $scope.isTable = data.typeName === 'Table';
+            if (data.typeName === 'Table' || data.typeName === 'hive_table' || data.typeName === 'Hive_Table' || data.typeNpame === 'Hive_table') {
+                $scope.isTable = true;
+            }
+
         });
 
         $scope.isString = angular.isString;
