@@ -134,7 +134,7 @@ module.exports = function(grunt) {
                 dest: 'dist'
             }
         },
-        clean: ['public/lib', 'dist'],
+        clean: ['public/lib', 'dist','bower_components','.bower-tmp','.bower-cache','.bower-registry'],
         proxit: {
             dev: {
                 options: {

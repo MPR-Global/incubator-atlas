@@ -212,7 +212,17 @@
                       <arguments>install</arguments>
                     </configuration>
                   </execution>
-
+				
+				<execution>
+                    <id>grunt clean</id>
+                    <goals>
+                      <goal>grunt</goal>
+                    </goals>
+                    <configuration>
+                      <arguments>clean</arguments>
+                    </configuration>
+                  </execution>
+                  
                   <execution>
                     <id>grunt dist</id>
                     <goals>
