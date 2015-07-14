@@ -19,11 +19,13 @@
 'use strict';
 
 angular.module('dgc', ['ngCookies',
+    'ngStorage',
     'ngResource',
     'ui.bootstrap',
     'ui.router',
     'dgc.system',
     'dgc.home',
+    'dgc.login',
     'dgc.search',
     'dgc.navigation'
 ]);

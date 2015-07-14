@@ -123,3 +123,9 @@ footer.navbar-bottom img {
 .search-spinner {
     text-align: center;
 }
+.login{
+    margin-top: 20px;
+}
+.custom-danger{
+    color: #a94442;
+}
