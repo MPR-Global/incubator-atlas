@@ -122,7 +122,7 @@ footer.navbar-bottom img {
 }
 .search-spinner {
     text-align: center;
-}
+} 
 
 .typesTitle .tag {
     padding: 10px 0 0 0;
@@ -153,4 +153,11 @@ footer.navbar-bottom img {
     padding-top: 8px;
     font-size: 17px;
     font-weight: bold;
+ }
+ 
+.login{
+    margin-top: 20px;
+}
+.custom-danger{
+    color: #a94442; 
 }
