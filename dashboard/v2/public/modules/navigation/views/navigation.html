@@ -18,6 +18,9 @@
 
 <div data-ng-controller="NavigationController">
     <h4>Tags</h4>
+    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="create()">
+    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+    </button>
     <div class="list-group">
         <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item">{{nav}} </a>
     </div>

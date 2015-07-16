@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource',
+angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'TypesResource',
     function($scope, $resource, $state, $stateParams, _, TypesResource) {
 
         $scope.appForm = {
@@ -26,21 +26,19 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
 
             submit: function() {
                 var formData = {
-                    enumTypes:[],
-                    structTypes:[],
-                    traitTypes:[
-                        {
-                            superTypes:[],
-                            hierarchicalMetaTypeName:"org.apache.atlas.typesystem.types.TraitType",
-                            typeName:$scope.typename1,
-                            attributeDefinitions:[]
-                        }
-                    ],
-                    classTypes:[]
+                    enumTypes: [],
+                    structTypes: [],
+                    traitTypes: [{
+                        superTypes: [],
+                        hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                        typeName: $scope.typename1,
+                        attributeDefinitions: []
+                    }],
+                    classTypes: []
                 };
-                TypesResource.add(JSON.stringify(formData), function () {
+                TypesResource.add(JSON.stringify(formData), function() {
                     console.log('success');
-                    $scope.successType = "Type " + $scope.typename1+" is created";
+                    $scope.successType = "Type " + $scope.typename1 + " is created";
                 });
             }
         };
