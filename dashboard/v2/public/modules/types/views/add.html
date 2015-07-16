@@ -1,0 +1,13 @@
+<h4>Form</h4>
+<form ng-submit="appForm.submit();">
+    <div>
+        <input type="text" placeholder="trait type name" ng-model="appForm.typename1">
+        <select ng-model="appFom.category">
+            <option value="enumTypes">Enum</option>
+            <option value="structTypes">Struct</option>
+            <option value="traitTypes">Trait</option>
+            <option value="classTypes">Class</option>
+        </select>
+    </div>
+    <button>Submit</button>
+</form>

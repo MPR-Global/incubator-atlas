@@ -123,3 +123,12 @@ footer.navbar-bottom img {
 .search-spinner {
     text-align: center;
 }
+
+
+h4 {padding:5px 0 0 0;margin:10px 0 5px 0;border-top:1px solid;font-family:arial;}
+pre {margin-top:0px;}
+
+form {padding:1em;background:#EEE;}
+form div {margin:0.5em 0;}
+form input {display:block;width:100%;padding:10px;font-size:0.8em;box-sizing:border-box;}
+form select {display:block;width:100%;padding:10px;font-size:0.8em;box-sizing:border-box;}
