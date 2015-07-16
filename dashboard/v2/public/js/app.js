@@ -40,12 +40,34 @@ angular.module('dgc').factory('lodash', ['$window',
     function($window) {
         return $window.d3;
     }
-]).factory('Global', ['$window', '$location',
-    function($window, $location) {
+]).factory('Global', ['$window', '$cookieStore', '$localStorage',
+    function($window, $cookieStore, $localStorage) {
+
         return {
-            user: $location.search()['user.name'],
-            authenticated: !!$window.user,
-            renderErrors: $window.renderErrors
+            setUserSession: function(usrSession, user) {
+                $cookieStore.put('usrSession', usrSession);
+                $localStorage[$cookieStore.get('usrSession').sessionId] = user;
+            },
+            unsetUserSession: function() {
+                $cookieStore.remove('usrSession');
+            },
+            getUserSession: function() {
+                var user = "",
+                    authenticated = false;
+                if (angular.isDefined($cookieStore.get('usrSession')) && $cookieStore.get('usrSession') !== null) {
+                    if (angular.isDefined($localStorage[$cookieStore.get('usrSession').sessionId])) {
+                        user = $localStorage[$cookieStore.get('usrSession').sessionId].user;
+                        authenticated = !!$cookieStore.get('usrSession');
+                    }
+                }
+                return {
+                    user: user,
+                    authenticated: authenticated
+                };
+            },
+            getRenderErrors: function() {
+                return $window.renderErrors;
+            }
         };
     }
 ]).factory('HttpInterceptor', ['Global', function(Global) {
@@ -60,8 +82,14 @@ angular.module('dgc').factory('lodash', ['$window',
     };
 }]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('HttpInterceptor');
-}]).run(['$rootScope', 'Global', 'NotificationService', 'lodash', 'd3', function($rootScope, Global, NotificationService, lodash, d3) {
-    var errors = Global.renderErrors;
+}]).run(['$rootScope', 'Global', 'NotificationService', 'lodash', 'd3', '$state', function($rootScope, Global, NotificationService, lodash, d3, $state) {
+    var errors = Global.getRenderErrors();
+    var isAuthenticated = Global.getUserSession().authenticated;
+    if (isAuthenticated) {
+        if (angular.isDefined(Global.getUserSession().user)) {
+            $rootScope.username = Global.getUserSession().user;
+        }
+    }
     if (angular.isArray(errors) || angular.isObject(errors)) {
         lodash.forEach(errors, function(err) {
             err = angular.isObject(err) ? err : {
@@ -76,7 +104,13 @@ angular.module('dgc').factory('lodash', ['$window',
             NotificationService.error(errors);
         }
     }
-    $rootScope.$on('$stateChangeStart', function() {
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
+        if (toState.name !== 'login' && !Global.getUserSession().authenticated) {
+            event.preventDefault();
+            $state.go('login');
+            return;
+        }
         d3.selectAll('.d3-tip').remove();
     });
+
 }]);

@@ -18,15 +18,11 @@
 
 'use strict';
 
-angular.module('dgc.home').controller('HeaderController', ['$scope', '$localStorage', '$state', '$cookieStore', '$rootScope', function($scope, $localStorage, $state, $cookieStore, $rootScope) {
+angular.module('dgc.home').controller('HeaderController', ['$scope', 'Global', '$state', '$rootScope', function($scope, Global, $state, $rootScope) {
 
     $scope.menu = [];
-
-    if (angular.isDefined($cookieStore.get('usrSession')) && $cookieStore.get('usrSession') !== null && (angular.isDefined($localStorage[$cookieStore.get('usrSession')]))) {
-
-        $rootScope.username = $localStorage[$cookieStore.get('usrSession')].user;
+    if (Global.getUserSession().authenticated) {
         $state.go('search');
-
     } else {
         $state.go('login');
     }
@@ -37,8 +33,7 @@ angular.module('dgc.home').controller('HeaderController', ['$scope', '$localStor
     };
 
     $scope.logOut = function() {
-        $localStorage[$cookieStore.get('usrSession')] = "";
-        $cookieStore.put('usrSession', null);
+        Global.unsetUserSession();
         $rootScope.username = "";
         $state.transitionTo('login');
     };
