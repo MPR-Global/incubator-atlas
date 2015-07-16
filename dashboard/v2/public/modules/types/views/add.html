@@ -1,13 +1,14 @@
-<h4>Form</h4>
-<form ng-submit="appForm.submit();">
+<h4>Create Type</h4>
+<span ng-show="successType" class="alert alert-success" ng-bind="successType"></span>
+<form class="appForm" ng-submit="appForm.submit();">
     <div>
-        <input type="text" placeholder="trait type name" ng-model="appForm.typename1">
-        <select ng-model="appFom.category">
-            <option value="enumTypes">Enum</option>
-            <option value="structTypes">Struct</option>
-            <option value="traitTypes">Trait</option>
-            <option value="classTypes">Class</option>
+        <input type="text" placeholder="type name" ng-model="typename1">
+        <select ng-init="category=3" ng-model="category">
+            <option value="1">Enum</option>
+            <option value="2">Struct</option>
+            <option value="3" selected="selected">Trait</option>
+            <option value="4">Class</option>
         </select>
     </div>
-    <button>Submit</button>
+    <button class="btn-success">Submit</button>
 </form>

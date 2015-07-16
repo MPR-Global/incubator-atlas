@@ -125,10 +125,12 @@ footer.navbar-bottom img {
 }
 
 
-h4 {padding:5px 0 0 0;margin:10px 0 5px 0;border-top:1px solid;font-family:arial;}
+app-form h4 {padding:5px 0 0 0;margin:10px 0 5px 0;border-top:1px solid;font-family:arial;}
+app-form span {
+    display: block;}
 pre {margin-top:0px;}
 
-form {padding:1em;background:#EEE;}
-form div {margin:0.5em 0;}
-form input {display:block;width:100%;padding:10px;font-size:0.8em;box-sizing:border-box;}
-form select {display:block;width:100%;padding:10px;font-size:0.8em;box-sizing:border-box;}
+form.appForm {padding:1em;background:#EEE;}
+form.appForm div {margin:0.5em 0;}
+form.appForm input {display:block;margin: 10px;width:200px;padding:10px;font-size:0.8em;box-sizing:border-box;}
+form.appForm select {display:block;margin: 10px;width:200px;padding:10px;font-size:0.8em;box-sizing:border-box;}

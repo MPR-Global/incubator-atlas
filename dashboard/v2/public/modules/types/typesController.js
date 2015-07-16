@@ -18,45 +18,29 @@
 
 'use strict';
 
-angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource', 'NotificationService',
-    function($scope, $resource, $state, $stateParams, _, TypesResource, NotificationService) {
+angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource',
+    function($scope, $resource, $state, $stateParams, _, TypesResource) {
 
         $scope.appForm = {
-
-            data: {
-                enumTypes: [],
-                structTypes: [],
-                traitTypes: [{
-                    supertypes:[],
-                    hierarchicalMetaTypeName:"org.apache.atlas.typesystem.types.TraitType",
-                    typeName:"Dilipnew22",
-                    attributeDefinitions:[]
-                }],
-                classTypes:[
-                    {
-                        superTypes:[],
-                        hierarchicalMetaTypeName:"org.apache.atlas.typesystem.types.ClassType",
-                        typeName:"Incubator-Atlas",
-                        attributeDefinitions:[
-                            {
-                                name:name,
-                                dataTypeName:"string",
-                                multiplicity:"optional",
-                                isComposite:false,
-                                isUnique:false,
-                                isIndexable:true,
-                                reverseAttributeName:null
-                            }
-                        ]
-                    }
-                ]
-            },
-
             dataSubmitted: '',
 
             submit: function() {
-                TypesResource.save({ }, function (response) {
+                var formData = {
+                    enumTypes:[],
+                    structTypes:[],
+                    traitTypes:[
+                        {
+                            superTypes:[],
+                            hierarchicalMetaTypeName:"org.apache.atlas.typesystem.types.TraitType",
+                            typeName:$scope.typename1,
+                            attributeDefinitions:[]
+                        }
+                    ],
+                    classTypes:[]
+                };
+                TypesResource.add(JSON.stringify(formData), function () {
                     console.log('success');
+                    $scope.successType = "Type " + $scope.typename1+" is created";
                 });
             }
         };
