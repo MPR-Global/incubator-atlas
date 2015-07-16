@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.login').controller('LoginController', ['$scope', '$location', '$http', '$state', '$localStorage', '$cookieStore', '$rootScope',
-    function($scope, $location, $http, $state, $localStorage, $cookieStore, $rootScope) {
+angular.module('dgc.login').controller('LoginController', ['$scope', 'Global', '$location', '$http', '$state', '$rootScope',
+    function($scope, Global, $location, $http, $state, $rootScope) {
         $scope.loggUser = function(form) {
             if (form.$valid) {
                 if ($scope.user.username === 'ambari-qa' && $scope.user.password === 'admin') {
@@ -27,18 +27,25 @@ angular.module('dgc.login').controller('LoginController', ['$scope', '$location'
                     userToken.timeOutLimit = $scope.user.timeOut;
                     userToken.user = $scope.user.username;
                     userToken.timeOut = new Date().getTime();
-                    $cookieStore.put('usrSession', "usr12345");
-                    $localStorage[$cookieStore.get('usrSession')] = userToken;
-                    $rootScope.username = $scope.user.username;
+                    var userSession = {
+                        sessionId: "user12345",
+                        timeOut: userToken.timeOut
+                    };
+                    Global.setUserSession(userSession, userToken);
+                    $rootScope.username = Global.getUserSession().user;
                     $state.go('search');
                 } else {
-                    $scope.showLoginVal.show = true;
-                    $scope.showLoginVal.userPassInvalid = true;
+                    $scope.showLoginVal = {
+                        show: true,
+                        userPassInvalid: true
+                    };
                 }
 
             } else {
-                $scope.showLoginVal.show = true;
-                $scope.showLoginVal.userPassInvalid = true;
+                $scope.showLoginVal = {
+                    show: true,
+                    userPassInvalid: true
+                };
             }
         };
     }
