@@ -18,30 +18,60 @@
 
 'use strict';
 
-angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource',
-    function($scope, $resource, $state, $stateParams, _, TypesResource) {
+angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource','NotificationService',
+    function($scope, $resource, $state, $stateParams, _, TypesResource,NotificationService) {
 
         $scope.appForm = {
-            dataSubmitted: '',
-
             submit: function() {
-                var formData = {
-                    enumTypes:[],
-                    structTypes:[],
-                    traitTypes:[
-                        {
-                            superTypes:[],
-                            hierarchicalMetaTypeName:"org.apache.atlas.typesystem.types.TraitType",
-                            typeName:$scope.typename1,
-                            attributeDefinitions:[]
-                        }
-                    ],
-                    classTypes:[]
-                };
-                TypesResource.add(JSON.stringify(formData), function () {
-                    console.log('success');
-                    $scope.successType = "Type " + $scope.typename1+" is created";
-                });
+                switch(Number($scope.category)) {
+                    case 1:
+                        NotificationService.reset();
+                        NotificationService.error('API not Available', false);
+                        break;
+                    case 2:
+                        NotificationService.reset();
+                        NotificationService.error('API not Available', false);
+                        break;
+                    case 3:
+                        NotificationService.reset();
+                        var formData = {
+                            enumTypes: [],
+                            structTypes: [],
+                            traitTypes: [{
+                                superTypes: [],
+                                hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                                typeName: $scope.typename,
+                                attributeDefinitions: []
+                            }],
+                            classTypes: []
+                        };
+                        break;
+                    case 4:
+                        NotificationService.reset();
+                        var formData = {
+                            enumTypes: [],
+                            structTypes: [],
+                            traitTypes: [],
+                            classTypes:[
+                                {
+                                    "superTypes":[],
+                                    "hierarchicalMetaTypeName":"org.apache.atlas.typesystem.types.ClassType",
+                                    "typeName":$scope.typename,
+                                    "attributeDefinitions":[]
+                                }
+                            ]
+                        };
+                        break;
+                    default:
+                        var formData = null;
+                        NotificationService.reset();
+                        NotificationService.error('Enter Type Name', false);
+                }
+                if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+                    TypesResource.add(JSON.stringify(formData), function () {
+                        $state.go("search");
+                    });
+                }
             }
         };
     }

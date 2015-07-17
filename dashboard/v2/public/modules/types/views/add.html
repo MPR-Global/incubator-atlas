@@ -1,14 +1,19 @@
 <h4>Create Type</h4>
-<span ng-show="successType" class="alert alert-success" ng-bind="successType"></span>
-<form class="appForm" ng-submit="appForm.submit();">
-    <div>
-        <input type="text" placeholder="type name" ng-model="typename1">
-        <select ng-init="category=3" ng-model="category">
+<form class="form-inline appForm" role="form" ng-submit="appForm.submit();">
+    <div class="form-group">
+        <label for="typeName">Type Name:</label>
+        <input type="text"  id="typeName" class="form-control" placeholder="type name" ng-model="typename">
+    </div>
+    <div class="form-group">
+        <label for="category">Select Category:</label>
+        <select class="form-control" id="category" ng-init="category=3" ng-model="category">
             <option value="1">Enum</option>
             <option value="2">Struct</option>
             <option value="3" selected="selected">Trait</option>
             <option value="4">Class</option>
         </select>
     </div>
-    <button class="btn-success">Submit</button>
+
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+    <a href="" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
 </form>
