@@ -17,7 +17,7 @@
   -->
 
 <div data-ng-controller="NavigationController">
-    <div class="row">
+  <div class="row">
         <div class="col-md-12 typesTitle">
             <div class="col-md-1 tag"><span class="glyphicon glyphicon-tags" aria-hionen="true"></span></div>
             <div class="col-md-3 tagsTitle"><h4>Tags</h4></div>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="list-group">
+  <div class="list-group">
         <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item">{{nav}} </a>
     </div>
 </div>
