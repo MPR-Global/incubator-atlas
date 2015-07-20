@@ -23,53 +23,58 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
 
         $scope.appForm = {
             submit: function() {
-                switch(Number($scope.category)) {
-                    case 1:
-                        NotificationService.reset();
-                        NotificationService.error('API not Available', false);
-                        break;
-                    case 2:
-                        NotificationService.reset();
-                        NotificationService.error('API not Available', false);
-                        break;
-                    case 3:
-                        NotificationService.reset();
-                        var formData = {
-                            enumTypes: [],
-                            structTypes: [],
-                            traitTypes: [{
-                                superTypes: [],
-                                hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
-                                typeName: $scope.typename,
-                                attributeDefinitions: []
-                            }],
-                            classTypes: []
-                        };
-                        break;
-                    case 4:
-                        NotificationService.reset();
-                        var formData = {
-                            enumTypes: [],
-                            structTypes: [],
-                            traitTypes: [],
-                            classTypes:[
-                                {
-                                    "superTypes":[],
-                                    "hierarchicalMetaTypeName":"org.apache.atlas.typesystem.types.ClassType",
-                                    "typeName":$scope.typename,
-                                    "attributeDefinitions":[]
-                                }
-                            ]
-                        };
-                        break;
-                    default:
-                        var formData = null;
-                        NotificationService.reset();
-                        NotificationService.error('Enter Type Name', false);
+                var formData = null;
+                if ($scope.typename) {
+                    switch (Number($scope.category)) {
+                        case 1:
+                            NotificationService.reset();
+                            NotificationService.error('API not Available', false);
+                            break;
+                        case 2:
+                            NotificationService.reset();
+                            NotificationService.error('API not Available', false);
+                            break;
+                        case 3:
+                            NotificationService.reset();
+                            formData = {
+                                enumTypes: [],
+                                structTypes: [],
+                                traitTypes: [{
+                                    superTypes: [],
+                                    hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                                    typeName: $scope.typename,
+                                    attributeDefinitions: []
+                                }],
+                                classTypes: []
+                            };
+                            break;
+                        case 4:
+                            NotificationService.reset();
+                            formData = {
+                                enumTypes: [],
+                                structTypes: [],
+                                traitTypes: [],
+                                classTypes: [
+                                    {
+                                        "superTypes": [],
+                                        "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
+                                        "typeName": $scope.typename,
+                                        "attributeDefinitions": []
+                                    }
+                                ]
+                            };
+                            break;
+                        default:
+                            formData = null;
+                            NotificationService.reset();
+                            NotificationService.error('Enter Type Name', false);
+                    }
+                } else {
+                    NotificationService.error('Enter Type Name', false);
                 }
                 if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                     TypesResource.add(JSON.stringify(formData), function () {
-                        $state.go("search");
+                        NotificationService.info('New type has been created', false);
                     });
                 }
             }

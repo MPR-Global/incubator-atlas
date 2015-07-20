@@ -130,3 +130,9 @@ footer.navbar-bottom img {
 .typesTitle .tagsTitle {
     padding: 0;
 }
+
+.appForm {
+    border:1px solid #dddddd;
+    border-radius: 4px;
+    padding: 40px;
+}

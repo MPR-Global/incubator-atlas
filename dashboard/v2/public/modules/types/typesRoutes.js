@@ -23,8 +23,7 @@ angular.module('dgc.types').config(['$stateProvider',
     function($stateProvider) {
         $stateProvider.state('types', {
             url: '/types',
-            templateUrl: '/modules/types/views/types.html',
-            controller: 'TypesController'
+            templateUrl: '/modules/types/views/add.html'
         });
     }
 ]);
