@@ -38,7 +38,7 @@
             <div ng-switch-when="load-gif" class="search-spinner"><img src="../img/spinner.gif" align="middle" /></div>
             <div ng-switch-default><h4 ng-show="searchMessage">{{searchMessage}}</h4></div>
         </div>
-        <div data-ng-include="'/modules/types/views/add.html'"></div>
+        <div ng-show='resultCount <= 0 && !searchMessage' data-ng-include="'/modules/types/views/add.html'"></div>
 
         <ul class="list-unstyled"  ng-show='resultCount > 0'>
             <li ng-repeat="result in filteredResults" class="searchresults">
