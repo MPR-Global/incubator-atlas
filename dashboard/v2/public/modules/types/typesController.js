@@ -45,7 +45,14 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                                     typeName: $scope.typename,
                                     attributeDefinitions: []
                                 }],
-                                classTypes: []
+                                classTypes: [
+                                    {
+                                        "superTypes": [],
+                                        "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
+                                        "typeName": $scope.supertypename,
+                                        "attributeDefinitions": []
+                                    }
+                                ]
                             };
                             break;
                         case 4:
@@ -75,6 +82,8 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                 if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                     TypesResource.add(JSON.stringify(formData), function () {
                         NotificationService.info('New type has been created', false);
+                    }, function(error) {
+                        NotificationService.error(error.data.error, false);
                     });
                 }
             }
