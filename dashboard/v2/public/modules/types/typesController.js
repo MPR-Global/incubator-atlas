@@ -24,6 +24,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.appForm = {
             submit: function() {
                 var formData = null;
+                var superTypes = '"'+$scope.supertypename.split(",").join('","')+'"' ;
                 if ($scope.typename) {
                     switch (Number($scope.category)) {
                         case 1:
@@ -40,19 +41,15 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                                 enumTypes: [],
                                 structTypes: [],
                                 traitTypes: [{
-                                    superTypes: [],
+                                    "superTypes": [
+                                        "Dimension",
+                                        "ETL"
+                                    ],
                                     hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
                                     typeName: $scope.typename,
                                     attributeDefinitions: []
                                 }],
-                                classTypes: [
-                                    {
-                                        "superTypes": [],
-                                        "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
-                                        "typeName": $scope.supertypename,
-                                        "attributeDefinitions": []
-                                    }
-                                ]
+                                classTypes: []
                             };
                             break;
                         case 4:
@@ -63,7 +60,10 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                                 traitTypes: [],
                                 classTypes: [
                                     {
-                                        "superTypes": [],
+                                        "superTypes": [
+                                            "Dimension",
+                                            "ETL"
+                                        ],
                                         "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
                                         "typeName": $scope.typename,
                                         "attributeDefinitions": []
@@ -79,9 +79,12 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                 } else {
                     NotificationService.error('Enter Type Name', false);
                 }
-                if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+               if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                     TypesResource.add(JSON.stringify(formData), function () {
                         NotificationService.info('New type has been created', false);
+                        TypesResource.get({ id: $scope.typename }, function (res) {
+                           $scope.resPreview = res.definition;
+                        });
                     }, function(error) {
                         NotificationService.error(error.data.error, false);
                     });

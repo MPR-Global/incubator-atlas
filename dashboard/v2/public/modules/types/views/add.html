@@ -15,37 +15,48 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<div data-ng-controller="TypesController">
-<h4>Create Type</h4>
-<form class="form-horizontal appForm" role="form" ng-submit="appForm.submit();">
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="supertypeName">Super Type:</label>
-        <div class="col-sm-8">
-            <input type="text"  id="supertypeName" class="form-control" placeholder="Super type name" ng-model="supertypename" >
+<div class="appForm" data-ng-controller="TypesController">
+    <h4>Create Type</h4>
+    <form class="form-horizontal" name="appForm" role="form" ng-submit="appForm.submit();">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="supertypeName">Super Type:</label>
+            <div class="col-sm-8">
+                <input type="text"  id="supertypeName" class="form-control" placeholder="Super type name" ng-model="supertypename" >
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="typeName">Type:</label>
-        <div class="col-sm-8">
-            <input type="text"  id="typeName" class="form-control" placeholder="type name" ng-model="typename">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="typeName">Type:</label>
+            <div class="col-sm-8">
+                <input type="text" name="typename_field"  id="typeName" class="form-control" placeholder="type name" ng-model="typename" ng-pattern="/^[a-zA-Z]*$/" required>
+                <span class="error pop_up"  ng-show="appForm.typename_field.$error.pattern">Special Characters/White Spaces/Numbers are not allowed</span>
+             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="category">Category:</label>
-        <div class="col-sm-8">
-            <select class="form-control" id="category" ng-init="category=3" ng-model="category">
-                <option value="1">Enum</option>
-                <option value="2">Struct</option>
-                <option value="3" selected="selected">Trait</option>
-                <option value="4">Class</option>
-            </select>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="category">Category:</label>
+            <div class="col-sm-8">
+                <select class="form-control" id="category" ng-init="category=3" ng-model="category">
+                    <option value="1">Enum</option>
+                    <option value="2">Struct</option>
+                    <option value="3" selected="selected">Trait</option>
+                    <option value="4">Class</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-            <button type="submit" class="btn btn-success">Submit</button>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
         </div>
-    </div>
 
-</form>
+    </form>
+    <div ng-if="resPreview" class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-8 ">
+            <h4>Preview Type</h4>
+            {{resPreview}}
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
 </div>
