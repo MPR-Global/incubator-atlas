@@ -24,7 +24,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.appForm = {
             submit: function() {
                 var formData = null;
-                var superTypes = '"'+$scope.supertypename.split(",").join('","')+'"' ;
+               // var superTypes = '"'+$scope.supertypename.split(",").join('","')+'"' ;
                 if ($scope.typename) {
                     switch (Number($scope.category)) {
                         case 1:
