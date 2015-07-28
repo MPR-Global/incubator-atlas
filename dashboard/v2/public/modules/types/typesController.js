@@ -20,69 +20,74 @@
 
 angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource','NotificationService',
     function($scope, $resource, $state, $stateParams, _, TypesResource,NotificationService) {
+        var categories = [];
+        var formData = null;
+        var superTypes = [];
+
+
+        $scope.getCategories = function () {
+            $scope.tags = null;
+            TypesResource.get({ categorytype: '/type?='+$scope.category }, function (result) {
+                angular.forEach(result.results, function(value) {
+                    categories.push({text:value});
+                });
+                $scope.loadCategories = function() {
+                    return categories;
+                };
+                angular.forEach($scope.tags, function(value) {
+                    superTypes.push(value.text);
+                });
+            });
+        };
+
+        switch($scope.category) {
+                case "ENUM":
+                    NotificationService.error('API not Available', false);
+                    break;
+                case "STRUCT":
+                    NotificationService.error('API not Available', false);
+                    break;
+                case "TRAIT":
+                    formData = {
+                        enumTypes: [],
+                        structTypes: [],
+                        traitTypes: [{
+                            "superTypes": superTypes,
+                            hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                            typeName: $scope.typename,
+                            attributeDefinitions: []
+                        }],
+                        classTypes: []
+                    };
+                    break;
+                case "CLASS":
+                    formData = {
+                        enumTypes: [],
+                        structTypes: [],
+                        traitTypes: [],
+                        classTypes: [
+                            {
+                                "superTypes": superTypes,
+                                "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
+                                "typeName": $scope.typename,
+                                "attributeDefinitions": []
+                            }
+                        ]
+                    };
+                    break;
+                default:
+              }
 
         $scope.appForm = {
             submit: function() {
-                var formData = null;
-               // var superTypes = '"'+$scope.supertypename.split(",").join('","')+'"' ;
-                if ($scope.typename) {
-                    switch (Number($scope.category)) {
-                        case 1:
-                            NotificationService.reset();
-                            NotificationService.error('API not Available', false);
-                            break;
-                        case 2:
-                            NotificationService.reset();
-                            NotificationService.error('API not Available', false);
-                            break;
-                        case 3:
-                            NotificationService.reset();
-                            formData = {
-                                enumTypes: [],
-                                structTypes: [],
-                                traitTypes: [{
-                                    "superTypes": [
-                                        "Dimension",
-                                        "ETL"
-                                    ],
-                                    hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
-                                    typeName: $scope.typename,
-                                    attributeDefinitions: []
-                                }],
-                                classTypes: []
-                            };
-                            break;
-                        case 4:
-                            NotificationService.reset();
-                            formData = {
-                                enumTypes: [],
-                                structTypes: [],
-                                traitTypes: [],
-                                classTypes: [
-                                    {
-                                        "superTypes": [
-                                            "Dimension",
-                                            "ETL"
-                                        ],
-                                        "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
-                                        "typeName": $scope.typename,
-                                        "attributeDefinitions": []
-                                    }
-                                ]
-                            };
-                            break;
-                        default:
-                            formData = null;
-                            NotificationService.reset();
-                            NotificationService.error('Enter Type Name', false);
-                    }
-                } else {
-                    NotificationService.error('Enter Type Name', false);
-                }
-               if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+                NotificationService.reset();
+                if (!$scope.typename) {
+                    NotificationService.error('Enter Type Name', false);                }
+
+                if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                     TypesResource.add(JSON.stringify(formData), function () {
                         NotificationService.info('New type has been created', false);
-                        TypesResource.get({ id: $scope.typename }, function (res) {
+                        TypesResource.get({ id: '/'+$scope.typename }, function (res) {
                            $scope.resPreview = res.definition;
                         });
                     }, function(error) {
