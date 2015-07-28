@@ -18,77 +18,86 @@
 
 'use strict';
 
-angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams','lodash', 'TypesResource','NotificationService',
-    function($scope, $resource, $state, $stateParams, _, TypesResource,NotificationService) {
+angular.module('dgc.types').controller('TypesController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'TypesResource', 'NotificationService',
+    function($scope, $resource, $state, $stateParams, _, TypesResource, NotificationService) {
         var categories = [];
         var formData = null;
         var superTypes = [];
 
-
-        $scope.getCategories = function () {
+        $scope.showSuperTags = false;
+        $scope.getCategories = function() {
             $scope.tags = null;
-            TypesResource.get({ categorytype: '/type?='+$scope.category }, function (result) {
+            TypesResource.get({
+                categorytype: 'type?=' + $scope.category
+            }, function(result) {
+                $scope.showSuperTags = true;
                 angular.forEach(result.results, function(value) {
-                    categories.push({text:value});
+                    categories.push({
+                        text: value
+                    });
                 });
-                $scope.loadCategories = function() {
-                    return categories;
+                $scope.loadCategories = function($query) {
+                    return categories.filter(function(category) {
+                        return category.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
+                    });
                 };
-                angular.forEach($scope.tags, function(value) {
-                    superTypes.push(value.text);
-                });
+
             });
         };
-
-        switch($scope.category) {
-                case "ENUM":
-                    NotificationService.error('API not Available', false);
-                    break;
-                case "STRUCT":
-                    NotificationService.error('API not Available', false);
-                    break;
-                case "TRAIT":
-                    formData = {
-                        enumTypes: [],
-                        structTypes: [],
-                        traitTypes: [{
-                            "superTypes": superTypes,
-                            hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
-                            typeName: $scope.typename,
-                            attributeDefinitions: []
-                        }],
-                        classTypes: []
-                    };
-                    break;
-                case "CLASS":
-                    formData = {
-                        enumTypes: [],
-                        structTypes: [],
-                        traitTypes: [],
-                        classTypes: [
-                            {
-                                "superTypes": superTypes,
-                                "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
-                                "typeName": $scope.typename,
-                                "attributeDefinitions": []
-                            }
-                        ]
-                    };
-                    break;
-                default:
-              }
 
         $scope.appForm = {
             submit: function() {
                 NotificationService.reset();
                 if (!$scope.typename) {
-                    NotificationService.error('Enter Type Name', false);                }
+                    NotificationService.error('Enter Type Name', false);
+                }
+                angular.forEach($scope.tags, function(value) {
+                    superTypes.push(value.text);
+                });
+
+                switch ($scope.category) {
+                    case "ENUM":
+                        NotificationService.error('API not Available', false);
+                        break;
+                    case "STRUCT":
+                        NotificationService.error('API not Available', false);
+                        break;
+                    case "TRAIT":
+                        formData = {
+                            enumTypes: [],
+                            structTypes: [],
+                            traitTypes: [{
+                                "superTypes": superTypes,
+                                hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                                typeName: $scope.typename,
+                                attributeDefinitions: []
+                            }],
+                            classTypes: []
+                        };
+                        break;
+                    case "CLASS":
+                        formData = {
+                            enumTypes: [],
+                            structTypes: [],
+                            traitTypes: [],
+                            classTypes: [{
+                                "superTypes": superTypes,
+                                "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
+                                "typeName": $scope.typename,
+                                "attributeDefinitions": []
+                            }]
+                        };
+                        break;
+                    default:
+                }
 
                 if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
-                    TypesResource.add(JSON.stringify(formData), function () {
+                    TypesResource.add(JSON.stringify(formData), function() {
                         NotificationService.info('New type has been created', false);
-                        TypesResource.get({ id: '/'+$scope.typename }, function (res) {
-                           $scope.resPreview = res.definition;
+                        TypesResource.get({
+                            id: $scope.typename
+                        }, function(res) {
+                            $scope.resPreview = res.definition;
                         });
                     }, function(error) {
                         NotificationService.error(error.data.error, false);
