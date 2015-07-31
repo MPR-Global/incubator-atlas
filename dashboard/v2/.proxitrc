@@ -1,0 +1,10 @@
+{
+   "verbose": true,
+   "hosts": [{
+	   "hostnames": ["*"],
+	   "routes": {
+		   "/": "dist",
+                   "/api":"http://162.249.6.50:21000/api"
+	   }
+   }]
+}
