@@ -19,11 +19,16 @@
 'use strict';
 
 angular.module('dgc.types').factory('TypesResource', ['$resource', function($resource) {
-    return $resource('/api/atlas/types/:id', {}, {
+    return $resource('/api/atlas/types/?:id', {}, {
         add: {
             'method': 'POST'
         },
         get: {
+            'method': 'GET',
+            'responseType': 'json'
+        },
+        getType: {
+            'url': '/api/atlas/types/:id',
             'method': 'GET',
             'responseType': 'json'
         }

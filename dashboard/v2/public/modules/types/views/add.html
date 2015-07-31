@@ -30,11 +30,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="category">Category:</label>
             <div class="col-sm-8">
-                <select ng-change="getCategories(category)" class="form-control" id="category" ng-model="category">
-                    <option value="ENUM">Enum</option>
-                    <option value="STRUCT">Struct</option>
-                    <option value="TRAIT" selected="selected">Trait</option>
-                    <option value="CLASS">Class</option>
+                <select class="form-control" id="category" ng-model="selectedcategory">
+                    <option ng-repeat="category in cetegorieslist" value="{{category}}">{{category}}</option>
                 </select>
             </div>
         </div>
@@ -44,10 +41,9 @@
                 <input type="text"  id="supertypeName" class="form-control" placeholder="Super type name" ng-model="supertypename" required>
             </div>
         </div>-->
-        <div ng-if="!showSuperTags && category" class="search-spinner"><img src="../img/spinner.gif" align="middle" /></div>
-        <div ng-if="showSuperTags" class="form-group">
+        <div class="form-group">
             <label class="control-label col-sm-2">Super Type:</label>
-            <div class="col-sm-8">
+            <div  ng-if="selectedcategory" class="col-sm-8">
                 <tags-input ng-model="tags"
                             placeholder="Add a supertypes"
                             replace-spaces-with-dashes="false">
@@ -59,9 +55,22 @@
                     </auto-complete>
                 </tags-input>
             </div>
+            <div  ng-if="!selectedcategory" class="col-sm-8">
+                <tags-input ng-model="tags"
+                            placeholder="Add a supertypes"
+                            replace-spaces-with-dashes="false"
+                            ng-disabled="true">
+                    <auto-complete source="loadCategories($query)"
+                                   min-length="0"
+                                   load-on-focus="true"
+                                   load-on-empty="true"
+                                   max-results-to-show="32" >
+                    </auto-complete>
+                </tags-input>
+            </div>
         </div>
 
-        <div ng-if="showSuperTags" class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-8">
                 <button type="submit" ng-click="appForm.submit();" class="btn btn-success">Submit</button>
             </div>
