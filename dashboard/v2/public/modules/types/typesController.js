@@ -23,18 +23,12 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         var categories = [];
         var formData = null;
         var superTypes = [];
-        $scope.cetegorieslist = ["ENUM", "STRUCT", "TRAIT","CLASS"];
-        angular.forEach($scope.cetegorieslist, function(index) {
-            TypesResource.get({
-                id: 'type=' + index
+        $scope.cetegorieslist = {ENUM : {},STRUCT :{}, TRAIT: {},CLASS: {}};
+        angular.forEach($scope.cetegorieslist, function(value,key) {
+            TypesResource.query({
+                type: key
             }, function(result) {
-                var category = [];
-                angular.forEach(result.results, function(value) {
-                    category.push({
-                        text: value
-                    });
-                });
-                categories[index] = category;
+                categories[key] = result;
             });
 
         });
@@ -45,9 +39,12 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
             });
         };
         $scope.showSuperTags = false;
+        $scope.resetTags = function(){
+          console.log('here');
+          console.log($scope);
+        };
         $scope.appForm = {
             submit: function() {
-                console.log('submitted');
                 NotificationService.reset();
                 if (!$scope.typename) {
                     NotificationService.error('Enter Type Name', false);
@@ -93,9 +90,9 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                 }
 
                 if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
-                    TypesResource.add(JSON.stringify(formData), function() {
+                    TypesResource.save(JSON.stringify(formData), function() {
                         NotificationService.info('New type has been created', false);
-                        TypesResource.getType({
+                        TypesResource.get({
                             id: $scope.typename
                         }, function(res) {
                             $scope.resPreview = res.definition;

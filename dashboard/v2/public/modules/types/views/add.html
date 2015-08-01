@@ -30,8 +30,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="category">Category:</label>
             <div class="col-sm-8">
-                <select class="form-control" id="category" ng-model="selectedcategory">
-                    <option ng-repeat="category in cetegorieslist" value="{{category}}">{{category}}</option>
+                <select class="form-control" id="category" ng-change="resetTags()"   ng-model="selectedcategory">
+                    <option ng-repeat="(key, value) in cetegorieslist" value="{{key}}">{{key}}</option>
                 </select>
             </div>
         </div>

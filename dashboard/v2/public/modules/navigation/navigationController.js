@@ -18,10 +18,12 @@
 
 'use strict';
 
-angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource', '$state',
-    function($scope, NavigationResource, $state) {
+angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'TypesResource', '$state',
+    function($scope, TypesResource, $state) {
 
-        $scope.leftnav = NavigationResource.get();
+        $scope.leftnav = TypesResource.get({
+            type: 'TRAIT'
+        });
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
 
