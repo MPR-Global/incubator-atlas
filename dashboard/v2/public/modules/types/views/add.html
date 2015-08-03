@@ -21,17 +21,17 @@
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="typeName">Type:</label>
-            <div class="col-sm-8">
+            <div class="col-sm-8" ng-class="{ 'has-error' : typesForm.typename_field.$invalid && !typesForm.typename_field.$pristine }">
                 <input type="text" name="typename_field"  id="typeName" class="form-control" placeholder="type name" ng-model="typename" ng-pattern="/^[a-zA-Z0-9_]*$/" required>
-                <span class="error pop_up"  ng-show="typesForm.typename_field.$error.pattern">Special Characters/White Spaces are not allowed</span>
-
+                <p ng-show="typesForm.typename_field.$error.pattern" class="help-block">Special Characters/White Spaces are not allowed</p>
+                <p ng-show="typesForm.typename_field.$invalid && !typesForm.typename_field.$pristine" class="help-block">Type name is required.</p>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="category">Category:</label>
             <div class="col-sm-8">
-                <select class="form-control" id="category" ng-model="selectedcategory">
-                    <option ng-repeat="category in cetegorieslist" value="{{category}}">{{category}}</option>
+                <select class="form-control" id="category" ng-change="resetTags()"   ng-model="selectedcategory">
+                    <option ng-repeat="(key, value) in cetegorieslist" value="{{key}}">{{key}}</option>
                 </select>
             </div>
         </div>

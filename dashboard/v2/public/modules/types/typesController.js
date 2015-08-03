@@ -23,18 +23,12 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         var categories = [];
         var formData = null;
         var superTypes = [];
-        $scope.cetegorieslist = ["ENUM", "STRUCT", "TRAIT","CLASS"];
-        angular.forEach($scope.cetegorieslist, function(index) {
-            TypesResource.get({
-                id: 'type=' + index
+        $scope.cetegorieslist = {ENUM : {},STRUCT :{}, TRAIT: {},CLASS: {}};
+        angular.forEach($scope.cetegorieslist, function(value,key) {
+            TypesResource.query({
+                type: key
             }, function(result) {
-                var category = [];
-                angular.forEach(result.results, function(value) {
-                    category.push({
-                        text: value
-                    });
-                });
-                categories[index] = category;
+                categories[key] = result;
             });
 
         });
@@ -45,64 +39,69 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
             });
         };
         $scope.showSuperTags = false;
+        $scope.resetTags = function(){
+          console.log('here');
+          console.log($scope);
+        };
         $scope.appForm = {
             submit: function() {
-                console.log('submitted');
-                NotificationService.reset();
-                if (!$scope.typename) {
-                    NotificationService.error('Enter Type Name', false);
-                }
-                angular.forEach($scope.tags, function(value) {
-                    superTypes.push(value.text);
-                });
-
-                switch ($scope.selectedcategory) {
-                    case "ENUM":
-                        NotificationService.error('API not Available', false);
-                        break;
-                    case "STRUCT":
-                        NotificationService.error('API not Available', false);
-                        break;
-                    case "TRAIT":
-                        formData = {
-                            enumTypes: [],
-                            structTypes: [],
-                            traitTypes: [{
-                                "superTypes": superTypes,
-                                hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
-                                typeName: $scope.typename,
-                                attributeDefinitions: []
-                            }],
-                            classTypes: []
-                        };
-                        break;
-                    case "CLASS":
-                        formData = {
-                            enumTypes: [],
-                            structTypes: [],
-                            traitTypes: [],
-                            classTypes: [{
-                                "superTypes": superTypes,
-                                "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
-                                "typeName": $scope.typename,
-                                "attributeDefinitions": []
-                            }]
-                        };
-                        break;
-                    default:
-                }
-
-                if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
-                    TypesResource.add(JSON.stringify(formData), function() {
-                        NotificationService.info('New type has been created', false);
-                        TypesResource.getType({
-                            id: $scope.typename
-                        }, function(res) {
-                            $scope.resPreview = res.definition;
-                        });
-                    }, function(error) {
-                        NotificationService.error(error.data.error, false);
+                if ($scope.appForm.$valid) {
+                    NotificationService.reset();
+                    if (!$scope.typename) {
+                        NotificationService.error('Enter Type Name', false);
+                    }
+                    angular.forEach($scope.tags, function (value) {
+                        superTypes.push(value.text);
                     });
+
+                    switch ($scope.selectedcategory) {
+                        case "ENUM":
+                            NotificationService.error('API not Available', false);
+                            break;
+                        case "STRUCT":
+                            NotificationService.error('API not Available', false);
+                            break;
+                        case "TRAIT":
+                            formData = {
+                                enumTypes: [],
+                                structTypes: [],
+                                traitTypes: [{
+                                    "superTypes": superTypes,
+                                    hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
+                                    typeName: $scope.typename,
+                                    attributeDefinitions: []
+                                }],
+                                classTypes: []
+                            };
+                            break;
+                        case "CLASS":
+                            formData = {
+                                enumTypes: [],
+                                structTypes: [],
+                                traitTypes: [],
+                                classTypes: [{
+                                    "superTypes": superTypes,
+                                    "hierarchicalMetaTypeName": "org.apache.atlas.typesystem.types.ClassType",
+                                    "typeName": $scope.typename,
+                                    "attributeDefinitions": []
+                                }]
+                            };
+                            break;
+                        default:
+                    }
+
+                    if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+                        TypesResource.save(JSON.stringify(formData), function () {
+                            NotificationService.info('New type has been created', false);
+                            TypesResource.get({
+                                id: $scope.typename
+                            }, function (res) {
+                                $scope.resPreview = res.definition;
+                            });
+                        }, function (error) {
+                            NotificationService.error(error.data.error, false);
+                        });
+                    }
                 }
             }
         };
