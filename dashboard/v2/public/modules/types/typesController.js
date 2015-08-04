@@ -42,20 +42,14 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.appForm = {
             submit: function() {
                 if ($scope.appForm.$valid) {
-                    NotificationService.reset();
-                    if (!$scope.typename) {
-                        NotificationService.error('Enter Type Name', false);
-                    }
                     angular.forEach($scope.tags, function (value) {
                         superTypes.push(value.text);
                     });
 
                     switch ($scope.selectedcategory) {
                         case "ENUM":
-                            NotificationService.error('API not Available', false);
                             break;
                         case "STRUCT":
-                            NotificationService.error('API not Available', false);
                             break;
                         case "TRAIT":
                             formData = {
