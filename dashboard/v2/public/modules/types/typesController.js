@@ -41,7 +41,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.showSuperTags = false;
         $scope.appForm = {
             submit: function() {
-                if ($scope.appForm.$valid) {
+                if ($scope.typesForm.$valid) {
                     angular.forEach($scope.tags, function (value) {
                         superTypes.push(value.text);
                     });
