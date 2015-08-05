@@ -362,7 +362,7 @@
                     <attachClasses>true</attachClasses>
                     <webResources>
                         <resource>
-                            <directory>../dashboard/v2/dist</directory>
+                            <directory>../dashboard/dist</directory>
                             <targetPath>/</targetPath>
                         </resource>
                         <resource>
