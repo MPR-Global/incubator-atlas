@@ -134,7 +134,7 @@ module.exports = function(grunt) {
                 dest: 'dist'
             }
         },
-        clean: ['public/lib', 'dist'],
+        clean: ['dist'],
         proxit: {
             dev: {
                 options: {

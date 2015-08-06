@@ -193,11 +193,6 @@
 					<plugin>
 						<groupId>com.github.eirslett</groupId>
 						<artifactId>frontend-maven-plugin</artifactId>
-						<version>0.0.23</version>
-						<!-- optional -->
-						<configuration>
-							<workingDirectory>../dashboard/v2/</workingDirectory>
-						</configuration>
 						<executions>
 						  <execution>
 							<id>install node and npm</id>
@@ -205,7 +200,7 @@
 							  <goal>install-node-and-npm</goal>
 							</goals>
 							<configuration>
-							  <nodeVersion>v0.10.30</nodeVersion>
+							  <nodeVersion>${node.version}</nodeVersion>
 							  <npmVersion>1.4.3</npmVersion>
 							</configuration>
 						  </execution>
@@ -226,16 +221,38 @@
 					<plugin>
 						<groupId>com.github.eirslett</groupId>
 						<artifactId>frontend-maven-plugin</artifactId>
-						<version>0.0.23</version>
-						<!-- optional -->
-						<configuration>
-							<workingDirectory>../dashboard/v2/</workingDirectory>
-						</configuration>
 						<executions>
 							<execution>
 								<id>npm install</id>
 								<goals>
 								  <goal>npm</goal>
+								</goals>
+								<configuration>
+								  <arguments>install</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+		    </build>
+		</profile>
+		<profile>
+			<id>bower-install</id>
+			<activation>
+				<file>
+					<missing>../dashboard/v2/public/lib</missing>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>install bower</id>
+								<goals>
+								  <goal>bower</goal>
 								</goals>
 								<configuration>
 								  <arguments>install</arguments>
@@ -258,11 +275,6 @@
 					<plugin>
 						<groupId>com.github.eirslett</groupId>
 						<artifactId>frontend-maven-plugin</artifactId>
-						<version>0.0.23</version>
-						<!-- optional -->
-						<configuration>
-							<workingDirectory>../dashboard/v2/</workingDirectory>
-						</configuration>
 						<executions>
 							<execution>
 								<id>npm remaining</id>
@@ -271,15 +283,6 @@
 								</goals>
 								<configuration>
 								  <arguments>install --ignore-scripts</arguments>
-								</configuration>
-							</execution>
-							<execution>
-								<id>grunt devUpdate</id>
-								<goals>
-								  <goal>grunt</goal>
-								</goals>
-								<configuration>
-								  <arguments>devUpdate</arguments>
 								</configuration>
 							</execution>
 							<execution>
