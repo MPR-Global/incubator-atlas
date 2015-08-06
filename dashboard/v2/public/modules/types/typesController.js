@@ -23,7 +23,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         var categories = [];
         var formData = null;
         var superTypes = [];
-        $scope.cetegorieslist = {ENUM : {},STRUCT :{}, TRAIT: {},CLASS: {}};
+        $scope.cetegorieslist = {ENUM : [],STRUCT :[], TRAIT: [],CLASS: []};
         angular.forEach($scope.cetegorieslist, function(value,key) {
             TypesResource.query({
                 type: key
@@ -81,6 +81,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                     }
 
                     if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+                        NotificationService.reset();
                         TypesResource.save(JSON.stringify(formData), function () {
                             NotificationService.info('New type has been created', false);
                             TypesResource.get({

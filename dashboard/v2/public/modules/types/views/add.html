@@ -43,23 +43,12 @@
         </div>-->
         <div class="form-group">
             <label class="control-label col-sm-2">Super Type:</label>
-            <div  ng-if="selectedcategory" class="col-sm-8">
-                <tags-input ng-model="tags"
-                            placeholder="Add a supertypes"
-                            replace-spaces-with-dashes="false">
-                    <auto-complete source="loadCategories($query)"
-                                   min-length="0"
-                                   load-on-focus="true"
-                                   load-on-empty="true"
-                                   max-results-to-show="32" >
-                    </auto-complete>
-                </tags-input>
-            </div>
-            <div  ng-if="!selectedcategory" class="col-sm-8">
+
+            <div  class="col-sm-8">
                 <tags-input ng-model="tags"
                             placeholder="Add a supertypes"
                             replace-spaces-with-dashes="false"
-                            ng-disabled="true">
+                            ng-disabled="!selectedcategory">
                     <auto-complete source="loadCategories($query)"
                                    min-length="0"
                                    load-on-focus="true"
