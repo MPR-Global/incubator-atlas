@@ -131,7 +131,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: 'public/',
                 src: ['**', '!js/**/*.js', '!modules/**/*.js'],
-                dest: 'dist'
+                dest: 'dist/'
             }
         },
         clean: ['dist'],
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
 
     grunt.registerTask('server', ['jshint', 'build', 'concurrent']);
-    grunt.registerTask('build', ['clean', 'bower', 'copy:dist', 'minify']);
+    grunt.registerTask('build', ['clean', 'copy:dist', 'minify']);
 
     grunt.registerTask('minify', 'Minify the all js', function() {
         var done = this.async();
