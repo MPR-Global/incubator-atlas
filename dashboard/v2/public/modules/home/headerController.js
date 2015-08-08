@@ -21,11 +21,11 @@
 angular.module('dgc.home').controller('HeaderController', ['$scope', 'Global', '$state', '$rootScope', function($scope, Global, $state, $rootScope) {
 
     $scope.menu = [];
-    if (Global.getUserSession().authenticated) {
-        $state.go('search');
-    } else {
-        $state.go('login');
-    }
+    // if (Global.getUserSession().authenticated) {
+    //     $state.go('search');
+    // } else {
+    //     $state.go('login');
+    // }
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = function() {

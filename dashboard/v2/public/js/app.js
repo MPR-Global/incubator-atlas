@@ -45,7 +45,9 @@ angular.module('dgc').factory('lodash', ['$window',
 
         return {
             setUserSession: function(usrSession, user) {
-                $cookieStore.put('usrSession', usrSession);
+                var exp = new Date(); 
+                exp.setTime(exp.getTime() + (60 * 60 * 1000));
+                $cookieStore.put('usrSession', usrSession, exp);
                 $localStorage[$cookieStore.get('usrSession').sessionId] = user;
             },
             unsetUserSession: function() {
@@ -73,6 +75,9 @@ angular.module('dgc').factory('lodash', ['$window',
 ]).factory('HttpInterceptor', ['Global', function(Global) {
     return {
         'request': function(config) {
+            if (!Global.getUserSession().authenticated) { 
+                window.location.href = window.location.origin + "#!/login"; 
+            }
             if (config.url && (config.url.indexOf('api/atlas/') === 0 || config.url.indexOf('/api/atlas/') === 0)) {
                 config.params = config.params || {};
                 config.params['user.name'] = Global.user;
@@ -82,7 +87,7 @@ angular.module('dgc').factory('lodash', ['$window',
     };
 }]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('HttpInterceptor');
-}]).run(['$rootScope', 'Global', 'NotificationService', 'lodash', 'd3', '$state', function($rootScope, Global, NotificationService, lodash, d3, $state) {
+}]).run(['$rootScope', 'Global', 'NotificationService', 'lodash', 'd3', '$state','$cookieStore', function($rootScope, Global, NotificationService, lodash, d3, $state, $cookieStore) {
     var errors = Global.getRenderErrors();
     var isAuthenticated = Global.getUserSession().authenticated;
     if (isAuthenticated) {
@@ -104,7 +109,13 @@ angular.module('dgc').factory('lodash', ['$window',
             NotificationService.error(errors);
         }
     }
-    $rootScope.$on('$stateChangeStart', function(event, toState) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
+        if(fromState.name !== "" && fromState.url !== "^"){
+            var exp = new Date(); 
+            exp.setTime(exp.getTime() + (60 * 60 * 1000));
+            $cookieStore.put('LastRoute', toState.name, exp);
+            $cookieStore.put('LastRouteParam', toParams, exp); 
+        }
         if (toState.name !== 'login' && !Global.getUserSession().authenticated) {
             event.preventDefault();
             $state.go('login');
