@@ -34,7 +34,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         });
         $scope.loadCategories = function($query) {
             var selectedCategory = $scope.selectedcategory;
-            return categories[selectedCategory].filter(function(category) {
+            return  _.filter(categories[selectedCategory], function(category) {
                 return category.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
             });
         };
