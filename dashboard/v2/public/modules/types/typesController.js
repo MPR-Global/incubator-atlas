@@ -32,6 +32,18 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
             });
 
         });
+        var getType = function (type){
+            TypesResource.get({
+                    id: type
+            }, function (data) {
+               return data.definition;
+            }, function(error) {
+                console.log(error);
+                if(error.status === 404) {
+                    return 'ERROR';
+                }
+            }
+        )};
         $scope.loadCategories = function($query) {
             var selectedCategory = $scope.selectedcategory;
             return  _.filter(categories[selectedCategory], function(category) {
@@ -42,6 +54,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.appForm = {
             submit: function() {
                 if ($scope.typesForm.$valid) {
+                    var resourceType = getType($scope.typename);
                     angular.forEach($scope.tags, function (value) {
                         superTypes.push(value.text);
                     });
@@ -82,16 +95,22 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
 
                     if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                         NotificationService.reset();
-                        TypesResource.save(JSON.stringify(formData), function () {
-                            NotificationService.info('New type has been created', false);
-                            TypesResource.get({
-                                id: $scope.typename
-                            }, function (res) {
-                                $scope.resPreview = res.definition;
+                        if(resourceType === undefined ) {
+                            TypesResource.update({ id:$scope.typename }, JSON.stringify(formData), function () {
+                               NotificationService.info('type has been updated', false);
+                                $scope.resPreview = resourceType;
+                            }, function (error) {
+                                NotificationService.error(error.data.error, false);
                             });
-                        }, function (error) {
-                            NotificationService.error(error.data.error, false);
-                        });
+                        } else {
+                            TypesResource.save(JSON.stringify(formData), function () {
+                                NotificationService.info('New type has been created', false);
+                                $scope.resPreview = getType($scope.typename);
+                            }, function (error) {
+                                NotificationService.error(error.data.error, false);
+                            });
+                        
+                        }
                     }
                 }
             }

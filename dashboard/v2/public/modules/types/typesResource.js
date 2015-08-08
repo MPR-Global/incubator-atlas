@@ -35,6 +35,9 @@ angular.module('dgc.types').factory('TypesResource', ['$resource', function($res
             },
             responseType: 'json',
             isArray: true
+        },
+        update: { 
+            method:'PUT' 
         }
     });
 
