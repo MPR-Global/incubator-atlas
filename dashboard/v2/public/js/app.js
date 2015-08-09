@@ -77,8 +77,8 @@ angular.module('dgc').factory('lodash', ['$window',
     }
 ]).factory('HttpInterceptor', ['Global', function(Global) {
     return {
-        'request': function(config) {
-            if (!Global.getUserSession().authenticated) { 
+        'request': function(config) { 
+            if (!Global.getUserSession().authenticated && config.url.indexOf('/api/atlas') !== -1) { 
                 window.location.href = window.location.origin + "#!/login"; 
             }
             if (config.url && (config.url.indexOf('api/atlas/') === 0 || config.url.indexOf('/api/atlas/') === 0)) {
