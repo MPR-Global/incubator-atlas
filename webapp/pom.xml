@@ -267,7 +267,7 @@
 			<id>grunt-task</id>
 			<activation>
 				<file>
-					<exists>../dashboard/v2/node_modules</exists>
+					<missing>../dashboard/v2/xyz</missing>
 				</file>
 			</activation>
 			<build>
