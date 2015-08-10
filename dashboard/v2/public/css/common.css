@@ -140,3 +140,6 @@ footer.navbar-bottom img {
 .error {
     color: #FF0000;
 }
+.form-group .custom-error {
+    color:#FF0000;
+}
