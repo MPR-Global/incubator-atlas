@@ -1305,6 +1305,7 @@
                         <exclude>dashboard/v2/lib/**</exclude>  <!-- temp libs -->
                         <exclude>dashboard/v2/node*/**</exclude>  <!-- temp libs -->
                         <exclude>dashboard/v2/dist/**</exclude>  <!-- package -->
+						<exclude>dashboard/v2/public/lib/**</exclude>  <!-- lib files -->
                         <exclude>dashboard/v2/**/*.min.js*</exclude> <!-- minified JS -->
                     </excludes>
                 </configuration>
