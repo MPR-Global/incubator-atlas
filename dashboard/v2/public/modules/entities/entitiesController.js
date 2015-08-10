@@ -21,7 +21,7 @@
 angular.module('dgc.entities').controller('EntityController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'EntityResource', 'NotificationService',
     function($scope, $resource, $state, $stateParams, _, EntityResource, NotificationService) {
 
-        $scope.viewtype = "LoadProcess";
+        $scope.viewtype = "Table";
         $scope.getviewtype = function() {
             switch (Number($scope.category)) {
 
