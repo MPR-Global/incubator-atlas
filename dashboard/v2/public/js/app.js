@@ -110,16 +110,31 @@ angular.module('dgc').factory('lodash', ['$window',
         }
     }
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
+        var lastRot = '', lastPrmObj = '', exp = '';
+        
         if(fromState.name !== "" && fromState.url !== "^"){
-            var exp = new Date(); 
+            exp = new Date(); 
             exp.setTime(exp.getTime() + (60 * 60 * 1000));
             $cookieStore.put('LastRoute', toState.name, exp);
             $cookieStore.put('LastRouteParam', toParams, exp); 
         }
+        
         if (toState.name !== 'login' && !Global.getUserSession().authenticated) {
             event.preventDefault();
             $state.go('login');
-            return;
+             
+        }else if(toState.name === 'login' && Global.getUserSession().authenticated){
+            event.preventDefault();
+            lastRot = $cookieStore.get('LastRoute');
+            lastPrmObj = $cookieStore.get('LastRouteParam');
+
+            if(lastRot !== undefined && lastRot !== 'login' && lastRot !== '') { 
+                $state.go(lastRot, lastPrmObj);
+                $cookieStore.remove('LastRoute');
+                $cookieStore.remove('LastRouteParam'); 
+            }else{
+                $state.go('search');
+            }
         }
         d3.selectAll('.d3-tip').remove();
     });
