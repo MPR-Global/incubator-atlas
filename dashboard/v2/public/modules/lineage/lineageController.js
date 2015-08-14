@@ -252,6 +252,11 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                             tooltip.hide(d);
                         }
                     })
+                    .on("dblclick", function(d) {
+                        $state.go("details", {
+                            id: d.guid
+                        });
+                    })
                     .attr("x", "-18px")
                     .attr("y", "-18px")
                     .attr("width", "34px")

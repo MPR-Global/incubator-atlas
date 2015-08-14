@@ -48,7 +48,9 @@ div.lineage {
     border-bottom: 2px solid #006600;
 
 }
-
+.node{
+    cursor  : pointer;
+}
 /*.node rect {*/
     /*stroke: #333;*/
     /*fill: #fff;*/
