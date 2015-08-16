@@ -519,7 +519,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             }
         };
         childCount(0, root);
-        tree = tree.nodeSize([40, 100]); 
+        tree = tree.nodeSize([50, 100]); 
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -529,10 +529,12 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
         nodes.forEach(function(d) {
             if(levelWidth.length > 1 && depthwidth === 10){
                for(var o=0; o < levelWidth.length; o++){
-                  if(levelWidth[o] > 4 ) { depthwidth = 60; }
+                  if(levelWidth[o] > 4 ) { depthwidth = 70;  break;}
                }
             } 
-            d.y = (d.depth * (maxLabelLength * depthwidth));           
+            var dpth = (d.depth * (maxLabelLength * depthwidth));
+            if(dpth && dpth < 230) {  dpth = 250; }
+            d.y = dpth;           
         }); 
 
         // Update the nodes…
@@ -684,7 +686,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
 
     // Append a group which holds all nodes and which the zoom Listener can act upon.
     var svgGroup = baseSvg.append("g")
-                    .attr("transform", "translate("+ widthg/2 + " ," + heightg/2 + ")");
+                    .attr("transform", "translate(120 ," + heightg/2 + ")");
 
     // Define the root
     root = data;
