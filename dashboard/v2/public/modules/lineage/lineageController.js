@@ -531,10 +531,10 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                for(var o=0; o < levelWidth.length; o++){
                   if(levelWidth[o] > 4 ) { depthwidth = 70;  break;}
                }
-            } 
-            var dpth = (d.depth * (maxLabelLength * depthwidth));
-            if(dpth && dpth < 230) {  dpth = 250; }
-            d.y = dpth;           
+            }  
+            var maxLebal = maxLabelLength;
+            if(depthwidth === 10) { maxLebal = 20;}
+            d.y = (d.depth * (maxLebal * depthwidth));           
         }); 
 
         // Update the nodes…
