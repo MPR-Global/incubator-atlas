@@ -18,15 +18,12 @@
 
 'use strict';
 
-angular.module('dgc.search').factory('SearchResource', ['$resource', function($resource) {
-    return $resource('/api/atlas/discovery/search/:verb', {}, {
-        search: {
-            'method': 'GET',
-            'responseType': 'json',
-            'transformResponse': function(data) {
-                return data;
-            }
-        }
-    });
-
-}]);
+//Setting up route
+angular.module('dgc.entities').config(['$stateProvider',
+    function($stateProvider) {
+        $stateProvider.state('entities', {
+            url: '/entities/:id',
+            templateUrl: '/modules/entities/views/add.html'
+        });
+    }
+]);

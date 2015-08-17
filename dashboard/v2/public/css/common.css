@@ -143,3 +143,17 @@ footer.navbar-bottom img {
 .form-group .custom-error {
     color:#FF0000;
 }
+<<<<<<< HEAD
+=======
+
+
+.create-entity {
+    margin-top: -15px;
+}
+
+.create-entity-details {
+    padding-top: 8px;
+    font-size: 17px;
+    font-weight: bold;
+}
+>>>>>>> develop

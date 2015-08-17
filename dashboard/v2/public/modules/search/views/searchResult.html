@@ -39,6 +39,7 @@
 
         <h5>Tags :  <a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search.results({query: key})">{{key}}</a> </h5>
         <div data-ng-if="!searchTypesAvailable" data-ng-include="'/modules/search/views/types/guid.html'"></div>
+        <h4><a class="pull-right create-entity" data-ui-sref="entities({id:result['$id$'].id})">Create Entity</a><h4>
     </li>
 </ul>
 <div class="resultsPagination" ng-show='filteredResults.length > 0'>
