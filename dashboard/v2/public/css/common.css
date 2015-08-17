@@ -123,3 +123,13 @@ footer.navbar-bottom img {
 .search-spinner {
     text-align: center;
 }
+
+.create-entity {
+    margin-top: -15px;
+}
+
+.create-entity-details {
+    padding-top: 8px;
+    font-size: 17px;
+    font-weight: bold;
+}
