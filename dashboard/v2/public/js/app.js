@@ -26,6 +26,8 @@ angular.module('dgc', ['ngCookies',
     'dgc.home',
     'dgc.search',
     'dgc.navigation',
+    'dgc.types',
+    'ngTagsInput',
     'dgc.entities'
 ]);
 
