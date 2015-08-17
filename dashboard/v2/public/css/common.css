@@ -124,6 +124,26 @@ footer.navbar-bottom img {
     text-align: center;
 }
 
+.typesTitle .tag {
+    padding: 10px 0 0 0;
+}
+.typesTitle .tagsTitle {
+    padding: 0;
+}
+
+.appForm {
+    border:1px solid #dddddd;
+    border-radius: 4px;
+    padding: 40px;
+    margin-top: 40px;
+}
+.error {
+    color: #FF0000;
+}
+.form-group .custom-error {
+    color:#FF0000;
+}
+
 .create-entity {
     margin-top: -15px;
 }
