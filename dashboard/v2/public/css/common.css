@@ -122,7 +122,7 @@ footer.navbar-bottom img {
 }
 .search-spinner {
     text-align: center;
-}
+} 
 
 .typesTitle .tag {
     padding: 10px 0 0 0;
@@ -139,18 +139,25 @@ footer.navbar-bottom img {
 }
 .error {
     color: #FF0000;
-}
+}  
+
 .form-group .custom-error {
     color:#FF0000;
-}
-
-
+} 
 .create-entity {
     margin-top: -15px;
 }
 
 .create-entity-details {
     padding-top: 8px;
-    font-size: 17px;
-    font-weight: bold;
-}
+    font-size: 17px; 
+    font-weight: bold; 
+ } 
+
+.login{
+   margin-top: 20px;
+} 
+ 
+.custom-danger{
+    color: #a94442;
+}   

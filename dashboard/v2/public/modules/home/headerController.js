@@ -18,12 +18,23 @@
 
 'use strict';
 
-angular.module('dgc.home').controller('HeaderController', ['$scope', function($scope) {
+angular.module('dgc.home').controller('HeaderController', ['$scope', 'Global', '$state', '$rootScope', function($scope, Global, $state, $rootScope) {
 
     $scope.menu = [];
+    // if (Global.getUserSession().authenticated) {
+    //     $state.go('search');
+    // } else {
+    //     $state.go('login');
+    // }
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = function() {
         return true;
+    };
+
+    $scope.logOut = function() {
+        Global.unsetUserSession();
+        $rootScope.username = "";
+        $state.transitionTo('login');
     };
 }]);
