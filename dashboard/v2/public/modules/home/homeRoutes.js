@@ -19,10 +19,15 @@
 'use strict';
 
 //Setting up route
-angular.module('dgc').config(['$locationProvider', '$urlRouterProvider',
-    function($locationProvider, $urlRouterProvider) {
-        $locationProvider.hashPrefix('!');
-        // For unmatched routes:
-        $urlRouterProvider.otherwise('/login');
+angular.module('dgc.home.routes', []).config(['$stateProvider',
+    function($stateProvider) {
+
+        $stateProvider.state('home', {
+            url: '/',
+            templateUrl: '/modules/home/views/home.html',
+            controller: 'HeaderController'
+        });
+        // states for my app
+
     }
 ]);
