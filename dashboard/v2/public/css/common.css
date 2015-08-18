@@ -139,11 +139,11 @@ footer.navbar-bottom img {
 }
 .error {
     color: #FF0000;
-}
+}  
+
 .form-group .custom-error {
     color:#FF0000;
 }
-
 
 .create-entity {
     margin-top: -15px;
@@ -152,12 +152,13 @@ footer.navbar-bottom img {
 .create-entity-details {
     padding-top: 8px;
     font-size: 17px;
-    font-weight: bold;
- }
- 
+    font-weight: bold; 
+ } 
+
 .login{
     margin-top: 20px;
 }
-.custom-danger{
+
+.custom-danger{ 
     color: #a94442; 
-}
+} 
