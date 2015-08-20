@@ -18,32 +18,4 @@
 
 'use strict';
 
-angular.module('dgc.home').controller('HeaderController', ['$scope', 'Global', '$state', '$rootScope', '$modal', function($scope, Global, $state, $rootScope, $modal) {
-
-    $scope.menu = [];
-    // if (Global.getUserSession().authenticated) {
-    //     $state.go('search');
-    // } else {
-    //     $state.go('login');
-    // }
-
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = function() {
-        return true;
-    };
-
-    $scope.logOut = function() {
-        Global.unsetUserSession();
-        $rootScope.username = "";
-        $state.transitionTo('login');
-    };
-    $scope.ShowAbout = function() {
-        $modal.open({
-            animation: true,
-            templateUrl: '/modules/about/views/about.html',
-            controller: 'AboutController',
-            size: 'lg'
-        });
-
-    };
-}]);
+angular.module('dgc.about', []);

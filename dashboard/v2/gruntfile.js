@@ -155,7 +155,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
 
-    grunt.registerTask('server', ['jshint', 'clean', 'bower','copy:dist', 'minify', 'concurrent']);
+    grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
     grunt.registerTask('build', ['clean', 'copy:dist', 'minify']);
 
     grunt.registerTask('minify', 'Minify the all js', function() {

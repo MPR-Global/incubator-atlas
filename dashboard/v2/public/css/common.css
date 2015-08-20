@@ -137,6 +137,7 @@ footer.navbar-bottom img {
     padding: 40px;
     margin-top: 40px;
 }
+
 .error {
     color: #FF0000;
 }  
@@ -161,3 +162,7 @@ footer.navbar-bottom img {
 .custom-danger{
     color: #a94442;
 }   
+
+.title-bold{
+    font-weight: bold;
+}
