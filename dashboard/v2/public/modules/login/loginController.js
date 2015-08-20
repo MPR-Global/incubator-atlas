@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.login').controller('LoginController', ['$scope', 'Global', '$location', '$http', '$state', '$rootScope', '$cookieStore', 
+angular.module('dgc.login').controller('LoginController', ['$scope', 'Global', '$location', '$http', '$state', '$rootScope', '$cookieStore',
     function($scope, Global, $location, $http, $state, $rootScope, $cookieStore) {
         $scope.loggUser = function(form) {
             if (form.$valid) {
@@ -33,12 +33,13 @@ angular.module('dgc.login').controller('LoginController', ['$scope', 'Global', '
                     };
                     Global.setUserSession(userSession, userToken);
                     $rootScope.username = Global.getUserSession().user;
-                    var lastRoute = $cookieStore.get('LastRoute'), lastParamObj = $cookieStore.get('LastRouteParam');
-                    if(lastRoute !== undefined && lastRoute !== 'login' && lastRoute !== '') { 
+                    var lastRoute = $cookieStore.get('LastRoute'),
+                        lastParamObj = $cookieStore.get('LastRouteParam');
+                    if (lastRoute !== undefined && lastRoute !== 'login' && lastRoute !== '') {
                         $state.go(lastRoute, lastParamObj);
                         $cookieStore.remove('LastRoute');
-                        $cookieStore.remove('LastRouteParam'); 
-                    }else {
+                        $cookieStore.remove('LastRouteParam');
+                    } else {
                         $state.go('search');
                     }
                 } else {

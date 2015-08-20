@@ -23,8 +23,13 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         var categories = [];
         var formData = null;
         var superTypes = [];
-        $scope.cetegorieslist = {ENUM : [],STRUCT :[], TRAIT: [],CLASS: []};
-        angular.forEach($scope.cetegorieslist, function(value,key) {
+        $scope.cetegorieslist = {
+            ENUM: [],
+            STRUCT: [],
+            TRAIT: [],
+            CLASS: []
+        };
+        angular.forEach($scope.cetegorieslist, function(value, key) {
             TypesResource.query({
                 type: key
             }, function(result) {
@@ -34,7 +39,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         });
         $scope.loadCategories = function($query) {
             var selectedCategory = $scope.selectedcategory;
-            return  _.filter(categories[selectedCategory], function(category) {
+            return _.filter(categories[selectedCategory], function(category) {
                 return category.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
             });
         };
@@ -42,7 +47,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.appForm = {
             submit: function() {
                 if ($scope.typesForm.$valid) {
-                    angular.forEach($scope.tags, function (value) {
+                    angular.forEach($scope.tags, function(value) {
                         superTypes.push(value.text);
                     });
 
@@ -82,14 +87,14 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
 
                     if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
                         NotificationService.reset();
-                        TypesResource.save(JSON.stringify(formData), function () {
+                        TypesResource.save(JSON.stringify(formData), function() {
                             NotificationService.info('New type has been created', false);
                             TypesResource.get({
                                 id: $scope.typename
-                            }, function (res) {
+                            }, function(res) {
                                 $scope.resPreview = res.definition;
                             });
-                        }, function (error) {
+                        }, function(error) {
                             NotificationService.error(error.data.error, false);
                         });
                     }
