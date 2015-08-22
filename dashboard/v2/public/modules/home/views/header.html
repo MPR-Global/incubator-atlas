@@ -31,6 +31,9 @@
             <li data-ng-repeat="item in menu" data-ui-sref-active="active">
                 <a data-ui-sref="{{item.state}}">{{item.title}}</a>
             </li>
+            <!--<li><button type="button" class="btn btn-default pull-right btn-sm" ng-click="createEntity()">Create Entity</button></li>-->
         </ul>
+        <a class="btn btn-large  pull-right" title='Create Entity' ng-click="createEntity()"><i class=" glyphicon glyphicon-plus-sign entityBtn "></i></a>
     </nav>
+
 </div>

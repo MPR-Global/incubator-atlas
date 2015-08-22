@@ -16,26 +16,29 @@
   ~ limitations under the License.
   -->
 <div data-ng-controller="EntityController">
-    <h5>Create Entities </h5>
-    <br/>
 
-   <div> <h4>Create Entities for DB,Column,Load Process</h4></div>
-    <br/>
-    <br/>
 
+   <div > <h4 class="col-offset-2 col-sm-9 pull-right">Create Entities for Table,DB,Column,Load Process</h4></div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <form class="form-horizontal appForm" role="form" ng-submit="appForm.submit();">
-
-        <div class="form-group">
-            <label for="category">Select Category:</label>
-            <select class="form-control" id="category" ng-init="category=2" ng-model="category" ng-change="getviewtype()">
+<div class="center-block">
+        <div class="form-group categories " >
+            <div class="col-sm-2"></div>
+            <label class="control-label col-sm-2" for="category">Select Category:</label>
+            <div class="col-sm-4">
+            <select class="form-control .pull-right" id="category" ng-init="category=2" ng-model="category" ng-change="getviewtype()">
                 <option value="2"  selected="selected">Table</option>
                 <option value="3" >LoadProcess</option>
                 <option value="4" >DB</option>
                 <option value="4">Column</option>
             </select>
+                </div>
         </div>
-
-        <div  data-ng-include="'/modules/entities/views/entitytypes/'+viewtype.toLowerCase()+'.html'"></div>
+        <div  data-ng-include="'/modules/entities/views/entitytypes/'+viewtype+'.html'"></div>
+</div>
     </form>
 
 </div>

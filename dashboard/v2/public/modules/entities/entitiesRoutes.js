@@ -22,7 +22,7 @@
 angular.module('dgc.entities').config(['$stateProvider',
     function($stateProvider) {
         $stateProvider.state('entities', {
-            url: '/entities/:id',
+            url: '/entities',
             templateUrl: '/modules/entities/views/add.html'
         });
     }

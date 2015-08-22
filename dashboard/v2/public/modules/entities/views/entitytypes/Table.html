@@ -1,14 +1,25 @@
-<div class="form-group">
+<div class="form-group ">
     <div class="col-sm-2"></div>
     <label class="control-label col-sm-2" for="TableName">Entity table Name:</label>
-    <div class="col-sm-8">
+    <div class="col-sm-4">
+        <select class="form-control .pull-right"  ng-model="$parent.entityTable">
+            <option value="">select entity</option>
+            <option ng-repeat="item in entities" value={{item.id}}>{{item.name}}</option>
+
+        </select>
+    </div>
+</div>
+<div class="form-group ">
+    <div class="col-sm-2"></div>
+    <label class="control-label col-sm-2" for="TableName">Entity table Name:</label>
+    <div class="col-sm-4">
         <input type="text"  id="TableName" class="form-control" placeholder="Entity Name" ng-model="$parent.TableName">
     </div>
 </div>
 <div class="form-group">
     <div class="col-sm-2"></div>
     <label class="control-label col-sm-2" for="Tabledescription">Entity table Discription:</label>
-    <div class="col-sm-8">
+    <div class="col-sm-4">
         <input type="text"  id="Tabledescription" class="form-control" placeholder="Entity Discription" ng-model="$parent.Tabledescription">
     </div>
 </div>
@@ -17,7 +28,7 @@
 <div class="form-group">
     <div class="col-sm-2"></div>
     <label class="control-label col-sm-2" for="Tableowner">Entity Owner:</label>
-    <div class="col-sm-8">
+    <div class="col-sm-4">
         <input type="text"  id="Tableowner" class="form-control" placeholder="Entity Owner" ng-model="$parent.Tableowner">
     </div>
 </div>
@@ -25,7 +36,7 @@
 
 <div class="form-group">
     <div class="col-sm-2"></div>
-    <div class="col-sm-offset-2 col-sm-8">
+    <div class="col-sm-offset-2 col-sm-4">
         <button type="submit" class="btn btn-success">Submit</button>
     </div>
 </div>
