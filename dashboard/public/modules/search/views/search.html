@@ -56,7 +56,7 @@
                 <a href ng-show="!isCollapsed" ng-click="doToggle($event,isCollapsed)">..show less</a>
 
                 <h5 ng-show="!dataTransitioned">Tags : <a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}</a></h5>
-                 <h4><a class="pull-right create-entity" data-ui-sref="entities({id:result['$id$'].id})">Create Entity</a><h4>
+                 <!--<h4><a class="pull-right create-entity" data-ui-sref="entities({id:result['$id$'].id})">Create Entity</a><h4>-->
 
             </li>
         </ul>

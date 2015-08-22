@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.home').controller('HeaderController', ['$scope', function($scope) {
+angular.module('dgc.home').controller('HeaderController', ['$scope', '$state', function($scope, $state) {
 
     $scope.menu = [];
 
@@ -26,4 +26,9 @@ angular.module('dgc.home').controller('HeaderController', ['$scope', function($s
     $scope.isLoggedIn = function() {
         return true;
     };
+
+    $scope.createEntity = function() {
+        $state.go('entities');
+    };
+
 }]);

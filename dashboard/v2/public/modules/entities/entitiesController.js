@@ -18,8 +18,22 @@
 
 'use strict';
 
-angular.module('dgc.entities').controller('EntityController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'EntityResource', 'NotificationService',
-    function($scope, $resource, $state, $stateParams, _, EntityResource, NotificationService) {
+angular.module('dgc.entities').controller('EntityController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'EntityResource', 'NotificationService', 'SearchResource',
+    function($scope, $resource, $state, $stateParams, _, EntityResource, NotificationService, SearchResource) {
+
+        $scope.searchEntity = function(query) {
+            SearchResource.search({
+                query: query
+            }, function searchSuccess(response) {
+                $scope.resultRows = response.results.rows;
+                $scope.entities=[];
+                angular.forEach($scope.resultRows, function(key) {
+                    $scope.entities.push({"name": key.name,"id":key['$id$'].id});
+                });
+
+            });
+        };
+        $scope.searchEntity('Table');
 
         $scope.viewtype = "Table";
         $scope.getviewtype = function() {
@@ -64,7 +78,7 @@ angular.module('dgc.entities').controller('EntityController', ['$scope', '$resou
                                 "description": $scope.Tabledescription,
                                 "db": {
                                     "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                    "id": $stateParams.id,
+                                    "id": $scope.entityTable,
                                     "version": 0,
                                     "typeName": "DB"
                                 },
@@ -203,7 +217,6 @@ angular.module('dgc.entities').controller('EntityController', ['$scope', '$resou
                         break;
                     case 3:
                         NotificationService.reset();
-                        console.log($scope.entitiyName + "entity name");
                         formData = {
                             "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
                             "id": {
