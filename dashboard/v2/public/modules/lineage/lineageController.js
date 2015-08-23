@@ -576,14 +576,16 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             .attr("x", function(d) {
                 return d.children || d._children ? -10 : 10;
             })
-            .attr("dx", function (d) { return d.children ? 30 : -30; })
+            .attr("dx", function (d) { return d.children ? 50 : -50; })
             .attr("dy", -24) 
             .attr('class', 'place-label')
             .attr("text-anchor", function(d) {
                 return d.children || d._children ? "end" : "start";
             })
             .text(function(d) {
-                return d.name;
+                var nameDis = (d.name.length > 15) ? d.name.substring(0,15) + "..." : d.name;
+                $(this).attr('title', d.name);
+                return nameDis;
             })
             .style("fill-opacity", 0); 
 
@@ -596,7 +598,9 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 return d.children || d._children ? "end" : "start";
             })
             .text(function(d) {
-                return d.name;
+                var nameDis = (d.name.length > 15) ? d.name.substring(0,15) + "..." : d.name;
+                $(this).attr('title', d.name);
+                return nameDis;
             });
 
         // Change the circle fill depending on whether it has children and is collapsed
