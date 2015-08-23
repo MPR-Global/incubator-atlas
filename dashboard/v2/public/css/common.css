@@ -161,3 +161,11 @@ footer.navbar-bottom img {
 .custom-danger{
     color: #a94442;
 }   
+
+.searchHistory {
+    color: #BDCF00;
+    padding: 10px;
+    background-color: #9C6892;
+    min-height: 35px;
+    height: auto;
+ }   

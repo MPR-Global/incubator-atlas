@@ -29,6 +29,12 @@
         <div>
             <small class="small-txt">Search: Table, DB, Column</small>
         </div>
+        <div class="searchHistory" ng-if="searchHistory.length > 0">
+           Recent searches :
+           <span data-ng-repeat="srcHistory in searchHistory" data-ng-click="historySearch(srcHistory)">
+              [ {{ srcHistory }} ]
+           </span>
+        </div>
     </form>
 </div>
 <div class="row mt10px">

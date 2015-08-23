@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'NotificationService',
-    function($scope, $location, $http, $state, $stateParams, _, SearchResource, NotificationService) {
+angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'NotificationService', '$localStorage',
+    function($scope, $location, $http, $state, $stateParams, _, SearchResource, NotificationService, $localStorage) {
 
         $scope.results = [];
         $scope.resultCount = 0;
@@ -28,6 +28,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.itemsPerPage = 10;
         $scope.filteredResults = [];
         $scope.resultRows = [];
+        $scope.searchHistory = $localStorage.SearchedHistory;
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
@@ -38,6 +39,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.searchMessage = 'load-gif';
 
             $scope.$parent.query = query;
+            $scope.persistSearch(query);
             SearchResource.search({
                 query: query
             }, function searchSuccess(response) {
@@ -85,6 +87,39 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 location: 'replace'
             });
         };
+
+        $scope.persistSearch = function(query){
+            var storedHisty = $localStorage.SearchedHistory, 
+                flagExit = false; 
+            
+            if(storedHisty !== undefined && query !== undefined && query.length > 0){ 
+
+              for(var t=0; t<storedHisty.length; t++){ 
+                if(storedHisty[t].toLowerCase() === query.toLowerCase()) {
+                  flagExit = true;
+                  break;
+                }   
+              }
+              if(!flagExit ) {
+                storedHisty.push(query);
+                $localStorage.SearchedHistory = storedHisty;
+              }  
+
+              if(storedHisty.length > 5) { storedHisty.splice(0,1); $localStorage.SearchedHistory = storedHisty; }
+
+            } else if(query !== undefined && query.length > 0) { 
+              $localStorage.SearchedHistory = [query]; 
+            }
+             
+        }; 
+
+        $scope.historySearch = function(searchQuey) { 
+            $scope.search(searchQuey);
+        };
+
+        $scope.$watch('searchHistory.length', function () {
+            /* your logic here */                    
+        }, true);
 
         $scope.filterResults = function() {
             var res = [];
