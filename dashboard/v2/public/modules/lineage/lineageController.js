@@ -36,8 +36,9 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                             render();
                         }
                     });
+                }else{ 
+                    $scope.requested = false;
                 }
-                $scope.requested = false;
             });
         }
 
