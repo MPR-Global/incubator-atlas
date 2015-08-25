@@ -30,262 +30,68 @@ angular.module('dgc.entities').controller('EntityController', ['$scope', '$resou
                 angular.forEach($scope.resultRows, function(key) {
                     $scope.entities.push({"name": key.name,"id":key['$id$'].id});
                 });
-
+                console.log( $scope.entities);
             });
         };
         $scope.searchEntity('Table');
 
-        $scope.viewtype = "Table";
+
+
+        $scope.category = "table";
         $scope.getviewtype = function() {
-            switch (Number($scope.category)) {
-
-                case 2:
-                    $scope.viewtype = "Table";
-                    break;
-                case 3:
-                    $scope.viewtype = "LoadProcess";
-                    break;
-                case 4:
-                    $scope.viewtype = "DB";
-                    break;
-
-            }
+            $scope.viewtype=$scope.category;
 
         };
+        $scope.templateUrl = function() {
+            return "/modules/entities/views/entitytypes/"+$scope.category+".html";
+        };
+
+
+
         $scope.appForm = {
             submit: function() {
-                switch (Number($scope.category)) {
-                    case 1:
+                var formData;
+                switch ($scope.category) {
+                    case 'table' :
+
                         NotificationService.reset();
-                        NotificationService.error('API not Available', false);
+
+                            formData=entityTable;
+                            formData.values.name=$scope.TableName;
+                            formData.values.description=$scope.Tabledescription;
+                            formData.values.db.id=$scope.entityTable;
+                            formData.owner=$scope.Tableowner;
                         break;
-                    case 2:
+                    case 'loadprocess':
                         NotificationService.reset();
 
-                        var formData = {
-                            "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                            "id": {
-                                "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                "id": "-1436884922170366000",
-                                "version": 0,
-                                "typeName": "Table"
-                            },
-                            "typeName": "Table",
-                            "values": {
-                                "tableType": "Managed",
-                                "name": $scope.TableName,
-                                "createTime": 1436884922170,
-                                "description": $scope.Tabledescription,
-                                "db": {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                    "id": $scope.entityTable,
-                                    "version": 0,
-                                    "typeName": "DB"
-                                },
-                                "retention": 1436884922170,
-                                "columns": [{
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                                    "id": {
-                                        "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                        "id": "-1436884922170004000",
-                                        "version": 0,
-                                        "typeName": "Column"
-                                    },
-                                    "typeName": "Column",
-                                    "values": {
-                                        "comment": "time_id",
-                                        "name": "time_id",
-                                        "dataType": "int"
-                                    },
-                                    "traitNames": [
+                        formData=loadprocessEnity;
+                        formData.values.name=$scope.entitiyName;
+                        formData.typeName=$scope.typeName;
+                        formData.values.queryPlan=$scope.queryPlan;
+                        formData.values.description=$scope.description;
+                        formData.values.queryText=$scope.queryText;
+                        formData.values.user=$scope.user;
 
-                                    ],
-                                    "traits": {
 
-                                    }
-                                }, {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                                    "id": {
-                                        "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                        "id": "-1436884922170024000",
-                                        "version": 0,
-                                        "typeName": "Column"
-                                    },
-                                    "typeName": "Column",
-                                    "values": {
-                                        "comment": "product id",
-                                        "name": "product_id",
-                                        "dataType": "int"
-                                    },
-                                    "traitNames": [
-
-                                    ],
-                                    "traits": {
-
-                                    }
-                                }, {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                                    "id": {
-                                        "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                        "id": "-1436884922170040000",
-                                        "version": 0,
-                                        "typeName": "Column"
-                                    },
-                                    "typeName": "Column",
-                                    "values": {
-                                        "comment": "customer id",
-                                        "name": "customer_id",
-                                        "dataType": "int"
-                                    },
-                                    "traitNames": [
-                                        "PII"
-                                    ],
-                                    "traits": {
-                                        "PII": {
-                                            "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
-                                            "typeName": "PII",
-                                            "values": {
-
-                                            }
-                                        }
-                                    }
-                                }, {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                                    "id": {
-                                        "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                        "id": "-1436884922170294000",
-                                        "version": 0,
-                                        "typeName": "Column"
-                                    },
-                                    "typeName": "Column",
-                                    "values": {
-                                        "comment": "product id",
-                                        "name": "sales",
-                                        "dataType": "double"
-                                    },
-                                    "traitNames": [
-                                        "Metric"
-                                    ],
-                                    "traits": {
-                                        "Metric": {
-                                            "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
-                                            "typeName": "Metric",
-                                            "values": {
-
-                                            }
-                                        }
-                                    }
-                                }],
-                                "lastAccessTime": 1436884922170,
-                                "owner": $scope.Tableowner,
-                                "sd": {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                                    "id": {
-                                        "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                        "id": "-1436884922169953000",
-                                        "version": 0,
-                                        "typeName": "StorageDesc"
-                                    },
-                                    "typeName": "StorageDesc",
-                                    "values": {
-                                        "outputFormat": "TextOutputFormat",
-                                        "location": "hdfs://host:8000/apps/warehouse/sales",
-                                        "compressed": true,
-                                        "inputFormat": "TextInputFormat"
-                                    },
-                                    "traitNames": [
-
-                                    ],
-                                    "traits": {
-
-                                    }
-                                }
-                            },
-                            "traitNames": [
-                                "Fact"
-                            ],
-                            "traits": {
-                                "Fact": {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
-                                    "typeName": "Fact",
-                                    "values": {
-
-                                    }
-                                }
-                            }
-                        };
                         break;
-                    case 3:
-                        NotificationService.reset();
-                        formData = {
-                            "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                            "id": {
-                                "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                "id": "-1436980375639783000",
-                                "version": 0,
-                                "typeName": $scope.typeName
-                            },
-                            "typeName": $scope.typeName,
-                            "values": {
-                                "queryId": "id",
-                                "name": $scope.entitiyName,
-                                "startTime": 1436980375639,
-                                "queryPlan": $scope.queryPlan,
-                                "description": $scope.description,
-                                "outputs": [],
-                                "endTime": 1436980385639,
-                                "inputs": [],
-                                "queryText": $scope.queryText,
-                                "user": $scope.user,
-                                "queryGraph": "graph"
-                            },
-                            "traitNames": [
-                                "ETL"
-                            ],
-                            "traits": {
-                                "ETL": {
-                                    "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
-                                    "typeName": "ETL",
-                                    "values": {
-
-                                    }
-                                }
-                            }
-                        };
-                        break;
-                    case 4:
+                    case 'db':
                         NotificationService.reset();
 
-                        formData = {
-                            "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Reference",
-                            "id": {
-                                "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Id",
-                                "id": "-1438867091050961000",
-                                "version": 0,
-                                "typeName": $scope.typeName
-                            },
-                            "typeName": $scope.typeName,
-                            "values": {
-                                "name": $scope.name,
-                                "createTime": 1438867091050,
-                                "description": $scope.description,
-                                "locationUri": $scope.locationUri,
-                                "owner": $scope.owner
-                            },
-                            "traitNames": [
+                        formData=dbEntity;
+                        formData.values.name=$scope.entitiyName;
+                        formData.typeName=$scope.typeName;
+                        formData.values.locationUri=$scope.locationUri;
+                        formData.values.description=$scope.description;
+                        formData.values.owner=$scope.owner;
 
-                            ],
-                            "traits": {
-
-                            }
-                        };
                         break;
                     default:
                         formData = null;
                         NotificationService.reset();
                         NotificationService.error('Enter Type Name', false);
                 }
-                if (typeof formData === "object" && !Array.isArray(formData) && formData !== null) {
+                if (typeof formData !== null) {
                     EntityResource.add(JSON.stringify(formData), function() {
                         $state.go("search");
                     });

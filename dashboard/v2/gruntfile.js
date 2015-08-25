@@ -123,14 +123,14 @@ module.exports = function(grunt) {
                         return [pkg.name, pkg.version, gitHash].join('_') + '.tgz';
                     }
                 },
-                src: ['node_modules/**', 'package.json', 'server.js', 'server/**', 'public/**', '!public/js/**', '!public/modules/**/*.js']
+                src: ['node_modules/**', 'package.json', 'server.js', 'server/**', 'public/**', '!public/js/**', '!public/modules/**/*.js','!public/js/json/**']
             }
         },
         copy: {
             dist: {
                 expand: true,
                 cwd: 'public/',
-                src: ['**', '!js/**/*.js', '!modules/**/*.js'],
+                src: ['**', '!js/**/**/*.js', '!modules/**/*.js'],
                 dest: 'dist'
             }
         },

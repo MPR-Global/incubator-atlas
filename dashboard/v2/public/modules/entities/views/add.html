@@ -29,15 +29,15 @@
             <div class="col-sm-2"></div>
             <label class="control-label col-sm-2" for="category">Select Category:</label>
             <div class="col-sm-4">
-            <select class="form-control .pull-right" id="category" ng-init="category=2" ng-model="category" ng-change="getviewtype()">
-                <option value="2"  selected="selected">Table</option>
-                <option value="3" >LoadProcess</option>
-                <option value="4" >DB</option>
-                <option value="4">Column</option>
+            <select class="form-control .pull-right" id="category" ng-model="category" >
+                <option value="table"  selected="selected">Table</option>
+                <option value="loadprocess" >LoadProcess</option>
+                <option value="db" >DB</option>
+                <option value="db">Column</option>
             </select>
                 </div>
         </div>
-        <div  data-ng-include="'/modules/entities/views/entitytypes/'+viewtype.toLowerCase()+'.html'"></div>
+    <ng-include src="templateUrl()"  ></ng-include>
 </div>
     </form>
 
