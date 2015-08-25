@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                         return [pkg.name, pkg.version, gitHash].join('_') + '.tgz';
                     }
                 },
-                src: ['node_modules/**', 'package.json', 'server.js', 'server/**', 'public/**', '!public/js/**', '!public/modules/**/*.js']
+                src: ['node_modules/**', 'package.json', 'server.js', 'server/**', 'public/**', '!public/js/**', '!public/modules/**/*.js','!public/js/json/**']
             }
         },
         copy: {
@@ -140,6 +140,8 @@ module.exports = function(grunt) {
             build: [distPath],
             options: {
                 force: true
+                src: ['**', '!js/**/**/*.js', '!modules/**/*.js'],
+                dest: 'dist'
             }
         },
         proxit: {
