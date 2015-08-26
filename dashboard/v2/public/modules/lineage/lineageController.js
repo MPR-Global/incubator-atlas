@@ -297,7 +297,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
     tooltip = d3.tip()
         .attr('class', 'd3-tip')
         .html(function(d) {
-            return '<pre class="alert alert-success">' + d.tip + '</pre>';
+            return '<pre class="alert alert-success">' + d.name + '</pre>';
         });
 
     // define the baseSvg, attaching a class for styling and the zoomListener
@@ -320,44 +320,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             d3.event.sourceEvent.stopPropagation();
             // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
         })
-        .on("drag", function(d) {
-            if (d ===root) {
-                return;
-            }
-            if (dragStarted) {
-                domNode = this;
-                initiateDrag(d, domNode);
-            }
-
-            // get coords of mouseEvent relative to svg container to allow for panning
-            var relCoords = d3.mouse($('svg').get(0));
-            if (relCoords[0] < panBoundary) {
-                panTimer = true;
-                pan(this, 'left');
-            } else if (relCoords[0] > ($('svg').width() - panBoundary)) {
-
-                panTimer = true;
-                pan(this, 'right');
-            } else if (relCoords[1] < panBoundary) {
-                panTimer = true;
-                pan(this, 'up');
-            } else if (relCoords[1] > ($('svg').height() - panBoundary)) {
-                panTimer = true;
-                pan(this, 'down');
-            } else {
-                try {
-                    clearTimeout(panTimer);
-                } catch (e) {
-
-                }
-            }
-
-            d.x0 += d3.event.dy;
-            d.y0 += d3.event.dx;
-            var node = d3.select(this);
-            node.attr("transform", "translate(" + d.y0 + "," + d.x0 + ")");
-            updateTempConnector();
-        }).on("dragend", function(d) {
+        .on("dragend", function(d) {
             if (d ===root) {
                 return;
             }
@@ -472,7 +435,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
         if (d3.event.defaultPrevented) return; // click suppressed
         d = toggleChildren(d);
         update(d);
-        centerNode(d);
+        //centerNode(d);
     }
 
     //arrow
@@ -558,12 +521,12 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
             })
             .on('mouseover', function(d) {
-                if (d.type === 'LoadProcess') {
+                if (d.type === 'LoadProcess' || 'Table') {
                     tooltip.show(d);
                 }
             })
             .on('mouseout', function(d) {
-                if (d.type === 'LoadProcess') {
+                if (d.type === 'LoadProcess' || 'Table') {
                     tooltip.hide(d);
                 }
             })
