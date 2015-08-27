@@ -38,10 +38,7 @@ angular.module('dgc.entities').controller('EntityController', ['$scope', '$resou
 
 
         $scope.category = "table";
-        $scope.getviewtype = function() {
-            $scope.viewtype=$scope.category;
 
-        };
         $scope.templateUrl = function() {
             return "/modules/entities/views/entitytypes/"+$scope.category+".html";
         };
@@ -51,46 +48,47 @@ angular.module('dgc.entities').controller('EntityController', ['$scope', '$resou
         $scope.appForm = {
             submit: function() {
                 var formData;
-                switch ($scope.category) {
-                    case 'table' :
+                if($scope.category==="table"){
 
-                        NotificationService.reset();
+                    NotificationService.reset();
 
-                            formData=entityTable;
-                            formData.values.name=$scope.TableName;
-                            formData.values.description=$scope.Tabledescription;
-                            formData.values.db.id=$scope.entityTable;
-                            formData.owner=$scope.Tableowner;
-                        break;
-                    case 'loadprocess':
-                        NotificationService.reset();
-
-                        formData=loadprocessEnity;
-                        formData.values.name=$scope.entitiyName;
-                        formData.typeName=$scope.typeName;
-                        formData.values.queryPlan=$scope.queryPlan;
-                        formData.values.description=$scope.description;
-                        formData.values.queryText=$scope.queryText;
-                        formData.values.user=$scope.user;
+                    formData=entityTable;
+                    formData.values.name=$scope.TableName;
+                    formData.values.description=$scope.Tabledescription;
+                    formData.values.db.id=$scope.entityTable;
+                    formData.owner=$scope.Tableowner;
 
 
-                        break;
-                    case 'db':
-                        NotificationService.reset();
+                    //formData.values.values.comment=$scope.comment;
+                    //formData.values.values.name=$scope.schemaName;
+                    //formData.values.values.dataType=$scope.dataType;
 
-                        formData=dbEntity;
-                        formData.values.name=$scope.entitiyName;
-                        formData.typeName=$scope.typeName;
-                        formData.values.locationUri=$scope.locationUri;
-                        formData.values.description=$scope.description;
-                        formData.values.owner=$scope.owner;
 
-                        break;
-                    default:
-                        formData = null;
-                        NotificationService.reset();
-                        NotificationService.error('Enter Type Name', false);
                 }
+                else if($scope.category==="loadprocess")
+                {
+                    NotificationService.reset();
+
+                    formData=loadprocessEnity;
+                    formData.values.name=$scope.entitiyName;
+                    formData.typeName=$scope.typeName;
+                    formData.values.queryPlan=$scope.queryPlan;
+                    formData.values.description=$scope.description;
+                    formData.values.queryText=$scope.queryText;
+                    formData.values.user=$scope.user;
+                }
+                else if($scope.category==="db")
+                {
+                    NotificationService.reset();
+
+                    formData=dbEntity;
+                    formData.values.name=$scope.entitiyName;
+                    formData.typeName=$scope.typeName;
+                    formData.values.locationUri=$scope.locationUri;
+                    formData.values.description=$scope.description;
+                    formData.values.owner=$scope.owner;
+                }
+
                 if (typeof formData !== null) {
                     EntityResource.add(JSON.stringify(formData), function() {
                         $state.go("search");
