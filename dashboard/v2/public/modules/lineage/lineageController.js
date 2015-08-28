@@ -158,8 +158,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
 
         function renderGraph(data, container) {
             // ************** Generate the tree diagram  *****************
-            var element = d3.select(container.element), 
-                panTimer = false,
+            var element = d3.select(container.element),  
                 widthg = Math.max(container.width, 960),
                 heightg = Math.max(container.height, 500),
 
@@ -173,9 +172,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 multiParents = null,
                 nodes = null,
                 tooltip = null,
-                node = null, 
-                panSpeed = 200,
-                panBoundary = 20, 
+                node = null,  
                 i = 0,
                 duration = 750,
                 root,
@@ -230,35 +227,8 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
         });
     }
     // Sort the tree initially incase the JSON isn't in a sorted order.
-    sortTree();
-
-    // TODO: Pan function, can be better implemented.
-
-    function pan(domNode, direction) {
-        var speed = panSpeed;
-        if (panTimer) {
-            clearTimeout(panTimer);
-            var translateCoords = d3.transform(svgGroup.attr("transform")), translateX, translateY, scaleX, scaleY;
-            if (direction ==='left' || direction ==='right') {
-                translateX = direction ==='left' ? translateCoords.translate[0] + speed : translateCoords.translate[0] - speed;
-                translateY = translateCoords.translate[1];
-            } else if (direction ==='up' || direction ==='down') {
-                translateX = translateCoords.translate[0];
-                translateY = direction ==='up' ? translateCoords.translate[1] + speed : translateCoords.translate[1] - speed;
-            }
-            scaleX = translateCoords.scale[0];
-            scaleY = translateCoords.scale[1];
-            var scale = zoomListener.scale();
-            svgGroup.transition().attr("transform", "translate(" + translateX + "," + translateY + ")scale(" + scale + ")");
-            d3.select(domNode).select('g.node').attr("transform", "translate(" + translateX + "," + translateY + ")");
-            zoomListener.scale(zoomListener.scale());
-            zoomListener.translate([translateX, translateY]);
-            panTimer = setTimeout(function() {
-                pan(domNode, speed, direction);
-            }, 50);
-        }
-    }
-
+    sortTree(); 
+     
     // Define the zoom function for the zoomable tree
 
     function zoom() {
@@ -268,31 +238,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
 
     // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
     var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
-
-    function initiateDrag(d, domNode) {
-        draggingNode = d;
-        d3.select(domNode).select('.ghostCircle').attr('pointer-events', 'none');
-        d3.selectAll('.ghostCircle').attr('class', 'ghostCircle show');
-        d3.select(domNode).attr('class', 'node activeDrag');
-
-        svgGroup.selectAll("g.node").sort(function(a) { // select the parent and sort the path's
-            if (a.id !==draggingNode.id) return 1; // a is not the hovered element, send "a" to the back
-            else return -1; // a is the hovered element, bring "a" to the front
-        });
-          
-
-        // remove parent link
-        //var parentLink = tree.links(tree.nodes(draggingNode.parent));
-        svgGroup.selectAll('path.link').filter(function(d) {
-            if (d.target.id ===draggingNode.id) {
-                return true;
-            }
-            return false;
-        }).remove();
-
-        dragStarted = null;
-    }
-
      /* Initialize tooltip */
     tooltip = d3.tip()
         .attr('class', 'd3-tip')
@@ -319,7 +264,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             nodes = tree.nodes(d);
             d3.event.sourceEvent.stopPropagation();
             // it's important that we suppress the mouseover event on the node being dragged. Otherwise it will absorb the mouseover event and the underlying node will not detect it d3.select(this).attr('pointer-events', 'none');
-        })
+        }) 
         .on("dragend", function(d) {
             if (d ===root) {
                 return;
