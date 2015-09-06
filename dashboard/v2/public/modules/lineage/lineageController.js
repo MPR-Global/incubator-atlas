@@ -462,6 +462,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             .on('click', click);
  
          nodeEnter.append("image")
+            .attr("class","nodeImage")
             .attr("xlink:href", function(d) { 
                 return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
             })
@@ -512,11 +513,16 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             });
 
         // Change the circle fill depending on whether it has children and is collapsed
-        node.select("circle.nodeCircle")
+        // Change the circle fill depending on whether it has children and is collapsed
+        node.select("image.nodeImage")
             .attr("r", 4.5)
-            .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+            .attr("xlink:href", function(d) { 
+                if(d._children){
+                    return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
+                }
+                return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
             });
+
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
