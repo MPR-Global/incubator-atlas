@@ -63,16 +63,27 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
 
         $scope.type = $element.parent().attr('data-table-type');
         $scope.requested = false;
+        $scope.height = $element[0].offsetHeight;
+        $scope.width = $element[0].offsetWidth;
 
         function render() {
             renderGraph($scope.lineageData, {
                 eleObj : $element,
                 element: $element[0],
-                height: $element[0].offsetHeight,
-                width: $element[0].offsetWidth
+                height: $scope.height,
+                width: $scope.width
             });
             $scope.rendered = true;
         }
+
+        $scope.onReset = function(){
+            renderGraph($scope.lineageData, {
+                eleObj : $element,
+                element: $element[0],
+                height: $scope.height,
+                width: $scope.width
+            }); 
+        };
 
         $scope.$on('render-lineage', function(event, lineageData) {
             if (lineageData.type === $scope.type) {
@@ -185,7 +196,8 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
              var tree = d3.layout.tree().nodeSize([100, 200]);
                 /*.size([viewerHeight, viewerWidth]);*/
 
-    container.eleObj.html('');    
+    container.eleObj.find(".graph").html('');    
+    container.eleObj.find("svg").remove();
 
     // define a d3 diagonal projection for use by the node paths later on.
     var diagonal = d3.svg.diagonal()
