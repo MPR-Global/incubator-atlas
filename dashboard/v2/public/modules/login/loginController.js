@@ -22,7 +22,7 @@ angular.module('dgc.login').controller('LoginController', ['$scope', 'Global', '
     function($scope, Global, $location, $http, $state, $rootScope, $cookieStore) {
         $scope.loggUser = function(form) {
             if (form.$valid) {
-                if ($scope.user.username === 'ambari-qa' && $scope.user.password === 'admin') {
+                if ($scope.user.username === 'admin' && $scope.user.password === 'admin') {
                     var userToken = {};
                     userToken.timeOutLimit = $scope.user.timeOut;
                     userToken.user = $scope.user.username;
