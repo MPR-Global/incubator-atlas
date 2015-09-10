@@ -140,8 +140,6 @@ module.exports = function(grunt) {
             build: [distPath],
             options: {
                 force: true
-                src: ['**', '!js/**/**/*.js', '!modules/**/*.js'],
-                dest: 'dist'
             }
         },
         proxit: {
