@@ -1,0 +1,81 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<div class="appForm" data-ng-controller="TypesController">
+    <h4>Create Type</h4>
+    <form name="typesForm" novalidate  class="form-horizontal" role="form" >
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="typeName">Type:</label>
+            <div class="col-sm-8">
+                <input type="text" name="typename_field"  id="typeName" class="form-control" placeholder="type name" ng-model="typename" ng-pattern="/^[a-zA-Z0-9_]*$/" required>
+                <div class="custom-error" ng-show="typesForm.typename_field.$dirty && typesForm.typename_field.$invalid">
+                <p ng-show="typesForm.typename_field.$error.pattern" >Special Characters/White Spaces are not allowed</p>
+                <p ng-show="typesForm.typename_field.$error.required" >Type name is required.</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="category">Category:</label>
+            <div class="col-sm-8">
+                <select class="form-control" id="category" ng-change="resetTags()"   ng-model="selectedcategory">
+                    <option ng-repeat="(key, value) in cetegorieslist" value="{{key}}">{{key}}</option>
+                </select>
+            </div>
+        </div>
+       <!-- <div class="form-group">
+            <label class="control-label col-sm-2" for="supertypeName">Super Type:</label>
+            <div class="col-sm-8">
+                <input type="text"  id="supertypeName" class="form-control" placeholder="Super type name" ng-model="supertypename" required>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label class="control-label col-sm-2">Super Type:</label>
+
+            <div  class="col-sm-8">
+                <tags-input ng-model="tags"
+                            placeholder="Add a supertypes"
+                            replace-spaces-with-dashes="false"
+                            ng-disabled="!selectedcategory">
+                    <auto-complete source="loadCategories($query)"
+                                   min-length="0"
+                                   load-on-focus="true"
+                                   load-on-empty="true"
+                                   max-results-to-show="32" >
+                    </auto-complete>
+                </tags-input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" ng-click="appForm.submit();" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+
+    </form>
+    <div ng-if="resPreview" class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-8 ">
+            <h4>Preview Type</h4>
+            {{resPreview}}
+        </div>
+        <div class="col-lg-2">
+        </div>
+    </div>
+</div>
