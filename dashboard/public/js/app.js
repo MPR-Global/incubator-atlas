@@ -26,7 +26,10 @@ angular.module('dgc', ['ngCookies',
     'dgc.home',
     'dgc.about',
     'dgc.search',
-    'dgc.navigation'
+    'dgc.navigation',
+    'dgc.types',
+    'ngTagsInput',
+    'dgc.entities'
 ]);
 
 angular.module('dgc.system', ['dgc.system.notification']);
