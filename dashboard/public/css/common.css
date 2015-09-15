@@ -127,3 +127,61 @@ footer.navbar-bottom img {
     padding-left: 10px;
     padding-right: 10px;
 }
+.typesTitle .tag {
+    padding: 10px 0 0 0;
+}
+.typesTitle .tagsTitle {
+    padding: 0;
+}
+
+.appForm {
+    border:1px solid #dddddd;
+    border-radius: 4px;
+    padding: 40px;
+    margin-top: 40px;
+}
+.error {
+    color: #FF0000;
+}
+.form-group .custom-error {
+    color:#FF0000;
+}
+
+
+.create-entity {
+    margin-top: -15px;
+}
+
+.create-entity-details {
+    padding-top: 8px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* 1st level */
+.nav label {
+    color: black;
+}
+
+/* 2nd level */
+.tree > li > label {
+    padding:10px 15px;
+}
+
+/* 3rd level */
+.tree > li > ul > li > a {
+    color:#fff;
+    font-size:10pt;
+    margin-left:15px;
+}
+.leftNavTypes
+{
+    margin-top: 41px;
+    border: rgba(210, 197, 197, 0.84) 1px solid;
+}
+
+/*  create types */
+  .typesDiv
+  {
+      margin-left: 287px;
+  }

@@ -32,6 +32,16 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
             });
 
         });
+            //parent div
+        $scope.myVar = true;
+        $scope.toggles = function() {
+            $scope.myVar = !$scope.myVar;
+        };
+
+        $('.tree-toggle').click(function () {
+                $(this).parent().children('ul.tree').toggle(200);
+            });
+
         $scope.loadCategories = function($query) {
             var selectedCategory = $scope.selectedcategory;
             return  _.filter(categories[selectedCategory], function(category) {
