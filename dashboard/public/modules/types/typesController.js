@@ -81,6 +81,8 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
        } ];
 
         $scope.add = function(itemToAdd , index) {  
+            itemToAdd.reverseAttributeName=null;
+
             $scope.itemsToAdd[index] = itemToAdd;
         }
 

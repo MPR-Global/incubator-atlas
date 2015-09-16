@@ -1,49 +1,59 @@
-<div class="form-group" >
-    <div class="col-sm-2"></div>
-    <!--<label class="control-label col-sm-2" for="typeName"> Name:</label>-->
-    <div class="col-sm-4" ng-repeat="itAdd in itemsToAdd track by $index">
-        <input type='text' ng-model="itAdd.name" placeholder='Enter Name'>
-        <input type='text' ng-model="itAdd.dataTypeName" placeholder='Enter Data Type'>
-        <input type='text' ng-model="itAdd.multiplicity" placeholder='Enter Multiplicity'>
-        <input type='text' ng-model="itAdd.isComposite" placeholder='Enter isComposite'>
-        <input type='text' ng-model="itAdd.isUnique" placeholder='Enter isUnique'>
-        <button ng-click="add(itAdd, $index)">Submit</button>
+    <div class="row" ng-repeat="itAdd in itemsToAdd track by $index">
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <label class="control-label col-sm-2" for="typeName"> Name:</label>
+            <input type='text' ng-model="itAdd.name" placeholder='Enter Name' required>
+        </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <label class="control-label col-sm-2" for="typeName"> Data Type:</label>
+        <input type='text' ng-model="itAdd.dataTypeName" placeholder='Enter Data Type' required>
+         </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <label class="control-label col-sm-2" for="typeName"> Multiplicity:</label>
+        <input type='text' ng-model="itAdd.multiplicity" placeholder='Enter Multiplicity' required>
+      </div>
+
+
+
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <label class="control-label col-sm-2" for="typeName"> isComposite:</label>
+        <input type='text' ng-model="itAdd.isComposite" placeholder='Enter isComposite' required>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <label class="control-label col-sm-2" for="typeName"> isUnique:</label>
+        <input type='text' ng-model="itAdd.isUnique" placeholder='Enter isUnique' required>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-2"></div>
+        <label class="control-label col-sm-2" for="typeName"> isIndexable:</label>
+        <input type='text' ng-model="itAdd.isIndexable" placeholder='Enter isIndexable' required>
+    </div>
+
+        <div class="form-group" >
+        <button class="btn btn-default" ng-click="add(itAdd, $index)">Submit</button>
+
+        </div>
         <!--<input ng-repeat="field in table.fields track by $index" type='text' ng-model='table.fields[$index]' placeholder='Attribute:'>-->
 
     </div>
     <div>
-        <button ng-click="addNew()">Add new</button>
+        <button class="btn btn-default" ng-click="addNew()">Add new</button>
     </div>
 </div>
-
-<!--<div class="form-group">-->
-    <!--<div class="col-sm-2"></div>-->
-    <!--<label class="control-label col-sm-2" for="typeName">DataType Name:</label>-->
-    <!--<div class="col-sm-4">-->
-        <!--<input type="text"  id="typeName" class="form-control" placeholder="TypeName" ng-model="$parent.typeName">-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-    <!--<div class="col-sm-2"></div>-->
-    <!--<label class="control-label col-sm-2" for="typeName">isComposite:</label>-->
-    <!--<div class="col-sm-4">-->
-        <!--<input type="text"  id="typeName" class="form-control" placeholder="TypeName" ng-model="$parent.typeName">-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-    <!--<div class="col-sm-2"></div>-->
-    <!--<label class="control-label col-sm-2" for="typeName">isUnique:</label>-->
-    <!--<div class="col-sm-4">-->
-        <!--<input type="text"  id="typeName" class="form-control" placeholder="TypeName" ng-model="$parent.typeName">-->
-    <!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-    <!--<div class="col-sm-2"></div>-->
-    <!--<label class="control-label col-sm-2" for="typeName">isIndexable:</label>-->
-    <!--<div class="col-sm-4">-->
-        <!--<input type="text"  id="typeName" class="form-control" placeholder="TypeName" ng-model="$parent.typeName">-->
-    <!--</div>-->
-<!--</div>-->
