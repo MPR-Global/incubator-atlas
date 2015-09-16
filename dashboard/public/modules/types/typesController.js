@@ -68,10 +68,9 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
         $scope.templateUrl = function() {
             return "/modules/types/views/attribute.html";
         };
-        //multiple textbox
+        //multiple textbox 
 
-
-       $scope.tempItem={
+        $scope.itemsToAdd = [ {
            "name" :'',
            "dataTypeName":"",
            "multiplicity":"",
@@ -79,22 +78,22 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
            "isUnique" :"",
            "isIndexable" :""
 
-       }
+       } ];
 
-        $scope.itemsToAdd = [$scope.tempItem];
-
-        $scope.add = function(itemToAdd) {
-
-            var index = $scope.itemsToAdd.indexOf(itemToAdd);
-
-            $scope.itemsToAdd.splice(index, 1);
-
-            $scope.itemsToAdd.push(angular.copy(itemToAdd))
+        $scope.add = function(itemToAdd , index) {  
+            $scope.itemsToAdd[index] = itemToAdd;
         }
 
         $scope.addNew = function() {
 
-            $scope.itemsToAdd.push($scope.tempItem)
+            $scope.itemsToAdd.push({
+               "name" :'',
+               "dataTypeName":"",
+               "multiplicity":"",
+               "isComposite" :"",
+               "isUnique" :"",
+               "isIndexable" :"" 
+            });
         }
 
         $scope.showSuperTags = false;
