@@ -48,9 +48,59 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                 return category.text.toLowerCase().indexOf($query.toLowerCase()) !== -1;
             });
         };
+
+        $scope.attribute=function(){
+            $scope.templateUrl();
+            $scope.addFormField();
+        };
+
+        //add attribute
+        $scope.table = { fields: [] };
+
+        $scope.addFormField = function() {
+            $scope.table.fields.push('');
+        }
+
+        $scope.submitTable = function() {
+            console.log($scope.table);
+        }
+
+        $scope.templateUrl = function() {
+            return "/modules/types/views/attribute.html";
+        };
+        //multiple textbox
+
+
+       $scope.tempItem={
+           "name" :'',
+           "dataTypeName":"",
+           "multiplicity":"",
+           "isComposite" :"",
+           "isUnique" :"",
+           "isIndexable" :""
+
+       }
+
+        $scope.itemsToAdd = [$scope.tempItem];
+
+        $scope.add = function(itemToAdd) {
+
+            var index = $scope.itemsToAdd.indexOf(itemToAdd);
+
+            $scope.itemsToAdd.splice(index, 1);
+
+            $scope.itemsToAdd.push(angular.copy(itemToAdd))
+        }
+
+        $scope.addNew = function() {
+
+            $scope.itemsToAdd.push($scope.tempItem)
+        }
+
         $scope.showSuperTags = false;
         $scope.appForm = {
             submit: function() {
+                console.log($scope.itemsToAdd );
                 if ($scope.typesForm.$valid) {
                     angular.forEach($scope.tags, function (value) {
                         superTypes.push(value.text);
@@ -69,7 +119,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                                     "superTypes": superTypes,
                                     hierarchicalMetaTypeName: "org.apache.atlas.typesystem.types.TraitType",
                                     typeName: $scope.typename,
-                                    attributeDefinitions: []
+                                    "attributeDefinitions": $scope.itemsToAdd
                                 }],
                                 classTypes: []
                             };
@@ -104,6 +154,7 @@ angular.module('dgc.types').controller('TypesController', ['$scope', '$resource'
                         });
                     }
                 }
+
             }
         };
     }
