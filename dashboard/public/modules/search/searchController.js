@@ -114,6 +114,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
 
         };
 
+
         $scope.historySearch = function(searchQuey) {
             $scope.search(searchQuey);
         };
@@ -121,6 +122,12 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.$watch('searchHistory.length', function() {
             /* your logic here */
         }, true);
+
+
+
+        $scope.removeHistory= function(searchHistory){
+            $localStorage.$reset(searchHistory);
+        };
 
         $scope.filterResults = function() {
             var res = [];

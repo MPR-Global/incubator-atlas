@@ -19,6 +19,7 @@
 'use strict';
 
 angular.module('dgc', ['ngCookies',
+    'ngStorage',
     'ngResource',
     'ui.bootstrap',
     'ui.router',
