@@ -91,7 +91,7 @@ footer.navbar-bottom img {
 }
 
 .mt10px {
-    margin-top: 10px;
+    margin-top: 52px;
 }
 
 .mt20px {
@@ -133,4 +133,19 @@ footer.navbar-bottom img {
     background-color: #FFFFFF;
     min-height: 35px;
     height: auto;
+}
+
+.LeftSearchHistory
+{
+    margin-bottom: -165px!important;
+    padding-left: 0px!important;
+    display: block;
+}
+.searchLeftTag
+{
+    text-align: left;
+    padding-right: 88px;
+}
+.remove-search-icon{
+    float: right;
 }
