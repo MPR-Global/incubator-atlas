@@ -24,7 +24,7 @@
             <li class="list-group-item" data-ng-repeat="srcHistory in searchHistory">
                 <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
                     {{ srcHistory }}
-                    <span  data-ng-click="removeHistory(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
+                    <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
                 </a>
 
             </li>
@@ -51,7 +51,7 @@
             <span data-ng-repeat="srcHistory in searchHistory" >
                          <label data-ng-click="historySearch(srcHistory)">
                           {{ srcHistory }}
-                             <a  data-ng-click="removeHistory(srcHistory,'SearchedTag')" >×</a>
+                             <a  data-ng-click="delete(srcHistory,'SearchedTag')" >×</a>
                          </label>
 
             </span>

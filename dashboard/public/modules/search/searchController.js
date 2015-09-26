@@ -123,11 +123,10 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             /* your logic here */
         }, true);
 
-
-
-        $scope.removeHistory= function(searchHistory){
-            $localStorage.$reset(searchHistory);
+        $scope.delete = function (item) {
+            $localStorage.SearchedHistory.splice($localStorage.SearchedHistory.indexOf(item), 1);
         };
+
 
         $scope.filterResults = function() {
             var res = [];
