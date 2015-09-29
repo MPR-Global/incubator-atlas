@@ -63,15 +63,15 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
 
                     if (!_.isEmpty(response.results.values.vertices)) {
                         loadProcess(response.results.values.edges, response.results.values.vertices)
-                        .then(function(res) {
-                            guidsList = res;
+                            .then(function(res) {
+                                guidsList = res;
 
-                            $scope.lineageData = transformData(response.results);
+                                $scope.lineageData = transformData(response.results);
 
-                            if (callRender) {
-                                render();
-                            }
-                        });
+                                if (callRender) {
+                                    render();
+                                }
+                            });
                     }
                     $scope.requested = false;
                 });
@@ -79,7 +79,6 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             });
 
         }
-
 
         function loadProcess(edges, vertices) {
 
@@ -132,7 +131,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                             console.log($scope.type);
                             getCombinedLineageData(lineageData, true);
                         } else {
-                           getCombinedLineageData(lineageData, true);
+                            getCombinedLineageData(lineageData, true);
                         }
                         $scope.requested = true;
                     }
@@ -217,7 +216,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 }
             });
 
-            return starTingObj; 
+            return starTingObj;
         }
 
         function renderGraph(data, container) {
@@ -225,7 +224,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             var element = d3.select(container.element),
                 widthg = Math.max(container.width, 1100),
                 //heightg = Math.max(container.height, 500),
-                heightg = Math.max((window. innerHeight - 380), 500),
+                heightg = Math.max((window.innerHeight - 380), 500),
 
                 totalNodes = 0,
                 maxLabelLength = 0,
@@ -242,7 +241,6 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 duration = 750,
                 root,
                 depthwidth = 10;
-
 
             var viewerWidth = widthg - 15,
                 viewerHeight = heightg;
@@ -284,7 +282,6 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 return d.children && d.children.length > 0 ? d.children : null;
             });
 
-
             // sort the tree according to the node names
 
             function sortTree() {
@@ -298,7 +295,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             // Define the zoom function for the zoomable tree  
             function zoom() {
                 svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-            } 
+            }
 
             // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
             var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
@@ -315,11 +312,10 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
                 .call(zoomListener)
-                .on("dblclick.zoom", function(){
+                .on("dblclick.zoom", function() {
                     return null;
                 })
                 .call(tooltip);
-
 
             // Define the drag listeners for drag/drop behaviour of nodes.
             dragListener = d3.behavior.drag()
@@ -376,7 +372,6 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 }
             }
 
-
             function expand(d) {
                 if (d._children) {
                     d.children = d._children;
@@ -432,11 +427,64 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
 
             function toggleChildren(d) {
                 if (d.children) {
-                    d._children = d.children;
-                    d.children = null;
+                    if (d.parent.children.length > 1) {
+                        var i = 0;
+                        d.parent.children.forEach(function(f) {
+                            if (f.guid !== d.guid) {
+                                if (f.children) {
+                                    f.children.forEach(function(a) {
+                                        d.children.forEach(function(b) {
+                                            if (a.guid === b.guid) {
+                                                d.parent.children[i]._children = d.parent.children[i].children;
+                                                d.parent.children[i].children = null;
+                                            }
+                                        });
+                                    });
+                                }
+
+                            }
+                            i++;
+                        });
+
+                        d._children = d.children;
+                        d.children = null;
+
+                    } else {
+                        d._children = d.children;
+                        d.children = null;
+                    }
+
                 } else if (d._children) {
-                    d.children = d._children;
-                    d._children = null;
+
+                    if (d.parent.children.length > 1) {
+                        var j = 0;
+                        d.parent.children.forEach(function(f) {
+
+                            if (f.guid !== d.guid) {
+                                if (f._children) {
+
+                                    f._children.forEach(function(a) {
+                                        d._children.forEach(function(b) {
+                                            if (a.guid === b.guid) {
+                                                d.parent.children[j].children = d.parent.children[j]._children;
+                                                d.parent.children[j]._children = null;
+                                            }
+                                        });
+                                    });
+
+                                }
+                            }
+
+                            j++;
+                        });
+
+                        d.children = d._children;
+                        d._children = null;
+                    } else {
+                        d.children = d._children;
+                        d._children = null;
+                    }
+
                 }
                 return d;
             }
@@ -556,8 +604,8 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                     .classed('node', true)
                     .attr("transform", function() {
                         return "translate(" + source.y0 + "," + source.x0 + ")";
-                    });
-                    //.on('click', click);
+                    })
+                    .on('click', click);
 
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
@@ -569,7 +617,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                             tooltip.show(d);
                         }
                     })
-                    .on('dblclick', function(d){ 
+                    .on('dblclick', function(d) {
                         $state.go("details", {
                             id: d.guid
                         });
@@ -627,7 +675,6 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                         }
                         return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
                     });
-
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -722,7 +769,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
 
             // Define the root
             root = data;
-            root.x0 = viewerWidth / 2;;
+            root.x0 = viewerWidth / 2;
             root.y0 = viewerHeight / 2;
 
             // Layout the tree initially and center on the root node.

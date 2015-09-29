@@ -188,7 +188,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 root,
                 depthwidth = 10;
 
-
             var viewerWidth = widthg - 15,
                 viewerHeight = heightg;
 
@@ -229,7 +228,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 return d.children && d.children.length > 0 ? d.children : null;
             });
 
-
             // sort the tree according to the node names
 
             function sortTree() {
@@ -246,7 +244,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
 
-
             // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
             var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
             /* Initialize tooltip */
@@ -262,11 +259,10 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
                 .call(zoomListener)
-                .on("dblclick.zoom", function(){
+                .on("dblclick.zoom", function() {
                     return null;
                 })
                 .call(tooltip);
-
 
             // Define the drag listeners for drag/drop behaviour of nodes.
             dragListener = d3.behavior.drag()
@@ -322,7 +318,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                     draggingNode = null;
                 }
             }
-
 
             function expand(d) {
                 if (d._children) {
@@ -495,7 +490,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                             tooltip.hide(d);
                         }
                     })
-                    .on('dblclick', function(d){ 
+                    .on('dblclick', function(d) {
                         $state.go("details", {
                             id: d.guid
                         });
@@ -548,7 +543,6 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                         }
                         return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
                     });
-
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
