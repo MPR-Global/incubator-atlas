@@ -144,9 +144,21 @@ footer.navbar-bottom img {
 .searchLeftTag
 {
     text-align: left;
-    padding-right: 88px;
+    padding-right: 176px;
     color:#555555;
 }
 .remove-search-icon{
     float: right;
+}
+.searchHistoryNav{
+    margin-left: 17px;
+}
+.tagSearch
+{
+    border-radius: 11px;
+    background: #8AC007;
+    color :white;
+    padding: 10px;
+    width: 50px;
+    height: 40px;
 }

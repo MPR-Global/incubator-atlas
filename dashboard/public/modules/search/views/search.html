@@ -17,19 +17,22 @@
   -->
 
 <div class="row mt20px">
-    <div ng-if="searchHistory.length > 0">
+    <div ng-if="searchHistory.length > 0" class="searchHistoryNav">
     <h4>Search History</h4>
     <div class="pull-left list-group  LeftSearchHistory" >
-        <ul>
+
             <li class="list-group-item" data-ng-repeat="srcHistory in searchHistory">
                 <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
                     {{ srcHistory }}
-                    <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
+
+
                 </a>
+
+                <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
 
             </li>
 
-        </ul>
+
 
     </div>
     </div>
@@ -48,13 +51,17 @@
         </div>
         <div class="searchHistory" ng-if="searchHistory.length > 0">
                        Recent searches :
-            <span data-ng-repeat="srcHistory in searchHistory" >
+
+            <span data-ng-repeat="srcHistory in searchHistory" class="tagSearch" >
+
                          <label data-ng-click="historySearch(srcHistory)">
                           {{ srcHistory }}
-                             <a  data-ng-click="delete(srcHistory,'SearchedTag')" >×</a>
+                             <span  data-ng-click="delete(srcHistory,'SearchedTag')" >×</span>
                          </label>
 
+
             </span>
+
         </div>
     </form>
 </div>
