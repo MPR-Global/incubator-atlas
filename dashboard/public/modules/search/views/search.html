@@ -17,27 +17,9 @@
   -->
 
 <div class="row mt20px">
-    <div ng-if="searchHistory.length > 0" class="searchHistoryNav">
-    <h4>Search History</h4>
-    <div class="pull-left list-group  LeftSearchHistory" >
-
-            <li class="list-group-item" data-ng-repeat="srcHistory in searchHistory">
-                <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
-                    {{ srcHistory }}
 
 
-                </a>
-
-                <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
-
-            </li>
-
-
-
-    </div>
-    </div>
-
-    <form class="col-lg-offset-3 col-lg-9" name="form" novalidate>
+    <form class="col-lg-offset-3 col-lg-9 " name="form" novalidate>
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" data-ng-model="query" required/>
                 <span class="input-group-btn">
@@ -52,7 +34,7 @@
         <div class="searchHistory" ng-if="searchHistory.length > 0">
                        Recent searches :
 
-            <span data-ng-repeat="srcHistory in searchHistory" class="tagSearch" >
+            <span data-ng-repeat="srcHistory in searchHistory" class="tagSearch btn-sm" >
 
                          <label data-ng-click="historySearch(srcHistory)">
                           {{ srcHistory }}
@@ -63,7 +45,27 @@
             </span>
 
         </div>
+        <div ng-if="searchHistory.length > 0" class="searchHistoryNav">
+            <h4>Search History</h4>
+            <div class="pull-left list-group  col-lg-3 " >
+
+                <li class="list-group-item " data-ng-repeat="srcHistory in searchHistory">
+                    <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
+                        {{ srcHistory }}
+
+
+                    </a>
+
+                    <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
+
+                </li>
+
+
+
+            </div>
+        </div>
     </form>
+
 </div>
 <div class="row mt10px">
     <div class="col-lg-3" data-ng-include="'/modules/navigation/views/navigation.html'"></div>
