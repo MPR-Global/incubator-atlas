@@ -31,12 +31,14 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             $scope.schemas = data;
             $scope.tableName = data.values.name;
             $scope.isTable = data.typeName === 'Table';
+            $scope.onActivate('io'); 
         });
 
         $scope.isNumber = angular.isNumber;
         
         $scope.isString = angular.isString;
 
+         
         $scope.onActivate = function tabActivate(tabname) {
             $scope.$broadcast('render-lineage', {
                 type: tabname,

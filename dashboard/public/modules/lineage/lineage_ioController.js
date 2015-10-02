@@ -17,7 +17,7 @@
  */
 'use strict';
 
-angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'Lineage_ioResource', 'd3', 'DetailsResource', '$q',
+angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'LineageResource', 'd3', 'DetailsResource', '$q',
     function($element, $scope, $state, $stateParams, _, LineageResource, d3, DetailsResource, $q) {
         var guidsList = [];
 
@@ -32,7 +32,8 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             });
             return newEdgsObj;
         }
-
+        $scope.requested = false;
+        
         function getCombinedLineageData(tableData, callRender) {
             LineageResource.get({
                 tableName: tableData.tableName,
@@ -72,8 +73,9 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                                 render();
                             }
                         });
+                    }else {
+                        $scope.requested = false;
                     }
-                    $scope.requested = false;
                 });
 
             });
@@ -225,7 +227,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             var element = d3.select(container.element),
                 widthg = Math.max(container.width, 1100),
                 //heightg = Math.max(container.height, 500),
-                heightg = Math.max((window. innerHeight - 380), 500),
+                heightg = Math.max((window. innerHeight - 400), 500),
 
                 totalNodes = 0,
                 maxLabelLength = 0,
@@ -419,7 +421,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
                 var scale = (depthwidth === 10) ? zoomListener.scale() : 0.4;
                 var x = -source.y0;
                 var y = -source.x0;
-                x = x * scale + 150;
+                x = x * scale - 130;
                 y = y * scale + viewerHeight / 2;
                 d3.select('g').transition()
                     .duration(duration)
