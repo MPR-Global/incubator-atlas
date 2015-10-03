@@ -253,7 +253,11 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
             tooltip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
-                    return '<pre class="alert alert-success">' + d.name + '</pre>';
+                    if(d.type === 'Table'){
+                        return '<pre class="alert alert-success">' + d.name+ '</pre>';
+                    }else{
+                        return '<pre class="alert alert-success">' + d.tip + '</pre>';
+                    }
                 });
 
             // define the baseSvg, attaching a class for styling and the zoomListener

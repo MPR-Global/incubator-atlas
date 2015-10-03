@@ -306,7 +306,11 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
             tooltip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
-                    return '<pre class="alert alert-success">' + d.name + '</pre>';
+                    if(d.type === 'Table'){
+                        return '<pre class="alert alert-success">' + d.name+ '</pre>';
+                    }else{
+                        return '<pre class="alert alert-success">' +d.tip+ '</pre>';                    }
+
                 });
 
             // define the baseSvg, attaching a class for styling and the zoomListener
@@ -722,7 +726,7 @@ angular.module('dgc.lineage_io').controller('Lineage_ioController', ['$element',
 
             // Define the root
             root = data;
-            root.x0 = viewerWidth / 2;;
+            root.x0 = viewerWidth / 2;
             root.y0 = viewerHeight / 2;
 
             // Layout the tree initially and center on the root node.
