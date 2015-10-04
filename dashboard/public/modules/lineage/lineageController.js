@@ -113,6 +113,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
                 if (vertices.hasOwnProperty(guid)) {
                     name = vertices[guid].values.name;
                     type = vertices[guid].values.vertexId.values.typeName;
+                    tip  = vertices[guid].values.name;
                 } else {
                     var loadProcess = getLoadProcessTypes(guid);
                     if (typeof loadProcess !== "undefined") {
@@ -259,7 +260,7 @@ angular.module('dgc.lineage').controller('LineageController', ['$element', '$sco
     tooltip = d3.tip()
         .attr('class', 'd3-tip')
         .html(function(d) {
-            return '<pre class="alert alert-success">' + d.name + '</pre>';
+            return '<pre class="alert alert-success">' + d.tip + '</pre>';
         });
 
     // define the baseSvg, attaching a class for styling and the zoomListener

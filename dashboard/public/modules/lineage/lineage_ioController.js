@@ -152,12 +152,13 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 if (vertices.hasOwnProperty(guid)) {
                     name = vertices[guid].values.name;
                     type = vertices[guid].values.vertexId.values.typeName;
+                    tip  = "";
                 } else {
                     var loadProcess = getLoadProcessTypes(guid);
                     if (typeof loadProcess !== "undefined") {
                         name = loadProcess.name;
                         type = loadProcess.typeName;
-                        tip = loadProcess.tip;
+                        tip =  loadProcess.tip;
                     } else {
                         name = 'Load Process';
                         type = 'Load Process';
@@ -304,8 +305,16 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             /* Initialize tooltip */
             tooltip = d3.tip()
                 .attr('class', 'd3-tip')
-                .html(function(d) {
-                    return '<pre class="alert alert-success">' + d.name + '</pre>';
+                .html(function(d) {  
+                    var toolTip = $("<pre>").attr("class", "alert alert-success")
+                                    .append($("<p>").html('Name :<b>' + d.name + '</b>'));
+
+                    if(d.tip && d.tip.trim() != ""){
+                        toolTip.append($("<p>").html('Query: '+ d.tip));
+                    } 
+                    
+                    console.log(toolTip.prop("outerHTML"));                    
+                    return toolTip.prop("outerHTML"); 
                 });
 
             // define the baseSvg, attaching a class for styling and the zoomListener
