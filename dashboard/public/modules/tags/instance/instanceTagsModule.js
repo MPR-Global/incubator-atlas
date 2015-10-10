@@ -18,21 +18,4 @@
 
 'use strict';
 
-angular.module('dgc.details').factory('DetailsResource', ['$resource', function($resource) {
-    return $resource('/api/atlas/entities/:id', {}, {
-        get: {
-            method: 'GET',
-            transformResponse: function(data) {
-                if (data) {
-                    return angular.fromJson(data.definition);
-                }
-            },
-            responseType: 'json'
-        },
-        saveTag: {
-            method: 'POST',
-            url: '/api/atlas/entity/:id/traits'
-        }
-    });
-
-}]);
+angular.module('dgc.tags.instance', []);
