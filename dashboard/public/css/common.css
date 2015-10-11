@@ -181,6 +181,57 @@ Tags on Home Page design
 }
 
 
+/*=======================================================================================
+Search Bar design
+=======================================================================================*/
+.mainSearch input{
+    height: 50px;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+    color: #414141;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: none;
+}
+.mainSearch .input-group-btn button{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 14px 20px;
+}
+
+/*=======================================================================================
+Tags on Home Page design
+=======================================================================================*/
+.mainTags{
+    min-height: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.mainTags a{
+    background: transparent;
+    border: none;
+    padding:5px 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: #0088cc !important;
+    border-radius: 0 !important;
+}
+.mainTags a:hover{
+    color: #005580 !important;
+    background: #eeeeee !important;
+}
+.mainTags h4{
+    padding:0 10px;
+}
+.mainTags i{
+    font-size: 12px;
+    margin-right: 3px;
+}
+
+
 
 .mt10px {
     margin-top: 10px;
