@@ -60,15 +60,52 @@ hr.separator {
 
 /* Header background */
 header.navbar-top {
-    background-color: #fafafa;
-    border-bottom: solid 4px #5cbb5a;
-    margin-bottom: 0px;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#333333));
+    background-image: -webkit-linear-gradient(top, #555555, #333333);
+    background-image: -o-linear-gradient(top, #555555, #333333);
+    background-image: linear-gradient(to bottom, #555555, #333333);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#555555, endColorstr=#333333);
+    -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
+    max-height: 40px;
+    min-height: 40px;
 }
 
-header .container {
-    padding: 12px;
+
+header a.mainLogo{
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 40px;
+    padding: 2px 5px 0 10px;
+    text-shadow: 0 1px 0 #555555;
+}
+header a.mainLogo:hover,header a.mainLogo:focus{
+    text-decoration: none;
 }
 
+header ul.menuBar li a{
+    line-height: 10px;
+    color: #c3c3c3;
+}
+header ul.menuBar li a>i {
+    margin-right: 3px;
+    font-size: 12px;
+} 
+header ul.menuBar li a:hover{
+    color: #fff;
+    background: transparent;
+} 
+header ul.menuBar li a:focus{
+    background: transparent;
+} 
+header ul.menuBar li.active a{
+    color: #333333;
+    background-color: #ffffff;
+    -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+}
 /* Footer */
 footer.navbar-bottom {
     background-color: #fafafa;
@@ -84,6 +121,57 @@ footer.navbar-bottom img {
     padding-left: 5px;
     margin-top: -21px;
 }
+
+/*=======================================================================================
+Search Bar design
+=======================================================================================*/
+.mainSearch input{
+    height: 50px;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+    color: #414141;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: none;
+}
+.mainSearch .input-group-btn button{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 14px 20px;
+}
+
+/*=======================================================================================
+Tags on Home Page design
+=======================================================================================*/
+.mainTags{
+    min-height: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.mainTags a{
+    background: transparent;
+    border: none;
+    padding:5px 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: #0088cc !important;
+    border-radius: 0 !important;
+}
+.mainTags a:hover{
+    color: #005580 !important;
+    background: #eeeeee !important;
+}
+.mainTags h4{
+    padding:0 10px;
+}
+.mainTags i{
+    font-size: 12px;
+    margin-right: 3px;
+}
+
 
 .searchresults {
     border: 1px solid #ddd;
