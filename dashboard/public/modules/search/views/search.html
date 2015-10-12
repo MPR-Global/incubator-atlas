@@ -16,10 +16,36 @@
   ~ limitations under the License.
   -->
 
-<div class="row mt20px">
+<div class="row mt20px col-lg-3">
 
 
-    <form class="col-lg-offset-3 col-lg-9 " name="form" novalidate>
+<div ng-if="searchHistory.length > 0" class="searchHistoryNav col-lg-12">
+            <h4>Search History</h4>
+            <div class="pull-left list-group  col-lg-12 " >
+
+                <li class="list-group-item " data-ng-repeat="srcHistory in searchHistory">
+                    <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
+                        {{ srcHistory }}
+
+
+                    </a>
+
+                    <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
+
+                </li>
+
+
+
+            </div>
+        </div>
+
+    <div class="col-lg-12 " data-ng-include="'/modules/navigation/views/navigation.html'"></div>
+    
+  
+</div>
+<div class="row mt10px col-lg-9">
+
+    <form class=" col-lg-12 " name="form" novalidate>
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" data-ng-model="query" required/>
                 <span class="input-group-btn">
@@ -45,31 +71,9 @@
             </span>
 
         </div>
-        <div ng-if="searchHistory.length > 0" class="searchHistoryNav">
-            <h4>Search History</h4>
-            <div class="pull-left list-group  col-lg-3 " >
-
-                <li class="list-group-item " data-ng-repeat="srcHistory in searchHistory">
-                    <a class="searchLeftTag"  data-ng-click="historySearch(srcHistory)">
-                        {{ srcHistory }}
-
-
-                    </a>
-
-                    <span  data-ng-click="delete(srcHistory,'SearchedTag')" class="glyphicon glyphicon-remove remove-search-icon" aria-hidden="true"></span>
-
-                </li>
-
-
-
-            </div>
-        </div>
+        
     </form>
-
-</div>
-<div class="row mt10px">
-    <div class="col-lg-3" data-ng-include="'/modules/navigation/views/navigation.html'"></div>
-    <div class="col-lg-9">
+    <div class="col-lg-12">
         <div ng-switch on="searchMessage">
             <div ng-switch-when="load-gif" class="search-spinner"><img src="../img/spinner.gif" align="middle" /></div>
             <div ng-switch-default><h4 ng-show="searchMessage">{{searchMessage}}</h4></div>

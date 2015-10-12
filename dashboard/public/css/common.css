@@ -91,7 +91,7 @@ footer.navbar-bottom img {
 }
 
 .mt10px {
-    margin-top: 0px;
+    margin-top: 60px;
 }
 
 .mt20px {
@@ -152,8 +152,8 @@ footer.navbar-bottom img {
 }
 .searchHistoryNav{
 
-    margin-left: -294px;
-    margin-top: -102px;
+   /* margin-left: -294px;*/
+    /*margin-top: -102px;*/
 }
 .tagSearch
 {
