@@ -152,7 +152,7 @@ footer.navbar-bottom img {
 #sideNav ul, #sideNav ul li{list-style:none; padding:0; margin:0;}
 #sideNav ul li a {word-break: break-all;}
 #sideNav > ul > li > a{display:block; margin-bottom:1px; padding:13px 15px 13px 45px; color:#04619c; font-weight:600; text-decoration:none; background:url(../images/plusIcon.png) 15px center no-repeat; }
-#sideNav > ul > li > a:hover {background:#f6f6f6 url(../img/plusIcon.png) 15px center no-repeat;}
+#sideNav > ul > li > a {background:#f6f6f6 url(../img/plusIcon.png) 15px center no-repeat;}
 #sideNav > ul > li.openSubNav  > a {background:#f6f6f6 url(../img/minusIcon.png) 15px center no-repeat; }
 #sideNav ul li ul, #sideNav ul li ul li ul {display:none;}
 #sideNav > ul > li.openSubNav > ul, #sideNav > ul > li  ul li.openSubNavLavel3 ul {display:block;}
