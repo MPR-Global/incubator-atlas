@@ -17,8 +17,108 @@
   -->
 
 <div data-ng-controller="NavigationController">
-    <h4>Tags</h4>
-    <div class="list-group">
-        <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item">{{nav}} </a>
-    </div>
+
+    <div id="sideNav">
+        <br/>
+        <!--<h4>Tags</h4>-->
+        <ul>
+            <li class="openSubNav"><a href="javascript:void(0)">Assets</a>
+                <ul>
+                    <li class="haslavel3"><a href="#">Database</a>
+                        <ul>
+                            <li><a href="#">Table 1</a></li>
+                            <li><a href="#">Table 2</a></li>
+                            <li><a href="#">Table 3</a></li>
+                            <li><a href="#">Table 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="haslavel3"><a href="#">Sub Item 1</a>
+                        <ul>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="haslavel3"><a href="#">Sub Item 1</a>
+                        <ul>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="haslavel3"><a href="#">Sub Item 1</a>
+                        <ul>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                            <li><a href="#">Lavel 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="javascript:void(0)">Glossary</a>
+                <ul>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 1</a></li>
+                </ul>
+            </li>
+            <li><a href="">Tag </a>
+                <ul>
+                    <li ng-repeat="nav in leftnav">  <a  ui-sref="search({ query: nav })"  >{{nav}} </a>
+                    </li>
+                    <!--<li><a href="#">Sub Item 2</a></li>-->
+                    <!--<li><a href="#">Sub Item 3</a></li>-->
+                    <!--<li><a href="#">Sub Item 4</a></li>-->
+                    <!--<li><a href="#">Sub Item 1</a></li>-->
+                    <!--<li><a href="#">Sub Item 2</a></li>-->
+                    <!--<li><a href="#">Sub Item 3</a></li>-->
+                    <!--<li><a href="#">Sub Item 4</a></li>-->
+                    <!--<li><a href="#">Sub Item 1</a></li>-->
+                    <!--<li><a href="#">Sub Item 2</a></li>-->
+                    <!--<li><a href="#">Sub Item 3</a></li>-->
+                    <!--<li><a href="#">Sub Item 4</a></li>-->
+                <!--</ul>-->
+            </li>
+            <li><a href="javascript:void(0)">JdbcAccess</a>
+                <ul>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 2</a></li>
+                    <li><a href="#">Sub Item 3</a></li>
+                    <li><a href="#">Sub Item 4</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:void(0)">Assets</a>
+                <ul>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 2</a></li>
+                    <li><a href="#">Sub Item 3</a></li>
+                    <li><a href="#">Sub Item 4</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:void(0)">Fact</a>
+                <ul>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 2</a></li>
+                    <li><a href="#">Sub Item 3</a></li>
+                    <li><a href="#">Sub Item 4</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:void(0)">JdbcAccess</a>
+                <ul>
+                    <li><a href="#">Sub Item 1</a></li>
+                    <li><a href="#">Sub Item 2</a></li>
+                    <li><a href="#">Sub Item 3</a></li>
+                    <li><a href="#">Sub Item 4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- side nav end -->
+
+    <!--<div class="list-group">-->
+        <!--<a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item">{{nav}} </a>-->
+    <!--</div>-->
 </div>
