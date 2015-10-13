@@ -16,9 +16,9 @@
   ~ limitations under the License.
   -->
 <div class="row">
-    <div class="col-lg-3" data-ng-include="'/modules/navigation/views/navigation.html'"></div>
+    <div class="col-lg-2" data-ng-include="'/modules/navigation/views/navigation.html'"></div>
 
-    <div class="col-lg-9">
+    <div class="col-lg-10">
         <div class="row mainSearch">
             <form class="col-lg-12" name="form" novalidate>
                 <div class="input-group">
@@ -31,24 +31,68 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 padding0 searchresults">
             <div ng-switch on="searchMessage">
                 <div ng-switch-when="load-gif" class="search-spinner"><img src="../img/spinner.gif" align="middle" /></div>
                 <div ng-switch-default><h4 ng-show="searchMessage">{{searchMessage}}</h4></div>
             </div>
-            <ul class="list-unstyled"  ng-show='resultCount > 0'>
+            <div class="panel panel-default" ng-show='resultCount > 0'>
+              <table class="table table-bordered datatable" >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Data</th>
+                    <th>Tags</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="result in filteredResults">
+                    <td>
+                      <a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a>
+                    </td>
+
+                    <td>
+                      {{result.description}}
+                    </td>
+
+                    <td>                    
+                      <span ng-repeat="(key, value) in filterSearchResults(result)">
+                          <span ng-show="$index <= 3  "><b>{{key}}: </b>{{value}} {{(($index+1 === limit) || $last ) ? '' : ' '}}</span><br ng-show="$index <= 3">
+                      </span>
+
+                      <div collapse="isCollapsed">
+                        <span ng-repeat="(key, value) in filterSearchResults(result)">
+                          <span ng-show="$index > 3"><b>{{key}}: </b>{{value}}{{$last ? '' : ' '}}</span><br ng-show="$index > 3">
+                        </span>
+                      </div>
+                      <a href ng-show="isCollapsed && (keyLength > 4)" ng-click="doToggle($event,isCollapsed)">..show more</a>
+                      <a href ng-show="!isCollapsed" ng-click="doToggle($event,isCollapsed)">..show less</a>
+                    </td>
+
+                    <td>
+                      <div ng-show="!dataTransitioned"><a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}"> </span></a></div>
+                    </td>
+                    <td>Edit</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- <ul class="list-unstyled"  ng-show='resultCount > 0'>
                 <li ng-repeat="result in filteredResults" class="searchresults">
                     <h4><a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a></h4>
 
                     <p>{{result.description}}</p>
-                                <span ng-repeat="(key, value) in filterSearchResults(result)">
-                                    <span ng-show="$index <= 3  "><b>{{key}}: </b>{{value}} {{(($index+1 === limit) || $last ) ? '' : ', '}}</span>
-                                </span>
+                    <span ng-repeat="(key, value) in filterSearchResults(result)">
+                        <span ng-show="$index <= 3  "><b>{{key}}: </b>{{value}} {{(($index+1 === limit) || $last ) ? '' : ', '}}</span>
+                    </span>
 
                     <div collapse="isCollapsed">
-                                    <span ng-repeat="(key, value) in filterSearchResults(result)">
-                                    <span ng-show="$index > 3"><b>{{key}}: </b>{{value}}{{$last ? '' : ', '}}</span>
-                                </span>
+                      <span ng-repeat="(key, value) in filterSearchResults(result)">
+                        <span ng-show="$index > 3"><b>{{key}}: </b>{{value}}{{$last ? '' : ', '}}</span>
+                      </span>
                     </div>
                     <a href ng-show="isCollapsed && (keyLength > 4)" ng-click="doToggle($event,isCollapsed)">..show more</a>
                     <a href ng-show="!isCollapsed" ng-click="doToggle($event,isCollapsed)">..show less</a>
@@ -56,7 +100,7 @@
                     <h5 ng-show="!dataTransitioned">Tags : <a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}">,</span> </a></h5>
 
                 </li>
-            </ul>
+            </ul> -->
             <div class="pull-right" ng-show='resultCount > 0'>
                 <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
                 <p>
