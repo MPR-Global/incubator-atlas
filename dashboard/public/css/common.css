@@ -44,6 +44,9 @@ hr.separator {
     margin-bottom: 0px !important;
 }
 
+.popover{
+    max-width: none !important;
+}
 .pointer {
     cursor: pointer;
 }

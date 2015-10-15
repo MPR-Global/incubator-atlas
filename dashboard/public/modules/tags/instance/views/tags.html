@@ -19,8 +19,9 @@
 	<div class="container tag-list">
 		<h4>Tags</h4>
 		<ul>
-			<li ng-repeat="trait in traitsList" class="list-group-item">
-				{{trait}},</li>
+			<li ng-repeat="trait in traitsList" class="list-group-item" popover="{{trait.values}}" popover-trigger="mouseenter">
+				{{trait.typeName}}, </li>
+
 			<li class="list-group-item"><a ng-click="openAddTag()" href=""
 				class="add-tag">Add tag</a></li>
 		</ul>
