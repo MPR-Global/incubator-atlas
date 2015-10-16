@@ -34,7 +34,9 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                                    var pair = key+":"+value;
                                    pair_arr.push(pair);                                
                             });
-                            data.traits[trait].values = pair_arr;
+                            data.traits[trait].values = pair_arr.join(" | ");
+                        } else {
+                            data.traits[trait].values = 'NA';
                         }
                     });
                 
