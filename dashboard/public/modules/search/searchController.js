@@ -108,7 +108,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             });
             $scope.keyLength = count;
             return res;
-        };
+        };    
+        angular.element(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+
         $scope.searchQuery = $location.search();
         $scope.query = ($location.search()).query;
         if ($scope.query) {

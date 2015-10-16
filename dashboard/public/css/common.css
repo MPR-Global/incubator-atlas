@@ -25,7 +25,9 @@ div.separator {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
+.pointer{
+    cursor: pointer;
+}
 span.separator {
     display: block;
     position: absolute;
