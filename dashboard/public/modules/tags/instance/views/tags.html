@@ -16,14 +16,17 @@
   ~ limitations under the License.
   -->
 <div data-ng-controller="InstanceTagController">
-	<div class="container tag-list">
+	<div class="container-fluid tag-list">
 		<h4>Tags</h4>
 		<ul>
-			<li ng-repeat="trait in traitsList" class="list-group-item" popover="{{trait.values}}" popover-trigger="mouseenter">
+			<li ng-repeat="trait in traitsList" class="list-group-item pointer" popover="{{trait.values}}" popover-title="{{trait.typeName}} Values" popover-trigger="mouseenter" >
 				{{trait.typeName}}, </li>
 
 			<li class="list-group-item"><a ng-click="openAddTag()" href=""
 				class="add-tag">Add tag</a></li>
 		</ul>
 	</div>
+      <script type="text/ng-template" id="trait-values.html">
+        <div>{{trait.values}}</div>
+      </script>
 </div>
