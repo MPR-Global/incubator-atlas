@@ -49,3 +49,12 @@
 	padding: 0px;
 	background-color: inherit;
 }
+.addTag{
+	text-align: center;
+}
+.addTag img{
+	cursor: pointer;
+}
+.searchResults td{
+	border: 0;
+}

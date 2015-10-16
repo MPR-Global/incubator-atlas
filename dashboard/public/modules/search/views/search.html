@@ -42,11 +42,12 @@
                   <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Data</th>
+                    <th>Owner</th>
                     <th>Tags</th>
-                    <th>Edit</th>
+                    <th>Tools</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr ng-repeat="result in filteredResults">
                     <td>
@@ -59,22 +60,14 @@
 
                     <td>                    
                       <span ng-repeat="(key, value) in filterSearchResults(result)">
-                          <span ng-show="$index <= 3  "><b>{{key}}: </b>{{value}} {{(($index+1 === limit) || $last ) ? '' : ' '}}</span><br ng-show="$index <= 3">
+                          <span ng-if="key =='owner'">{{value}}</span>
                       </span>
-
-                      <div collapse="isCollapsed">
-                        <span ng-repeat="(key, value) in filterSearchResults(result)">
-                          <span ng-show="$index > 3"><b>{{key}}: </b>{{value}}{{$last ? '' : ' '}}</span><br ng-show="$index > 3">
-                        </span>
-                      </div>
-                      <a href ng-show="isCollapsed && (keyLength > 4)" ng-click="doToggle($event,isCollapsed)">..show more</a>
-                      <a href ng-show="!isCollapsed" ng-click="doToggle($event,isCollapsed)">..show less</a>
                     </td>
 
                     <td>
                       <div ng-show="!dataTransitioned"><a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}"> </span></a></div>
                     </td>
-                    <td>Edit</td>
+                    <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTag()"></td>
                   </tr>
                 </tbody>
               </table>
@@ -101,6 +94,7 @@
 
                 </li>
             </ul> -->
+
             <div class="pull-right" ng-show='resultCount > 0'>
                 <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
                 <p>
