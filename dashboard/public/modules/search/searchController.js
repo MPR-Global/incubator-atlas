@@ -114,7 +114,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             });
             $scope.keyLength = count;
             return res;
-        };    
+        };
         $scope.searchQuery = $location.search();
         $scope.query = ($location.search()).query;
         if ($scope.query) {
