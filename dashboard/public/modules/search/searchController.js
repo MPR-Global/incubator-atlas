@@ -96,6 +96,12 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.doToggle = function($event, el) {
             this.isCollapsed = !el;
         };
+        $scope.openAddTagHome = function(traitId) {
+            console.log(traitId);
+            $state.go('addTagHome', {
+                id: traitId
+            });
+        };
         $scope.filterSearchResults = function(items) {
             var res = {};
             var count = 0;
