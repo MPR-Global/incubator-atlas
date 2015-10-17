@@ -28,6 +28,9 @@ div.separator {
 .pointer{
     cursor: pointer;
 }
+.alert{
+    border-radius: 0 !important;
+}
 span.separator {
     display: block;
     position: absolute;
@@ -66,6 +69,9 @@ hr.separator {
 .padding0{
     padding: 0 !important;
 }
+.paddingR0{
+    padding-right: 0 !important;
+}
 /* Header background */
 header.navbar-top {
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#333333));
@@ -85,7 +91,7 @@ header a.mainLogo{
     color: #ffffff;
     font-size: 16px;
     line-height: 40px;
-    padding: 2px 5px 0 10px;
+    padding: 2px 5px 0 15px;
     text-shadow: 0 1px 0 #555555;
 }
 header a.mainLogo:hover,header a.mainLogo:focus{
@@ -117,7 +123,7 @@ header ul.menuBar li.active a{
 /* Footer */
 footer.navbar-bottom {
     background-color: #fafafa;
-    border-top: solid 4px #5cbb5a;
+    border-top: solid 4px #444;
 }
 
 footer.navbar-bottom p {
@@ -135,7 +141,7 @@ Search Bar design
 =======================================================================================*/
 .mainSearch input{
     height: 50px;
-    border-radius: 2px;
+    border-radius: 0px;
     border: 1px solid #e3e3e3;
     color: #414141;
     border-top-right-radius: 0px;
@@ -143,8 +149,8 @@ Search Bar design
     box-shadow: none;
 }
 .mainSearch .input-group-btn button{
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0;
+    border-radius: 0;
     padding: 14px 20px;
 }
 
