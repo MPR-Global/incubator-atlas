@@ -67,7 +67,7 @@
                     <td>
                       <div ng-show="!dataTransitioned"><a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}"> </span></a></div>
                     </td>
-                    <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTag()"></td>
+                    <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
                 </tbody>
               </table>
