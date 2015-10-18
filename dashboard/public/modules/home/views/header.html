@@ -31,6 +31,9 @@
     </div>
     <nav class="collapse navbar-collapse" data-collapse="isCollapsed" data-role="navigation">
         <ul class="navbar-nav nav pull-right menuBar" data-ng-if="isLoggedIn()">
+            <li data-ui-sref-active="active">
+                 <a data-ui-sref="search({ query: '' })" class="menulink">Search</a>
+            </li>
             <li data-ng-repeat="item in menu" data-ui-sref-active="active">
                 <a data-ui-sref="{{item.state}}">{{item.title}}</a>
             </li>
