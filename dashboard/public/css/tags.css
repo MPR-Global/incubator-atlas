@@ -49,6 +49,15 @@
   background-color: #dff0d8;
   border-color: #d6e9c6;
 }
+.inputs button.remove{
+  position: absolute;
+  right: 28px;
+  bottom: 12px;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 4px;
+  background-color: #a94442;
+}
 .appForm .panel{
     border-radius: 0 !important;
 }
