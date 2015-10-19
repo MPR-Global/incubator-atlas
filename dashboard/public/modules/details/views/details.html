@@ -23,7 +23,7 @@
     <div role="tabpanel" class="col-lg-12">
         <h2>Name: {{details.values.name}}</h2>
         <h4>Description: {{details.values.description}}</h4>
-        <h4>Lineage: <ng-include data-table-type="io" src="'/modules/lineage/views/lineage_io.html'"/></h4> 
+        <h4 ng-if="isTable" >Lineage: <ng-include data-table-type="io" src="'/modules/lineage/views/lineage_io.html'"/></h4> 
         <tabset>
             <tab heading="Details">
                 <table class="table table-bordered">
