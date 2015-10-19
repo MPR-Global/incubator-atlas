@@ -28,6 +28,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.itemsPerPage = 10;
         $scope.filteredResults = [];
         $scope.resultRows = [];
+        $scope.resultType = '';
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
@@ -47,9 +48,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 $scope.totalItems = $scope.resultCount;
                 $scope.transformedResults = {};
                 $scope.dataTransitioned = false;
-                if (response.results.dataType && response.results.dataType.typeName.indexOf('__') === 0) {
+                if (response.dataType && response.dataType.typeName.indexOf('__') === 0) {
                     $scope.dataTransitioned = true;
-                    var attrDef = response.results.dataType.attributeDefinitions;
+                    var attrDef = response.dataType.attributeDefinitions;
                     angular.forEach(attrDef, function(value) {
                         if (value.dataTypeName === '__IdType') {
                             $scope.searchKey = value.name;
@@ -59,10 +60,14 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 } else {
                     $scope.transformedResults = $scope.resultRows;
                 }
-                if ($scope.results)
+                if ($scope.results) {
+                    if (response.dataType) {
+                        $scope.resultType = response.dataType.typeName;
+                    }
                     $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
-                else
+                } else {
                     $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
+                }
 
                 $scope.$watch('currentPage + itemsPerPage', function() {
                     var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
@@ -97,10 +102,17 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             this.isCollapsed = !el;
         };
         $scope.openAddTagHome = function(traitId) {
-            console.log(traitId);
             $state.go('addTagHome', {
                 id: traitId
             });
+        };
+        $scope.isTag = function(typename) {
+             
+            if ( typename.indexOf( "__tempQueryResultStruct" ) > -1 ) {
+                return true;
+            } else {
+                return false;
+            } 
         };
         $scope.filterSearchResults = function(items) {
             var res = {};

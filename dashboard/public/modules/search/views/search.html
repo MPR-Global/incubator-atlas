@@ -39,17 +39,21 @@
             <div class="panel panel-default" ng-show='resultCount > 0'>
               <table class="table table-bordered datatable" >
                 <thead>
-                  <tr>
+                  <tr ng-if="!isTag(resultType)">
                     <th>Name</th>
                     <th>Description</th>
                     <th>Owner</th>
                     <th>Tags</th>
                     <th>Tools</th>
                   </tr>
+                  <tr ng-if="isTag(resultType)">
+                    <th>Name</th>
+                    <th>Type</th>
+                  </tr>                  
                 </thead>
 
                 <tbody>
-                  <tr ng-repeat="result in filteredResults">
+                  <tr ng-if="!isTag(resultType)" ng-repeat="result in filteredResults">
                     <td>
                       <a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a>
                     </td>
@@ -68,6 +72,15 @@
                       <div ng-show="!dataTransitioned"><a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}"> </span></a></div>
                     </td>
                     <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
+                  </tr>
+                  <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults">
+                    <td>
+                      <a data-ui-sref="details({id:result.guid})">{{result.guid}}</a>
+                    </td>
+
+                    <td>
+                      {{result.typeName}}
+                    </td>
                   </tr>
                 </tbody>
               </table>
