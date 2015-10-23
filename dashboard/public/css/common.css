@@ -194,7 +194,13 @@ Tags on Home Page design
     font-size: 12px;
     margin-right: 3px;
 }
-
+.mainTags .list-group-item.limitSize{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;y
+}
 
 /*=======================================================================================
 Search Bar design
@@ -212,7 +218,10 @@ Search Bar design
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: 14px 20px;
-
+}
+.breakword{
+    word-wrap: break-word;
+}
 /*=======================================================================================
 Tags on Home Page design
 =======================================================================================*/
