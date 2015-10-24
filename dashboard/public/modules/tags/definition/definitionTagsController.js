@@ -18,19 +18,20 @@
 
 'use strict';
 
-angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'AttributeDefinition', 'TagClasses', 'TagsResource', 'NotificationService',
-    function($scope, $resource, $state, $stateParams, _, AttributeDefinition, Categories, TagsResource, NotificationService) {
+angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$scope', '$resource', 'NavigationResource', '$state', '$stateParams', 'lodash', 'AttributeDefinition', 'TagClasses', 'TagsResource', 'NotificationService',
+    function($scope, $resource, NavigationResource, $state, $stateParams, _, AttributeDefinition, Categories, TagsResource, NotificationService) {
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
         $scope.tagModel = {
             typeName: null,
             attributeDefinitions: []
         };
-
+        if (NavigationResource.get().$promise) {
+            $scope.typesList = NavigationResource.get();            
+        }
         $scope.addAttribute = function AddAttribute() {
             $scope.tagModel.attributeDefinitions.push(AttributeDefinition.getModel());
         };
-
         $scope.removeAttribute = function(index){
             $scope.tagModel.attributeDefinitions.splice(index,1);
         };
@@ -62,6 +63,25 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                         $scope.saving = false;
                     });
             }
+        };
+        $scope.getAttributeDefinations = function() {
+            TagsResource.get({
+                id: $scope.selectedType
+            }, function(data) {
+                var instanceType = Categories[$scope.category].instanceInfo();
+                if (instanceType) {
+                    var traitTypes = angular.fromJson(data.definition)[instanceType][0];
+                    if (traitTypes) {
+                        $scope.propertiesList = {};
+                        $scope.isRequired = {};
+                        _.each(traitTypes.attributeDefinitions, function(value) {
+                            $scope.propertiesList[value.name] = '';
+                            $scope.isRequired[value.name] = value.isRequired;
+                        });
+                    }
+                }
+
+            });
         };
     }
 ]);
