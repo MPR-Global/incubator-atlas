@@ -15,7 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<div data-ng-controller="InstanceTagController">
+<!-- <div data-ng-controller="InstanceTagController">
   <div class="container tag-list">
     <h4>Tags</h4>
     <ul>
@@ -26,4 +26,24 @@
         class="add-tag">Add tag</a></li>
     </ul>
   </div>
-</div>
+</div> -->
+
+<table data-ng-controller="InstanceTagController" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Description</th>
+      <th>Tools</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="trait in traitsList" class="pointer" >
+      <td>
+        {{trait.typeName}}
+      </td>
+      <td>{{trait.values}}</td>
+      <td>Tools</td>
+    </tr>
+
+  </tbody>
+</table>
