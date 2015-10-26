@@ -20,15 +20,15 @@
   text-decoration: underline;
 }
 .inputs input{
-	height: 50px;
+  height: 50px;
   border-radius: 0px;
   border: 1px solid #e3e3e3;
   color: #414141;
   box-shadow: none;
 }
 .inputs .control-label{
-	padding: 15px;
-	padding-top: 15px !important;
+  padding: 15px;
+  padding-top: 15px !important;
 }
 .inputs button.addAttr, .inputs button.saveAttr{
   height: 40px;
@@ -39,10 +39,10 @@
   font-weight: bold;
 }
 .inputs button.addAttr{
-	background-color: #ff8e00;
+  background-color: #ff8e00;
 }
 .inputs pre{
-	border: 0;
+  border: 0;
   border-top: 1px solid #ddd;
   border-radius: 0;
   margin-bottom: 0;
@@ -70,40 +70,43 @@
 }
 
 .input-spacing{
-	padding-bottom: 10px!important;
+  padding-bottom: 10px!important;
 }
 
 .create-tag-entity .modal-footer{
-	border-top: 0;
+  border-top: 0;
 }
 
 .tag-list{
-	border:1px solid #ddd;
-	padding:10px;
-	background-color: #F5F5F5;
+  border:1px solid #ddd;
+  padding:10px;
+  background-color: #F5F5F5;
 }
 
 .tag-list ul{
-	padding-left: 0px;
+  padding-left: 0px;
 }
 
 .error{
-	color:red;
+  color:red;
 }
 
 .tag-list ul li{
-	display: inline;
-	line-height: 30px;
-	border:none;
-	padding: 0px;
-	background-color: inherit;
+  display: inline;
+  line-height: 30px;
+  border:none;
+  padding: 0px;
+  background-color: inherit;
 }
 .addTag{
-	text-align: center;
+  text-align: center;
 }
 .addTag img{
-	cursor: pointer;
+  cursor: pointer;
 }
 .searchResults td{
-	border: 0;
+  border: 0;
+}
+.overviewTag, .deleteTag{
+  margin-right: 15px;
 }

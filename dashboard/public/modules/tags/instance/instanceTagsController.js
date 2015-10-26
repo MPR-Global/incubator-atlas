@@ -48,6 +48,12 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                 id: $scope.id
             });
         };
+        $scope.openTagDetails = function(traitId) {
+            $state.go('tagDetails', {
+                id: $stateParams.id,
+                traitId: traitId
+            });
+        };
         getResourceData();
         $scope.$on('refreshResourceData', getResourceData);
     }

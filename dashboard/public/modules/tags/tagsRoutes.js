@@ -41,5 +41,18 @@ angular.module('dgc.tags').config(['$stateProvider',
                 });
             }]
         });
+        $stateProvider.state('tagDetails', {
+            parent: 'details',
+            params: { traitId:null},
+            onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+                $modal.open({
+                    templateUrl: '/modules/tags/instance/views/tagDetails.html',
+                    controller: 'TagDetailsController',
+                    windowClass: 'tag-details-entity'
+                }).result.finally(function() {
+                    $state.go('^');
+                });
+            }]
+        });
     }
 ]);
