@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope', 'DetailsResource', '$stateParams', '$state',
-    function($scope, DetailsResource, $stateParams, $state) {
+angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope', '$rootScope', 'DetailsResource', '$stateParams', '$state', 'NotificationService',
+    function($scope, $rootScope, DetailsResource, $stateParams, $state, NotificationService) {
         $scope.id = $stateParams.id;
 
         function getResourceData() {
@@ -53,6 +53,18 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                 id: $stateParams.id,
                 traitId: traitId
             });
+        };
+        $scope.deleteTag = function(traitId) {
+                DetailsResource.deleteTag({
+                    id: $stateParams.id,
+                    name: traitId
+                }).$promise.then(function() {
+                    $rootScope.$broadcast('refreshResourceData', $stateParams.id);
+                    NotificationService.info('Tag "' + traitId + '" has been deleted from entity', true);
+                }).catch(function(err) {
+                    $scope.isError = true;
+                    $scope.error = err.data.error;
+                });
         };
         getResourceData();
         $scope.$on('refreshResourceData', getResourceData);

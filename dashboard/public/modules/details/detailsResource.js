@@ -32,6 +32,10 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', function(
         saveTag: {
             method: 'POST',
             url: '/api/atlas/entity/:id/traits'
+        },
+        deleteTag: {
+            method: 'DELETE',
+            url: '/api/atlas/entities/:id/traits/:name'
         }
     });
 

@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.tags.instance').controller('TagDetailsController', ['$scope', 'DetailsResource', '$stateParams', '$state',
-    function($scope, DetailsResource, $stateParams, $state) {
+angular.module('dgc.tags.instance').controller('TagDetailsController', ['$scope', 'DetailsResource', '$stateParams',
+    function($scope, DetailsResource, $stateParams) {
         $scope.id = $stateParams.id;
         $scope.traitId = $stateParams.traitId;
 
