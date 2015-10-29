@@ -303,3 +303,7 @@ Tags on Home Page design
     border: 1px solid #CCCCCC;
     padding: 5px;
 }
+
+.wordBreak {
+    word-break: break-word;
+}
