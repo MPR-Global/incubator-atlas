@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$stateParams', 'DetailsResource',
-    function($window, $scope, $stateParams, DetailsResource) {
+angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource',
+    function($window, $scope, $state, $stateParams, DetailsResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
@@ -27,6 +27,7 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             id: $stateParams.id
         }, function(data) {
             $scope.details = data;
+            console.log(data);
             $scope.schemas = data;
             $scope.tableName = data.values.name;
             $scope.isTable = data.typeName === 'Table';
@@ -34,12 +35,19 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
         });
 
         $scope.isNumber = angular.isNumber;
-
+        $scope.isObject = angular.isObject;
         $scope.isString = angular.isString;
+        $scope.isArray = angular.isArray;
         $scope.onActivate = function tabActivate(tabname) {
             $scope.$broadcast('render-lineage', {
                 type: tabname,
                 tableName: $scope.tableName
+            });
+        };
+
+        $scope.goDetails = function(id){
+            $state.go("details", {
+                id: id
             });
         };
 
