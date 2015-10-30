@@ -254,7 +254,10 @@ Tags on Home Page design
     margin-right: 3px;
 }
 
-
+.pdLft15px
+{
+    padding-left: 15px;
+}
 
 .mt10px {
     margin-top: 10px;
@@ -306,4 +309,16 @@ Tags on Home Page design
 
 .wordBreak {
     word-break: break-word;
+}
+
+.tabsearchanchor {
+    max-width: 100px;
+    display: list-item;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+    float: left; 
+    padding-right: 10px;
 }
