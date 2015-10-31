@@ -322,3 +322,13 @@ Tags on Home Page design
     float: left; 
     padding-right: 10px;
 }
+
+.tabsearchResult {
+    max-width: 500px;
+    display: list-item;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize; 
+}
