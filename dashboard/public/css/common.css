@@ -320,7 +320,12 @@ Tags on Home Page design
     white-space: nowrap;
     text-transform: capitalize;
     float: left; 
-    padding-right: 10px !important;
+    
+    background: lightblue !important;
+    color: black !important;
+    margin: 4px !important; 
+    padding-left: 7px !important;
+    padding-right: 7px !important;
 }
 
 .tabsearchResult {
