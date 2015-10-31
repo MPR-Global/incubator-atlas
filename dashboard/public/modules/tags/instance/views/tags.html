@@ -19,7 +19,7 @@
   <div class="container tag-list wordBreak">
     <h4>Tags</h4>
     <ul>
-      <li ng-repeat="trait in traitsList" class="list-group-item pointer" popover="{{trait.values}}" popover-title="{{trait.typeName}} Values" popover-trigger="mouseenter" >
+      <li ng-repeat="trait in traitsList" class="list-group-item pointer tabsearchanchor" popover="{{trait.values}}" popover-title="{{trait.typeName}} Values" popover-trigger="mouseenter" >
         {{trait.typeName}}, </li>
 
       <li class="list-group-item"><a ng-click="openAddTag()" href=""
