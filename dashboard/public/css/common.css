@@ -337,3 +337,12 @@ Tags on Home Page design
     white-space: nowrap;
     text-transform: capitalize; 
 }
+
+.maxwidth125px {
+    max-width: 125px !important;
+}
+
+.anchorAbsolute {
+    position: absolute;
+    right: 4px;
+}

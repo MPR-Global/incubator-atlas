@@ -48,6 +48,26 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                 id: $scope.id
             });
         };
+
+        $scope.detachTag = function($event, name) {
+            var r = confirm("Please confirm delete.");
+            if (r == true) {
+                DetailsResource.detachTag({
+                    id: $stateParams.id,
+                    tagName: name
+                }, function(data) {
+                    console.log("Detached Tag");
+                    console.log(data);
+
+                    if (data.requestId != undefined && data.GUID == $stateParams.id && data.traitName == name) {
+                        var curent = $event.currentTarget;
+                        curent.parentElement.remove();
+                        $(".popover").remove();
+                    }
+                });
+            }
+        };
+        
         getResourceData();
         $scope.$on('refreshResourceData', getResourceData);
     }

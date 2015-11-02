@@ -97,6 +97,7 @@
 	border:none;
 	padding: 2px;
 	background-color: inherit;
+  padding-right: 20px !important;
 }
 .addTag{
 	text-align: center;

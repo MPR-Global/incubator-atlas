@@ -19,8 +19,8 @@
   <div class="container tag-list wordBreak">
     <h4>Tags</h4>
     <ul>
-      <li ng-repeat="trait in traitsList" class="list-group-item pointer tabsearchanchor" popover="{{trait.values}}" popover-title="{{trait.typeName}} Values" popover-trigger="mouseenter" >
-        {{trait.typeName}} </li>
+      <li ng-repeat="trait in traitsList" class="list-group-item pointer tabsearchanchor maxwidth125px" popover="{{trait.values}}" popover-title="{{trait.typeName}} Values" popover-trigger="mouseenter" >
+        {{trait.typeName}} <a href="" class="anchorAbsolute" ng-click="detachTag($event, trait.typeName)"> <i class="fa fa-times"></i> </a> </li>
 
       <li class="list-group-item"><a ng-click="openAddTag()" href=""
         class="add-tag btn btn-primary">Add tag</a></li>
