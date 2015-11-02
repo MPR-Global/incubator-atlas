@@ -81,3 +81,9 @@ div.lineage {
 /*.images {*/
     /*background-image: url("../img/process.png");*/
 /*}​*/
+
+
+.alignLineage{
+    text-align: center;
+    margin-top: 100px;
+}

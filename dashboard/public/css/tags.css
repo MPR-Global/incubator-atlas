@@ -17,7 +17,7 @@
  */
 
 .add-tag {
-  text-decoration: underline;
+  margin-top: 3px;
 }
 .inputs input{
 	height: 50px;
