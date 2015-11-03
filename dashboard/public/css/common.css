@@ -337,6 +337,14 @@ Tags on Home Page design
     white-space: nowrap;
     text-transform: capitalize; 
 }
+.searchResultCount {
+    max-width: 500px;
+    display: list-item;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-transform: capitalize; 
+}
 
 .maxwidth125px {
     max-width: 125px !important;
