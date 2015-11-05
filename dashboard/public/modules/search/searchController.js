@@ -134,7 +134,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 pro = [];
             if(results && results.length > 0){
                 var result = results[0];
-                if(result === 'object'){ 
+                if(typeof result === 'object'){ 
                     angular.forEach(result, function(value, key){
                         if(key.indexOf('$') === -1){ 
                             pro.push(key);
