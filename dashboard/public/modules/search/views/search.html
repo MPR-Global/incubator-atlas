@@ -52,7 +52,7 @@
                 </thead>
 
                 <tbody>
-                  <tr ng-if="!isTag(resultType)" ng-repeat="result in filteredResults">
+                  <tr ng-if="!isTag(resultType) && isObject(result)" ng-repeat="result in filteredResults track by $index">
                     <td>
                       <a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a>
                     </td>
@@ -72,12 +72,12 @@
                     </td>
                     <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
-                  <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults">
-                    <td data-ng-if="isObject(result) && !isString(result)" data-ng-repeat="res in result">
-                      <a data-ng-if="res.toLowerCase() == 'guid'" data-ui-sref="details({id:result.guid})">{{res}}</a>
-                      <a data-ng-if="res.toLowerCase() != 'guid'">{{res}}</a>
+                  <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults track by $index">
+                    <td data-ng-if="isObject(result) && !isString(result)" data-ng-repeat="res in transformedProperties track by $index">
+                      <a data-ng-if="res.toLowerCase() == 'guid'" data-ui-sref="details({id:result[res]})">{{result[res]}}</a>
+                      <span data-ng-if="res.toLowerCase() != 'guid'">{{result[res]}}</span>
                     </td> 
-                    <td data-ng-if="isString(result)">
+                    <td data-ng-if="isString(result) || result == false || result == true">
                       <a data-ng-if="result.toLowerCase() == 'guid'" data-ui-sref="details({id:result})">{{result}}</a>
                       <a data-ng-if="result.toLowerCase() != 'guid'">{{result}}</a>
                     </td> 

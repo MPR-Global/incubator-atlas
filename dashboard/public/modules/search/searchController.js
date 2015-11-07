@@ -73,6 +73,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                                 $scope.searchKey = value.name;
                             }
                         });
+                        if($scope.searchKey === undefined){
+                            $scope.searchKey = '';
+                        }
                     }
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
