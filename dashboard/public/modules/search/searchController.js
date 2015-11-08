@@ -33,6 +33,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$rootSco
         $scope.isString = angular.isString;
         $scope.isArray = angular.isArray;
         $scope.isNumber = angular.isNumber;  
+
         
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
