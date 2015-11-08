@@ -305,8 +305,14 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             tooltip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
-                    return '<pre class="alert alert-success">' + d.name + '</pre>';
-                });
+                         var toolTip = $("<pre>").attr("class", "alert alert-success")
+                             .append($("<p>").html('Name :<b>' + d.name + '</b>'));
+
+                         if (d.tip && d.tip.trim() !== "") {
+                             toolTip.append($("<p>").html('Query: ' + d.tip));
+                         }
+                         return toolTip.prop("outerHTML");
+                    });
 
             // define the baseSvg, attaching a class for styling and the zoomListener
             var baseSvg = element.append('svg')
