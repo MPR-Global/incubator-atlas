@@ -193,7 +193,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             }, function(data) { 
                     if ($scope.filteredResults !== null && Object.keys($scope.filteredResults).length > 0) {               
                         angular.forEach($scope.filteredResults, function(obj, trait) {
-                            if ( obj.$id$.id.indexOf( id ) > -1 ) {
+                            if ( (obj.$id$ && obj.$id$.id.indexOf( id ) > -1) || (obj.id && obj.id.indexOf( id ) > -1)){
                                  $scope.filteredResults[trait].$traits$ = data.traits;
                             }
                         });
