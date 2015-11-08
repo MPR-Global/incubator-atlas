@@ -47,7 +47,9 @@
                     <th>Tools</th>
                   </tr>
                   <tr ng-if="isTag(resultType) && transformedProperties != undefined" >
-                    <th ng-repeat="prop in transformedProperties">{{prop}}</th> 
+                    <th ng-repeat="prop in transformedProperties" ng-if="prop !== 'id'">
+                       {{(prop != '$traits$') ? prop : 'Tags'}}
+                    </th> 
                   </tr>                  
                 </thead>
 
@@ -72,11 +74,25 @@
                     </td>
                     <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
+
+
+
                   <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults track by $index">
-                    <td data-ng-if="isObject(result) && !isString(result)" data-ng-repeat="res in transformedProperties track by $index">
-                      <a data-ng-if="res.toLowerCase() == 'guid'" data-ui-sref="details({id:result[res]})">{{result[res]}}</a>
-                      <span data-ng-if="res.toLowerCase() != 'guid'">{{result[res]}}</span>
+                    <td data-ng-if="isObject(result) && !isString(result) && res !== 'id'" data-ng-repeat="res in transformedProperties track by $index">
+                      <a data-ng-if="res == 'guid'" data-ui-sref="details({id:result[res]})">{{result[res]}}</a>
+
+                      <span data-ng-if="res != '$traits$' && res != 'Tools' && res != 'guid' && res != 'Name'">{{result[res]}}</span>
+
+                      <a data-ng-if="res== 'Name'" data-ui-sref="details({id:result['id']|| result['guid']})">{{result[res]}}</a>
+                      
+                      <div data-ng-if="res == '$traits$'" class="wordBreak">
+                        <a class="tabsearchanchor" ng-repeat="(key, value) in result[res]" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a>
+                      </div>
+
+                      <span data-ng-if="res == 'Tools'" class="addTag"> <img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['id']|| result['guid'])"> </span>
+
                     </td> 
+
                     <td data-ng-if="isString(result) || result == false || result == true">
                       <a data-ng-if="result.toLowerCase() == 'guid'" data-ui-sref="details({id:result})">{{result}}</a>
                       <a data-ng-if="result.toLowerCase() != 'guid'">{{result}}</a>
@@ -84,35 +100,7 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
-
-            <!-- <ul class="list-unstyled"  ng-show='resultCount > 0'>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- <ul class="list-unstyled"  ng-show='resultCount > 0'>
-                <li ng-repeat="result in filteredResults" class="searchresults">
-                    <h4><a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a></h4>
-
-                    <p>{{result.description}}</p>
-                    <span ng-repeat="(key, value) in filterSearchResults(result)">
-                        <span ng-show="$index <= 3  "><b>{{key}}: </b>{{value}} {{(($index+1 === limit) || $last ) ? '' : ', '}}</span>
-                    </span>
-
-                    <div collapse="isCollapsed">
-                      <span ng-repeat="(key, value) in filterSearchResults(result)">
-                        <span ng-show="$index > 3"><b>{{key}}: </b>{{value}}{{$last ? '' : ', '}}</span>
-                      </span>
-                    </div>
-                    <a href ng-show="isCollapsed && (keyLength > 4)" ng-click="doToggle($event,isCollapsed)">..show more</a>
-                    <a href ng-show="!isCollapsed" ng-click="doToggle($event,isCollapsed)">..show less</a>
-
-                    <h5 ng-show="!dataTransitioned">Tags : <a ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">{{key}}<span ng-show="!{{$last}}">,</span> </a></h5>
-
-                </li>
-            </ul> -->
+            </div> 
 
             <div class="pull-right" ng-show='resultCount > 0'>
                 <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>

@@ -62,7 +62,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
                 }
 
-                if (response.dataType && response.dataType.typeName.indexOf('__') === 0) {
+                if (response.dataType ) {
                     $scope.dataTransitioned = true;
                     var attrDef = response.dataType.attributeDefinitions;
                     if(attrDef.length === 1) {
@@ -72,9 +72,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                             if (value.dataTypeName === '__IdType') {
                                 $scope.searchKey = value.name;
                             }
+                            console.log("searchKey "+$scope.searchKey);
                         });
-                        if($scope.searchKey === undefined){
+                        if($scope.searchKey === undefined || $scope.searchKey === ''){
                             $scope.searchKey = '';
+                            console.log("searchKey "+$scope.searchKey);
                         }
                     }
                     $scope.transformedResults = $scope.filterResults();
@@ -90,6 +92,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 }
                 else {
                     $scope.transformedResults = $scope.resultRows;
+
                 } 
 
                 $scope.$watch('currentPage + itemsPerPage', function() {
@@ -126,7 +129,23 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 });
             }else { 
                 angular.forEach($scope.resultRows, function(value) {
-                    res.push(value);
+                    var objVal = {}, curVal = value;
+                    if(curVal.name) { 
+                        objVal.Name = curVal.name; 
+                        delete curVal.name;
+                    }
+                    angular.forEach(curVal, function(vl, ky){  
+                        if(ky == '$id$'){
+                            objVal.id = curVal[ky].id;
+                        } else if(ky == '$traits$'){
+                            objVal[ky] = vl;
+                            objVal.Tools = objVal.id;
+                        } else{ 
+                            objVal[ky] = vl;
+                        } 
+                    });
+
+                    res.push(objVal);
                 });
             }
             return res;
@@ -139,7 +158,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 var result = results[0];
                 if(typeof result === 'object'){ 
                     angular.forEach(result, function(value, key){
-                        if(key.indexOf('$') === -1){ 
+                        if(key.indexOf('$typeName$') === -1){ 
                             pro.push(key);
                         }
                     });
