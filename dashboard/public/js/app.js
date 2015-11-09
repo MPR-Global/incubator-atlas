@@ -78,7 +78,27 @@ angular.module('dgc').factory('lodash', ['$window',
             NotificationService.error(errors);
         }
     }
+
+    $rootScope.loadTraits = function(){
+        $rootScope.$broadcast('load_Traits');
+    };
+
     $rootScope.$on('$stateChangeStart', function() {
         d3.selectAll('.d3-tip').remove();
     });
+
+    $rootScope.$on('$stateChangeSuccess', function(evt, to, toParams, from){
+        if(from.name !== '' && to.name === 'search' && to.name !== from.name) { 
+           $rootScope.loadTraits();
+        } else if(from.name === '' && to.name === 'search'){
+             $rootScope.loadTraits();
+        }
+
+        if(to.name !== 'search') { 
+           $('.leftNavigation').addClass('hide'); 
+        }else { 
+           $('.leftNavigation').removeClass('hide'); 
+        }
+    });
+
 }]);
