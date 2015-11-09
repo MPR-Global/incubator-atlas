@@ -45,7 +45,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
 
             });
         };
-        $scope.ok = function(tagDefinitionform) {
+        $scope.ok = function($event, tagDefinitionform) {
             if (tagDefinitionform.$valid) {
                 var requestObject = {
                     "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
@@ -54,8 +54,13 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                 };
                 DetailsResource.saveTag({
                     id: $stateParams.id
-                }, requestObject).$promise.then(function() {
-                    $rootScope.$broadcast('refreshResourceData', $stateParams.id);
+                }, requestObject).$promise.then(function(data) {
+                    //$rootScope.$broadcast('refreshResourceData', $stateParams.id);
+                    if (data.requestId != undefined && data.GUID == $stateParams.id) {
+                        var curent = $event.currentTarget,
+                            tagName = $("#tagDefinition").val();
+                        $("#" + $stateParams.id).find("td").find("div.tags").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+                    } 
                     NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
                     $modalInstance.close(true);
                 }).catch(function(err) {
