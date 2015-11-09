@@ -52,7 +52,7 @@
                 </thead>
 
                 <tbody>
-                  <tr ng-if="!isTag(resultType) && isObject(result)" ng-repeat="result in filteredResults track by $index">
+                  <tr ng-if="!isTag(resultType) && isObject(result)" ng-repeat="result in filteredResults track by $index"  id="{{result['$id$'].id}}">
                     <td>
                       <a data-ui-sref="details({id:result['$id$'].id || result.guid})">{{result.name || result.guid}}</a>
                     </td>

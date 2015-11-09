@@ -88,7 +88,7 @@ angular.module('dgc').factory('lodash', ['$window',
     });
 
     $rootScope.$on('$stateChangeSuccess', function(evt, to, toParams, from){
-        if(from.name !== '' && to.name === 'search' && to.name !== from.name) { 
+        if(from.name !== '' && to.name === 'search' && to.name !== from.name && to.name !== 'addTagHome' && from.name  !== 'addTagHome') { 
            $rootScope.loadTraits();
         } else if(from.name === '' && to.name === 'search'){
              $rootScope.loadTraits();
