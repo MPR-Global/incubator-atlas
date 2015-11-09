@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService',
-    function($scope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService) {
+angular.module('dgc.search').controller('SearchController', ['$scope', '$rootScope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService',
+    function($scope, $rootScope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService) {
 
         $scope.results = [];
         $scope.resultCount = 0;
@@ -32,7 +32,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.isObject = angular.isObject;
         $scope.isString = angular.isString;
         $scope.isArray = angular.isArray;
-        $scope.isNumber = angular.isNumber;
+        $scope.isNumber = angular.isNumber;  
         
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
