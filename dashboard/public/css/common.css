@@ -354,3 +354,9 @@ Tags on Home Page design
     position: absolute;
     right: 4px;
 }
+.addTag{
+   margin-top: -35px;
+}
+.tagAlign{
+    text-align: center;
+}
