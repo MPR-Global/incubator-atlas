@@ -39,6 +39,17 @@
                           <input type="text" class="form-control" name="typeName" id="typeName" placeholder="Tag Name" data-ng-model="tagModel.typeName" required/>
                       </div>
                   </div>
+
+                  <div class="form-group">
+                      <label class="control-label col-sm-2" for="ParentTag">Parent Tag</label>
+                      <div class="col-sm-4">
+                          <select ng-model="selectedParent"  class="form-control" id="ParentTag" name="ParentTag">
+                              <option></option>
+                              <option ng-repeat="data in typesList" title="{{data}}">{{data}}</option>
+                          </select>
+                      </div>
+                  </div>
+
                   <ng-form name="attributeForm">
                       <div class="form-group" data-ng-class="{'has-error': attributeForm.name.$invalid && attributeForm.name.$dirty}"
                            data-ng-repeat-start="attribute in tagModel.attributeDefinitions">
