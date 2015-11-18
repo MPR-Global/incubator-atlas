@@ -25,24 +25,36 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
         }
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
-
+        $scope.propertiesList = {};
+        $scope.isRequired = {};
         $scope.getAttributeDefinations = function() {
+            $scope.getAttributeApi($scope.selectedType);
+
+        };
+
+        $scope.getAttributeApi = function(tagName) { 
             TagsResource.get({
-                id: $scope.selectedType
+                id: tagName
             }, function(data) {
                 var instanceType = Categories[$scope.category].instanceInfo();
                 if (instanceType) {
-                    var traitTypes = angular.fromJson(data.definition)[instanceType][0];
-                    if (traitTypes) {
-                        $scope.propertiesList = {};
-                        $scope.isRequired = {};
-                        _.each(traitTypes.attributeDefinitions, function(value) {
-                            $scope.propertiesList[value.name] = '';
-                            $scope.isRequired[value.name] = value.isRequired;
-                        });
-                    }
-                }
+                    var traitTypes = angular.fromJson(data.definition)[instanceType];
 
+                    for(var t=0; t < traitTypes.length; t++){
+                        if (traitTypes[t]) {  
+                            _.each(traitTypes[t].attributeDefinitions, function(value) {
+                                $scope.propertiesList[value.name] = '';
+                                $scope.isRequired[value.name] = value.isRequired;
+                            });
+                        }
+
+                        if(traitTypes[t].superTypes && traitTypes[t].superTypes.length > 0){
+                            for(var s=0; s<traitTypes[t].superTypes.length; s++){ 
+                                $scope.getAttributeApi(traitTypes[t].superTypes[s]);
+                            }
+                        }
+                    }  
+                } 
             });
         };
         $scope.ok = function($event, tagDefinitionform) {
