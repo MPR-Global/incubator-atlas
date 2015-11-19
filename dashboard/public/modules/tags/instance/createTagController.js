@@ -25,11 +25,11 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
         }
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
-        $scope.propertiesList = {};
-        $scope.isRequired = {};
+        
         $scope.getAttributeDefinations = function() {
-            $scope.getAttributeApi($scope.selectedType);
-
+            $scope.propertiesList = {};
+            $scope.isRequired = {};
+            $scope.getAttributeApi($scope.selectedType); 
         };
 
         $scope.getAttributeApi = function(tagName) { 
