@@ -49,7 +49,11 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
         $scope.save = function saveTag(form) {
             $scope.savedTag = null;
             if (form.$valid) {
-                $scope.tagModel.superTypes.push($scope.selectedParent);
+                // if($scope.selectedParent != '' ){ 
+                //     $scope.tagModel.superTypes.push($scope.selectedParent);
+                // }
+                $scope.tagModel.superTypes = $scope.selectedParent;
+                //$scope.tagModel.superTypes.push($scope.selectedParent);
                 $scope.categoryInst = Categories[$scope.category];
                 $scope.categoryInst.clearTags().addTag($scope.tagModel);
 
