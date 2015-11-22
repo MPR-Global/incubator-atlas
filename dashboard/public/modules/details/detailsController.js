@@ -41,7 +41,8 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
         $scope.onActivate = function tabActivate(tabname) {
             $scope.$broadcast('render-lineage', {
                 type: tabname,
-                tableName: $scope.tableName
+                tableName: $scope.tableName,
+                guid : $stateParams.id
             });
         };
 
