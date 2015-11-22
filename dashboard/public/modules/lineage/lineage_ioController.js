@@ -141,6 +141,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     render();
                 }
             }
+            $scope.guid = lineageData.guid;
         });
 
         function transformData(metaData) {
@@ -568,7 +569,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
                     .attr("xlink:href", function(d) {
-                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                        return d.type === 'Table' ? ((d.guid === $scope.guid) ? '../img/tableicon1.png' : '../img/tableicon.png') : '../img/process.png';
                     })
                     .on('mouseover', function(d) {
                         if (d.type === 'LoadProcess' || 'Table') {
@@ -625,14 +626,14 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
                 // Change the circle fill depending on whether it has children and is collapsed
                 // Change the circle fill depending on whether it has children and is collapsed
-                node.select("image.nodeImage")
-                    .attr("r", 4.5)
-                    .attr("xlink:href", function(d) {
-                        if (d._children) {
-                            return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
-                        }
-                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
-                    });
+                // node.select("image.nodeImage")
+                //     .attr("r", 4.5)
+                //     .attr("xlink:href", function(d) {
+                //         if (d._children) {
+                //             return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
+                //         }
+                //         return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                //     });
 
 
                 // Transition nodes to their new position.
