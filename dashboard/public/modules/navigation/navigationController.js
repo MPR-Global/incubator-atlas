@@ -19,11 +19,14 @@
 
 angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource',
     function($scope, NavigationResource) {
-
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
 
-        };
+        }; 
+ 
+        $scope.$on('load_Traits', function () { 
+            $scope.leftnav = NavigationResource.get();
+		});
 
         $scope.$on('load_Traits', function() {
             $scope.leftnav = NavigationResource.get();

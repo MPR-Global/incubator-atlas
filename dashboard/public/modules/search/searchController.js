@@ -58,18 +58,18 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 if ($scope.results) {
                     if (response.dataType) {
                         $scope.resultType = response.dataType.typeName;
-                    } else if (response.results.dataType) {
+                   } else if (response.results.dataType) {
                         $scope.resultType = response.results.dataType.typeName;
                     } else if (typeof response.dataType === 'undefined') {
                         $scope.resultType = "full text";
                     }
-                    $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
+                 $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
                 } else {
                     $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
                 }
 
                 if (response.dataType && response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') === -1) {
-                    $scope.dataTransitioned = true;
+                   $scope.dataTransitioned = true;
                     var attrDef = response.dataType.attributeDefinitions;
                     if (attrDef.length === 1) {
                         $scope.searchKey = attrDef[0].name;
@@ -105,6 +105,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if ($scope.transformedResults) {
                         $scope.filteredResults = $scope.transformedResults.slice(begin, end);
                     }
+
                     $scope.pageCount = function() {
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
                     };
@@ -161,7 +162,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if (onlyId) {
                         objVal.guid = objVal.id;
                     }
-
                     res.push(objVal);
                 });
             }
