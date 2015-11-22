@@ -81,4 +81,25 @@ angular.module('dgc').factory('lodash', ['$window',
     $rootScope.$on('$stateChangeStart', function() {
         d3.selectAll('.d3-tip').remove();
     });
+
+     $rootScope.loadTraits = function(){
+        $rootScope.$broadcast('load_Traits');
+    };
+
+    $rootScope.$on('$stateChangeSuccess', function(evt, to, toParams, from){
+        if(from.name !== '' && to.name === 'search' && to.name !== from.name && typeof to.parent === 'undefined') { 
+           $rootScope.loadTraits();
+        } else if(from.name === '' && to.name === 'search'){
+             $rootScope.loadTraits();
+        }
+
+        if(typeof to.parent === 'undefined'){ 
+            if(to.name !== 'search') { 
+               $('.leftNavigation').addClass('hide'); 
+            }else { 
+               $('.leftNavigation').removeClass('hide'); 
+            }
+        }
+    });
+    
 }]);
