@@ -32,7 +32,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.isString = angular.isString;
         $scope.isArray = angular.isArray;
         $scope.isNumber = angular.isNumber;
-
+        $scope.mapAttr = ['name', 'guid', 'typeName', 'owner', 'description', 'createTime', '$traits$', '$id$', 'comment', 'dataType'];
 
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
@@ -46,9 +46,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             SearchResource.search({
                 query: query
             }, function searchSuccess(response) {
+
                 $scope.resultCount = response.count;
                 $scope.results = response.results;
-                $scope.resultRows = $scope.results;
+                $scope.resultRows = ($scope.results && $scope.results.rows) ? $scope.results.rows : $scope.results;
+
                 $scope.totalItems = $scope.resultCount;
                 $scope.transformedResults = {};
                 $scope.dataTransitioned = false;
@@ -56,15 +58,17 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 if ($scope.results) {
                     if (response.dataType) {
                         $scope.resultType = response.dataType.typeName;
+                    } else if(response.results.dataType) {
+                        $scope.resultType = response.results.dataType.typeName; 
                     } else if (typeof response.dataType === 'undefined') {
                         $scope.resultType = "full text";
-                    }
+                    } 
                     $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
                 } else {
                     $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
                 }
 
-                if (response.dataType && response.dataType.typeName && response.dataType.typeName !== "Table") {
+                if (response.dataType && response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') == -1) {
                     $scope.dataTransitioned = true;
                     var attrDef = response.dataType.attributeDefinitions;
                     if (attrDef.length === 1) {
@@ -91,8 +95,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
                     console.log($scope.transformedProperties);
-                } else if (response.dataType.typeName && response.dataType.typeName === "Table") {
+                } else if (response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
                     $scope.searchKey = "Table";
+                    $scope.transformedResults = $scope.resultRows;
+                } else if (response.results.dataType && response.results.dataType.typeName && response.results.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
+                    $scope.searchKey = "Table"; 
                     $scope.transformedResults = $scope.resultRows;
                 }
 
@@ -137,13 +144,15 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         delete curVal.name;
                     }
                     angular.forEach(curVal, function(vl, ky) {
-                        if (ky === '$id$') {
-                            objVal.id = curVal[ky].id;
-                        } else if (ky === '$traits$') {
-                            objVal[ky] = vl;
-                            objVal.Tools = objVal.id;
-                        } else if (ky.indexOf('$') === -1) {
-                            objVal[ky] = vl;
+                        if($scope.mapAttr.indexOf(ky) !== -1 || ky.indexOf('_col_') != -1){ 
+                            if (ky === '$id$') {
+                                objVal.id = curVal[ky].id;
+                            } else if (ky === '$traits$') {
+                                objVal[ky] = vl;
+                                objVal.Tools = objVal.id;
+                            } else if (ky.indexOf('$') === -1) {
+                                objVal[ky] = vl;
+                            }
                         }
                     });
 
