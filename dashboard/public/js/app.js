@@ -82,6 +82,12 @@ angular.module('dgc').factory('lodash', ['$window',
         d3.selectAll('.d3-tip').remove();
     });
 
+    $rootScope.updateTags = function(added, obj){
+        if(added){ 
+            $rootScope.$broadcast('add_Tag', obj);
+        }
+    };
+
      $rootScope.loadTraits = function(){
         $rootScope.$broadcast('load_Traits');
     };
