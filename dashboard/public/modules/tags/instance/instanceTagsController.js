@@ -48,8 +48,12 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
         };
 
         $scope.$on('add_Tag', function (evt, obj) {  
-            $scope.traitsList[obj.added] = {typeName : obj.added};
-            console.log($scope.traitsList);
+            $scope.traitsList[obj.added] = {typeName : obj.added}; 
+            if($.isEmptyObject($scope.traitsList)){ 
+                $scope.noTags = true; 
+            }else{
+                $scope.noTags = false;
+            }
         });
 
 
@@ -74,6 +78,11 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                         $($event.currentTarget).closest('tr').remove();
                         console.log( $scope.traitsList );
                         delete $scope.traitsList[name];
+                        if($.isEmptyObject($scope.traitsList)){ 
+                            $scope.noTags = true; 
+                        }else {
+                            $scope.noTags = false;
+                        }
                     }
                 });
             }
