@@ -41,8 +41,18 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                     });
                 
                 $scope.traitsList = data.traits;
+                if($.isEmptyObject($scope.traitsList)){ 
+                    $scope.noTags = true; 
+                }
             });
-        }
+        };
+
+        $scope.$on('add_Tag', function (evt, obj) {  
+            $scope.traitsList[obj.added] = {typeName : obj.added};
+            console.log($scope.traitsList);
+        });
+
+
         $scope.openAddTag = function() {
             $state.go('addTag', {
                 id: $scope.id
@@ -61,8 +71,9 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
 
                     if (data.requestId !== undefined && data.GUID === $stateParams.id && data.traitName === name) {
                         var curent = $event.currentTarget;
-                        curent.parentElement.remove();
-                        $(".popover").remove();
+                        $($event.currentTarget).closest('tr').remove();
+                        console.log( $scope.traitsList );
+                        delete $scope.traitsList[name];
                     }
                 });
             }
