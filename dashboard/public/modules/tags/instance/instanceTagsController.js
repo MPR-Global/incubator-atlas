@@ -41,6 +41,9 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                     });
                 
                 $scope.traitsList = data.traits;
+                if($.isEmptyObject($scope.traitsList)){ 
+                    $scope.noTags = true; 
+                }
             });
         };
 

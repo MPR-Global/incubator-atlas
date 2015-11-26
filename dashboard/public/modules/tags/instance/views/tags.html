@@ -29,7 +29,7 @@
          </tr>
       </thead>
       <tbody>
-         <tr ng-repeat="trait in traitsList" class="pointer" >
+           <tr ng-repeat="trait in traitsList" class="pointer" ng-if="!noTags">
             <td class="col-lg-11" >
                {{trait.typeName}}
             </td>
@@ -39,5 +39,9 @@
          </tr>
       </tbody>
    </table>
+   <div ng-if="noTags"> 
+            <h4>    No tags to display </h4>
+         </div>
 </div>
+
 
