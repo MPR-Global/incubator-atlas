@@ -64,8 +64,9 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
         };
 
         $scope.detachTag = function($event, name) {
-                $("#myModal").modal().on('click','#btnDelete',function(event){
-                    event.preventDefault();
+                $('#btnDelete').modal().on('click',function(e){
+                    $("#myModal").modal();
+              
                            DetailsResource.detachTag({
                     id: $stateParams.id,
                     tagName: name
@@ -84,9 +85,11 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                             $scope.noTags = false;
                         }
                     }
-                });
 
-                }) 
+                });
+                e.preventDefault()
+                }) ;
+
          
             
         };
