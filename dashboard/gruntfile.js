@@ -85,7 +85,7 @@ module.exports = function(grunt) {
 						distPath + '/lib/angular-ui-utils/ui-utils.min.js',
 						distPath + '/lib/lodash/lodash.min.js',
 						distPath + '/lib/d3/d3.min.js',
-						distPath + '/lib/d3-tip/index.js',
+						distPath + '/lib/d3-tip/index.js'
                     ]
 
                 }
