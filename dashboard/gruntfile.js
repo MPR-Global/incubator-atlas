@@ -72,10 +72,20 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    "dist/js/applib.js": [distPath + '/lib/jquery/dist/jquery.min.js',
+                    "dist/js/applib.js": [
+						distPath + '/lib/jquery/dist/jquery.min.js',
                         distPath + '/lib/bootstrap/dist/bootstrap.min.js',
-                        distPath + '/lib/**/**.min.js',
-                        distPath + '/lib/**/**.js'
+                        distPath + '/lib/angular/angular.min.js',
+                        distPath + '/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
+						distPath + '/lib/angular-cookies/angular-cookies.min.js',
+						distPath + '/lib/angular-resource/angular-resource.min.js',
+						distPath + '/lib/angular-route/angular-route.min.js',
+						distPath + '/lib/angular-sanitize/angular-sanitize.min.js',
+						distPath + '/lib/angular-ui-router/release/angular-ui-router.min.js',
+						distPath + '/lib/angular-ui-utils/ui-utils.min.js',
+						distPath + '/lib/lodash/lodash.min.js',
+						distPath + '/lib/d3/d3.min.js',
+						distPath + '/lib/d3-tip/index.js',
                     ]
 
                 }
