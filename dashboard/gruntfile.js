@@ -74,9 +74,8 @@ module.exports = function(grunt) {
                 files: {
                     "dist/js/applib.js": [distPath + '/lib/jquery/dist/jquery.min.js',
                         distPath + '/lib/bootstrap/dist/bootstrap.min.js',
-                        distPath + '/lib/angular/angular.min.js',
-                        distPath + '/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                        distPath + '/lib/angular-cookies/angular-cookies.js',
+                        distPath + '/lib/**/**.min.js',
+                        distPath + '/lib/**/**.js'
                     ]
 
                 }
