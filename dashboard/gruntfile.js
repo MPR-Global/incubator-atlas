@@ -66,6 +66,22 @@ module.exports = function(grunt) {
                 logConcurrentOutput: true
             }
         },
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                files: {
+                    "dist/js/applib.js": [distPath + '/lib/jquery/dist/jquery.min.js',
+                        distPath + '/lib/bootstrap/dist/bootstrap.min.js',
+                        distPath + '/lib/angular/angular.min.js',
+                        distPath + '/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                        distPath + '/lib/angular-cookies/angular-cookies.js',
+                    ]
+
+                }
+            }
+        },
         jsbeautifier: {
             'default': {
                 src: ['<%= jshint.all.src %>', 'bower.json'],
@@ -165,15 +181,17 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent', 'concat']);
 
-    grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
-    grunt.registerTask('build', ['copy:dist', 'minify']);
+    grunt.registerTask('build', ['copy:dist', 'minify', 'concat']);
 
     grunt.registerTask('minify', 'Minify the all js', function() {
         var done = this.async();
         grunt.task.run(['shell:min']);
         done();
     });
+
     grunt.loadNpmTasks('proxit');
     grunt.registerTask('proxitserver', 'Proxit', function() {
         var done = this.async();
