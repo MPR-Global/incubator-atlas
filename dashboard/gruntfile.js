@@ -31,6 +31,23 @@ module.exports = function(grunt) {
         modulesPath = '../public/'
 
     grunt.initConfig({
+        // configure cssmin to minify css files ------------------------------------
+        cssmin: {
+            options: {
+                banner: '/*\n <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> \n*/\n'
+            },
+            build: {
+                files: {
+                    'dist/css/common.min.css': 'dashboard/css/common.css',
+                    'dist/css/d3tip.min.css': 'dashboard/css/d3tip.css',
+                    'dist/css/details.min.css': 'dashboard/css/details.css',
+                    'dist/css/lineage.min.css': 'dashboard/css/lineage.css',
+                    'dist/css/sticky-footer-navbar.min.css': 'dashboard/css/sticky-footer-navbar.css',
+                    'dist/css/tags.min.css': 'dashboard/css/tags.css'
+                }
+            }
+        },
+
         watch: {
             options: {
                 livereload: 35729
@@ -188,4 +205,5 @@ module.exports = function(grunt) {
             done();
         });
     });
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 };

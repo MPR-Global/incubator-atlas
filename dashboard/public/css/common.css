@@ -355,6 +355,7 @@ Tags on Home Page design
     right: 4px;
 }
 
+
 .addTag{
    margin-top: -35px;
 }
@@ -379,4 +380,182 @@ Tags on Home Page design
 .notifier{
     margin-right: 15px;
     margin-left: -15px;
+}
+/* Details page*/
+
+.tab-content .table-bordered {
+    border-top: none;
+}
+
+.detailsPage .nav-tabs>li.active>a, 
+.detailsPage .nav-tabs>li.active>a:focus, 
+.detailsPage .nav-tabs>li.active>a:hover,
+.detailsPage .nav-tabs>li>a:hover {
+    border-radius: 0;
+}
+.detailsPage .nav-tabs>li.active>a,
+.detailsPage .nav-tabs>li.active>a:focus{
+    border-radius: 0;
+    background: #F8F8F8;
+}
+
+.detailsPage .nav-tabs>li>a {
+    margin-right: 0px; 
+    
+}
+
+.detailsPage .table>thead:first-child>tr:first-child>th {
+    border-bottom-width: 1px;
+}
+.detailsPage .table td{
+  padding-left: 15px;
+}
+.detailsPage .table tr:nth-child(even) td{
+  padding-left: 15px;
+  background: #f9f9f9;
+}
+.detailsPage .table tr td:first-child{
+  font-weight: bold;
+}
+.detailsPage .table th{
+  padding-left: 15px;
+  background: #f8f8f8;
+}
+.detailsPage .lineage{
+  position: absolute;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  z-index: -1;
+}
+.detailsPage .black{
+  color: #555;
+}
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.content {
+  padding-bottom: 90px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* tags */
+
+.add-tag {
+  margin-top: -7px;
+}
+.inputs input{
+    height: 50px;
+  border-radius: 0px;
+  border: 1px solid #e3e3e3;
+  color: #414141;
+  box-shadow: none;
+}
+.inputs .control-label{
+    padding: 15px;
+    padding-top: 15px !important;
+}
+.inputs button.addAttr, .inputs button.saveAttr{
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #FFFFFF;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+}
+.inputs button.addAttr{
+    background-color: #ff8e00;
+}
+.inputs pre{
+    border: 0;
+  border-top: 1px solid #ddd;
+  border-radius: 0;
+  margin-bottom: 0;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.inputs button.remove{
+  position: absolute;
+  right: 28px;
+  bottom: 12px;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 4px;
+  background-color: #a94442;
+}
+.appForm .panel{
+    border-radius: 0 !important;
+}
+.appForm .panel-footer{
+    margin-bottom: 0;
+}
+
+.appForm .panel-body{
+    padding-bottom: 0;
+}
+
+.input-spacing{
+    padding-bottom: 10px!important;
+}
+
+.create-tag-entity .modal-footer{
+    border-top: 0;
+}
+
+.tag-list{
+    border:1px solid #ddd;
+    padding:10px;
+    background-color: #F5F5F5;
+}
+
+.tag-list ul{
+    padding-left: 0px;
+}
+
+.error{
+    color:red;
+}
+
+.tag-list ul li{
+    display: inline;
+    line-height: 30px;
+    border:none;
+    padding: 2px;
+    background-color: inherit;
+  padding-right: 20px !important;
+}
+.addTag{
+    text-align: center;
+}
+.addTag img{
+    cursor: pointer;
+}
+.searchResults td{
+    border: 0;
+}
+.tagalign{
+   margin-top: 14px;
+}
+.tagsAdded{
+  display: inline;
 }
