@@ -581,7 +581,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     .attr("x", "-18px")
                     .attr("y", "-18px")
                     .attr("width", "34px")
-                    .attr("height", "34px");
+                    .attr("height", "34px")
+                      .style("cursor", "pointer");
 
                 nodeEnter.append("text")
                     .attr("x", function(d) {

@@ -20,12 +20,31 @@
 
 angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource',
     function($scope, NavigationResource) {
-
+       var pagesShown = 1;
+    	var pageSize = 5;
         $scope.leftnav = NavigationResource.get();
+           $scope.leftnavLength=$scope.leftnav;
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
 
         };
+        var l=$scope.leftnav;
+        	console.log("test", $scope.leftnav );
 
-    }
+
+
+	$scope.itemsLimit = function() {
+        return pageSize * pagesShown;
+    };
+    $scope.hasMoreItemsToShow = function() {
+
+        return pagesShown < ($scope.leftnav / pageSize);
+    };
+    $scope.showMoreItems = function() {
+        pagesShown = pagesShown + 1;         
+    };
+
+     
+}
+
 ]);
