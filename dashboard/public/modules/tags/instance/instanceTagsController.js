@@ -64,10 +64,12 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
         };
 
         $scope.detachTag = function($event, name) {
-                $('#btnDelete').modal().on('click',function(e){
-                    $("#myModal").modal();
+            $scope.displayName = name;
+            $('#btnDelete').modal().on('click',function(e){
+                e.preventDefault()    
+                $("#myModal").modal();
               
-                           DetailsResource.detachTag({
+                DetailsResource.detachTag({
                     id: $stateParams.id,
                     tagName: name
                 }, function(data) {
@@ -84,14 +86,13 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                         }else {
                             $scope.noTags = false;
                         }
-                    }
+                    } 
+                }); 
+            }) ;            
+        };
 
-                });
-                e.preventDefault()
-                }) ;
-
-         
-            
+        $scope.cancel = function(){
+             $(".modal-backdrop").remove();
         };
 
         

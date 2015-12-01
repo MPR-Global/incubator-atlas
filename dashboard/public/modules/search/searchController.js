@@ -138,7 +138,8 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             } else {
                 angular.forEach($scope.resultRows, function(value) {
                     var objVal = {},
-                        curVal = value;
+                        curVal = value,
+                        traits = false;
                     if (curVal.name) {
                         objVal.Name = curVal.name;
                         delete curVal.name;
@@ -146,16 +147,18 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     angular.forEach(curVal, function(vl, ky) {
                         if($scope.mapAttr.indexOf(ky) !== -1 || ky.indexOf('_col_') != -1){ 
                             if (ky === '$id$') {
-                                objVal.id = curVal[ky].id;
-                            } else if (ky === '$traits$') {
-                                objVal[ky] = vl;
-                                objVal.Tools = objVal.id;
+                                objVal.id = curVal[ky].id;   
+                                traits = true;
                             } else if (ky.indexOf('$') === -1) {
                                 objVal[ky] = vl;
-                            }
+                            } 
                         }
                     });
 
+                    if(traits){ 
+                        objVal.$traits$ = curVal['$traits$'];
+                        objVal.Tools = curVal['$id$'].id;  
+                    }
                     res.push(objVal);
                 });
             }
