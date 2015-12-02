@@ -33,6 +33,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.currentPage = pageNo;
         };
         $scope.search = function(query) {
+            $scope.$parent.searchclass="active";
             $scope.results = [];
             NotificationService.reset();
             $scope.limit = 4;
