@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource',
-    function($window, $scope, $state, $stateParams, DetailsResource) {
+angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource','SchemaResource',
+    function($window, $scope, $state, $stateParams, DetailsResource,SchemaResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
@@ -28,11 +28,26 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
         }, function(data) {
             $scope.details = data;
             $scope.schemas = data;
-            $scope.tableName = data.values.name;
+            $scope.tablesName = data.values.name;
             $scope.isTable = (typeof data.typeName !== 'undefined' && data.typeName.toLowerCase().indexOf('table') !== -1) ? true : false;
             $scope.onActivate('io');
+
             $scope.isTags = (typeof data.traits !== 'undefined' && typeof data.traits === 'object') ? true : false;
+
+     
+
+         SchemaResource.get({
+            tableName:  data.values.name
+        }, function(datas) {
+            $scope.details = datas;
+            console.log("schema api",datas);
+            $scope.schema = datas;
+           console.log(data.values.name);
+            
+
         });
+
+    });
 
         $scope.isNumber = angular.isNumber;
         $scope.isObject = angular.isObject;
