@@ -39,13 +39,13 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', function(
         }
     });
 
-}]).factory('SchemaResource', ['$resource', function($resource) {
-    return $resource('/api/atlas/lineage/hive/table/:tablesName/schema', {}, {
+}]).factory('SchemaResource', ['$resource', function($resource,DetailsResource) {
+    return $resource('/api/atlas/lineage/hive/table/:tableName/schema', {}, {
         get: {
             method: 'GET',
-            transformResponse: function(datas) {
-                if (datas) {
-                    return angular.fromJson(datas.definition);
+            transformResponse: function(data) {
+                if (data) {
+                    return angular.fromJson(data);
                 }
             },
             responseType: 'json'
