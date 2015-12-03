@@ -29,13 +29,15 @@ angular.module('dgc.search').config(['$stateProvider',
         $stateProvider.state('addTagHome', {
             parent: 'search',
             params: { id:null},
-            onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', function($stateParams, $state, $modal, NavigationResource) {
+            onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', '$cookieStore', function($stateParams, $state, $modal, NavigationResource, $cookieStore) {
                 $modal.open({
                     templateUrl: '/modules/tags/instance/views/createTag.html',
                     controller: 'CreateTagController',
                     windowClass: 'create-tag-entity',
                     resolve: {
                         typesList: function() {
+                            if($cookieStore.traitsList)
+                                return $cookieStore.traitsList.$promise;
                             return NavigationResource.get().$promise;
                         }
                     }

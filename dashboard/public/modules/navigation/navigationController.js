@@ -18,8 +18,8 @@
 
 'use strict';
 
-angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource',
-    function($scope, NavigationResource) {
+angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource','$cookieStore',
+    function($scope, NavigationResource, $cookieStore) {
  
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
@@ -28,6 +28,7 @@ angular.module('dgc.navigation').controller('NavigationController', ['$scope', '
  
         $scope.$on('load_Traits', function () { 
             $scope.leftnav = NavigationResource.get();
+            $cookieStore.traitsList = $scope.leftnav;
 		});
 
     }
