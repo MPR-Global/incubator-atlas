@@ -24,10 +24,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="colm in details.values.columns">
-        <td> {{colm.values.name}}</td>
-        <td>{{colm.values.comment}}</td>
-        <td> {{colm.values.dataType}}</td>
+    <tr ng-repeat="colm in schema">
+        <td> {{colm.name}}</td>
+        <td>{{colm.comment}}</td>
+        <td> {{colm.dataType}}</td>
 
     </tr>
 

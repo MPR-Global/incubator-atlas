@@ -23,8 +23,10 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
         $scope.tableName = false;
         $scope.isTable = false;
 
+
         DetailsResource.get({
             id: $stateParams.id
+
         }, function(data) {
             $scope.details = data;
             $scope.schemas = data;
@@ -36,8 +38,14 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
 
      
 
-         SchemaResource.get({
+    
+            $scope.tableName = data.values.name;
+            $scope.isTable = (typeof data.typeName !== 'undefined' && data.typeName.toLowerCase().indexOf('table') !== -1) ? true : false;
+            $scope.onActivate('io');
+
+        SchemaResource.get({
             tableName:  data.values.name
+
         }, function(datas) {
             $scope.details = datas;
             console.log("schema api",datas);
@@ -45,9 +53,14 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
            console.log(data.values.name);
             
 
+
+        }, function(data1) {
+           $scope.schema = data1.results.rows;
+              
+            });
+
         });
 
-    });
 
         $scope.isNumber = angular.isNumber;
         $scope.isObject = angular.isObject;
