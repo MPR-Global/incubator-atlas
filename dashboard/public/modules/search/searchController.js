@@ -78,23 +78,19 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                             if (value.dataTypeName === '__IdType') {
                                 $scope.searchKey = value.name;
                             }
-                            console.log("searchKey " + $scope.searchKey);
                         });
                         if ($scope.searchKey === undefined || $scope.searchKey === '') {
                             $scope.searchKey = '';
-                            console.log("searchKey " + $scope.searchKey);
                         }
                     }
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
-                    console.log($scope.transformedProperties);
 
                 } else if (typeof response.dataType === 'undefined') {
                     $scope.dataTransitioned = true;
                     $scope.searchKey = '';
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
-                    console.log($scope.transformedProperties);
                 } else if (response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
                     $scope.searchKey = "Table";
                     $scope.transformedResults = $scope.resultRows;
@@ -109,8 +105,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if ($scope.transformedResults) {
                         $scope.filteredResults = $scope.transformedResults.slice(begin, end);
                     }
-                    console.log("Filter Result");
-                    console.log($scope.filteredResults);
                     $scope.pageCount = function() {
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
                     };

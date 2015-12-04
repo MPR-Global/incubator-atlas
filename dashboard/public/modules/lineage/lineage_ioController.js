@@ -31,7 +31,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 }
             });
             return newEdgsObj;
-        } 
+        }
 
         function getCombinedLineageData(tableData, callRender) {
             LineageResource.get({
@@ -71,7 +71,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                                 if (callRender) {
                                     render();
                                 }
-                            }); 
+                            });
                     } else {
                         $scope.requested = false;
                     }
@@ -130,11 +130,10 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 if (!$scope.lineageData) {
                     if ($scope.requested) {
                         if ($scope.type === 'io') {
-                            console.log($scope.type);
                             getCombinedLineageData(lineageData, true);
                         } else {
                             getCombinedLineageData(lineageData, true);
-                        } 
+                        }
                     }
                 } else {
                     render();
@@ -306,13 +305,13 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 .attr('class', 'd3-tip')
                 .html(function(d) {
                     var toolTip = $("<pre>").attr("class", "alert alert-success")
-                             .append($("<p>").html('Name :<b>' + d.name + '</b>'));
+                        .append($("<p>").html('Name :<b>' + d.name + '</b>'));
 
-                         if (d.tip && d.tip.trim() !== "") {
-                             toolTip.append($("<p>").html('Query: ' + d.tip));
-                         }
-                         return toolTip.prop("outerHTML");
-                    });
+                    if (d.tip && d.tip.trim() !== "") {
+                        toolTip.append($("<p>").html('Query: ' + d.tip));
+                    }
+                    return toolTip.prop("outerHTML");
+                });
 
             // define the baseSvg, attaching a class for styling and the zoomListener
             var baseSvg = element.append('svg')
