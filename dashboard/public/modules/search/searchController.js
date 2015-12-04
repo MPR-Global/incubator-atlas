@@ -147,6 +147,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                                 objVal.id = curVal[ky].id;
                                 onlyId = true;
                                 traits = true;
+
                             } else if (ky.indexOf('$') === -1) {
                                 objVal[ky] = vl;
                                 onlyId = false;
@@ -162,6 +163,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if (onlyId) {
                         objVal.guid = objVal.id;
                     }
+
                     res.push(objVal);
                 });
             }

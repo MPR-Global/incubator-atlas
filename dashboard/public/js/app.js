@@ -80,6 +80,7 @@ angular.module('dgc').factory('lodash', ['$window',
     $rootScope.$on('$stateChangeStart', function() {
         d3.selectAll('.d3-tip').remove();
     });
+
     $rootScope.updateTags = function(added, obj) {
         if (added) {
             $rootScope.$broadcast('add_Tag', obj);
