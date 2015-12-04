@@ -15,20 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 'use strict';
 
 angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource',
     function($scope, NavigationResource) {
- 
+
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
 
-        }; 
- 
-        $scope.$on('load_Traits', function () { 
+        };
+
+        $scope.$on('load_Traits', function() {
             $scope.leftnav = NavigationResource.get();
-		});
+        });
 
     }
 ]);
