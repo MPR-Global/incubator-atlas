@@ -147,7 +147,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                                 objVal.id = curVal[ky].id;
                                 onlyId = true;
                                 traits = true;
-
                             } else if (ky.indexOf('$') === -1) {
                                 objVal[ky] = vl;
                                 onlyId = false;

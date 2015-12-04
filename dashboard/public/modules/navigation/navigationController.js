@@ -28,9 +28,5 @@ angular.module('dgc.navigation').controller('NavigationController', ['$scope', '
             $scope.leftnav = NavigationResource.get();
         });
 
-        $scope.$on('load_Traits', function() {
-            $scope.leftnav = NavigationResource.get();
-        });
-
     }
 ]);
