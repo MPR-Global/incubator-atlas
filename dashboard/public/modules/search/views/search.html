@@ -66,11 +66,7 @@
                         </span>
                      </td>
                      <td>
-<<<<<<< HEAD
                         <div id="{{result['$id$'].id || result.guid}}" ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
-=======
-                        <div ng-show="!dataTransitioned" class="wordBreak tags"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
->>>>>>> ATLAS-244 - Add Tag Tab - updated
                      </td>
                      <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
@@ -80,7 +76,7 @@
                         
                         <span data-ng-if="res != '$traits$' && res != 'Tools' && res != 'guid' && res.toLowerCase().indexOf('name') == -1 && res.toLowerCase().indexOf('time') == -1">{{result[res]}}</span> 
                         
-                        <span data-ng-if="res.toLowerCase().indexOf('time') != -1 && isNumber(result[res])">{{result[res] * 1000 | date:'yyyy-MM-dd HH:mm:ss'}} UTC</span> 
+                        <span data-ng-if="res.toLowerCase().indexOf('time') != -1 && isNumber(result[res])">{{result[res] * 1000 | date:'yyyy-MM-dd HH:mm:ss'}} UTC</span>
                         <a data-ng-if="res.toLowerCase().indexOf('name') != -1" data-ui-sref="details({id:result['id']|| result['guid']})">{{result[res]}}</a>
                         
                         <div data-ng-if="res == '$traits$'" class="wordBreak tags" id="{{result['id']|| result['guid']}}">
