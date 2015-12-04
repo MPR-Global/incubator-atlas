@@ -32,7 +32,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.isString = angular.isString;
         $scope.isArray = angular.isArray;
         $scope.isNumber = angular.isNumber;
-        $scope.mapAttr = ['name', 'guid', 'typeName', 'owner', 'description', 'createTime', '$traits$', '$id$', 'comment', 'dataType'];
+        $scope.mapAttr = ['guid', 'typeName', 'owner', 'description', 'createTime', '$traits$', '$id$', 'comment', 'dataType'];
 
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
@@ -58,17 +58,17 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 if ($scope.results) {
                     if (response.dataType) {
                         $scope.resultType = response.dataType.typeName;
-                    } else if(response.results.dataType) {
-                        $scope.resultType = response.results.dataType.typeName; 
+                    } else if (response.results.dataType) {
+                        $scope.resultType = response.results.dataType.typeName;
                     } else if (typeof response.dataType === 'undefined') {
                         $scope.resultType = "full text";
-                    } 
+                    }
                     $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
                 } else {
                     $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
                 }
 
-                if (response.dataType && response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') == -1) {
+                if (response.dataType && response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') === -1) {
                     $scope.dataTransitioned = true;
                     var attrDef = response.dataType.attributeDefinitions;
                     if (attrDef.length === 1) {
@@ -78,28 +78,24 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                             if (value.dataTypeName === '__IdType') {
                                 $scope.searchKey = value.name;
                             }
-                            console.log("searchKey " + $scope.searchKey);
                         });
                         if ($scope.searchKey === undefined || $scope.searchKey === '') {
                             $scope.searchKey = '';
-                            console.log("searchKey " + $scope.searchKey);
                         }
                     }
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
-                    console.log($scope.transformedProperties);
 
                 } else if (typeof response.dataType === 'undefined') {
                     $scope.dataTransitioned = true;
                     $scope.searchKey = '';
                     $scope.transformedResults = $scope.filterResults();
                     $scope.transformedProperties = $scope.filterProperties();
-                    console.log($scope.transformedProperties);
                 } else if (response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
                     $scope.searchKey = "Table";
                     $scope.transformedResults = $scope.resultRows;
                 } else if (response.results.dataType && response.results.dataType.typeName && response.results.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
-                    $scope.searchKey = "Table"; 
+                    $scope.searchKey = "Table";
                     $scope.transformedResults = $scope.resultRows;
                 }
 
@@ -109,8 +105,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if ($scope.transformedResults) {
                         $scope.filteredResults = $scope.transformedResults.slice(begin, end);
                     }
-                    console.log("Filter Result");
-                    console.log($scope.filteredResults);
                     $scope.pageCount = function() {
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
                     };
@@ -138,23 +132,32 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             } else {
                 angular.forEach($scope.resultRows, function(value) {
                     var objVal = {},
-                        curVal = value;
+                        curVal = value,
+                        onlyId = false;
+
                     if (curVal.name) {
-                        objVal.Name = curVal.name;
+                        objVal.name = curVal.name;
                         delete curVal.name;
                     }
                     angular.forEach(curVal, function(vl, ky) {
-                        if($scope.mapAttr.indexOf(ky) !== -1 || ky.indexOf('_col_') != -1){ 
+                        if ($scope.mapAttr.indexOf(ky) !== -1 || ky.indexOf('_col_') !== -1 || ky.toLowerCase().indexOf('name') !== -1) {
                             if (ky === '$id$') {
                                 objVal.id = curVal[ky].id;
+                                onlyId = true;
                             } else if (ky === '$traits$') {
                                 objVal[ky] = vl;
                                 objVal.Tools = objVal.id;
+                                onlyId = false;
                             } else if (ky.indexOf('$') === -1) {
                                 objVal[ky] = vl;
+                                onlyId = false;
                             }
                         }
                     });
+
+                    if (onlyId) {
+                        objVal.guid = objVal.id;
+                    }
 
                     res.push(objVal);
                 });
