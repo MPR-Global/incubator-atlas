@@ -22,6 +22,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
         if (typesList) {
             $scope.typesList = typesList;
         }
+        var $$ = angular.element;
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
 
@@ -41,10 +42,11 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
 
                     for (var t = 0; t < traitTypes.length; t++) {
                         if (traitTypes[t]) {
-                            _.each(traitTypes[t].attributeDefinitions, function(value) {
+                            for(var value in traitTypes[t].attributeDefinitions)
+                            { 
                                 $scope.propertiesList[value.name] = '';
                                 $scope.isRequired[value.name] = value.isRequired;
-                            });
+                            }
                         }
 
                         if (traitTypes[t].superTypes && traitTypes[t].superTypes.length > 0) {
@@ -65,11 +67,13 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                 };
                 DetailsResource.saveTag({
                     id: $stateParams.id
-                }, requestObject).$promise.then(function(data) { 
+                }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.id) {
-                        var tagName = $("#tagDefinition").val();
-                        $rootScope.updateTags(true, { added : $scope.selectedType});
-                        $("#" + $stateParams.id).find("td").find("div.tags").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+                        var tagName = $$("#tagDefinition").val();
+                        $rootScope.updateTags(true, {
+                            added: $scope.selectedType
+                        });
+                        $$("#" + $stateParams.id).append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
                     }
                     NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
                     $modalInstance.close(true);

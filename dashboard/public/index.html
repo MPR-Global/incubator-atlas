@@ -46,7 +46,7 @@
 </header>
 <div class="content container">
     <div data-ng-include="'/modules/notification/views/notifications.html'"></div>
-    <div class="col-lg-2 padding0" data-ng-include="'/modules/navigation/views/navigation.html'"></div>
+    <div class="col-lg-2 padding0" data-ng-include="'/modules/navigation/views/navigation.html'" ng-class="leftNav ? 'hide' : ''" ></div>
     <div data-ui-view class="ngView"></div>
 </div>
 <footer class="footer navbar-bottom">
