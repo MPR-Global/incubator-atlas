@@ -17,7 +17,7 @@
    -->
 <div class="col-lg-10 paddingR0">
    <div class="">
-      <div class="row mainSearch">
+      <div class="row main-search">
          <form class="col-lg-12" name="form" novalidate>
             <div class="input-group">
                <input type="text" class="form-control" placeholder="Search: Table, DB, Column" data-ng-model="query" required/>
@@ -33,7 +33,7 @@
          <div ng-switch on="searchMessage">
             <div ng-switch-when="load-gif" class="search-spinner"><img src="../img/spinner.gif" align="middle" /></div>
             <div ng-switch-default>
-               <h4 ng-show="searchMessage" title="{{searchMessage}}" class="tabsearchResult">{{searchMessage}}</h4>
+               <h4 ng-show="searchMessage" title="{{searchMessage}}" class="tabsearch-result">{{searchMessage}}</h4>
             </div>
          </div>
          <div class="panel panel-default" ng-show='resultCount > 0'>
@@ -66,9 +66,13 @@
                         </span>
                      </td>
                      <td>
+<<<<<<< HEAD
                         <div id="{{result['$id$'].id || result.guid}}" ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+=======
+                        <div id="{{result['$id$'].id}}" ng-show="!dataTransitioned" class="word-break"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+>>>>>>> HDPDGI-265 css class names  standardize
                      </td>
-                     <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
+                     <td class="add-tag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
                   <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults track by $index">
                      <td data-ng-if="isObject(result) && !isString(result) && res != 'id'" data-ng-repeat="res in transformedProperties track by $index">
