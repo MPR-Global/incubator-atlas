@@ -69,7 +69,21 @@
                     </td>
 
                     <td>
-                      <div ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+                      <!-- <div ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div> -->
+                       <div  ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})">
+                <tags-input ng-model="tags"
+                            placeholder="Add a supertypes"
+                            replace-spaces-with-dashes="false">
+                            {key}}
+                    <auto-complete source=" search({query: key})"
+                                   min-length="0"
+                                   load-on-focus="true"
+                                   load-on-empty="true"
+                                   max-results-to-show="32" >
+                    </auto-complete>
+                </tags-input>
+            </div>
+            
                     </td>
                     <td class="addTag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>

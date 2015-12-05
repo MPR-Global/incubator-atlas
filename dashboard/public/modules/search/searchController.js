@@ -63,9 +63,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if (response.dataType) {
                         $scope.resultType = response.dataType.typeName;
                     }
-                    $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
+                    // $scope.searchMessage = $scope.resultCount + ' results matching your search query ' + $scope.query + ' were found';
+                    $scope.searchMessage = $scope.resultCount + ' results found on search query: ' + $scope.query + '';
                 } else {
-                    $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
+                    // $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
+                    $scope.searchMessage = 'No results found for your search query: ' + $scope.query + '';
                 }
 
                 $scope.$watch('currentPage + itemsPerPage', function() {
@@ -81,7 +83,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     }
                 });
             }, function searchError(err) {
-                $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
+                // $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
+                $scope.searchMessage = 'No results found for your search query:  ' + $scope.query + '';
+
                 NotificationService.error('Error occurred during executing search query, error status code = ' + err.status + ', status text = ' + err.statusText, false);
             });
         };
