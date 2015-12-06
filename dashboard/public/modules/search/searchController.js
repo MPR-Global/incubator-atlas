@@ -136,7 +136,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         onlyId = false;
 
                     if (curVal.name) {
-                        objVal.Name = curVal.name;
+                        objVal.name = curVal.name;
                         delete curVal.name;
                     }
                     angular.forEach(curVal, function(vl, ky) {
