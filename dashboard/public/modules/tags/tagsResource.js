@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.tags').factory('TagsResource', ['$resource', function($resource) {
+angular.module('dgc.tags').factory('tagsResource', ['$resource', function($resource) {
     return $resource('/api/atlas/types/:id', {}, {
         query: {
             method: 'GET',

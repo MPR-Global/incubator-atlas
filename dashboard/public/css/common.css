@@ -72,7 +72,7 @@ hr.separator {
     color: #999999;
     padding-left: 14px;
 }
-.mB20{
+.mb20{
     margin-bottom: 20px;
 }
 .padding0{
@@ -166,7 +166,7 @@ Search Bar design
 /*=======================================================================================
 Tags on Home Page design
 =======================================================================================*/
-.mainTags{
+.main-tags{
     min-height: 20px;
     margin-bottom: 20px;
     background-color: #f5f5f5;
@@ -175,7 +175,7 @@ Tags on Home Page design
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
-.mainTags a{
+.main-tags a{
     background: transparent;
     border: none;
     padding:5px 10px;
@@ -183,18 +183,18 @@ Tags on Home Page design
     color: #0088cc !important;
     border-radius: 0 !important;
 }
-.mainTags a:hover{
+.main-tags a:hover{
     color: #005580 !important;
     background: #eeeeee !important;
 }
-.mainTags h4{
+.main-tags h4{
     padding:0 10px;
 }
-.mainTags i{
+.main-tags i{
     font-size: 12px;
     margin-right: 3px;
 }
-.mainTags .list-group-item.limitSize{
+.main-tags .list-group-item.limitSize{
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;

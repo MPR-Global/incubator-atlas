@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService',
-    function($scope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService) {
+angular.module('dgc.search').controller('searchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'searchResource', 'detailsResource', 'notificationService',
+    function($scope, $location, $http, $state, $stateParams, _, searchResource, detailsResource, notificationService) {
 
         $scope.results = [];
         $scope.resultCount = 0;
@@ -39,11 +39,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         };
         $scope.search = function(query) {
             $scope.results = [];
-            NotificationService.reset();
+            notificationService.reset();
             $scope.limit = 4;
             $scope.searchMessage = 'load-gif';
             $scope.$parent.query = query;
-            SearchResource.search({
+            searchResource.search({
                 query: query
             }, function searchSuccess(response) {
 
@@ -110,12 +110,12 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
                     };
                     if ($scope.results.length < 1) {
-                        NotificationService.error('No Result found', false);
+                        notificationService.error('No Result found', false);
                     }
                 });
             }, function searchError(err) {
                 $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
-                NotificationService.error('Error occurred during executing search query, error status code = ' + err.status + ', status text = ' + err.statusText, false);
+                notificationService.error('Error occurred during executing search query, error status code = ' + err.status + ', status text = ' + err.statusText, false);
             });
             $state.go('search', {
                 query: query
@@ -204,7 +204,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             }
         };
         $scope.getResourceDataHome = function(event, id) {
-            DetailsResource.get({
+            detailsResource.get({
                 id: id
             }, function(data) {
                 if ($scope.filteredResults !== null && Object.keys($scope.filteredResults).length > 0) {

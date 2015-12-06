@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.search').factory('SearchResource', ['$resource', function($resource) {
+angular.module('dgc.search').factory('searchResource', ['$resource', function($resource) {
     return $resource('/api/atlas/discovery/search/', {}, {
         search: {
             'method': 'GET',
