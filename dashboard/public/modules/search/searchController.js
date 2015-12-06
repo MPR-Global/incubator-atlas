@@ -44,7 +44,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.searchMessage = 'load-gif';
             $scope.$parent.query = query;
             SearchResource.search({
-                query: query
+                query: encodeURIComponent(query)
             }, function searchSuccess(response) {
 
                 $scope.resultCount = response.count;
@@ -115,11 +115,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             }, function searchError(err) {
                 $scope.searchMessage = '0 results matching your search query ' + $scope.query + ' were found';
                 NotificationService.error('Error occurred during executing search query, error status code = ' + err.status + ', status text = ' + err.statusText, false);
-            });
-            $state.go('search', {
-                query: query
-            }, {
-                location: 'replace'
             });
         };
 
@@ -227,9 +222,16 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             return res;
         };
         $scope.searchQuery = $location.search();
-        $scope.query = ($location.search()).query;
+          $scope.goSearch = function(query) {
+            $state.go('search', {
+                query: encodeURIComponent(query)
+            }, {
+                location: 'replace'
+            });
+        };
+        if ($location.search().query)
+            $scope.query = decodeURIComponent($location.search().query);
         if ($scope.query) {
-
             $scope.search($scope.query);
         }
     }
