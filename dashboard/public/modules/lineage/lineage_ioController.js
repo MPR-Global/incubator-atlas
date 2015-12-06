@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'LineageResource', 'd3', 'DetailsResource', '$q',
-    function($element, $scope, $state, $stateParams, _, LineageResource, d3, DetailsResource, $q) {
+angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'lineageResource', 'd3', 'detailsResource', '$q',
+    function($element, $scope, $state, $stateParams, _, lineageResource, d3, detailsResource, $q) {
         var guidsList = [];
 
         function inVertObj(edgs) {
@@ -34,12 +34,12 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         }
 
         function getCombinedLineageData(tableData, callRender) {
-            LineageResource.get({
+            lineageResource.get({
                 tableName: tableData.tableName,
                 type: 'outputs'
             }, function lineageSuccess(response1) {
 
-                LineageResource.get({
+                lineageResource.get({
                     tableName: tableData.tableName,
                     type: 'inputs'
                 }, function lineageSuccess(response) {
@@ -88,7 +88,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             var deferred = $q.defer();
             for (var guid in edges) {
                 if (!vertices.hasOwnProperty(guid)) {
-                    urlCalls.push(DetailsResource.get({
+                    urlCalls.push(detailsResource.get({
                         id: guid
                     }).$promise);
                 }
@@ -566,7 +566,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
                     .attr("xlink:href", function(d) {
-                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                        return d.type === 'Table' ? '../img/tableIcon-green.png' : '../img/processIcon-green.png';
                     })
                     .on('mouseover', function(d) {
                         if (d.type === 'LoadProcess' || 'Table') {
@@ -627,9 +627,9 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     .attr("r", 4.5)
                     .attr("xlink:href", function(d) {
                         if (d._children) {
-                            return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
+                            return d.type === 'Table' ? '../img/tableIcon-red.png' : '../img/processIcon-red.png';
                         }
-                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                        return d.type === 'Table' ? '../img/tableIcon-green.png' : '../img/processIcon-green.png';
                     });
 
 

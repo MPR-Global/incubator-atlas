@@ -17,13 +17,13 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource',
-    function($window, $scope, $state, $stateParams, DetailsResource) {
+angular.module('dgc.details').controller('detailsController', ['$window', '$scope', '$state', '$stateParams', 'detailsResource',
+    function($window, $scope, $state, $stateParams, detailsResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
 
-        DetailsResource.get({
+        detailsResource.get({
             id: $stateParams.id
         }, function(data) {
             $scope.details = data;

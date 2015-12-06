@@ -16,12 +16,12 @@
   ~ limitations under the License.
   -->
 
-<div class="lineage-viz table-bordered" data-ng-controller="Lineage_ioController">
+<div class="lineage-viz table-bordered" data-ng-controller="lineage_ioController">
     <button type="button" class="btn btn-primary pull-right" ng-click="onReset()">
         Reset
     </button>
     <div class="graph">
-      <h4 data-ng-if="!requested && !lineageData" class="alignLineage">No lineage data found</h4>
+      <h4 data-ng-if="!requested && !lineageData" class="align-lineage">No lineage data found</h4>
       <i data-ng-if="requested" class="fa fa-spinner fa-spin fa-5x"></i>
       <svg >
           <g/>

@@ -17,12 +17,12 @@
  */
 'use strict';
 
-angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope', 'DetailsResource', '$stateParams', '$state',
-    function($scope, DetailsResource, $stateParams, $state) {
+angular.module('dgc.tags.instance').controller('instanceTagController', ['$scope', 'detailsResource', '$stateParams', '$state',
+    function($scope, detailsResource, $stateParams, $state) {
         $scope.id = $stateParams.id;
 
         function getResourceData() {
-            DetailsResource.get({
+            detailsResource.get({
                 id: $stateParams.id
             }, function(data) {
 
@@ -70,7 +70,7 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
                 e.preventDefault();
                 $("#myModal").modal();
 
-                DetailsResource.detachTag({
+                detailsResource.detachTag({
                     id: $stateParams.id,
                     tagName: name
                 }, function(data) {
