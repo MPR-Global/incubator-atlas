@@ -311,7 +311,7 @@ Tags on Home Page design
     word-break: break-word;
 }
 
-.tabsearchanchor {
+.tabsearch-tag {
     max-width: 100px;
     display: list-item;
     overflow: hidden;

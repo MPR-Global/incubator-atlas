@@ -54,7 +54,7 @@ div.lineage {
     /*fill: #fff;*/
 /*}*/
 
-.edgePath path {
+.edge-path path {
     stroke: #333;
     fill: #333;
     stroke-width: 1.5px;
@@ -83,7 +83,7 @@ div.lineage {
 /*}​*/
 
 
-.alignLineage{
+.align-lineage{
     text-align: center;
     margin-top: 100px;
 }
