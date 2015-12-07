@@ -153,9 +153,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         }
                     });
 
-                    if(traits){ 
-                        objVal.$traits$ = curVal.$traits$ || {} ;
-                        objVal.Tools = objVal.id;  
+                    if (traits) {
+                        objVal.$traits$ = curVal.$traits$ || {};
+                        objVal.Tools = objVal.id;
                     }
 
                     if (onlyId) {
