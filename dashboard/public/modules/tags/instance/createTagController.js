@@ -42,7 +42,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
 
                     for (var t = 0; t < traitTypes.length; t++) {
                         if (traitTypes[t]) {
-                            for(var indx in traitTypes[t].attributeDefinitions)
+                           for(var indx = 0; indx < traitTypes[t].attributeDefinitions.length; indx++)
                             { 
                                 var attrDefn = traitTypes[t].attributeDefinitions[indx];
                                 $scope.propertiesList[attrDefn.name] = '';
