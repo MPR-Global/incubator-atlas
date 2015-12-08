@@ -39,6 +39,13 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
                 if (data1.results) {
                     $scope.schema = data1.results.rows;
                     $scope.isSchema = (data1.results.rows && data1.results.rows.length > 0) ? true : false;
+                    for(var t=0; t<data1.results.rows.length; t++){
+                        if(data1.results.rows[t].$id$){
+                            $scope.isTraitId = true;
+                            break;
+                        }
+                    }
+                    
                 }
             });
         });
