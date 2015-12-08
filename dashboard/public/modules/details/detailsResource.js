@@ -39,7 +39,7 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', function(
         }
     });
 
-}]).factory('SchemaResource', ['$resource', function($resource,DetailsResource) {
+}]).factory('SchemaResource', ['$resource', function($resource) {
     return $resource('/api/atlas/lineage/hive/table/:tableName/schema', {}, {
         get: {
             method: 'GET',
@@ -50,5 +50,5 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', function(
             },
             responseType: 'json'
         }
-})
+});
 }]);
