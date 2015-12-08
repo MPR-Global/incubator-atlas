@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 'use strict';
 
 //Setting up route
@@ -28,7 +27,9 @@ angular.module('dgc.search').config(['$stateProvider',
         });
         $stateProvider.state('addTagHome', {
             parent: 'search',
-            params: { id:null},
+            params: {
+                tId: null
+            },
             onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', function($stateParams, $state, $modal, NavigationResource) {
                 $modal.open({
                     templateUrl: '/modules/tags/instance/views/createTag.html',
