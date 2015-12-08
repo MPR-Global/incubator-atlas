@@ -29,7 +29,10 @@
     </thead>
     <tbody>
         <tr ng-repeat="colm in schema">
-            <td> {{colm.name}}</td>
+            <td> 
+                <a ng-if="colm['$id$']" data-ui-sref="details({id:colm['$id$'].id})">{{colm.name}}</a> 
+                <span ng-if="!colm['$id$']"> {{colm.name}} </span>
+            </td>
             <td>{{colm.comment}}</td>
             <td> {{colm.dataType}}</td>
             <td ng-if="colm['$id$']">
