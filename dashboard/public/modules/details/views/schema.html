@@ -21,14 +21,21 @@
         <th>Name</th>
         <th>Comment</th>
         <th>DataType</th>
+        <th>Tags </th>
+        <th>Tools</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="colm in details.values.columns">
-        <td> {{colm.values.name}}</td>
-        <td>{{colm.values.comment}}</td>
-        <td> {{colm.values.dataType}}</td>
-
+    <tr ng-repeat="colm in schema">
+        <td> {{colm.name}}</td>
+        <td>{{colm.comment}}</td>
+        <td> {{colm.dataType}}</td>
+          <td>
+             <div id="{{colm['$id$'].id }}" ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in colm['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+          </td>
+           <td class="addTag">
+           <img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(colm['$id$'].id )">
+           </td>
     </tr>
 
     </tbody>

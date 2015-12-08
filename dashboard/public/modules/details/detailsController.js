@@ -36,7 +36,7 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             tableName:  data.values.name
         }, function(data1) {
            $scope.schema = data1.results.rows;
-              
+            
             });
         });
 
@@ -52,6 +52,12 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             });
         };
 
+         $scope.openAddTagHome = function(traitId) {
+            $state.go('addTagHome', {
+                id: traitId
+            });
+        };
+        
         $scope.goDetails = function(id) {
             $state.go("details", {
                 id: id
