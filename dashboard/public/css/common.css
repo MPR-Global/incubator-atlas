@@ -107,6 +107,7 @@ header a.main-logo:hover,header a.main-logo:focus{
     text-decoration: none;
 }
 
+
 header ul.menubar li a{
     line-height: 10px;
     color: #c3c3c3;
@@ -123,6 +124,23 @@ header ul.menubar li a:focus{
     background: transparent;
 } 
 header ul.menubar li.active a{
+
+    line-height: 10px;
+    color: #c3c3c3;
+}
+header ul.menu-bar li a>i {
+    margin-right: 3px;
+    font-size: 12px;
+} 
+header ul.menu-bar li a:hover{
+    color: #fff;
+    background: transparent;
+} 
+header ul.menu-bar li a:focus{
+    background: transparent;
+} 
+header ul.menu-bar li.active a{
+
     color: #333333;
     background-color: #ffffff;
     -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
@@ -148,7 +166,7 @@ footer.navbar-bottom img {
 /*=======================================================================================
 Search Bar design
 =======================================================================================*/
-.mainSearch input{
+.main-search input{
     height: 50px;
     border-radius: 0px;
     border: 1px solid #e3e3e3;
@@ -157,7 +175,7 @@ Search Bar design
     border-bottom-right-radius: 0px;
     box-shadow: none;
 }
-.mainSearch .input-group-btn button{
+.main-search .input-group-btn button{
     border-radius: 0;
     border-radius: 0;
     padding: 14px 20px;
@@ -301,17 +319,17 @@ Tags on Home Page design
     padding-right: 10px;
 }
 
-.btnToggle
+.btn-toggle
 {
     border: 1px solid #CCCCCC;
     padding: 5px;
 }
 
-.wordBreak {
+.word-break {
     word-break: break-word;
 }
 
-.tabsearchanchor {
+.tabsearch-tag {
     max-width: 100px;
     display: list-item;
     overflow: hidden;
@@ -328,7 +346,7 @@ Tags on Home Page design
     padding-right: 7px !important;
 }
 
-.tabsearchResult {
+.tabsearch-result {
     max-width: 500px;
     display: list-item;
     overflow: hidden;
@@ -337,7 +355,7 @@ Tags on Home Page design
     white-space: nowrap;
     text-transform: capitalize; 
 }
-.searchResultCount {
+.search-resultcount {
     max-width: 500px;
     display: list-item;
     overflow: hidden;
@@ -350,16 +368,16 @@ Tags on Home Page design
     max-width: 125px !important;
 }
 
-.anchorAbsolute {
+.anchor-absolute {
     position: absolute;
     right: 4px;
 }
 
-.addTag{
+.add-tag{
    margin-top: -35px;
 }
 
-.tagAlign{
+.tag-align{
     text-align: center;
 } 
 

@@ -20,6 +20,7 @@
 angular.module('dgc.tags.instance').controller('instanceTagController', ['$scope', 'detailsResource', '$stateParams', '$state',
     function($scope, detailsResource, $stateParams, $state) {
         $scope.id = $stateParams.id;
+        var $$ = angular.element;
 
         function getResourceData() {
             detailsResource.get({
@@ -66,17 +67,29 @@ angular.module('dgc.tags.instance').controller('instanceTagController', ['$scope
 
         $scope.detachTag = function($event, name) {
             $scope.displayName = name;
+
             $('#btnDelete').modal().on('click', function(e) {
                 e.preventDefault();
                 $("#myModal").modal();
 
                 detailsResource.detachTag({
+
+            $$('#btnDelete').modal().on('click', function(e) {
+                e.preventDefault();
+                $$("#myModal").modal();
+
+                DetailsResource.detachTag({
+
                     id: $stateParams.id,
                     tagName: name
                 }, function(data) {
 
                     if (data.requestId !== undefined && data.GUID === $stateParams.id && data.traitName === name) {
+
                         $($event.currentTarget).closest('tr').remove();
+
+                        $$($event.currentTarget).closest('tr').remove();
+
                         delete $scope.traitsList[name];
                         if ($.isEmptyObject($scope.traitsList)) {
                             $scope.noTags = true;
@@ -90,7 +103,11 @@ angular.module('dgc.tags.instance').controller('instanceTagController', ['$scope
         };
 
         $scope.cancel = function() {
+
             $(".modal-backdrop").remove();
+
+            $$(".modal-backdrop").remove();
+
         };
 
         getResourceData();

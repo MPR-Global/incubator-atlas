@@ -17,9 +17,17 @@
  */
 'use strict';
 
+<<<<<<< HEAD
 angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'lineageResource', 'd3', 'detailsResource', '$q',
     function($element, $scope, $state, $stateParams, _, lineageResource, d3, detailsResource, $q) {
         var guidsList = [];
+=======
+angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'LineageResource', 'd3', 'DetailsResource', '$q',
+    function($element, $scope, $state, $stateParams, _, LineageResource, d3, DetailsResource, $q) {
+        var guidsList = [],
+            $$ = angular.element;
+
+>>>>>>> origin/HDPDGI-265
 
         function inVertObj(edgs) {
             var newEdgsObj = {};
@@ -304,11 +312,19 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
             tooltip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
+<<<<<<< HEAD
                     var toolTip = $("<pre>").attr("class", "alert alert-success")
                         .append($("<p>").html('Name :<b>' + d.name + '</b>'));
 
                     if (d.tip && d.tip.trim() !== "") {
                         toolTip.append($("<p>").html('Query: ' + d.tip));
+=======
+                    var toolTip = $$("<pre>").attr("class", "alert alert-success")
+                        .append($$("<p>").html('Name :<b>' + d.name + '</b>'));
+
+                    if (d.tip && d.tip.trim() !== "") {
+                        toolTip.append($$("<p>").html('Query: ' + d.tip));
+>>>>>>> origin/HDPDGI-265
                     }
                     return toolTip.prop("outerHTML");
                 });
@@ -602,7 +618,7 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                     })
                     .text(function(d) {
                         var nameDis = (d.name.length > 15) ? d.name.substring(0, 15) + "..." : d.name;
-                        $(this).attr('title', d.name);
+                        $$(this).attr('title', d.name);
                         return nameDis;
                     })
                     .style("fill-opacity", 0);

@@ -33,7 +33,7 @@
             <td class="col-lg-11" >
                {{trait.typeName}}
             </td>
-            <td class="col-lg-1 tagAlign">
+            <td class="col-lg-1 tag-align">
                <a href="" class="deleteTag confirm-delete" data-toggle="modal" data-target="#myModal" ><i class="fa fa-trash-o " ng-click="detachTag($event, trait.typeName)"></i></a>
             </td>
          </tr>
@@ -57,7 +57,11 @@
       </div>
     </div>
   </div>
+
   <div ng-if="noTags" class="noTags"> 
+
+  <div ng-if="noTags" class="no-tags"> 
+
       No tags to display 
   </div>  
 </div>

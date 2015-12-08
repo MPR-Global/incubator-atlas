@@ -30,7 +30,11 @@
  </a>
     </div>
     <nav class="collapse navbar-collapse" data-collapse="isCollapsed" data-role="navigation">
+
         <ul class="navbar-nav nav pull-right menubar" data-ng-if="isLoggedIn()">
+
+        <ul class="navbar-nav nav pull-right menu-bar" data-ng-if="isLoggedIn()">
+
             <li data-ui-sref-active="active">
                  <a data-ui-sref="search()" class="menu-link">Search</a>
             </li>
@@ -41,7 +45,11 @@
               <a  ng-if="!username" class="menu-link" href="https://cwiki.apache.org/confluence/display/ATLAS/Atlas+Home" target="_blank">Help</a>
             </li>
             <li data-ui-sref-active="active">
+
                 <a  ng-if="!username" class="menu-link" href="javascript:void(0)" ng-click="showAbout()">About</a>
+
+                <a  ng-if="!username" class="menu-link" href="javascript:void(0)" ng-click="ShowAbout()">About</a>
+
             </li>
         </ul>
     </nav>

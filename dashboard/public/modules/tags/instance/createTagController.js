@@ -22,7 +22,12 @@ angular.module('dgc.tags.instance').controller('createTagController', ['$scope',
         if (typesList) {
             $scope.typesList = typesList;
         }
+
         $scope.categoryList = categories;
+
+        var $$ = angular.element;
+        $scope.categoryList = Categories;
+
         $scope.category = 'TRAIT';
 
         $scope.getAttributeDefinations = function() {
@@ -68,11 +73,19 @@ angular.module('dgc.tags.instance').controller('createTagController', ['$scope',
                     id: $stateParams.id
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.id) {
+
                         var tagName = $("#tagDefinition").val();
                         $rootScope.updateTags(true, {
                             added: $scope.selectedType
                         });
                         $("#" + $stateParams.id).append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+
+                        var tagName = $$("#tagDefinition").val();
+                        $rootScope.updateTags(true, {
+                            added: $scope.selectedType
+                        });
+                        $$("#" + $stateParams.id).append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+
                     }
                     notificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
                     $modalInstance.close(true);

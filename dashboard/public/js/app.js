@@ -99,10 +99,17 @@ angular.module('dgc').factory('lodash', ['$window',
         }
 
         if (typeof to.parent === 'undefined') {
+
             if (to.name !== 'search') {
                 $('.leftNavigation').addClass('hide');
             } else {
                 $('.leftNavigation').removeClass('hide');
+
+            if (to.name !== 'search') { 
+                $rootScope.leftNav = true;
+            } else { 
+                $rootScope.leftNav = false;
+
             }
         }
     });

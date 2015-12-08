@@ -17,8 +17,13 @@
  */
 'use strict';
 
+
 angular.module('dgc.navigation').controller('navigationController', ['$scope', 'navigationResource',
     function($scope, navigationResource) {
+
+angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource',
+    function($scope, NavigationResource) {
+
 
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
@@ -26,7 +31,11 @@ angular.module('dgc.navigation').controller('navigationController', ['$scope', '
         };
 
         $scope.$on('load_Traits', function() {
+
             $scope.leftnav = navigationResource.get();
+
+            $scope.leftnav = NavigationResource.get();
+
         });
 
     }
