@@ -26,6 +26,9 @@ angular.module('dgc.tags').config(['$stateProvider',
         });
         $stateProvider.state('addTag', {
             parent: 'details',
+            params: {
+                tId: null
+            },
             onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', function($stateParams, $state, $modal, NavigationResource) {
                 $modal.open({
                     templateUrl: '/modules/tags/instance/views/createTag.html',
