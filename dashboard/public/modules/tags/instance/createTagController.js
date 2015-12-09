@@ -70,9 +70,8 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.tId) {
                         var tagName = $$("#tagDefinition").val();
-                        if($stateParams.frm == 'details'){
-                            $scope.$emit('addSchema_Tag', $scope.selectedType);
-                        }else{ 
+                        if($stateParams.frm && $stateParams.frm !== 'details'){
+                       
                             $rootScope.updateTags(true, {
                                 added: $scope.selectedType
                             });

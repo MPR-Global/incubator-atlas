@@ -28,7 +28,8 @@ angular.module('dgc.search').config(['$stateProvider',
         $stateProvider.state('addTagHome', {
             parent: 'search',
             params: {
-                tId: null
+                tId: null,
+                 frm : 'search'
             },
             onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', function($stateParams, $state, $modal, NavigationResource) {
                 $modal.open({

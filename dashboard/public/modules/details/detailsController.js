@@ -68,10 +68,6 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             });
         };
 
-        $scope.$on('addSchema_Tag', function(evt, obj) {
-            //$scope.schema
-            colsole.log(obj);
-        });
 
         $scope.goDetails = function(id) {
             $state.go("details", {
