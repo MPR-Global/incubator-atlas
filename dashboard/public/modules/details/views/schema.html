@@ -36,7 +36,7 @@
             <td>{{colm.comment}}</td>
             <td> {{colm.dataType}}</td>
             <td ng-if="colm['$id$']">
-                <div id="{{colm['$id$'].id }}" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in colm['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+                <div id="{{colm['$id$'].id}}_schema" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in colm['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
             </td>
             <td ng-if="colm['$id$']" class="addTag">
                 <img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(colm['$id$'].id )">
