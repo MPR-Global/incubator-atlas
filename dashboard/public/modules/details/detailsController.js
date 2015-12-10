@@ -44,8 +44,15 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
                             $scope.isTraitId = true;
                             break;
                         }
+                          
                     }
-                    
+                    for(var t1=0; t<data1.results.rows.length; t1++){
+                        if(data1.results.rows[t1]){
+                            $scope.isHiveSchema = true;
+                            break;
+                        }
+
+                    }
                 }
             });
         });

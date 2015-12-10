@@ -34,7 +34,8 @@
                 <span ng-if="!colm['$id$']"> {{colm.name}} </span>
             </td>
             <td>{{colm.comment}}</td>
-            <td> {{colm.dataType}}</td>
+            <td ng-if="!isHiveSchema"> {{colm.dataType}}</td>
+            <td ng-if="isHiveSchema" > {{colm.type}}</td>
             <td ng-if="colm['$id$']">
                 <div id="{{colm['$id$'].id}}_schema" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in colm['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
             </td>
