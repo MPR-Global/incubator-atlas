@@ -33,28 +33,27 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             $scope.onActivate('io');
             $scope.isTags = (typeof data.traits !== 'undefined' && typeof data.traits === 'object') ? true : false;
 
-            SchemaResource.get({
-                tableName: data.values.name
-            }, function(data1) {
-                if (data1.results) {
-                    $scope.schema = data1.results.rows;
-                    $scope.isSchema = (data1.results.rows && data1.results.rows.length > 0) ? true : false;
-                    for(var t=0; t<data1.results.rows.length; t++){
-                        if(data1.results.rows[t].$id$){
-                            $scope.isTraitId = true;
-                            break;
-                        }
-                          
+            if (data && data.values && data.values.name && data.values.name !== "") {
+                SchemaResource.get({
+                    tableName: data.values.name
+                }, function(data1) {
+                    if (data1.results) {
+                        $scope.schema = data1.results.rows;
+                        $scope.isSchema = (data1.results.rows && data1.results.rows.length > 0) ? true : false;
+                        for (var t = 0; t < data1.results.rows.length; t++) {
+                            if (data1.results.rows[t].$id$) {
+                                $scope.isTraitId = true; 
+                            }
+                            if (data1.results.rows[t].type) {
+                                $scope.isHiveSchema = true; 
+                            }  
+                            if($scope.isTraitId && $scope.isHiveSchema){
+                                break;
+                            }
+                        } 
                     }
-                    for(var t1=0; t<data1.results.rows.length; t1++){
-                        if(data1.results.rows[t1]){
-                            $scope.isHiveSchema = true;
-                            break;
-                        }
-
-                    }
-                }
-            });
+                });
+            }
         });
 
 

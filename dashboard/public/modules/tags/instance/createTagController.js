@@ -70,19 +70,14 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.tId) {
                         var tagName = $$("#tagDefinition").val();
-                        if($stateParams.frm && $stateParams.frm !== 'details'){
-                       
+                        if($stateParams.frm && $stateParams.frm !== 'details'){ 
                             $rootScope.updateTags(true, {
                                 added: $scope.selectedType
                             });
-                        }
-                        if($stateParams.frm === 'details'){
-                            $$("#" + $stateParams.tId+"_schema").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }
-                        else {
                             $$("#" + $stateParams.tId).append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }
-                        
+                        }else if($stateParams.frm === 'details'){
+                            $$("#" + $stateParams.tId+"_schema").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+                        }  
                     }
                     NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
                     $modalInstance.close(true);

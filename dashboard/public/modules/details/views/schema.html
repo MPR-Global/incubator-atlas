@@ -22,7 +22,8 @@
         <tr>
             <th>Name</th>
             <th>Comment</th>
-            <th>DataType</th>
+            <th ng-if="!isHiveSchema">DataType</th>
+            <th ng-if="isHiveSchema">Type</th>
             <th ng-if="isTraitId">Tags </th>
             <th ng-if="isTraitId">Tools</th>
         </tr>
@@ -35,7 +36,7 @@
             </td>
             <td>{{colm.comment}}</td>
             <td ng-if="!isHiveSchema"> {{colm.dataType}}</td>
-            <td ng-if="isHiveSchema" > {{colm.type}}</td>
+            <td ng-if="isHiveSchema"> {{colm.type}}</td>
             <td ng-if="colm['$id$']">
                 <div id="{{colm['$id$'].id}}_schema" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in colm['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
             </td>
