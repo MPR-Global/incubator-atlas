@@ -40,6 +40,14 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
             $scope.categoryInst = Categories[$scope.category].clearTags();
         };
 
+        $scope.reset = function(){
+            $scope.tagModel = {
+                typeName: null,
+                superTypes: [],
+                attributeDefinitions: []
+            };
+        }
+
         $scope.save = function saveTag(form) {
             $scope.savedTag = null;
             if (form.$valid) {
@@ -53,6 +61,8 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                 TagsResource.save($scope.categoryInst.toJson()).$promise
                     .then(function TagCreateSuccess() {
                         NotificationService.info('"' + $scope.tagModel.typeName + '" has been created', false);
+                        $scope.typesList = NavigationResource.get();
+                        $scope.reset();
                     }).catch(function TagCreateFailed(error) {
                         NotificationService.error(error.data.error, false);
                     }).finally(function() {
