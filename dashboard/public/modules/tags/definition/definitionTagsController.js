@@ -46,7 +46,8 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                 superTypes: [],
                 attributeDefinitions: []
             };
-        }
+            $scope.selectedParent = undefined;
+        };
 
         $scope.save = function saveTag(form) {
             $scope.savedTag = null;
@@ -62,7 +63,7 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                     .then(function TagCreateSuccess() {
                         NotificationService.info('"' + $scope.tagModel.typeName + '" has been created', false);
                         $scope.typesList = NavigationResource.get();
-                        $scope.reset();
+                        $scope.reset(); 
                     }).catch(function TagCreateFailed(error) {
                         NotificationService.error(error.data.error, false);
                     }).finally(function() {
