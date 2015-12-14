@@ -35,6 +35,41 @@ module.exports = function(grunt) {
             options: {
                 livereload: 35729
             },
+    //           less: {
+    //             build: {
+    //             files: {
+    //             'dist/css/sticky-footer-navbar.css': 'public/css/sticky-footer-navbar.less'
+    //         }
+    //     }
+    // },
+       less: {
+                files: ["public/css/*.less", "public/css/*.less"],
+                tasks: ["less", "csslint"], 
+                options: {
+                    nospawn: true
+                }
+            },
+                    less: {
+            development: {
+                options: {
+                    compress: true,
+                    yuicompress: false,
+                    optimization: 2,
+                    cleancss:false,  
+                    paths: ["css"],   
+                    syncImport: false,
+                    strictUnits:false,
+                    strictMath: true,
+                    strictImports: true,
+                    ieCompat: false    
+                },
+                files: {
+                    "public/css/sticky-footer-navbar.css": "public/css/sticky-footer-navbar.less"
+                }
+            }
+        },
+       
+
             js: {
                 files: ['public/**/*.js', '!public/lib/**', '!public/dist/**', '!public/js/app.min.js'],
                 tasks: ['shell']
@@ -51,6 +86,8 @@ module.exports = function(grunt) {
                 files: ['public/**/*.{ico,gif,png}'],
                 tasks: ['copy:dist']
             }
+           
+
         },
         jshint: {
             all: {
@@ -165,8 +202,8 @@ module.exports = function(grunt) {
     });
 
     require('load-grunt-tasks')(grunt);
-    grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
-
+    grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default','less']);
+     // grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'less']);
     grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
     grunt.registerTask('build', ['copy:dist', 'minify']);
 
@@ -176,6 +213,7 @@ module.exports = function(grunt) {
         done();
     });
     grunt.loadNpmTasks('proxit');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.registerTask('proxitserver', 'Proxit', function() {
         var done = this.async();
         grunt.task.run(['proxit:dev']);
