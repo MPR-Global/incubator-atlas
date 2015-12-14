@@ -17,25 +17,28 @@
  */
 
 'use strict';
+var host = 'localhost',
+    port = '21000',
+    baseUrl = '/api/atlas/';
 
-angular.module('dgc.tags').factory('TagsResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_HOST + AtlasConfig.API_ENDPOINTS.CREATE_TRAIT + '/:id', {}, {
-        query: {
-            method: 'GET',
-            transformResponse: function(data) {
-                var categories = [];
-                if (data) {
-                    angular.forEach(data.results, function(value) {
-                        categories.push({
-                            text: value
-                        });
-                    });
-                }
-                return categories;
-            },
-            responseType: 'json',
-            isArray: true
+angular.module('dgc').constant('AtlasConfig', {
+    API_HOST: host+':'+port+baseUrl,
+    API_ENDPOINTS :{
+        ABOUT : 'admin/version',
+        GET_ENTITY:'entities',
+        ATTACH_DETACH_TRAITS:'traits',
+        SCHEMA_LINEAGE_PREPAND:'lineage/hive/table',
+        SCHEMA_APPEND:'schema',
+        GRAPH : 'graph',
+        TRAITS_LIST:'types?type=TRAIT',
+        SEARCH: 'discovery/search/',
+        CREATE_TRAIT:'types'
+    },
+    MESSAGES :{
+        SUCCESS :{
+        },
+        ERROR :{
         }
-    });
+    }
+});
 
-}]);
