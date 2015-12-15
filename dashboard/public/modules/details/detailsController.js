@@ -17,15 +17,14 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource', 'SchemaResource',
-    function($window, $scope, $state, $stateParams, DetailsResource, SchemaResource) {
+angular.module('dgc.details').controller('detailsController', ['$window', '$scope', '$state', '$stateParams', 'detailsResource',
+    function($window, $scope, $state, $stateParams, detailsResource, schemaResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
 
-        DetailsResource.get({
+        detailsResource.get({
             id: $stateParams.id
-
         }, function(data) {
             $scope.details = data;
             $scope.tableName = data.values.name;
@@ -34,7 +33,7 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
             $scope.isTags = (typeof data.traits !== 'undefined' && typeof data.traits === 'object') ? true : false;
 
             if (data && data.values && data.values.name && data.values.name !== "") {
-                SchemaResource.get({
+                schemaResource.get({
                     tableName: data.values.name
                 }, function(data1) {
                     if (data1.results) {
@@ -55,7 +54,6 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
                 });
             }
         });
-
 
         $scope.isNumber = angular.isNumber;
         $scope.isObject = angular.isObject;

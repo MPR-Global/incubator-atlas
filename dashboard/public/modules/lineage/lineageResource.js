@@ -18,6 +18,6 @@
 
 'use strict';
 
-angular.module('dgc.lineage').factory('LineageResource', ['$resource', function($resource) {
+angular.module('dgc.lineage').factory('lineageResource', ['$resource', function($resource) {
     return $resource('/api/atlas/lineage/hive/table/:tableName/:type/graph', {});
 }]);

@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.details').factory('DetailsResource', ['$resource', function($resource) {
+angular.module('dgc.details').factory('detailsResource', ['$resource', function($resource) {
     return $resource('/api/atlas/entities/:id', {}, {
         get: {
             method: 'GET',
@@ -39,7 +39,7 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', function(
         }
      });
 
-}]).factory('SchemaResource', ['$resource', function($resource) {
+}]).factory('schemaResource', ['$resource', function($resource) {
     return $resource('/api/atlas/lineage/hive/table/:tableName/schema', {}, {
         get: {
             method: 'GET',
