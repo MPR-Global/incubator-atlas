@@ -17,8 +17,8 @@
  */
 
 'use strict';
-var host = 'localhost',
-    port = '21000',
+var host = 'http://localhost',
+    port = '8080',
     baseUrl = '/api/atlas/';
 
 angular.module('dgc').constant('AtlasConfig', {
@@ -33,12 +33,6 @@ angular.module('dgc').constant('AtlasConfig', {
         TRAITS_LIST:'types?type=TRAIT',
         SEARCH: 'discovery/search/',
         CREATE_TRAIT:'types'
-    },
-    MESSAGES :{
-        SUCCESS :{
-        },
-        ERROR :{
-        }
     }
 });
 
