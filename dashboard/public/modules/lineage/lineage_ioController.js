@@ -60,9 +60,13 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                                             });
                                             response.results.values.edges[key] = array1;
                                             response1.results.values.edges[key] = array1;
+
+
+
                                         }
                                     });
                                 });
+
 
                                 angular.extend(response.results.values.edges, response1.results.values.edges);
                                 angular.extend(response.results.values.vertices, response1.results.values.vertices);
@@ -154,6 +158,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 }
             }
             $scope.guid = lineageData.guid;
+
         });
 
         function transformData(metaData) {
@@ -170,11 +175,11 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     var loadProcess = getLoadProcessTypes(guid);
                     if (typeof loadProcess !== "undefined") {
                         name = loadProcess.name;
-                        type = loadProcess.typeName;
+                        type = 'edges';
                         tip = loadProcess.tip;
                     } else {
                         name = 'Load Process';
-                        type = 'Load Process';
+                        type = 'edges';
                     }
                 }
                 var vertex = {
@@ -557,11 +562,11 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
-                    .attr("xlink:href", function(d) {  
-                        return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('process') !== -1) ? '../img/process.png' : '../img/tableicon.png';
+                    .attr("xlink:href", function(d) { 
+                        return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('edges') !== -1) ? '../img/process.png' : '../img/tableicon.png';
                     })
                     .on('mouseover', function(d) {
-                        if (d.type === 'LoadProcess' || 'Table') {
+                        if (d.type === 'edges' || 'Table') {
                             tooltip.show(d);
                         }
                     })
