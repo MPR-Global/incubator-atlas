@@ -41,7 +41,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 type: 'outputs'
             }).$promise.then(
                 function lineageSuccess(response1) {
-                    $scope.$emit('show_lineage');
+                  //  $scope.$emit('show_lineage');
+                  $('#lineageGraph').removeClass('hide');
                     LineageResource.get({
                         tableName: tableData.tableName,
                         type: 'inputs'
