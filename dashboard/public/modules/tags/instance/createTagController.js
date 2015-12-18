@@ -79,8 +79,11 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                             $$("#" + $stateParams.tId+"_schema").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
                         }  
                     }
-                    NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
-                    $modalInstance.close(true);
+                    $scope.isSuccess=true;
+                    //NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
+                    $scope.successmessage='Tag "' + $scope.selectedType + '" has been added to entity';
+                    //$modalInstance.close(true);
+
                 }).catch(function(err) {
                     $scope.isError = true;
                     $scope.error = err.data.error;
