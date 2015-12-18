@@ -17,14 +17,15 @@
  */
 'use strict';
 
-angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope', 'DetailsResource', '$modalInstance', 'typesList', 'lodash', 'TagsResource', '$stateParams', '$rootScope', 'TagClasses', 'NotificationService',
-    function($scope, DetailsResource, $modalInstance, typesList, _, TagsResource, $stateParams, $rootScope, Categories, NotificationService) {
+angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope', 'DetailsResource', '$modalInstance', 'typesList', 'lodash', 'TagsResource', '$stateParams', '$rootScope', 'TagClasses',
+    function($scope, DetailsResource, $modalInstance, typesList, _, TagsResource, $stateParams, $rootScope, Categories) {
         if (typesList) {
             $scope.typesList = typesList;
         }
         var $$ = angular.element;
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
+        $scope.isSuccess = false;
 
         $scope.getAttributeDefinations = function() {
             $scope.propertiesList = {};
@@ -59,6 +60,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
             });
         };
         $scope.ok = function($event, tagDefinitionform) {
+            $scope.isSuccess = false;
             if (tagDefinitionform.$valid) {
                 var requestObject = {
                     "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
@@ -70,19 +72,17 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.tId) {
                         var tagName = $$("#tagDefinition").val();
-                        if($stateParams.frm && $stateParams.frm !== 'details'){ 
+                        if ($stateParams.frm && $stateParams.frm !== 'details') {
                             $rootScope.updateTags(true, {
                                 added: $scope.selectedType
                             });
                             $$("#" + $stateParams.tId).append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }else if($stateParams.frm === 'details'){
-                            $$("#" + $stateParams.tId+"_schema").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }  
+                        } else if ($stateParams.frm === 'details') {
+                            $$("#" + $stateParams.tId + "_schema").append("<a class='tabsearchanchor ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+                        }
                     }
-                    $scope.isSuccess=true;
-                    //NotificationService.info('Tag "' + $scope.selectedType + '" has been added to entity', true);
-                    $scope.successmessage='Tag "' + $scope.selectedType + '" has been added to entity';
-                    //$modalInstance.close(true);
+                    $scope.successmessage = 'Tag "' + $scope.selectedType + '" has been added to entity';
+                    $scope.isSuccess = true;
 
                 }).catch(function(err) {
                     $scope.isError = true;
