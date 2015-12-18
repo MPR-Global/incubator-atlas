@@ -54,9 +54,19 @@
                                 <span data-ng-repeat="(key2, value2) in value"> {{ key2 }} : {{ value2 }}<span ng-if="!$last">,</span></span>
                             </td>
                              <td data-ng-if="isArray(value) && !isString(value.id) && !isObject(value.id)">
-                                <div class="pdLft15px" data-ng-repeat="(key2, value2) in value">
-                                    <div class="row" data-ng-repeat="(key1, value1) in value2" ng-if="value2">
-                                        {{ key1 }} : {{ value1 }}
+                                <div  data-ng-repeat="(key2, value2) in value">
+                                <a class=" pointer" data-ng-if="isObject(value2) && isString(value2.id)"   data-ui-sref="details({id:value2.id})">{{ value2.id }}</a>
+                              
+                                    <div class="row pdLft15px" data-ng-repeat="(key1, value1) in value2">
+                                  
+                                    <span ng-if="isObject(value1)">
+                                        <a class=" pointer" data-ng-if="isString(value1.id)"   data-ui-sref="details({id:value1.id})">{{ value1.id }}</a>
+                                       
+                                        
+                                    </span> 
+                                   
+                                       
+                                        
                                     </div>
                                 </div>
                             </td>
