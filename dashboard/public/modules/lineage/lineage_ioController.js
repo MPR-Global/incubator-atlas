@@ -259,7 +259,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
 
             var viewerWidth = widthg - 15,
-                viewerHeight = heightg;
+                viewerHeight = heightg,
+                center = [viewerWidth / 2, viewerHeight / 2];
 
             var tree = d3.layout.tree().size([viewerHeight, viewerWidth]);
             /*.size([viewerHeight, viewerWidth]);   nodeSize([100, 200]);*/
@@ -309,9 +310,11 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Sort the tree initially incase the JSON isn't in a sorted order.
             sortTree();
 
-            // Define the zoom function for the zoomable tree  
+            // Define the zoom function for the zoomable tree
             function zoom() {
-                svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                console.log(zoomListener.translate());
+                console.log(zoomListener.scale());
+                d3.select('g').attr("transform", "translate(" + zoomListener.translate() + ")scale(" + zoomListener.scale() + ")");
             }
 
             // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
@@ -335,6 +338,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
                 .call(zoomListener)
+                .call(zoomListener.event)
                 .on("dblclick.zoom", function() {
                     return null;
                 })
@@ -447,6 +451,29 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 zoomListener.scale(scale);
                 zoomListener.translate([x, y]);
             }
+
+            // Toggle children function
+
+            // function toggleChildren(d) {
+            //     if (d.children) {
+            //         d._children = d.children;
+            //         d.children = null;
+            //     } else if (d._children) {
+            //         d.children = d._children;
+            //         d._children = null;
+            //     }
+            //     return d;
+            // }
+
+            // Toggle children on click.
+
+            // function click(d) {
+            //     if (d3.event.defaultPrevented) return; // click suppressed
+            //     d = toggleChildren(d);
+            //     update(d);
+            //     //centerNode(d);
+            // }
+
             //arrow
             baseSvg.append("svg:defs")
                 .append("svg:marker")
@@ -474,6 +501,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 .attr("orient", "auto")
                 .append("svg:path")
                 .attr("d", "M -2 5 L 8 0 L 8 10 z");
+
 
             function update(source) {
                 // Compute the new height, function counts total children of root node and sets tree height accordingly.
@@ -559,10 +587,10 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
                     .attr("xlink:href", function(d) {
-                        return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('edges') !== -1) ? '../img/process.png' : '../img/tableicon.png';
+                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
                     })
                     .on('mouseover', function(d) {
-                        if (d.type === 'edges' || 'Table') {
+                        if (d.type === 'LoadProcess' || 'Table') {
                             tooltip.show(d);
                         }
                     })
@@ -613,6 +641,18 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                         $(this).attr('title', d.name);
                         return nameDis;
                     });
+
+                // Change the circle fill depending on whether it has children and is collapsed
+                // Change the circle fill depending on whether it has children and is collapsed
+                node.select("image.nodeImage")
+                    .attr("r", 4.5)
+                    .attr("xlink:href", function(d) {
+                        if (d._children) {
+                            return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
+                        }
+                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                    });
+
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -704,6 +744,56 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Append a group which holds all nodes and which the zoom Listener can act upon.
             var svgGroup = baseSvg.append("g")
                 .attr("transform", "translate(0,0)");
+
+
+            // Simplest possible buttons
+            baseSvg.selectAll(".button")
+                .data(['zoom_in', 'zoom_out'])
+                .enter()
+                .append("rect")
+                .attr("x", function(d,i){return 10 + 50*i})
+                .attr({y: 10, width: 40, height: 20, class: "button"})
+                .attr("id", function(d){return d})
+                .style("fill", function(d,i){ return i ? "red" : "green"})
+
+
+            var intervalID;
+
+            d3.selectAll('.button').on('mousedown', function(){
+                d3.event.preventDefault();
+                var factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
+                intervalID = setInterval(zoom_by, 40, factor);
+            }).on('mouseup', function(){
+                d3.event.preventDefault();
+                clearInterval(intervalID);
+                intervalID = undefined;
+            })
+
+            function zoom_by(factor){
+                var scale = zoomListener.scale(),
+                    extent = zoomListener.scaleExtent(),
+                    translate = zoomListener.translate(),
+                    x = translate[0], y = translate[1],
+                    target_scale = scale * factor;
+
+                // If we're already at an extent, done
+                if (target_scale === extent[0] || target_scale === extent[1]) { return false; }
+                // If the factor is too much, scale it down to reach the extent exactly
+                var clamped_target_scale = Math.max(extent[0], Math.min(extent[1], target_scale));
+                if (clamped_target_scale != target_scale){
+                    target_scale = clamped_target_scale;
+                    factor = target_scale / scale;
+                }
+
+                // Center each vector, stretch, then put back
+                x = (x - center[0]) * factor + center[0];
+                y = (y - center[1]) * factor + center[1];
+
+                // Enact the zoom immediately
+                zoomListener.scale(target_scale)
+                    .translate([x,y]);
+                zoom();
+            }
 
             // Define the root
             root = data;
