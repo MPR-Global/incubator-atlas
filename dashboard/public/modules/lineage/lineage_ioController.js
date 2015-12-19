@@ -29,7 +29,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             $.each(edgs, function(key, value) {
                 for (var k = 0; k < value.length; k++) {
                     newEdgsObj[value[k]] = newEdgsObj[value[k]] || [];
-                    newEdgsObj[value[k]] = [key];
+                    newEdgsObj[value[k]].push(key);
                 }
             });
             return newEdgsObj;
@@ -41,8 +41,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 type: 'outputs'
             }).$promise.then(
                 function lineageSuccess(response1) {
-                  //  $scope.$emit('show_lineage');
-                  $('#lineageGraph').removeClass('hide');
+                    //  $scope.$emit('show_lineage');
+                    $('#lineageGraph').removeClass('hide');
                     LineageResource.get({
                         tableName: tableData.tableName,
                         type: 'inputs'
@@ -98,7 +98,6 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         }
 
         function loadProcess(edges, vertices) {
-
             var urlCalls = [];
             var deferred = $q.defer();
             for (var guid in edges) {
@@ -559,7 +558,9 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 nodeEnter.append("image")
                     .attr("class", "nodeImage")
                     .attr("xlink:href", function(d) {
-                        return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('edges') !== -1) ? '../img/process.png' : '../img/tableicon.png';
+                        return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('edges') !== -1) ?
+                            ((d.guid === $scope.guid) ? '../img/process1.png' : '../img/process.png') :
+                            ((d.guid === $scope.guid) ? '../img/tableicon1.png' : '../img/tableicon.png');
                     })
                     .on('mouseover', function(d) {
                         if (d.type === 'edges' || 'Table') {
