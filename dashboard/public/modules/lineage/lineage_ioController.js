@@ -747,19 +747,11 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
 
             // Simplest possible buttons
-            baseSvg.selectAll(".button")
-                .data(['zoom_in', 'zoom_out'])
-                .enter()
-                .append("rect")
-                .attr("x", function(d,i){return 10 + 50*i})
-                .attr({y: 10, width: 40, height: 20, class: "button"})
-                .attr("id", function(d){return d})
-                .style("fill", function(d,i){ return i ? "red" : "green"})
 
 
             var intervalID;
 
-            d3.selectAll('.button').on('mousedown', function(){
+            d3.selectAll('.zoom-buttons').on('mousedown', function(){
                 d3.event.preventDefault();
                 var factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
                 intervalID = setInterval(zoom_by, 40, factor);

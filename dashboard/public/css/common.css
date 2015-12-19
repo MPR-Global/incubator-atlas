@@ -369,3 +369,6 @@ Tags on Home Page design
 .tag-attr{
     font-weight:bold;
 }
+.zoom-buttons{
+    width:63px !important;
+}
