@@ -65,6 +65,12 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
             });
         };
 
+        $scope.openAddTag = function() {
+            $state.go('addTag', {
+                tId: $scope.id
+            });
+        };
+
         $scope.detachTag = function($event, name) {
             $scope.displayName = name;
             $$('#btnDelete').modal().on('click', function(e) {
@@ -88,7 +94,7 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
 
                 });
             });
-        };
+        };  
 
         $scope.cancel = function() {
             $$(".modal-backdrop").remove();
