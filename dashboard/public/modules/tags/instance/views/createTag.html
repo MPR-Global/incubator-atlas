@@ -16,8 +16,12 @@
   ~ limitations under the License.
   -->
 <div class="modal-header">
-	<h4 class="modal-title">Add tag</h4>
+	 <h4 class="modal-title">Add tag
+	  <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
+	 </h4>
+	
 </div>
+
 <div class="modal-body">
 	<div class="form-group">
 		<div align="center" class="error col-sm-12 tabsearchResult pointer" title="{{error}}" ng-if="isError">
@@ -52,7 +56,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-success" type="submit" ng-click="ok($event, tagDefinitionform)" ng-disabled="tagDefinitionform.$invalid">Save</button>
+			<button class="btn btn-success" type="submit" ng-click="ok(tagDefinitionform)" ng-disabled="tagDefinitionform.$invalid">Save</button>
 			<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 		</div>
 	</form>
