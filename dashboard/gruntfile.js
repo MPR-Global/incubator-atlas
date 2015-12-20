@@ -31,6 +31,27 @@ module.exports = function(grunt) {
         modulesPath = '../public/'
 
     grunt.initConfig({
+          less: {
+                 development: {
+                     options: {
+                         paths: ["public/css"]
+                     },
+                     files: {"public/css/sticky-footer-navbar.less": "public/css/sticky-footer-navbar.css",
+                                "public/css/common.less": "public/css/common.css"
+                 },
+                         
+                 },
+                 production: {
+                     options: {
+                         paths: ["public/css"],
+                         cleancss: true
+                     },
+                      files: {"public/css/sticky-footer-navbar.less": "public/css/sticky-footer-navbar.css",
+                                "public/css/common.less": "public/css/common.css"
+                  },
+                          
+                 }
+             },
         watch: {
             options: {
                 livereload: 35729
@@ -166,6 +187,9 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
+
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.registerTask('default', ['less']);
 
     grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
     grunt.registerTask('build', ['copy:dist', 'minify']);
