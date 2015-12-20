@@ -435,7 +435,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
 
             function centerNode(source) {
-                var scale = (depthwidth === 10) ? zoomListener.scale() : 0.4;
+                var scale =  zoomListener.scale();
                 var x = -source.y0;
                 var y = -source.x0;
                 x = x * scale - 130;
@@ -491,7 +491,9 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     }
                 };
                 childCount(0, root);
-                tree = tree.nodeSize([50, 100]);
+                //tree = tree.nodeSize([50, 100]);
+                tree = tree.separation(function(a, b) { return ((a.parent === root) && (b.parent === root)) ? 3 : 1; })
+                .size([viewerHeight, viewerWidth - 160]);
 
                 // Compute the new tree layout.
                 var nodes = tree.nodes(root).reverse();
@@ -521,7 +523,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     if (levelWidth.length > 1 && depthwidth === 10) {
                         for (var o = 0; o < levelWidth.length; o++) {
                             if (levelWidth[o] > 4) {
-                                depthwidth = 70;
+                                depthwidth = 10;
                                 break;
                             }
                         }
