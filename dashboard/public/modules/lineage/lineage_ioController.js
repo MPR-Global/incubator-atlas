@@ -120,6 +120,17 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         $scope.height = $element[0].offsetHeight;
         $scope.width = $element[0].offsetWidth;
 
+        /*$(window).on('resize.doResize', function() {
+            $scope.height = Math.max((window.innerHeight - 400), 300);
+            $scope.width = $(".lineage-viz").width();
+            renderGraph($scope.lineageData, {
+                eleObj: $element,
+                element: $element[0],
+                height: $scope.height,
+                width: $scope.width
+            });
+        });*/
+
         function render() {
             renderGraph($scope.lineageData, {
                 eleObj: $element,
@@ -234,12 +245,22 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             return starTingObj;
         }
 
+        angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: 300, minHeight:50, stop: function(evt, ui){
+               $scope.height = ui.size.height;
+               $scope.width = ui.size.width;
+               renderGraph($scope.lineageData, {
+                   eleObj: $element,
+                   element: $element[0],
+                   height: $scope.height,
+                   width: $scope.width
+               });
+        }});
+
         function renderGraph(data, container) {
             // ************** Generate the tree diagram  *****************
             var element = d3.select(container.element),
-                widthg = Math.max(container.width, 1100),
-                heightg = Math.max((window.innerHeight - 400), 500),
-
+                widthg = container.width || 1100,
+                heightg = container.height || Math.max((window.innerHeight - 400), 300),
                 totalNodes = 0,
                 maxLabelLength = 0,
                 selectedNode = null,
@@ -258,7 +279,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
 
             var viewerWidth = widthg - 15,
-                viewerHeight = heightg;
+                viewerHeight = heightg,
+                center = [viewerWidth / 2, viewerHeight / 2];
 
             var tree = d3.layout.tree().size([viewerHeight, viewerWidth]);
             /*.size([viewerHeight, viewerWidth]);   nodeSize([100, 200]);*/
@@ -308,9 +330,9 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Sort the tree initially incase the JSON isn't in a sorted order.
             sortTree();
 
-            // Define the zoom function for the zoomable tree  
+            // Define the zoom function for the zoomable tree
             function zoom() {
-                svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                d3.select('g').attr("transform", "translate(" + zoomListener.translate() + ")scale(" + zoomListener.scale() + ")");
             }
 
             // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
@@ -334,6 +356,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
                 .call(zoomListener)
+                .call(zoomListener.event)
                 .on("dblclick.zoom", function() {
                     return null;
                 })
@@ -617,6 +640,15 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                         return nameDis;
                     });
 
+                node.select("image.nodeImage")
+                    .attr("r", 4.5)
+                    .attr("xlink:href", function(d) {
+                        if (d._children) {
+                            return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
+                        }
+                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
+                    });
+
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
                     .duration(duration)
@@ -707,6 +739,45 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Append a group which holds all nodes and which the zoom Listener can act upon.
             var svgGroup = baseSvg.append("g")
                 .attr("transform", "translate(0,0)");
+
+            // Simplest possible buttons
+            var intervalID;
+
+            d3.selectAll('.zoom-buttons').on('mousedown', function(){
+                d3.event.preventDefault();
+                var factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
+                intervalID = setInterval(zoom_by, 40, factor);
+            }).on('mouseup', function(){
+                d3.event.preventDefault();
+                clearInterval(intervalID);
+                intervalID = undefined;
+            });
+
+            function zoom_by(factor){
+                var scale = zoomListener.scale(),
+                    extent = zoomListener.scaleExtent(),
+                    translate = zoomListener.translate(),
+                    x = translate[0], y = translate[1],
+                    target_scale = scale * factor;
+
+                // If we're already at an extent, done
+                if (target_scale === extent[0] || target_scale === extent[1]) { return false; }
+                // If the factor is too much, scale it down to reach the extent exactly
+                var clamped_target_scale = Math.max(extent[0], Math.min(extent[1], target_scale));
+                if (clamped_target_scale !== target_scale){
+                    target_scale = clamped_target_scale;
+                    factor = target_scale / scale;
+                }
+
+                // Center each vector, stretch, then put back
+                x = (x - center[0]) * factor + center[0];
+                y = (y - center[1]) * factor + center[1];
+
+                // Enact the zoom immediately
+                zoomListener.scale(target_scale)
+                    .translate([x,y]);
+                zoom();
+            }
 
             // Define the root
             root = data;
