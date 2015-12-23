@@ -28,10 +28,6 @@
             <h4 ng-if="details.values && details.values.name && details.values.name != ''">
             <b>Name:</b> <span class="black">{{details.values.name}}</span></h2>
             <h4 ng-if="details.values && details.values.description && details.values.description != ''"><b>Description:</b> <span class="black">{{details.values.description}}</span></h4>
-            <h4 data-disable="!tableName" data-select="onActivate('io')" id="lineageGraph" class="hide">
-                <span class="lineage">Lineage</span> 
-                <ng-include data-table-type="io" src="'/modules/lineage/views/lineage_io.html'"/>
-            </h4>
         </div>
         <tabset>
             <tab heading="Details">
@@ -45,7 +41,7 @@
                     <tbody>
                         <tr data-ng-repeat="(key,value) in details.values" ng-if="value && !(key==='columns') && !(key==='name') && !(key==='description')">
                             <td>{{key}}</td>
-                            <td data-ng-if="isObject(value) && isString(value.id)" class="pointer"> 
+                            <td data-ng-if="isObject(value) && isString(value.id)" class="pointer">
                                 <a data-ui-sref="details({id:value.id})">{{ value.id }}</a>
                             </td>
                             <td data-ng-if="isObject(value) && isObject(value.id) && isString(value.id.id)" class="pointer">  <a data-ui-sref="details({id:value.id.id})">{{ value.id.id }}</a>
@@ -56,24 +52,24 @@
                              <td data-ng-if="isArray(value) && !isString(value.id) && !isObject(value.id)">
                                 <div  data-ng-repeat="(key2, value2) in value">
                                 <a class=" pointer" data-ng-if="isObject(value2) && isString(value2.id)"   data-ui-sref="details({id:value2.id})">{{ value2.id }}</a>
-                              
+
                                     <div class="row pdLft15px" data-ng-repeat="(key1, value1) in value2">
-                                  
+
                                     <span ng-if="isObject(value1)">
                                         <a class=" pointer" data-ng-if="isString(value1.id)"   data-ui-sref="details({id:value1.id})">{{ value1.id }}</a>
-                                       
-                                        
-                                    </span> 
-                                   
-                                       
-                                        
+
+
+                                    </span>
+
+
+
                                     </div>
                                 </div>
                             </td>
                             <td data-ng-if="isArray(value) && !isObject(value)" >
                                 <div class="row" data-ng-repeat="(key1, value1) in value" ng-if="value1">
-                                    <div data-ng-if="isObject(value1)" data-ng-repeat="(key2, value2) in value1" > 
-                                        <a data-ng-if="isString(value2) && key2 == 'id'" class="pointer pdLft15px" data-ui-sref="details({id:value2})">{{ value2 }}</a> 
+                                    <div data-ng-if="isObject(value1)" data-ng-repeat="(key2, value2) in value1" >
+                                        <a data-ng-if="isString(value2) && key2 == 'id'" class="pointer pdLft15px" data-ui-sref="details({id:value2})">{{ value2 }}</a>
                                     </div>
                                 </div>
                             </td>
@@ -97,5 +93,9 @@
                 <ng-include  src="'/modules/tags/instance/views/tags.html'"/>
             </tab>
         </tabset>
+        <h4 data-disable="!tableName" data-select="onActivate('io')" id="lineageGraph" class="hide">
+            <span class="lineage">Lineage</span>
+            <ng-include data-table-type="io" src="'/modules/lineage/views/lineage_io.html'"/>
+        </h4>
     </div>
 </div>
