@@ -37,9 +37,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
-        $scope.resetSearchCache = function(){
+        $scope.resetSearchCache = function(query){
             var httpCache = $cacheFactory.get('$http');
-            httpCache.remove('/api/atlas/discovery/search/');
+            httpCache.remove('/api/atlas/discovery/search?query='+query);
         };
         $scope.search = function(query) {
             $scope.results = [];
@@ -59,7 +59,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 $scope.transformedResults = {};
                 $scope.dataTransitioned = false;
                 $timeout(function(){
-                    $scope.resetSearchCache();
+                    $scope.resetSearchCache(query);
                 },3600000);
 
                 if ($scope.results) {
