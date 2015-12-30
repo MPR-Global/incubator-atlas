@@ -21,7 +21,7 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
     function($scope, DetailsResource, $stateParams, $state) {
         $scope.id = $stateParams.id;
         var $$ = angular.element;
-
+        $scope.TagTitle=$stateParams.tagTitle;
         function getResourceData() {
             DetailsResource.get({
                 id: $stateParams.id
@@ -59,9 +59,10 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
         });
 
 
-        $scope.openAddTag = function() {
+        $scope.openAddTag = function(tagTitle) {
             $state.go('addTag', {
-                tId: $scope.id
+                tId: $scope.id,
+                tagTitle: tagTitle
             });
         };
 
@@ -69,6 +70,24 @@ angular.module('dgc.tags.instance').controller('InstanceTagController', ['$scope
             $scope.displayName = name;
         };
 
+        $scope.editTag = function(name) {
+            DetailsResource.detachTag({
+                id: $stateParams.id,
+                tagName: name
+            }, function(data) {
+
+                if (data.requestId !== undefined && data.GUID === $stateParams.id && data.traitName === name) {
+                    $$("#" + name).remove();
+                    delete $scope.traitsList[name];
+                    if ($.isEmptyObject($scope.traitsList)) {
+                        $scope.noTags = true;
+                    } else {
+                        $scope.noTags = false;
+                    }
+                }
+            });
+            $scope.openAddTag('Edit Tag');
+        };
         $scope.removeTag = function() {
             $$("#myModal").modal();
             var name = $scope.displayName;

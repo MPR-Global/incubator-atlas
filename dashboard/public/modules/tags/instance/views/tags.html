@@ -19,7 +19,7 @@
    -->
 <div data-ng-controller="InstanceTagController" >
    <div>
-      <a ng-click="openAddTag()" class="add-tag btn btn-primary pull-right">Add Tag</a>
+      <a ng-click="openAddTag('Add Tag')" class="add-tag btn btn-primary pull-right">Add Tag</a>
    </div>
    <table class="table table-bordered">
       <thead>
@@ -39,6 +39,7 @@
             </td>
             <td class="col-lg-1 tagAlign">
                <a href="" class="deleteTag confirm-delete" data-toggle="modal" data-target="#myModal" ><i class="fa fa-trash-o " ng-click="detachTag($event, trait.typeName)"></i></a>
+                <a href=""><i class="fa fa-pencil" ng-click="editTag(trait.typeName)"></i></a>
             </td>
          </tr>
       </tbody>

@@ -30,6 +30,7 @@ angular.module('dgc.details').config(['$stateProvider',
             parent: 'details',
             params: {
                 tId: null,
+                tagTitle:'Add Tag',
                 frm : 'details'
             },
             onEnter: ['$stateParams', '$state', '$modal', 'NavigationResource', function($stateParams, $state, $modal, NavigationResource) {

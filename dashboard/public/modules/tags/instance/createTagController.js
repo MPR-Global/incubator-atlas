@@ -26,6 +26,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
         $scope.categoryList = Categories;
         $scope.category = 'TRAIT';
         $scope.isSuccess = false;
+        $scope.tagTitle=$stateParams.tagTitle;
         $scope.getAttributeDefinations = function() {
             $scope.propertiesList = {};
             $scope.isRequired = {};
