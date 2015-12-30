@@ -23,6 +23,7 @@ angular.module('dgc.search').factory('SearchResource', ['$resource', function($r
         search: {
             'method': 'GET',
             'responseType': 'json',
+            'cache' : true,
             'transformResponse': function(data) {
                 return data;
             }

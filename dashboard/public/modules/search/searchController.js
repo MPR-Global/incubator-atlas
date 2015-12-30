@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService',
-    function($scope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService) {
+angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService','$timeout','$cacheFactory',
+    function($scope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService, $timeout, $cacheFactory) {
 
         $scope.results = [];
         $scope.resultCount = 0;
@@ -37,6 +37,10 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
+        $scope.resetSearchCache = function(){
+            var httpCache = $cacheFactory.get('$http');
+            httpCache.remove('/api/atlas/discovery/search/');
+        };
         $scope.search = function(query) {
             $scope.results = [];
             NotificationService.reset();
@@ -54,6 +58,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 $scope.totalItems = $scope.resultCount;
                 $scope.transformedResults = {};
                 $scope.dataTransitioned = false;
+                $timeout(function(){
+                    $scope.resetSearchCache();
+                },3600000);
 
                 if ($scope.results) {
                     if (response.dataType) {
