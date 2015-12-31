@@ -19,7 +19,7 @@
 'use strict';
 
 angular.module('dgc.tags').factory('TagsResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_HOST + AtlasConfig.API_ENDPOINTS.CREATE_TRAIT + '/:id', {}, {
+    return $resource(AtlasConfig.API_ENDPOINTS.CREATE_TRAIT + '/:id', {}, {
         query: {
             method: 'GET',
             transformResponse: function(data) {

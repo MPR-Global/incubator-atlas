@@ -15,24 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 'use strict';
 var host = 'http://localhost',
     port = '8080',
-    baseUrl = '/api/atlas/';
+    baseUrl = '/api/atlas/',
+    apiHost = host + ':' + port + baseUrl;
 
-angular.module('dgc').constant('AtlasConfig', {
-    API_HOST: host+':'+port+baseUrl,
-    API_ENDPOINTS :{
-        ABOUT : 'admin/version',
-        GET_ENTITY:'entities',
-        ATTACH_DETACH_TRAITS:'traits',
-        SCHEMA_LINEAGE_PREPAND:'lineage/hive/table',
-        SCHEMA_APPEND:'schema',
-        GRAPH : 'graph',
-        TRAITS_LIST:'types?type=TRAIT',
-        SEARCH: 'discovery/search/',
-        CREATE_TRAIT:'types'
+angular.module('dgc').constant('AtlasConfig', { 
+    API_ENDPOINTS: {
+        ABOUT: apiHost + 'admin/version',
+        GET_ENTITY: apiHost + 'entities',
+        ATTACH_DETACH_TRAITS: apiHost + 'traits',
+        SCHEMA_LINEAGE_PREPAND: apiHost + 'lineage/hive/table',
+        SCHEMA_APPEND: apiHost + 'schema',
+        GRAPH: apiHost + 'graph',
+        TRAITS_LIST: apiHost + 'types?type=TRAIT',
+        SEARCH: apiHost + 'discovery/search/',
+        CREATE_TRAIT: apiHost + 'types'
     }
 });
-

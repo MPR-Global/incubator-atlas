@@ -19,7 +19,7 @@
 'use strict';
 
 angular.module('dgc.search').factory('SearchResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_HOST + AtlasConfig.API_ENDPOINTS.SEARCH, {}, {
+    return $resource(AtlasConfig.API_ENDPOINTS.SEARCH, {}, {
         search: {
             'method': 'GET',
             'responseType': 'json',

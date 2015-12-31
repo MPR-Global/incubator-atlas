@@ -19,5 +19,5 @@
 'use strict';
 
 angular.module('dgc.about').factory('AboutResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_HOST + AtlasConfig.API_ENDPOINTS.ABOUT, {});
+    return $resource(AtlasConfig.API_ENDPOINTS.ABOUT, {});
 }]);

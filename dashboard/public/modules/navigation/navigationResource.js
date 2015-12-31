@@ -19,7 +19,7 @@
 'use strict';
 
 angular.module('dgc.navigation').factory('NavigationResource', ['$resource','AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_HOST + AtlasConfig.API_ENDPOINTS.TRAITS_LIST, {}, {
+    return $resource(AtlasConfig.API_ENDPOINTS.TRAITS_LIST, {}, {
         get: {
             'method': 'GET',
             'responseType': 'json',
