@@ -17,7 +17,7 @@
   -->
 <div class="row">
     <div class="appForm col-lg-12" data-ng-controller="DefinitionTagsController">
-      <div class="panel panel-default">
+      <div class="panel panel-default" test-id="test_add_Paneldefault">
         <div class="panel-heading"><h4>Tag Definition</h4></div>
         <div class="panel-body inputs">
           <form data-name="tagForm" class="form-horizontal" novalidate role="form">
@@ -42,7 +42,7 @@
                   <div class="form-group">
                      <label class="control-label col-sm-2" for="ParentTag">Parent Tag</label>
                       <div class="col-sm-4">
-                          <select ng-model="selectedParent" class="form-control h160" id="ParentTag" name="ParentTag" multiple> 
+                          <select ng-model="selectedParent" class="form-control h160" id="ParentTag" name="ParentTag" multiple test-id="test_add_Parentag"> 
                               <option ng-repeat="data in typesList" title="{{data}}">{{data}}</option>
                           </select>
                       </div>

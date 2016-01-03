@@ -19,6 +19,10 @@
 <div data-ng-controller="NavigationController" class="mainTags leftNavigation">
     <h4>Tags</h4>
     <div class="list-group">
-        <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item limitSize" title="{{nav}}"><i class="fa fa-tag"></i> {{nav}} </a>
+        <a id="myMenuList" test-id="test_myMenuList" ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item limitSize" title="{{nav}}"><i class="fa fa-tag"></i> {{nav}} </a>
+        
+        <button class="show-more-btn" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()" test-id="test_navigationbtn">Show more 
+        </button>
+
     </div>
 </div>

@@ -19,12 +19,12 @@
    -->
 <div class="col-lg-10 paddingR0">
    <div class="">
-      <div class="row mainSearch">
+      <div class="row mainSearch" test-id="test_mainSearch">
          <form class="col-lg-12" name="form" novalidate>
-            <div class="input-group">
+            <div class="input-group" test-id="test_input-group">
                <input type="text" class="form-control" placeholder="Search: Table, DB, Column" data-ng-model="query" required/>
                <span class="input-group-btn">
-               <button class="btn btn-success" type="submit" data-ng-disabled="form.$invalid" ui-sref="search({ query: query })">
+               <button class="btn btn-success" type="submit" data-ng-disabled="form.$invalid" ui-sref="search({ query: query })" test-id="test_Searchbutton">
                <i class="glyphicon glyphicon-search white "></i>
                </button>
                </span>
@@ -39,7 +39,7 @@
             </div>
          </div>
          <div class="panel panel-default" ng-show='resultCount > 0'>
-            <table class="table table-bordered datatable" >
+            <table class="table table-bordered datatable" test-id="test_Searchtable"> >
                <thead>
                   <tr ng-if="!isTag(resultType)">
                      <th>Name</th>
