@@ -253,10 +253,10 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                    element: $element[0],
                    height: $scope.height,
                    width: $scope.width
-               });
+               }, true);
         }});
 
-        function renderGraph(data, container) {
+        function renderGraph(data, container, isResize) {
             // ************** Generate the tree diagram  *****************
             var element = d3.select(container.element),
                 widthg = container.width || 1100,
@@ -640,14 +640,14 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                         return nameDis;
                     });
 
-                node.select("image.nodeImage")
+               /* node.select("image.nodeImage")
                     .attr("r", 4.5)
                     .attr("xlink:href", function(d) {
                         if (d._children) {
                             return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
                         }
                         return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
-                    });
+                    });*/
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -745,8 +745,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
             d3.selectAll('.zoom-buttons').on('mousedown', function(){
                 d3.event.preventDefault();
-                var factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
-                intervalID = setInterval(zoom_by, 40, factor);
+                $scope.factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
+                intervalID = setInterval(zoom_by, 40, $scope.factor);
             }).on('mouseup', function(){
                 d3.event.preventDefault();
                 clearInterval(intervalID);
@@ -787,6 +787,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Layout the tree initially and center on the root node.
             update(root);
             centerNode(root);
+
             $scope.requested = false;
             var couplingParent1 = tree.nodes(root).filter(function(d) {
                 return d.name === 'cluster';
@@ -803,6 +804,12 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             multiParents.forEach(function() {
                 svgGroup.append("path", "g");
             });
+            if(isResize){
+                var sam = setInterval(function(){
+                zoom_by($scope.factor);
+                clearInterval(sam);
+                }, 1000);
+            }
         }
 
     }
