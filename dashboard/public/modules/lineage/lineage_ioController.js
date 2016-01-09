@@ -120,17 +120,6 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         $scope.height = $element[0].offsetHeight;
         $scope.width = $element[0].offsetWidth;
 
-        $(window).on('resize.doResize', function() {
-            $scope.height = Math.max((window.innerHeight - 400), 300);
-            $scope.width = $(".lineage-viz").width();
-            renderGraph($scope.lineageData, {
-                eleObj: $element,
-                element: $element[0],
-                height: $scope.height,
-                width: $scope.width
-            });
-        });
-
         function render() {
             renderGraph($scope.lineageData, {
                 eleObj: $element,
