@@ -120,7 +120,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         $scope.height = $element[0].offsetHeight;
         $scope.width = $element[0].offsetWidth;
 
-        /*$(window).on('resize.doResize', function() {
+        $(window).on('resize.doResize', function() {
             $scope.height = Math.max((window.innerHeight - 400), 300);
             $scope.width = $(".lineage-viz").width();
             renderGraph($scope.lineageData, {
@@ -129,7 +129,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 height: $scope.height,
                 width: $scope.width
             });
-        });*/
+        });
 
         function render() {
             renderGraph($scope.lineageData, {
@@ -245,18 +245,10 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             return starTingObj;
         }
 
-        angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: 300, minHeight:50, stop: function(evt, ui){
-               $scope.height = ui.size.height;
-               $scope.width = ui.size.width;
-               renderGraph($scope.lineageData, {
-                   eleObj: $element,
-                   element: $element[0],
-                   height: $scope.height,
-                   width: $scope.width
-               }, true);
-        }});
+        angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: 300, minHeight:50
+        });
 
-        function renderGraph(data, container, isResize) {
+        function renderGraph(data, container) {
             // ************** Generate the tree diagram  *****************
             var element = d3.select(container.element),
                 widthg = container.width || 1100,
@@ -640,15 +632,6 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                         return nameDis;
                     });
 
-               /* node.select("image.nodeImage")
-                    .attr("r", 4.5)
-                    .attr("xlink:href", function(d) {
-                        if (d._children) {
-                            return d.type === 'Table' ? '../img/tableicon1.png' : '../img/process1.png';
-                        }
-                        return d.type === 'Table' ? '../img/tableicon.png' : '../img/process.png';
-                    });*/
-
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
                     .duration(duration)
@@ -804,12 +787,6 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             multiParents.forEach(function() {
                 svgGroup.append("path", "g");
             });
-            if(isResize){
-                var sam = setInterval(function(){
-                zoom_by($scope.factor);
-                clearInterval(sam);
-                }, 1000);
-            }
         }
 
     }
