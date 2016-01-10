@@ -131,6 +131,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         }
 
         $scope.onReset = function() {
+            $scope.height = $scope.initialHeight;
+            angular.element('.lineage-viz').height($scope.height);
             renderGraph($scope.lineageData, {
                 eleObj: $element,
                 element: $element[0],
@@ -233,9 +235,6 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
             return starTingObj;
         }
-
-        angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: 300, minHeight:50
-        });
 
         function renderGraph(data, container) {
             // ************** Generate the tree diagram  *****************
@@ -759,7 +758,11 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // Layout the tree initially and center on the root node.
             update(root);
             centerNode(root);
-
+            if(!$scope.initialHeight){
+                $scope.initialHeight = angular.element('.lineage-viz').height();
+            }
+            angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: angular.element('.lineage-viz').height(), minHeight:50
+            });
             $scope.requested = false;
             var couplingParent1 = tree.nodes(root).filter(function(d) {
                 return d.name === 'cluster';
