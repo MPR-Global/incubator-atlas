@@ -17,7 +17,9 @@
   -->
 
 <div data-ng-controller="NavigationController" class="mainTags leftNavigation">
-    <h4>Tags</h4>
+    <div><h4 class="pull-left">Tags</h4>  
+      <a href ng-click="refreshTags()"> <img src="../img/refresh.png" class="pull-right" style="margin: 10px;" ></a></div>
+    </br> 
     <div class="list-group">
         <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item limitSize" title="{{nav}}"><i class="fa fa-tag"></i> {{nav}} </a>
     </div>
