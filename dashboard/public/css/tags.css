@@ -119,5 +119,12 @@
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+}  
+
+.mtop3 {
+  margin-top : 3px;
 }
+
+.mrt-8 {
+  margin-right: -8px;
 }
