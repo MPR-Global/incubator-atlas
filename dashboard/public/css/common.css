@@ -376,3 +376,38 @@ Tags on Home Page design
   overflow: hidden!important;
 
 }
+
+.tag{
+ background-image: url("../img/black-tag.png");
+background-repeat:no-repeat;
+width:24px;
+height:24px;
+border:none;
+background-color: white;
+}
+
+.tag a:link{
+background-image: url("../img/black-tag.png");
+background-repeat:no-repeat;
+width:24px;
+height:24px;
+border:none;
+background-color: white;
+}
+
+.tag a:hover{
+background-image: url("../img/green-tag.png");
+background-repeat:no-repeat;
+width:24px;
+height:24px;
+border:none;
+background-color: white;
+}
+.tag a:link a:visited a:active{
+  background-image: url("../img/black-tag.png");
+background-repeat:no-repeat;
+width:24px;
+height:24px;
+border:none;
+background-color: white;  
+}
