@@ -52,6 +52,8 @@ angular.module('dgc').factory('lodash', ['$window',
 ]).factory('HttpInterceptor', ['Global', function(Global) {
     return {
         'request': function(config) {
+            config.headers.Accept = 'application/json; charset=UTF-8';
+            config.headers['Content-Type'] = 'application/json; charset=UTF-8';
             if (config.url && (config.url.indexOf('api/atlas/') === 0 || config.url.indexOf('/api/atlas/') === 0)) {
                 config.params = config.params || {};
                 config.params['user.name'] = Global.user;
@@ -99,9 +101,9 @@ angular.module('dgc').factory('lodash', ['$window',
         }
 
         if (typeof to.parent === 'undefined') {
-            if (to.name !== 'search') { 
+            if (to.name !== 'search') {
                 $rootScope.leftNav = true;
-            } else { 
+            } else {
                 $rootScope.leftNav = false;
             }
         }

@@ -21,7 +21,7 @@
 angular.module('dgc.tags').factory('TagsResource', ['$resource', function($resource) {
     return $resource('/api/atlas/types/:id', {}, {
         query: {
-            method: 'GET', 
+            method: 'GET',
             transformResponse: function(data) {
                 var categories = [];
                 if (data) {
@@ -37,13 +37,9 @@ angular.module('dgc.tags').factory('TagsResource', ['$resource', function($resou
             isArray: true
         },
         saveTag : {
-                    method: 'POST',
-                    url: '/api/atlas/types',
-                    responseType: 'json',
-                    'headers': {          
-                         'Accept' : "application/json;charset=UTF-8",         
-                         'content-type': "application/json;charset=UTF-8"   
-                    }  
+            method: 'POST',
+            url: '/api/atlas/types',
+            responseType: 'json'
         }
     });
 

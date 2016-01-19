@@ -22,13 +22,9 @@ angular.module('dgc.navigation').factory('NavigationResource', ['$resource', fun
     return $resource('/api/atlas/types?type=TRAIT', {}, {
         get: {
             'method': 'GET',
-            'responseType': 'json', 
+            'responseType': 'json',
             'isArray': true,
             'cache' : true,
-            'headers': {          
-                 'Accept' : "application/json; charset=utf-8",         
-                 'Content-Type': "application/json; charset=utf-8"   
-            },     
             'transformResponse': function(data) {
                 var results = [];
                 angular.forEach(data && data.results, function(val) {
