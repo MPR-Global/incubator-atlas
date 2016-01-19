@@ -50,7 +50,7 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                 NotificationService.reset();
                 $scope.saving = true;
 
-                TagsResource.save($scope.categoryInst.toJson()).$promise
+                TagsResource.saveTag($scope.categoryInst.toJson()).$promise
                     .then(function TagCreateSuccess() {
                         NotificationService.info('"' + $scope.tagModel.typeName + '" has been created', false);
                     }).catch(function TagCreateFailed(error) {
