@@ -40,6 +40,15 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
             $scope.categoryInst = Categories[$scope.category].clearTags();
         };
 
+        $scope.reset = function(){
+            $scope.tagModel = {
+                typeName: null,
+                superTypes: [],
+                attributeDefinitions: []
+            };
+            $scope.selectedParent = undefined;
+        };
+
         $scope.refreshTags = function(){
             var httpDefaultCache = $cacheFactory.get('$http');
             httpDefaultCache.remove('/api/atlas/types?type=TRAIT');
@@ -61,6 +70,8 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
                         NotificationService.info('"' + $scope.tagModel.typeName + '" has been created', false);
                         var httpDefaultCache = $cacheFactory.get('$http');
                         httpDefaultCache.remove('/api/atlas/types?type=TRAIT');
+                        $scope.typesList = NavigationResource.get();
+                        $scope.reset();
                     }).catch(function TagCreateFailed(error) {
                         NotificationService.error(error.data.error, false);
                     }).finally(function() {
