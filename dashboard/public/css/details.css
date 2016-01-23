@@ -25,6 +25,7 @@
 .detailsPage .nav-tabs>li.active>a:hover,
 .detailsPage .nav-tabs>li>a:hover {
     border-radius: 0;
+    color: #37BB9B;
 }
 .detailsPage .nav-tabs>li.active>a,
 .detailsPage .nav-tabs>li.active>a:focus{
