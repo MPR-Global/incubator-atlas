@@ -49,18 +49,47 @@ angular.module('dgc').factory('lodash', ['$window',
             renderErrors: $window.renderErrors
         };
     }
-]).factory('HttpInterceptor', ['Global', function(Global) {
+]).factory('HttpInterceptor', ['Global', '$rootScope', function(Global, $rootScope) {
+    var numLoadings = 0;
+    angular.element(document).bind("keydown", function(e){
+        if(e.keyCode ==27){
+            $rootScope.$broadcast("loader_hide");
+        }
+    });
     return {
         'request': function(config) {
+            numLoadings++;
             if (config.url && (config.url.indexOf('api/atlas/') === 0 || config.url.indexOf('/api/atlas/') === 0)) {
                 config.params = config.params || {};
                 config.params['user.name'] = Global.user;
             }
+            $rootScope.$broadcast("loader_show");
             return config;
+        },
+        response: function (response) { 
+            if ((--numLoadings) === 0) { 
+                $rootScope.$broadcast("loader_hide");
+            } 
+            return response; 
+        },
+        responseError: function (response) { 
+            if (!(--numLoadings)) { 
+                $rootScope.$broadcast("loader_hide");
+            } 
+            return response;
         }
     };
 }]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('HttpInterceptor');
+}]).directive("loader",[function () { 
+    return function ($scope, element, attrs) {
+        $scope.$on("loader_show", function () {
+            return element.show();
+        });
+        return $scope.$on("loader_hide", function () {
+            return element.hide();
+        });
+    };
 }]).run(['$rootScope', 'Global', 'NotificationService', 'lodash', 'd3', function($rootScope, Global, NotificationService, lodash, d3) {
     var errors = Global.renderErrors;
     if (angular.isArray(errors) || angular.isObject(errors)) {

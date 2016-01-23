@@ -41,7 +41,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.results = [];
             NotificationService.reset();
             $scope.limit = 4;
-            $scope.searchMessage = 'load-gif';
+            $scope.searchMessage = '';
             $scope.$parent.query = query;
             SearchResource.search({
                 query: query
