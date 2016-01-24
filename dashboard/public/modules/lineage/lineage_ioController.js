@@ -564,8 +564,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     .attr("class", "nodeImage")
                     .attr("xlink:href", function(d) {
                         return (d.type && d.type !== '' && d.type.toLowerCase().indexOf('edges') !== -1) ?
-                            ((d.guid === $scope.guid) ? '../img/process1.png' : '../img/process.png') :
-                            ((d.guid === $scope.guid) ? '../img/tableicon1.png' : '../img/tableicon.png');
+                            ((d.guid === $scope.guid) ? '../img/process1.png' : '../img/process-new.png') :
+                            ((d.guid === $scope.guid) ? '../img/table-new1.png' : '../img/table-new.png');
                     })
                     .on('mouseover', function(d) {
                         if (d.type === 'edges' || 'Table') {
