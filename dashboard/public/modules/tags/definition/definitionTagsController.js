@@ -41,11 +41,7 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
         };
 
         $scope.reset = function(){
-            $scope.tagModel = {
-                typeName: null,
-                superTypes: [],
-                attributeDefinitions: []
-            };
+            $scope.tagModel = angular.copy($scope.newtagModel);
             $scope.selectedParent = undefined;
         };
 
