@@ -357,6 +357,7 @@ Tags on Home Page design
 
 .addTag{
    margin-top: -35px;
+   background-color:#4cae4c;
 }
 
 .tagAlign{
@@ -369,3 +370,8 @@ Tags on Home Page design
 .tag-attr{
     font-weight:bold;
 }
+
+.tooltip.top .tooltip-inner {
+    background-color: white;
+    color: #37bb9b;
+  }
