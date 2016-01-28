@@ -376,3 +376,9 @@ Tags on Home Page design
   overflow: hidden!important;
 
 }
+#searchBar{
+    border-top:none;
+    border-left:none;
+    border-bottom: 2px solid #47a447;
+    box-shadow:none;
+}

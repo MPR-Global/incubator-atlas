@@ -21,8 +21,9 @@
    <div class="">
       <div class="row mainSearch">
          <form class="col-lg-12" name="form" novalidate>
-            <div class="input-group">
-               <input type="text" class="form-control" placeholder="Search: Table, DB, Column" data-ng-model="query" required/>
+            
+            <div class="input-group col-sm-6">
+               <input type="text" class="form-control" placeholder="Search: Table, DB, Column" id="searchBar" data-ng-model="query" required/>
                <span class="input-group-btn">
                <button class="btn btn-success" type="submit" data-ng-disabled="form.$invalid" ui-sref="search({ query: query })">
                <i class="glyphicon glyphicon-search white "></i>
@@ -39,7 +40,7 @@
             </div>
          </div>
          <div class="panel panel-default" ng-show='resultCount > 0'>
-            <table class="table table-bordered datatable" >
+            <table class="table table-hover datatable" >
                <thead>
                   <tr ng-if="!isTag(resultType)">
                      <th>Name</th>
