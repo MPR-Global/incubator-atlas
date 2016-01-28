@@ -29,7 +29,7 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
         $scope.typesList = NavigationResource.get();
         $scope.newtagModel = angular.copy($scope.tagModel);
         $scope.addAttribute = function AddAttribute() {
-            $scope.tagModel.attributeDefinitions.push(AttributeDefinition.getModel());
+        $scope.tagModel.attributeDefinitions.push(AttributeDefinition.getModel());
         };
 
         $scope.removeAttribute = function(index) {
@@ -41,8 +41,12 @@ angular.module('dgc.tags.definition').controller('DefinitionTagsController', ['$
         };
 
         $scope.reset = function(){
-          $scope.tagModel = $scope.newtagModel;
-          $scope.selectedParent = undefined;
+            $scope.tagModel = {
+                typeName: null,
+                superTypes: [],
+                attributeDefinitions: []
+            };
+            $scope.selectedParent = undefined;
         };
 
         $scope.refreshTags = function(){
