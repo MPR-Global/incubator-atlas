@@ -46,9 +46,9 @@
                         <tr data-ng-repeat="(key,value) in details.values" ng-if="value && !(key==='columns') && !(key==='name') && !(key==='description')">
                             <td>{{key}}</td>
                             <td data-ng-if="isObject(value) && isString(value.id)" class="pointer"> 
-                                <a data-ui-sref="details({id:value.id})">{{ value.id }}</a>
+                                <a data-ui-sref="details({id:value.id})">{{ value.name }}</a>
                             </td>
-                            <td data-ng-if="isObject(value) && isObject(value.id) && isString(value.id.id)" class="pointer">  <a data-ui-sref="details({id:value.id.id})">{{ value.id.id }}</a>
+                            <td data-ng-if="isObject(value) && isObject(value.id) && isString(value.id.id)" class="pointer">  <a data-ui-sref="details({id:value.id.id})">{{ value.id.name }}</a>
                             </td>
                            <td data-ng-if="isObject(value) && !isArray(value) && !isString(value.id) && !isObject(value.id)">
                                 <span data-ng-repeat="(key2, value2) in value"> {{ key2 }} : {{ value2 }}<span ng-if="!$last">,</span></span>
@@ -84,7 +84,7 @@
                                     <div class="col-md-6" data-ng-if="isString(value1)"> {{key1}} : {{value1 | date:'medium'}} UTC</div>
                                 </div>
                             </td>
-                            <td data-ng-if="isNumber(value)">{{value * 1000 | date:'yyyy-MM-dd HH:mm:ss'}} UTC</td>
+                            <td data-ng-if="isNumber(value)">{{value | date:'yyyy-MM-dd HH:mm:ss'}} UTC</td>
                             <td data-ng-if="isString(value)">{{value}}</td>
                         </tr>
                     </tbody>
