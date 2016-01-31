@@ -105,10 +105,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if ($scope.transformedResults) {
                         var count = 0; $scope.dataT = [];
                         $scope.dataT = $scope.transformedResults.slice(begin, end);
-                        console.log('before----',$scope.dataT);
-                        /*$scope.dataT = $scope.filteredResults;
-                        console.log($scope.dataT, '======>',$scope.filteredResults);*/
-                       console.log('In..', $scope.dataT);
                             angular.forEach($scope.dataT, function(value) {
 
                                     if (value.guid && !value.name) {
@@ -117,11 +113,12 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                                                 id: value.guid
                                             }, function(data) {
                                                 value.name = data.values.name;
+
                                             });
                                    }
                                    if(count === $scope.dataT.length-1){
                                     $scope.filteredResults =  $scope.dataT;
-                                   console.log('======>',$scope.filteredResults);
+                                    $scope.dataAvailable = true;
                                    }
                                    count ++;
 
@@ -149,6 +146,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             var res = [];
             if ($scope.searchKey !== '') {
                 angular.forEach($scope.resultRows, function(value) {
+
+                    var objVal = value[$scope.searchKey];
+                    if(!objVal.name)
+                    objVal.name = '';
+                     res.push(objVal);
                     res.push(value[$scope.searchKey]);
                 });
             } else {
@@ -184,7 +186,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         objVal.guid = objVal.id;
                     }
                     if(!objVal.name)
-                        objVal.name = undefined;
+                        objVal.name = '';
                     res.push(objVal);
                 });
             }
