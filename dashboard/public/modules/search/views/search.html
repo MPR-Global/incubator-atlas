@@ -71,7 +71,7 @@
                      <td>
                         <div id="{{result['$id$'].id || result.guid}}" ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
                      </td>
-                     <td class="addTag"><img ng-src="img/addTag2.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
+                     <td class="addTag"><img ng-src="img/addTag4.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
                   <tr ng-if="isTag(resultType)" ng-repeat="result in filteredResults track by $index">
                      <td data-ng-if="isObject(result) && !isString(result) && res != 'id'" data-ng-repeat="res in transformedProperties track by $index" class="wordBreak">
