@@ -122,7 +122,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                                    }
                                    count ++;
 
-                        })
+                        });
                     }
                     $scope.pageCount = function() {
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
