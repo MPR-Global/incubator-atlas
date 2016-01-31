@@ -37,6 +37,46 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.setPage = function(pageNo) {
             $scope.currentPage = pageNo;
         };
+
+        $scope.initalPage1 = function(results) {
+            $scope.filteredResults = results;
+        };
+
+        $scope.initalPage = function() {
+            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
+                end = begin + $scope.itemsPerPage,
+                currentRowData = [],
+                res = [],
+                count = 0;
+                
+            if ($scope.transformedResults && $scope.transformedResults.length > 0) {
+                currentRowData = $scope.transformedResults.slice(begin, end);
+            }
+
+            angular.forEach(currentRowData, function(value) {
+                var objVal = value;
+
+                if (objVal.guid && !objVal.name) {
+                    DetailsResource.get({
+                        id: objVal.guid
+                    }, function(data) {
+                        objVal.name = data.values.name;
+                        res.push(objVal);
+                        count++;
+                        if (currentRowData.length === count) {
+                            $scope.mapRespose(res);
+                        }
+                    });
+                } else {
+                    res.push(objVal);
+                    count++;
+                    if (currentRowData.length === count) {
+                        $scope.mapRespose(res);
+                    }
+                }
+            });
+        };
+
         $scope.search = function(query) {
             $scope.results = [];
             NotificationService.reset();
@@ -46,7 +86,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             SearchResource.search({
                 query: query
             }, function searchSuccess(response) {
-
                 $scope.resultCount = response.count;
                 $scope.results = response.results;
                 $scope.resultRows = ($scope.results && $scope.results.rows) ? $scope.results.rows : $scope.results;
@@ -84,13 +123,10 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                         }
                     }
                     $scope.transformedResults = $scope.filterResults();
-                    $scope.transformedProperties = $scope.filterProperties();
-
                 } else if (typeof response.dataType === 'undefined') {
                     $scope.dataTransitioned = true;
                     $scope.searchKey = '';
                     $scope.transformedResults = $scope.filterResults();
-                    $scope.transformedProperties = $scope.filterProperties();
                 } else if (response.dataType.typeName && response.dataType.typeName.toLowerCase().indexOf('table') !== -1) {
                     $scope.searchKey = "Table";
                     $scope.transformedResults = $scope.resultRows;
@@ -100,30 +136,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 }
 
                 $scope.$watch('currentPage + itemsPerPage', function() {
-                    var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
-                        end = begin + $scope.itemsPerPage;
-                    if ($scope.transformedResults) {
-                        var count = 0; $scope.dataT = [];
-                        $scope.dataT = $scope.transformedResults.slice(begin, end);
-                            angular.forEach($scope.dataT, function(value) {
-
-                                    if (value.guid && !value.name) {
-                                            //$scope.getNameByGuid(res, objVal, $scope.resultRows.length, count++);
-                                            DetailsResource.get({
-                                                id: value.guid
-                                            }, function(data) {
-                                                value.name = data.values.name;
-
-                                            });
-                                   }
-                                   if(count === $scope.dataT.length-1){
-                                    $scope.filteredResults =  $scope.dataT;
-                                    $scope.dataAvailable = true;
-                                   }
-                                   count ++;
-
-                        });
-                    }
+                    $scope.initalPage();
                     $scope.pageCount = function() {
                         return Math.ceil($scope.resultCount / $scope.itemsPerPage);
                     };
@@ -142,16 +155,31 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             });
         };
 
+        $scope.mapRespose = function(response) {
+            $scope.transformedProperties = $scope.filterProperties();
+            $scope.initalPage1(response);
+        };
+
+        $scope.getNameByGuid = function(res, objVal, rowCount, count) { 
+            DetailsResource.get({
+                id: objVal.guid
+            }, function(data) {
+                objVal.name = data.values.name;
+                res.push(objVal);
+                if (rowCount === count) {
+                    $scope.mapRespose(res);
+                }
+            });
+        };
+
         $scope.filterResults = function() {
-            var res = [];
+            var res = [],
+                count = 0;
+
             if ($scope.searchKey !== '') {
                 angular.forEach($scope.resultRows, function(value) {
-
                     var objVal = value[$scope.searchKey];
-                    if(!objVal.name)
-                    objVal.name = '';
-                     res.push(objVal);
-                    res.push(value[$scope.searchKey]);
+                    res.push(objVal);
                 });
             } else {
                 angular.forEach($scope.resultRows, function(value) {
@@ -185,8 +213,15 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                     if (onlyId) {
                         objVal.guid = objVal.id;
                     }
-                    if(!objVal.name)
-                        objVal.name = '';
+ 
+                    if (objVal.guid && !objVal.name) {
+                        DetailsResource.get({
+                            id: objVal.guid
+                        }, function(data) {
+                            objVal.name = data.values.name;
+                        });
+                    }
+
                     res.push(objVal);
                 });
             }
@@ -214,11 +249,13 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.doToggle = function($event, el) {
             this.isCollapsed = !el;
         };
+
         $scope.openAddTagHome = function(traitId) {
             $state.go('addTagHome', {
                 tId: traitId
             });
         };
+
         $scope.isTag = function(typename) {
 
             if (typename.indexOf("__tempQueryResultStruct") > -1 || $scope.searchKey === '') {
@@ -227,6 +264,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 return false;
             }
         };
+
         $scope.getResourceDataHome = function(event, id) {
             DetailsResource.get({
                 id: id
@@ -240,7 +278,9 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
                 }
             });
         };
+
         $scope.$on('refreshResourceData', $scope.getResourceDataHome);
+
         $scope.filterSearchResults = function(items) {
             var res = {};
             var count = 0;
@@ -254,10 +294,12 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.keyLength = count;
             return res;
         };
-        $scope.searchQuery = $location.search();
-        $scope.query = ($location.search()).query;
-        if ($scope.query) {
 
+        $scope.searchQuery = $location.search();
+
+        $scope.query = ($location.search()).query;
+
+        if ($scope.query) {
             $scope.search($scope.query);
         }
     }
