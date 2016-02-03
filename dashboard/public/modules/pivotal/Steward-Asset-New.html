@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pivotal </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+<link rel="stylesheet" href="css/font-awesome.min.css" />
+<script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper" class="wrapper-padding">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="sidebar-width">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand bdr-bottam">
+                    <a href="#">
+                       <span class="pull-left" style="color:#fff;">Apache Atlas</span>
+						<img src="img/user7.png">
+                    </a>
+                </li> 
+										<li class="bdr-bottam">
+											<span class="fa fa-trash-o"></span>
+                                            <span class="mrgin"><a>Delete</a> </span>
+										   <span class="fa fa-trash-o"></span>
+										   <span class="mrgin">Move</span>
+										   <span class="fa fa-trash-o"></span>
+										   <span class="mrgin">Create</span>
+										</li>
+										
+										<li class="bdr-bottam">
+											<a href="#" style="color:#fff;">
+												<span class="fa fa-arrow-left"></span>
+												<span class="left-menuitem active">Engineering</span>
+												<span class="badge badge-info">14</span>
+											</a>
+										</li>
+										<li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">dev-langauges.xls</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-th"></span>
+                                            <span class="mrgin">NEW_LANG_LIST</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">programming-tools.xls</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                             <a href="#"><span class="fa fa-file"></span>
+                                            <span class="mrgin">langauges-checklist.org</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                             <a href="#"><span class="fa fa-file"></span>
+                                            <span class="mrgin">retired-langauges.cvs</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                             <a href="#"><span class="fa fa-file"></span>
+                                            <span class="mrgin">fav-langauges.cvs</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">popular-lang.html</span></a>
+                                        </li>
+										<li class="bdrnone">
+                                             <a href="#"><span class="fa fa-th"></span>
+                                            <span class="mrgin">LANG_ACCOUNTS</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">best-lang-for-web.xls</span></a>
+                                        </li>
+										 <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">langauge-feedback.csv</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-th"></span>
+                                            <span class="mrgin">RELEASES</span></a>
+                                        </li>
+										<li class="bdrnone">
+                                             <a href="#"><span class="fa fa-file"></span>
+                                            <span class="mrgin">new-langauges.txt</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">java-notes.txt</span></a>
+                                        </li>
+                                        <li class="bdrnone">
+                                            <a href="#"> <span class="fa fa-file"></span>
+                                            <span class="mrgin">css-hhacks-new.xls</span></a>
+                                        </li>
+										
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="page-content-wrapper-widht">
+            <div class="container-fluid">
+				<div class="row menu-top">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 top-menu-item1">
+					 <a href="#menu-toggle" id="menu-toggle"> 
+                        <span><i id="headernav" class="fa fa-bars" style="font-size: 45px;"></i></span>
+                        <!--<span><i id="headernav2" class="fa fa-chevron-left" style="font-size: 45px;"></i></span>-->
+					 </a>
+                    </div>
+                    <div class="col-lg-6 top-menu-item">
+                        <ul class="breadcrumb breadcrumb-default">
+							<li><a href="#">....</a></li>
+                            <li><a href="#">Pivotal Labs</a></li>
+                            <li><a href="#">Labs Practices</a></li>
+                            <li class="active">Engineering</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4"> 
+                        <input type="text" class="form-control query_home_search" placeholder="Search for..."></input> 
+                    </div>
+                </div>
+                <div class="row">
+					<div class="container-fluid">
+						<span class="h1tag">dev-langauges.xls</span><span class="h2tag">BOOKMARK</span>
+						<P>Add a Discripition...</P>
+						<button type="button" class="btn1 btn-primary-outline">ADD TAG +</button>
+					</div>
+                    <div id="Pivotaltab" class="col-lg-12">
+						<div class="container-fluid jumbotron nomar-pad">
+							<div class="col-lg-12">
+								<div class="col-lg-9 graph bgcol9">
+									<!-- <img src="img/Capture.png" /> -->
+									<script>
+										var data = [
+											{ "name" : "dev-langauges.xls", "parent":"null" },
+											{ "name" : "Pivotal Filter", "parent":"dev-langauges.xls" },
+											{ "name" : "all-Dev-Lang.xls", "parent":"Pivotal Filter" },
+											{ "name" : "combiner", "parent":"all-Dev-Lang.xls" },
+											{ "name" : "all-db-langauges.xls", "parent":"combiner" },
+											{ "name" : "programing-lang.xls", "parent":"combiner" }
+											];
+
+										// *********** Convert flat data into a nice tree ***************
+										// create a name: node map
+										var dataMap = data.reduce(function(map, node) {
+											map[node.name] = node;
+											return map;
+										}, {});
+
+										// create the tree array
+										var treeData = [];
+										data.forEach(function(node) {
+											// add to parent
+											var parent = dataMap[node.parent];
+											if (parent) {
+												// create child array if it doesn't exist
+												(parent.children || (parent.children = []))
+													// add node to child array
+													.push(node);
+											} else {
+												// parent is null or missing
+												treeData.push(node);
+											}
+										});
+
+										// ************** Generate the tree diagram	 *****************
+										var margin = {top: 20, right: 120, bottom: 20, left: 50},
+											width = 850 - margin.right - margin.left,
+											height = 350 - margin.top - margin.bottom;
+											
+										var i = 0;
+
+										var tree = d3.layout.tree()
+											.size([height, width]);
+
+										var diagonal = d3.svg.diagonal()
+											.projection(function(d) { return [d.y, d.x]; });
+
+										var svg = d3.select(".graph").append("svg")
+											.attr("width", width + margin.right + margin.left)
+											.attr("height", height + margin.top + margin.bottom)
+										  .append("g")
+											.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+										root = treeData[0];
+										  
+										update(root);
+
+										function update(source) {
+
+										  // Compute the new tree layout.
+										  var nodes = tree.nodes(root).reverse(),
+											  links = tree.links(nodes);
+
+										  // Normalize for fixed-depth.
+										  nodes.forEach(function(d) { d.y = d.depth * 100; });
+
+										  // Declare the nodes…
+										  var node = svg.selectAll("g.node")
+											  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+										  // Enter the nodes.
+										  var nodeEnter = node.enter().append("g")
+											  .attr("class", "node")
+											  .attr("transform", function(d) { 
+												  return "translate(" + d.y + "," + d.x + ")"; });
+
+										  nodeEnter.append("circle")
+											  .attr("r", 10)
+											  .style("fill", "#fff");
+
+										  nodeEnter.append("text")
+											  .attr("x", function(d) { 
+												  return d.children || d._children ? 50 : 13; })
+											  .attr("dy", "3em")
+											  .attr("text-anchor", function(d) { 
+												  return d.children || d._children ? "end" : "start"; })
+											  .text(function(d) { return d.name; })
+											  .style("fill-opacity", 1);
+
+										  // Declare the links…
+										  var link = svg.selectAll("path.link")
+											  .data(links, function(d) { return d.target.id; });
+
+										  // Enter the links.
+										  link.enter().insert("path", "g")
+											  .attr("class", "link")
+											  .attr("d", diagonal);
+										}
+									</script>
+								</div>	
+							</div>	
+						</div>	
+						<div class="container-fluid jumbotron">
+							<div class="col-lg-12">
+								<div class="col-lg-9 bg-white paddingZero">
+									<ul class="nav nav-tabs">
+										<li class="active"><a data-toggle="tab" href="#PROPRTIES">PROPRTIES</a></li>
+										<li><a data-toggle="tab" href="#ACCEPTABLE">ACCEPTABLE USE</a></li>
+										<li><a data-toggle="tab" href="#LINKS">LINKS</a></li>
+									</ul>
+									<div class="tab-content padding30">
+										<div id="PROPRTIES" class="tab-pane fade in active">
+											<span>Date Created:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+											</br></br><span>Date Modifed:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+											</br></br><span>Date Accessed:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+											</br></br><span>Stewardship:</span> <span style="margin-left:38px">Unsigned</span>
+										</div>
+										<div id="ACCEPTABLE" class="tab-pane fade">
+											<span>Stewardship:</span> <span style="margin-left:38px">Valerie Millingham - valeriemillingham@pivotal.io </span></br></br>
+											<span>Date Created:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+										</div>
+										<div id="LINKS" class="tab-pane fade">
+											<span>Stewardship:</span> <span style="margin-left:38px">Valerie Millingham - valeriemillingham@pivotal.io </span></br></br>
+											<span>Date Created:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container-fluid">
+						<div class="col-lg-12">
+							<div class="col-lg-9">
+								<h1>Comments</h1>
+								<P>Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy.</P>
+								<p><a>Michael</a></p>
+								<p>May 3, 2015 12:30 pm</p>
+								<button type="button" class="btn1 btnprine2 pull-right">ADD COMMENT +</button>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
