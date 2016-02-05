@@ -28,7 +28,8 @@ angular.module('dgc', ['ngCookies',
     'dgc.navigation',
     'dgc.tags',
     'dgc.tags.instance',
-    'dgc.tags.definition'
+    'dgc.tags.definition',
+    'dgc.pivotal'
 ]);
 
 angular.module('dgc.system', ['dgc.system.notification']);

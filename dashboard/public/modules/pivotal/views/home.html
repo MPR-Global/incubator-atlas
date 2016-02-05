@@ -12,11 +12,13 @@
     <title>Pivotal </title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+      <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
 
     <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-<link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,79 +28,79 @@
 
 </head>
 
-<body>
+<body ng-app="dgc">
 
-    <div id="wrapper">
+    <div id="wrapper" ng-controller ="PivotalController">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+             <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
                        <span class="pull-left" style="color:#fff;">Apache Atlas</span>
-						<img src="img/user7.png">
+                     <!--    <img src="public/modules/pivotal/views/img/user7.png"> -->
+                    </a>
+                </li>
+                <li ng-repeat="leftNav in leftNav">
+                 
+                    <a href="#" style="color:#fff;"> <span class="fa fa-arrow-left"></span>
+                    <span class="left-menuitem active">{{leftNav.name}}</span>
+                    <span class="badge badge-info">9</span>
+                    </a>
+                </li>
+               <!--  <li>
+                    <a href="#"> <span class="left-menuitem">Branding</span>
+                    <span class="badge badge-default">21</span>
                     </a>
                 </li>
                 <li>
-				 
-                    <a href="#" style="color:#fff;"> <span class="fa fa-arrow-left"></span>
-					<span class="left-menuitem active">Pivotal Labs</span>
-					<span class="badge badge-info">9</span>
-					</a>
-                </li>
-                <li>
-                    <a href="#"> <span class="left-menuitem">Branding</span>
-					<span class="badge badge-default">21</span>
-					</a>
+                    <a href="#"> 
+                        <span class="left-menuitem">Careers</span>
+                        <span class="badge badge-default">18</span>
+                    </a>
                 </li>
                 <li>
                     <a href="#"> 
-						<span class="left-menuitem">Careers</span>
+                        <span class="left-menuitem">Client Resources</span>
                         <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
                 <li>
                     <a href="#"> 
-						<span class="left-menuitem">Client Resources</span>
+                        <span class="left-menuitem">Human Resources</span>
                         <span class="badge badge-default">18</span>
-					</a>
-                </li>
-                <li>
-                    <a href="#"> 
-						<span class="left-menuitem">Human Resources</span>
-                        <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
                 <li>
                    <a href="#"> 
-						<span class="left-menuitem">Lab Practices</span>
+                        <span class="left-menuitem">Lab Practices</span>
                         <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
                 <li>
                      <a href="#"> 
-						<span class="left-menuitem">Offices</span>
+                        <span class="left-menuitem">Offices</span>
                         <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
-				 <li>
+                 <li>
                     <a href="#"> 
-						<span class="left-menuitem">Recruitments</span>
+                        <span class="left-menuitem">Recruitments</span>
                         <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
                 <li>
                    <a href="#"> 
-						<span class="left-menuitem">Sales</span>
+                        <span class="left-menuitem">Sales</span>
                         <span class="badge badge-default">18</span>
-					</a>
+                    </a>
                 </li>
                 <li>
                      <a href="#"> 
-						<span class="left-menuitem">Practice Management</span>
+                        <span class="left-menuitem">Practice Management</span>
                         <span class="badge badge-default">18</span>
-					</a>
-                </li>
+                    </a>
+                </li> -->
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -115,9 +117,10 @@
                     </div>
                     <div class="col-lg-6 top-menu-item">
                         <ul class="breadcrumb breadcrumb-default">
-                            <li><a href="#">Pivotal</a></li>
+                           <li ng-repeat="bread in breacrumb "><a href="#">{{bread.name}}</a></li>
+                       <!--      <li><a href="#">Pivotal</a></li>
                             <li><a href="#">Services</a></li>
-                            <li class="active">Pivotal Labs</li>
+                            <li class="active">Pivotal Labs</li> -->
                         </ul>
                     </div>
                     <div class="col-lg-4"> 
@@ -216,10 +219,25 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+   
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <!--  Core JavaScript -->
+ <script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/lib/angular-cookies/angular-cookies.js"></script>
+<script src="/lib/angular-resource/angular-resource.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+<script src="/lib/angular-sanitize/angular-sanitize.js"></script>
+<script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/lib/angular-ui-utils/ui-utils.js"></script>
+<script src="/lib/lodash/lodash.js"></script>
+<script src="/lib/d3/d3.js"></script>
+<script src="/lib/d3-tip/index.js"></script>
+<script src="/lib/jquery-ui/ui/jquery-ui.js"></script>
+
+<script src="/js/app.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
