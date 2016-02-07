@@ -100,7 +100,10 @@
             </table>
          </div>
          <div class="pull-right" ng-show='resultCount > 0'>
-            <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+
+            <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="itemsPerPage" class="pagination-sm" boundary-link-numbers="true" rotate="false"></pagination> 
+
+            
             <p>
          </div>
       </div>
