@@ -28,6 +28,11 @@ angular.module('dgc.pivotal').config(['$stateProvider',
             url: '/labpractice',
             templateUrl: '/modules/pivotal/views/search-result-hover.html'
         });
+
+                    $stateProvider.state('asset', {
+            url: '/asset',
+            templateUrl: '/modules/pivotal/views/Steward-Asset-Home.html'
+        });     
         // $stateProvider.state('addTag', {
         //     parent: 'details',
         //     params: {

@@ -37,18 +37,23 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                       <span class="pull-left" style="color:#fff;">Apache Atlas</span>
+                       <!-- <span class="pull-left" style="color:#fff;">Apache Atlas</span> -->
                      <!--    <img src="public/modules/pivotal/views/img/user7.png"> -->
                     </a>
                 </li>
-                <li ng-repeat="leftNav in leftNav">
+            <!--     <li ng-repeat="leftNav in leftNav">
                  
                     <a href="#" style="color:#fff;"> <span class="fa fa-arrow-left"></span>
-                    <span class="left-menuitem active">{{leftNav.name}}</span>
+                    <span class="left-menuitem active" data-ui-sref="labpractice">{{leftNav.name}}</span>
                     <span class="badge badge-info">9</span>
                     </a>
+                </li> -->
+                  <li>
+                    <a href="#" data-ui-sref="pivotal"> <span class="left-menuitem">Pivotal Labs</span>
+                    <span class="badge badge-default">21</span>
+                    </a>
                 </li>
-               <!--  <li>
+                <li>
                     <a href="#"> <span class="left-menuitem">Branding</span>
                     <span class="badge badge-default">21</span>
                     </a>
@@ -72,7 +77,7 @@
                     </a>
                 </li>
                 <li>
-                   <a href="#"> 
+                   <a href="#" data-ui-sref="labpractice"> 
                         <span class="left-menuitem">Lab Practices</span>
                         <span class="badge badge-default">18</span>
                     </a>
@@ -100,7 +105,7 @@
                         <span class="left-menuitem">Practice Management</span>
                         <span class="badge badge-default">18</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

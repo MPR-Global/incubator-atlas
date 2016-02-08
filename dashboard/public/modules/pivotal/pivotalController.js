@@ -29,4 +29,7 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
   {id:6,name:'Lab Practice'},{id:7,name:'Lab Practise'}];
 
 
+  $scope.name ="Michael";
+
+
 }]);
