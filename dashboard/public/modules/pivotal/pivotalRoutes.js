@@ -24,6 +24,10 @@ angular.module('dgc.pivotal').config(['$stateProvider',
             url: '/pivotal',
             templateUrl: '/modules/pivotal/views/home.html'
         });
+               $stateProvider.state('labpractice', {
+            url: '/labpractice',
+            templateUrl: '/modules/pivotal/views/search-result-hover.html'
+        });
         // $stateProvider.state('addTag', {
         //     parent: 'details',
         //     params: {

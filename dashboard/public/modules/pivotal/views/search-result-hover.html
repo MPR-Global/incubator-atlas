@@ -11,12 +11,13 @@
 
     <title>Pivotal </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+      <!-- Bootstrap Core CSS -->
+      <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
 
     <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-<link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,19 +27,19 @@
 
 </head>
 
-<body>
+<body ng-app="dgc">
 
     <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand bdr-bottam">
+         <!--        <li class="sidebar-brand bdr-bottam">
                     <a href="#">
                        <span class="pull-left" style="color:#fff;">Apache Atlas</span>
 						<img src="img/user7.png">
                     </a>
-                </li>
+                </li> -->
                 <li>
 				 
                     <a href="#" style="color:#fff;"> <span class="fa fa-arrow-left"></span>
@@ -159,11 +160,22 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+ <script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/lib/angular-cookies/angular-cookies.js"></script>
+<script src="/lib/angular-resource/angular-resource.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+<script src="/lib/angular-sanitize/angular-sanitize.js"></script>
+<script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/lib/angular-ui-utils/ui-utils.js"></script>
+<script src="/lib/lodash/lodash.js"></script>
+<script src="/lib/d3/d3.js"></script>
+<script src="/lib/d3-tip/index.js"></script>
+<script src="/lib/jquery-ui/ui/jquery-ui.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+<script src="/js/app.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -172,6 +184,7 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+
 
 </body>
 
