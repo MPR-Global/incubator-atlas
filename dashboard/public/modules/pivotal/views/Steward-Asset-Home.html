@@ -69,6 +69,7 @@
                               <ul class="nav nav-tabs">
                                  <li class="active"><a data-toggle="tab" href="#PROPRTIES">PROPRTIES</a></li>
                                  <li><a data-toggle="tab" href="#ACCEPTABLE">ACCEPTABLE USE</a></li>
+                                 <li><a data-toggle="tab" href="#links">LINKS</a></li>
                               </ul>
                               <div class="tab-content padding30">
                                  <div id="PROPRTIES" class="tab-pane fade in active">
@@ -84,16 +85,36 @@
                                             </div>  
                                         </div>
                                     </div> 
-
                                  </div>
                                  <div id="ACCEPTABLE" class="tab-pane fade">
                                     <span>{{response.acceptableUse}}</span>
+                                 </div>
+                                 <div id="links" class="tab-pane fade">
+                                    <div ng-repeat="link in response.links">
+                                        <span>{{link}}</span>
+                                    </div>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
+
+                  <div class="container-fluid">
+                        <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                <h1>Comments</h1>
+                                <div ng-repeat="comment in response.comments">
+                                    <p>{{comment.description}}</p>
+                                    <p><a>{{comment.userName}}</a></p>
+                                    <p> {{comment.dateTime}}</p>
+                                </div>
+                                <button type="button" class="btn1 btnprine2 pull-right">ADD COMMENT +</button>
+                            </div>
+                        </div>
+                    </div>
+
+
                </div>
             </div>
          </div>

@@ -47,7 +47,7 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 					      },
 					      {
 					         "id": 2,
-					         "name": "Services"
+					         "name": "Labs"
 					      },
 					      {
 					         "id": 3,
@@ -56,7 +56,7 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 					   ],
 					   "subCategories": [
 					      {
-					         "name": "dev-langauges.xls",
+					         "name": "dev-langaugesTest.xls",
 					         "type": "xls",
 					         "id": 8,
 					         "subCategoryCount": 0
@@ -132,17 +132,17 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 					         "email": "abc @pivotal.com"
 					      }
 					    },
-					    "links": [],
+					    "links": ['Apache Hive', 'Apache Spark', 'Apache HDFC', 'Tech Crunch-Languages'],
 					    "comments": [
 					         {
 					            "userName": "Anil Gayakwad",
-					            "description": "This give a full view for langauges ",
-					            "dateTime": 123456789
+					            "description": "Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy.",
+					            "dateTime": 'May 3, 2015 12:30 pm'
 					         },
 					         {
 					            "userName": "Mike",
-					            "description": "to good to use for programming easy to under stand ",
-					            "dateTime": 123456789
+					            "description": "Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. Awarded 6 out of 6 for customer Service by PC Pro Magazine and a Computer Shopper Best Buy. ",
+					            "dateTime": 'May 3, 2015 12:30 pm'
 					         }
 					    ],
 					    "media": {
