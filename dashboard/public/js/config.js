@@ -16,17 +16,17 @@
  * limitations under the License.
  */
 'use strict';
-var host = 'http://localhost',
-    port = '3010',
+var host = '',
+    port = '',
     baseUrl = '/api/atlas/',
-    apiHost = host + ':' + port + baseUrl;
+    apiHost = (host!=='') ? host + ':' + port + baseUrl : baseUrl ;
 
 angular.module('dgc').constant('AtlasConfig', { 
     API_ENDPOINTS: {
         ABOUT: apiHost + 'admin/version',
         GET_ENTITY: apiHost + 'entities',
         ATTACH_DETACH_TRAITS: apiHost + 'traits',
-        SCHEMA_LINEAGE_PREPAND: apiHost + 'lineage/hive/table',
+        SCHEMA_LINEAGE_PREPEND: apiHost + 'lineage/hive/table',
         SCHEMA_APPEND: apiHost + 'schema',
         GRAPH: apiHost + 'graph',
         TRAITS_LIST: apiHost + 'types?type=TRAIT',

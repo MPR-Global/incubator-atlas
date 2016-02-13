@@ -40,7 +40,7 @@ angular.module('dgc.details').factory('DetailsResource', ['$resource', 'AtlasCon
      });
 
 }]).factory('SchemaResource', ['$resource','AtlasConfig', function($resource, AtlasConfig) {
-    return $resource(AtlasConfig.API_ENDPOINTS.SCHEMA_LINEAGE_PREPAND + '/:tableName/' + AtlasConfig.API_ENDPOINTS.SCHEMA_APPEND, {}, {
+    return $resource(AtlasConfig.API_ENDPOINTS.SCHEMA_LINEAGE_PREPEND + '/:tableName/' + AtlasConfig.API_ENDPOINTS.SCHEMA_APPEND, {}, {
         get: {
             method: 'GET',
             transformResponse: function(data) {
