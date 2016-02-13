@@ -25,10 +25,10 @@ angular.module('dgc').constant('AtlasConfig', {
     API_ENDPOINTS: {
         ABOUT: apiHost + 'admin/version',
         GET_ENTITY: apiHost + 'entities',
-        ATTACH_DETACH_TRAITS: apiHost + 'traits',
+        ATTACH_DETACH_TRAITS:   'traits',
         SCHEMA_LINEAGE_PREPEND: apiHost + 'lineage/hive/table',
-        SCHEMA_APPEND: apiHost + 'schema',
-        GRAPH: apiHost + 'graph',
+        SCHEMA_APPEND: 'schema',
+        GRAPH:  'graph',
         TRAITS_LIST: apiHost + 'types?type=TRAIT',
         SEARCH: apiHost + 'discovery/search/',
         CREATE_TRAIT: apiHost + 'types'
