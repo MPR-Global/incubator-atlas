@@ -2,16 +2,24 @@
    <!-- Sidebar -->
    <div id="sidebar-wrapper" class="sidebar-width">
       <ul class="sidebar-nav">
+         <li class="sidebar-brand bdr-bottam">
+            <a href="#">
+               <span class="pull-left logo">Apache Atlas</span>
+               <span class="pull-right user-icon"><img src="img/user7.png"></span>
+            </a>
+         </li>
+
          <li class="bdr-bottam">
-            <a href="#" style="color:#fff;">
-            <a data-ui-sref="pivotal">{{response.name}}</a>
+            <a class="left-menu-active" data-ui-sref="pivotal">
+               <span class="fa fa-arrow-left"></span>
+               <span class="left-menuitem active">{{response.name}}</span>
             <span class="badge badge-info">{{response.subCategoryCount}}</span>
             </a>
          </li>
          <li class="bdrnone" ng-repeat="subcat in response.subCategories">
             <a href="#"> <span class="fa fa-file"></span>
-            <span class="mrgin"> {{subcat.name}}</span></a>
-            <span data-ng-if="subcat.subCategoryCount > 0" class="badge badge-info">{{subcat.subCategoryCount}}</span>
+            <span class="mrgin"> {{subcat.name}}</span>
+            <span data-ng-if="subcat.subCategoryCount > 0" class="badge badge-info">{{subcat.subCategoryCount}}</span></a>
          </li>
       </ul>
    </div>
@@ -28,7 +36,7 @@
             </div>
             <div class="col-lg-6 top-menu-item">
                <ul class="breadcrumb breadcrumb-default">
-                  <li ng-repeat="path in response.breadcrumb"><a href="#" data-ui-sref="{{path.name}}"></a> {{path.name}}</li>
+                  <li ng-repeat="path in response.breadcrumb" ng-class="{'active' : $last}"><a href="#" data-ui-sref="{{path.name}}"></a> {{path.name}}</li>
                </ul>
             </div>
             <div class="col-lg-4"> 

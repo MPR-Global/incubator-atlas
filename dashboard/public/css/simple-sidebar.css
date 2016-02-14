@@ -3,8 +3,25 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+body {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #18bc9c;
+    background-color: #ffffff;
+}
 /* Toggle Styles */
+
+
+a {
+    color: #18bc9c;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #18bc9c;
+    text-decoration: underline;
+}
 
 #wrapper {
     padding-left: 0;
@@ -190,9 +207,10 @@ input.query_home_search {
     border-bottom: 2px solid #dce4ec;
 }
 .breadcrumb-default{
-background-color:#fff;
-    padding: 13px 15px;
-	margin-bottom: 0px;
+background-color:#fff !important;
+    padding: 13px 15px !important;
+	margin-bottom: 0px !important;
+    border:none !important;
 }
 
 .breadcrumb > li + li:before {
@@ -394,8 +412,22 @@ display : block;
 	  stroke: #ccc;
 	  stroke-width: 2px;
 	}
-	
 
+.logo{
+    color:#fff !important;
+}
+
+.left-menu-active{
+    color: #ffffff !important;;
+    background: #232333;
+}
+
+.user-icon{
+    padding-right: 20px;
+}
+.breadcrumb li:hover{
+    cursor: pointer;
+}
 /****/
 
 /****/
