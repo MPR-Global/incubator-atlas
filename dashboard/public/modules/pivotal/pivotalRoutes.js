@@ -33,6 +33,10 @@ angular.module('dgc.pivotal').config(['$stateProvider',
             url: '/asset',
             templateUrl: '/modules/pivotal/views/Steward-Asset-Home.html'
         });     
+                          $stateProvider.state('create', {
+            url: '/create',
+            templateUrl: '/modules/pivotal/views/Steward-Asset-New.html'
+        });     
         // $stateProvider.state('addTag', {
         //     parent: 'details',
         //     params: {
