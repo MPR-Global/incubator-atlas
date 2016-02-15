@@ -1,25 +1,49 @@
+
+
 <div id="wrapper" class="wrapper-padding"  ng-controller ="PivotalController">
    <!-- Sidebar -->
    <div id="sidebar-wrapper" class="sidebar-width">
       <ul class="sidebar-nav">
          <li class="sidebar-brand bdr-bottam">
             <a href="#">
-               <span class="pull-left logo">Apache Atlas</span>
-               <span class="pull-right user-icon"><img src="img/user7.png"></span>
+            <span class="pull-left logo">Apache Atlas</span>
+            <span class="pull-right user-icon"><img src="img/user7.png"></span>
             </a>
          </li>
-
-         <li class="bdr-bottam">
+         <!-- <li class="bdr-bottam">
             <a class="left-menu-active" data-ui-sref="pivotal">
-               <span class="fa fa-arrow-left"></span>
-               <span class="left-menuitem active">{{response.name}}</span>
-            <span class="badge badge-info">{{response.subCategoryCount}}</span>
+            <span class="fa fa-arrow-left"></span>
+            <span class="left-menuitem active">{{response.name}}</span>
+            <span class="badge badge-info">{{response.subCategoryCount}}</span> 
             </a>
-         </li>
-         <li class="bdrnone" ng-repeat="subcat in response.subCategories">
+         </li> -->
+        <!--  <li class="bdrnone" ng-repeat="subcat in response.subCategories">
             <a href="#"> <span class="fa fa-file"></span>
             <span class="mrgin"> {{subcat.name}}</span>
             <span data-ng-if="subcat.subCategoryCount > 0" class="badge badge-info">{{subcat.subCategoryCount}}</span></a>
+         </li> -->
+         <li class="bdr-bottam">
+            <div class="panel-group" id="accordion">
+               <div class="panel bdr-bottam" style="background-color:#353545;" ng-repeat="catgris in response.categories">
+                  <div class="panel-heading">
+                     <h4 class="panel-title">
+                        <span class="fa fa-arrow-left"></span>
+                        <a data-toggle="collapse" data-parent="#accordion" style="margin-left:15px;" href="#collapse2" class="" aria-expanded="true">{{catgris.name}}</a>
+                         <span data-ng-if="catgris.subCategoryCount > 0" class="badge badge-info">{{catgris.subCategoryCount}}</span></a>
+                     </h4>
+                  </div>
+                  <div id="collapse2" class="panel-collapse collapse in" aria-expanded="true">
+                     <div class="panel-body">
+                        <ul style="color:#fff;">
+                           <li ng-repeat="subCat in catgris.subCategories">
+                              <span class="mrgin">{{subCat.name}}</span>
+                              <span data-ng-if="subCat.subCategoryCount > 0" class="badge badge-info">{{subCat.subCategoryCount}}</span></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </li>
       </ul>
    </div>
@@ -47,10 +71,19 @@
             <div id="Pivotaltab" class="col-lg-12">
                <div class="container-fluid">
                   <div class="col-lg-9 bg-white">
-                     <span class="h1tag">{{response.name}}</span><span class="h2tag">Subscribe</span>
-                     <p class="para">{{response.description}}</p>
-                     <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
-                     <button type="button" class="btn1 btn-primary-outline">+</button>
+                     <div>
+                        <span class="h1tag">{{response.name}}</span><span class="h2tag">Subscribe</span>
+                        <p class="para" ng-class="!edDesc ? 'show' : 'hide'">{{response.description}}</p> 
+                     </div>
+                     <textarea ng-class="edDesc ? 'show' : 'hide'" class="txtArea" ng-model="response.description"> {{response.description}} </textarea>
+                     <span class="fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edDesc=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
+
+                     <button type="button" class="btn1 btn-primary-outline" ng-class="edDesc ? 'show' : 'hide'" ng-click="edDesc=false"> update </button>
+
+                     <div>
+                        <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
+                        <button type="button" class="btn1 btn-primary-outline">+</button>
+                     </div>
                   </div>
                </div>
                <div class="container-fluid jumbotron">
@@ -85,6 +118,7 @@
                            </div>
                         </div>
                      </div>
+                     <span class="fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edGenric=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
                   </div>
                </div>
             </div>
@@ -104,10 +138,10 @@
          </div>
       </div>
    </div>
-</div>  
+</div>
 <script>
    $("#menu-toggle").click(function(e) {
        e.preventDefault();
        $("#wrapper").toggleClass("toggled");
    });
-</script> 
+</script>

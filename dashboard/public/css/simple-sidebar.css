@@ -428,6 +428,11 @@ display : block;
 .breadcrumb li:hover{
     cursor: pointer;
 }
+
+.txtArea {
+    width: 100%;
+    height: 170px;
+}
 /****/
 
 /****/

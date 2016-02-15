@@ -29,7 +29,7 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
   {id:1,name:'Pivotal'},{id:2,name:'Services'},{id:3,name:'Pivotal Labs'}];
 
 
-   $scope.leftNav =[
+  $scope.leftNav =[
   {id:1,name:'PivotaLabs'},{id:2,name:'Branding'},{id:3,name:'Career'},{id:4,name:'ClientResources'},{id:5,name:'HumanResource'},
   {id:6,name:'Lab Practice'},{id:7,name:'Lab Practise'}];
 
@@ -54,56 +54,115 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 					         "name": "Engineering" 
 					      }
 					   ],
-					   "subCategories": [
-					      {
-					         "name": "dev-langaugesTest.xls",
-					         "type": "xls",
-					         "id": 8,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "NEW_LANG_LIST",
-					         "type": "xls",
-					         "id": 4,
-					         "subCategoryCount": 4
-					      },
-					      {
-					         "name": "programming-tools.xls",
-					         "type": "csv",
-					         "id": 6,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "langauges-checklist.org",
-					         "type": "list",
-					         "id": 6,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "etired-langauges.cvs",
-					         "type": "csv",
-					         "id": 6,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "fav-langauges.cvs",
-					         "type": "list",
-					         "id": 6,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "popular-lang.html",
-					         "type": "csv",
-					         "id": 6,
-					         "subCategoryCount": 0
-					      },
-					      {
-					         "name": "LANG_ACCOUNTS",
-					         "type": "list",
-					         "id": 6,
-					         "subCategoryCount": 10
-					      } 
-					   ], 
+					   "categories": [
+					       {
+					       		"name" : "Engineering",
+					       		"subCategoryCount": 8,
+					       		"subCategories":[
+								      {
+								         "name": "dev-langaugesTest.xls",
+								         "type": "xls",
+								         "id": 8,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "NEW_LANG_LIST",
+								         "type": "xls",
+								         "id": 4,
+								         "subCategoryCount": 4
+								      },
+								      {
+								         "name": "programming-tools.xls",
+								         "type": "csv",
+								         "id": 6,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "langauges-checklist.org",
+								         "type": "list",
+								         "id": 6,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "etired-langauges.cvs",
+								         "type": "csv",
+								         "id": 6,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "fav-langauges.cvs",
+								         "type": "list",
+								         "id": 6,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "popular-lang.html",
+								         "type": "csv",
+								         "id": 6,
+								         "subCategoryCount": 0
+								      },
+								      {
+								         "name": "LANG_ACCOUNTS",
+								         "type": "list",
+								         "id": 6,
+								         "subCategoryCount": 10
+								      } 
+						   		]
+							}, {
+						   		"name" : "Pivotal",
+						   		"subCategoryCount": 8,
+					       		"subCategories":[
+						      {
+						         "name": "Branding",
+						         "type": "List",
+						         "id": 8,
+						         "subCategoryCount": 0
+						      },
+						      {
+						         "name": "Careers",
+						         "type": "List",
+						         "id": 4,
+						         "subCategoryCount": 4
+						      },
+						      {
+						         "name": "Client Resource",
+						         "type": "List",
+						         "id": 6,
+						         "subCategoryCount": 0
+						      },
+						      {
+						         "name": "Human Resource",
+						         "type": "list",
+						         "id": 6,
+						         "subCategoryCount": 0
+						      },
+						      {
+						         "name": "Careers",
+						         "type": "List",
+						         "id": 4,
+						         "subCategoryCount": 4
+						      },
+						      {
+						         "name": "Lab Practise",
+						         "type": "List",
+						         "id": 6,
+						         "subCategoryCount": 0
+						      },
+						      {
+						         "name": "Office",
+						         "type": "list",
+						         "id": 6,
+						         "subCategoryCount": 0
+						      },
+						      {
+						         "name": "Sales",
+						         "type": "list",
+						         "id": 6,
+						         "subCategoryCount": 0
+						      }
+						    	]
+							}
+						],   
 					   "tags": [ 
 					      { 
 					         "name": "javaScript", 
@@ -164,6 +223,10 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 					         ]
 					    } 
 					}
+
+  $scope.updateResponse = function(){
+
+  }					
 
 
 }]);
