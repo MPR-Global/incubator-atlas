@@ -16,12 +16,12 @@
             <span class="left-menuitem active">{{response.name}}</span>
             <span class="badge badge-info">{{response.subCategoryCount}}</span> 
             </a>
-         </li> -->
-        <!--  <li class="bdrnone" ng-repeat="subcat in response.subCategories">
+            </li> -->
+         <!--  <li class="bdrnone" ng-repeat="subcat in response.subCategories">
             <a href="#"> <span class="fa fa-file"></span>
             <span class="mrgin"> {{subcat.name}}</span>
             <span data-ng-if="subcat.subCategoryCount > 0" class="badge badge-info">{{subcat.subCategoryCount}}</span></a>
-         </li> -->
+            </li> -->
          <li class="bdr-bottam">
             <div class="panel-group" id="accordion">
                <div class="panel bdr-bottam" style="background-color:#353545;" ng-repeat="catgris in response.categories">
@@ -29,7 +29,7 @@
                      <h4 class="panel-title">
                         <span class="fa fa-arrow-left"></span>
                         <a data-toggle="collapse" data-parent="#accordion" style="margin-left:15px;" href="#collapse2" class="" aria-expanded="true">{{catgris.name}}</a>
-                         <span data-ng-if="catgris.subCategoryCount > 0" class="badge badge-info">{{catgris.subCategoryCount}}</span></a>
+                        <span data-ng-if="catgris.subCategoryCount > 0" class="badge badge-info">{{catgris.subCategoryCount}}</span></a>
                      </h4>
                   </div>
                   <div id="collapse2" class="panel-collapse collapse in" aria-expanded="true">
@@ -73,13 +73,11 @@
                   <div class="col-lg-9 bg-white">
                      <div>
                         <span class="h1tag">{{response.name}}</span><span class="h2tag">Subscribe</span>
-                        <p class="para" ng-class="!edDesc ? 'show' : 'hide'">{{response.description}}</p> 
+                        <p class="para" ng-class="!edDesc ? 'show' : 'hide'">{{response.description}}</p>
                      </div>
                      <textarea ng-class="edDesc ? 'show' : 'hide'" class="txtArea" ng-model="response.description"> {{response.description}} </textarea>
                      <span class="fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edDesc=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
-
                      <button type="button" class="btn1 btn-primary-outline" ng-class="edDesc ? 'show' : 'hide'" ng-click="edDesc=false"> update </button>
-
                      <div>
                         <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
                         <button type="button" class="btn1 btn-primary-outline">+</button>
@@ -96,7 +94,7 @@
                         </ul>
                         <div class="tab-content padding30">
                            <div id="PROPRTIES" class="tab-pane fade in active">
-                              <div ng-repeat="(key, value) in response.properties">
+                              <div ng-repeat="(key, value) in response.properties" ng-class="!edGenric ? 'show' : 'hide'">
                                  <div data-ng-if="isString(value)">
                                     <span>{{key}}:</span> <span class="left-margin30">{{ value}}</span>
                                  </div>
@@ -107,18 +105,39 @@
                                     </div>
                                  </div>
                               </div>
+                              <div ng-repeat="(key, value) in response.properties" ng-class="edGenric ? 'show' : 'hide'">
+                                 <div data-ng-if="isString(value)">
+                                    <span>{{key}}:</span> 
+                                    <input type="text" data-ng-model="response.properties[key]"></input> 
+                                 </div>
+                                 <div data-ng-if="isObject(value) && !isString(value)">
+                                    <span> {{key}}:</span> 
+                                    <div ng-repeat="(key1, value1) in value"> 
+                                       <span>{{key1}}:</span>
+                                       <input type="text" data-ng-model="value[key1]"></input> 
+                                    </div>
+                                 </div>
+                              </div>
                            </div>
                            <div id="ACCEPTABLE" class="tab-pane fade">
-                              <span>{{response.acceptableUse}}</span>
+                              <span ng-class="!edGenric ? 'show' : 'hide'">{{response.acceptableUse}}</span>
+                              <textarea ng-class="edGenric ? 'show' : 'hide'" class="txtArea" ng-model="response.acceptableUse"> {{response.acceptableUse}} </textarea>
                            </div>
                            <div id="links" class="tab-pane fade">
-                              <div ng-repeat="link in response.links">
+                              <div ng-repeat="link in response.links" ng-class="!edGenric ? 'show' : 'hide'">
                                  <span>{{link}}</span>
+                              </div>
+                              <div ng-class="edGenric ? 'show' : 'hide'">
+                                 <div ng-repeat="(ky, val) in response.links"> 
+                                     <input type="text" data-ng-model="response.links[ky]"></input> 
+                                 </div>
+                                 <button type="button" class="btn1 btn-primary-outline" ng-click="response.links.push('')">+</button>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <span class="fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edGenric=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
+                     <span class="fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edGenric=true" ng-class="!edGenric ? 'show' : 'hide'"></span>
+                     <button type="button" class="btn1 btn-primary-outline" ng-class="edGenric ? 'show' : 'hide'" ng-click="edGenric=false"> update </button>
                   </div>
                </div>
             </div>
