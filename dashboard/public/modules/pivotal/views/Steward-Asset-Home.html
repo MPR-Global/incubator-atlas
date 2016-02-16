@@ -72,16 +72,17 @@
                      <li><a data-toggle="tab" href="#ACCEPTABLE">ACCEPTABLE USE</a></li>
                      <li><a data-toggle="tab" href="#links">LINKS</a></li>
                   </ul>
-                  <div class="tab-content padding30">
+                  <div class="tab-content padding30"> 
                      <div id="PROPRTIES" class="tab-pane fade in active">
                         <div ng-repeat="(key, value) in response.properties" ng-class="!edGenric ? 'show' : 'hide'">
                            <div data-ng-if="isString(value)">
-                              <span>{{key}}:</span> <span class="left-margin30">{{ value}}</span>
+                              <span style="min-width:160px; float:left;">{{key}}:</span> 
+                              <span tyle="min-width:160px; float:left;">{{ value}}</span>
                            </div>
                            <div data-ng-if="isObject(value) && !isString(value)">
                               <span> {{key}}:</span> 
                               <div ng-repeat="(key1, value1) in value"> 
-                                 <span>{{key1}}:</span> <span class="left-margin30">{{ value1}}</span>
+                                 <span>{{key1}}:</span> <span class="left-margin30">{{value1}}</span>
                               </div>
                            </div>
                         </div>
