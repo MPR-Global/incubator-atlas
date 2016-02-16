@@ -1,3 +1,5 @@
+
+
 <div id="wrapper" class="wrapper-padding"  ng-controller ="PivotalController">
    <!-- Sidebar -->
    <div id="sidebar-wrapper" class="sidebar-width">
@@ -8,25 +10,23 @@
             <span class="pull-right user-icon"><img src="img/user7.png"></span>
             </a>
          </li>
-
          <div id="MainMenu" class="toggle-menu">
             <div ng-repeat="catgris in response.categories">
                <li class="bdr">
                   <a href="#{{catgris.name}}" data-toggle="collapse" data-parent="#MainMenu" ng-class="{'active' : $first}">
                   {{catgris.name}}
-                     <span data-ng-if="catgris.subCategoryCount > 0" class="badge badge-info">{{catgris.subCategoryCount}}</span>
+                  <span data-ng-if="catgris.subCategoryCount > 0" class="badge badge-info">{{catgris.subCategoryCount}}</span>
                   </a>
                </li>
                <div class="collapse" id="{{catgris.name}}" ng-class="{'in' : $first}">
                   <li class="bdrnone" ng-repeat="subCat in catgris.subCategories">
                      <a href="javascript:;">{{subCat.name}}
-                        <span data-ng-if="subCat.subCategoryCount > 0" class="badge badge-info">{{subCat.subCategoryCount}}</span>
+                     <span data-ng-if="subCat.subCategoryCount > 0" class="badge badge-info">{{subCat.subCategoryCount}}</span>
                      </a>
                   </li>
                </div>
             </div>
          </div>
-
       </ul>
    </div>
    <!-- /#sidebar-wrapper -->
@@ -51,154 +51,147 @@
          </div>
       </div>
       <div class="container-fluid">
-            <div id="Pivotaltab" class="col-lg-12">
-                  <div class="bg-white">
-                     <div class="row">
-                        <span class="h1tag">{{response.name}}</span><span class="h2tag">Subscribe</span>
-                     <p class="col-lg-10" ng-class="!edDesc ? 'show' : 'hide'">{{response.description}}</p>
-                        <span class="col-lg-1 fa fa-pencil-square fa-2x pull-right" style="color:#999999" ng-click="edDesc=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
-                     <textarea ng-class="edDesc ? 'show' : 'hide'" class="txtArea" ng-model="response.description"> {{response.description}} </textarea>
-                     <button type="button" class="btn1 btn-primary-outline" ng-class="edDesc ? 'show' : 'hide'" ng-click="edDesc=false"> update </button>
-                     </div>
-                     <div class="row">
-                        <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
-                        <button class="btn1 btn-primary-outline" data-toggle="modal" data-target=".bs-example-modal-lg"> + </button>
-                     </div>
-                  </div>
-               <div class="container jumbotron" style="margin-left: -40px;padding-right:0px">
-                     <div class="bg-white paddingZero col-lg-8">
-                        <ul class="nav nav-tabs">
-                           <li class="active"><a data-toggle="tab" href="#PROPRTIES">PROPRTIES</a></li>
-                           <li><a data-toggle="tab" href="#ACCEPTABLE">ACCEPTABLE USE</a></li>
-                           <li><a data-toggle="tab" href="#links">LINKS</a></li>
-                        </ul>
-                        <div class="tab-content padding30">
-                           <div id="PROPRTIES" class="tab-pane fade in active">
-                              <div ng-repeat="(key, value) in response.properties" ng-class="!edGenric ? 'show' : 'hide'">
-                                 <div data-ng-if="isString(value)">
-                                    <span>{{key}}:</span> <span class="left-margin30">{{ value}}</span>
-                                 </div>
-                                 <div data-ng-if="isObject(value) && !isString(value)">
-                                    <span> {{key}}:</span> 
-                                    <div ng-repeat="(key1, value1) in value"> 
-                                       <span>{{key1}}:</span> <span class="left-margin30">{{ value1}}</span>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div ng-repeat="(key, value) in response.properties" class="form-horizontal" ng-class="edGenric ? 'show' : 'hide'">
-                                 <div data-ng-if="isString(value)" class="form-group">
-                                    <span class="col-sm-4 control-lable">{{key}}:</span>
-                                    <div class="col-sm-8">
-                                    <input type="text" class="form-control" data-ng-model="response.properties[key]" />
-                                    </div>
-                                 </div>
-                                 <div data-ng-if="isObject(value) && !isString(value)" class="form-horizontal">
-                                    <span> {{key}}:</span> 
-                                    <div ng-repeat="(key1, value1) in value" class="form-group">
-                                       <span class="col-sm-4 control-lable">{{key1}}:</span>
-                                       <div class="col-sm-8">
-                                       <input type="text" class="form-control" data-ng-model="value[key1]" />
-                                       </div>
-                                    </div>
-                                 </div>
+         <div id="Pivotaltab" class="col-lg-12">
+            <div class="bg-white">
+               <div class="row">
+                  <span class="h1tag">{{response.name}}</span><span class="h2tag">Subscribe</span>
+                  <p class="col-lg-10" ng-class="!edDesc ? 'show' : 'hide'">{{response.description}}</p>
+                  <span class="col-lg-1 fa fa-pencil-square fa-2x pull-right" style="color:#999999" ng-click="edDesc=true" ng-class="!edDesc ? 'show' : 'hide'"></span>
+                  <textarea ng-class="edDesc ? 'show' : 'hide'" class="txtArea" ng-model="response.description"> {{response.description}} </textarea>
+                  <button type="button" class="btn1 btn-primary-outline" ng-class="edDesc ? 'show' : 'hide'" ng-click="edDesc=false"> update </button>
+               </div>
+               <div class="row">
+                  <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
+                  <button class="btn1 btn-primary-outline" data-toggle="modal" data-target=".bs-example-modal-lg"> + </button>
+               </div>
+            </div>
+            <div class="container jumbotron" style="margin-left: -40px;padding-right:0px">
+               <div class="bg-white paddingZero col-lg-8">
+                  <ul class="nav nav-tabs">
+                     <li class="active"><a data-toggle="tab" href="#PROPRTIES">PROPRTIES</a></li>
+                     <li><a data-toggle="tab" href="#ACCEPTABLE">ACCEPTABLE USE</a></li>
+                     <li><a data-toggle="tab" href="#links">LINKS</a></li>
+                  </ul>
+                  <div class="tab-content padding30">
+                     <div id="PROPRTIES" class="tab-pane fade in active">
+                        <div ng-repeat="(key, value) in response.properties" ng-class="!edGenric ? 'show' : 'hide'">
+                           <div data-ng-if="isString(value)">
+                              <span>{{key}}:</span> <span class="left-margin30">{{ value}}</span>
+                           </div>
+                           <div data-ng-if="isObject(value) && !isString(value)">
+                              <span> {{key}}:</span> 
+                              <div ng-repeat="(key1, value1) in value"> 
+                                 <span>{{key1}}:</span> <span class="left-margin30">{{ value1}}</span>
                               </div>
                            </div>
-                           <div id="ACCEPTABLE" class="tab-pane fade">
-                              <span ng-class="!edGenric ? 'show' : 'hide'">{{response.acceptableUse}}</span>
-                              <textarea ng-class="edGenric ? 'show' : 'hide'" class="txtArea" ng-model="response.acceptableUse"> {{response.acceptableUse}} </textarea>
-                           </div>
-                           <div id="links" class="tab-pane fade">
-                              <div ng-repeat="link in response.links" ng-class="!edGenric ? 'show' : 'hide'">
-                                 <span>{{link}}</span>
+                        </div>
+                        <div ng-repeat="(key, value) in response.properties" class="form-horizontal" ng-class="edGenric ? 'show' : 'hide'">
+                           <div data-ng-if="isString(value)" class="form-group">
+                              <span class="col-sm-4 control-lable">{{key}}:</span>
+                              <div class="col-sm-8">
+                                 <input type="text" class="form-control" data-ng-model="response.properties[key]" />
                               </div>
-                              <div ng-class="edGenric ? 'show' : 'hide'">
-                                 <div ng-repeat="(ky, val) in response.links" class="form-group">
-                                     <input type="text" class="form-control" data-ng-model="response.links[ky]" />
+                           </div>
+                           <div data-ng-if="isObject(value) && !isString(value)" class="form-horizontal">
+                              <span> {{key}}:</span> 
+                              <div ng-repeat="(key1, value1) in value" class="form-group">
+                                 <span class="col-sm-4 control-lable">{{key1}}:</span>
+                                 <div class="col-sm-8">
+                                    <input type="text" class="form-control" data-ng-model="value[key1]" />
                                  </div>
-                                 <button type="button" class="btn1 btn-primary-outline" ng-click="response.links.push('')">+</button>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-lg-2">
-                     <span class="col-lg-offset-3 fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edGenric=true" ng-class="!edGenric ? 'show' : 'hide'"></span>
-                     <button type="button" class="btn1 btn-primary-outline" ng-class="edGenric ? 'show' : 'hide'" ng-click="edGenric=false"> update </button>
+                     <div id="ACCEPTABLE" class="tab-pane fade">
+                        <span ng-class="!edGenric ? 'show' : 'hide'">{{response.acceptableUse}}</span>
+                        <textarea ng-class="edGenric ? 'show' : 'hide'" class="txtArea" ng-model="response.acceptableUse"> {{response.acceptableUse}} </textarea>
                      </div>
-               </div>
-            </div>
-      </div>
-            <div class="container-fluid">
-               <div class="col-lg-12">
-                  <div class="col-lg-9">
-                     <h1>Comments</h1>
-                     <div ng-repeat="comment in response.comments">
-                        <p>{{comment.description}}</p>
-                        <p><a>{{comment.userName}}</a></p>
-                        <p> {{comment.dateTime}}</p>
+                     <div id="links" class="tab-pane fade">
+                        <div ng-repeat="link in response.links" ng-class="!edGenric ? 'show' : 'hide'">
+                           <span>{{link}}</span>
+                        </div>
+                        <div ng-class="edGenric ? 'show' : 'hide'">
+                           <div ng-repeat="(ky, val) in response.links" class="form-group">
+                              <input type="text" class="form-control" data-ng-model="response.links[ky]" />
+                           </div>
+                           <button type="button" class="btn1 btn-primary-outline" ng-click="response.links.push('')">+</button>
+                        </div>
                      </div>
-                     <button type="button" class="btn1 btnprine2 pull-right">ADD COMMENT +</button>
                   </div>
                </div>
+               <div class="col-lg-2">
+                  <span class="col-lg-offset-3 fa fa-pencil-square fa-2x pull-xs-right fa-border" style="color:#999999" ng-click="edGenric=true" ng-class="!edGenric ? 'show' : 'hide'"></span>
+                  <button type="button" class="btn1 btn-primary-outline" ng-class="edGenric ? 'show' : 'hide'" ng-click="edGenric=false"> update </button>
+               </div>
             </div>
-
-
+         </div>
+      </div>
+      <div class="container-fluid">
+         <div class="col-lg-12">
+            <div class="col-lg-9">
+               <h1>Comments</h1>
+               <div ng-repeat="comment in response.comments">
+                  <p>{{comment.description}}</p>
+                  <p><a>{{comment.userName}}</a></p>
+                  <p> {{comment.dateTime}}</p>
+               </div>
+               <div ng-class="addCommts ? 'show' : 'hide'" >
+                  <textarea class="txtArea" ng-model="newCommentDescription"> </textarea> 
+                  <button type="button" class="btn1 btnprine2 pull-right" data-ng-click="addNewComments()">ADD </button>
+               </div>
+               <button type="button" class="btn1 btnprine2 pull-right" ng-class="!addCommts ? 'show' : 'hide'" data-ng-click="addCommts=true" >ADD COMMENT +</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+               <p>Add Tags</p>
+            </div>
+            <div class="modal-body">
+               <div class="tree well">
+                  <ul>
+                     <li class="parent_li">
+                        <span > Name : </span>
+                        <input type="text" data-ng-model='newTagName'></input>
+                     </li>
+                     <li class="parent_li">
+                        <span > Type : </span>
+                        <select data-ng-model='newTagType'>
+                           <option title="Langauge" class="ng-binding ng-scope" value="Langauge">Langauge</option>
+                           <option title="Coding" class="ng-binding ng-scope" value="Coding">Coding</option>
+                           <option title="Text" class="ng-binding ng-scope" value="Text">Text</option>
+                        </select>
+                     </li>
+                  </ul>
+               </div>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+               <button type="button" class="btn btn-success" data-dismiss="modal" data-ng-click="addNewTag()">Add</button>
+            </div>
+         </div>
+      </div>
    </div>
 </div>
-
-
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
- <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-       
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-       <p>Add Tags</p>
-      </div>
-      <div class="modal-body">
-
-        <div class="tree well">
-           <ul>
-              <li class="parent_li">
-                 <span > Name : </span>
-                 <input type="text" ng-modal='newTagName'></input>
-              </li> 
-               <li class="parent_li">
-                 <span > Type : </span>
-                 <select > 
-                     <option title="Langauge" class="ng-binding ng-scope" value="Langauge">Langauge</option>
-                     <option title="Coding" class="ng-binding ng-scope" value="Coding">Coding</option>
-                     <option title="Text" class="ng-binding ng-scope" value="Text">Text</option>
-                 </select>
-              </li> 
-           </ul>
-        </div>
-
-
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addTag()">Add</button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
    $("#menu-toggle").click(function(e) {
        e.preventDefault();
        $("#wrapper").toggleClass("toggled");
    });
-
+   
    $(document).on('click.bs.collapse.data-api', '[data-toggle=collapse]', function (e) {
       var $this   = $(this), href
       var parent  = $this.attr('data-parent')
       var $parent = parent && $(parent)
-
+   
       $(".collapse").removeClass("in");
       $parent.find('[data-toggle=collapse]').removeClass("active");
      if(!$(this).hasClass('collapsed')){
         $(this).addClass('active')
      }
    })
-
+   
 </script>
