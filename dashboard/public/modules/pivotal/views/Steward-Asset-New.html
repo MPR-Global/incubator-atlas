@@ -1,6 +1,6 @@
 
-
-    <div id="wrapper" class="wrapper-padding"  ng-controller ="PivotalController">
+<div   ng-controller ="PivotalController">
+    <div id="wrapper" class="wrapper-padding">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper" class="sidebar-width">
@@ -17,7 +17,7 @@
 										   <span class="fa fa-trash-o"></span>
 										   <span class="mrgin">Move</span>
 										   <span class="fa fa-trash-o"></span>
-										   <span class="mrgin">Create</span>
+										   <span class="mrgin" data-toggle="modal" data-target="#myModalNorm" >Create </span>
 										</li>
 										
 										<li class="bdr-bottam">
@@ -231,11 +231,12 @@
 										<li><a data-toggle="tab" href="#LINKS">LINKS</a></li>
 									</ul>
 									<div class="tab-content padding30">
-										<div id="PROPRTIES" class="tab-pane fade in active">
-											<span>Date Created:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
+										<div id="PROPRTIES" class="tab-pane fade in active" ng-repeat="data in data">
+											<!-- <span>Date Created:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
 											</br></br><span>Date Modifed:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
 											</br></br><span>Date Accessed:</span> <span class="left-margin30">Feb 3, 2016 05:04 pm </span>
-											</br></br><span>Stewardship:</span> <span style="margin-left:38px">Unsigned</span>
+											</br></br><span>Stewardship:</span> <span style="margin-left:38px">Unsigned</span> -->
+											<span>Date Created:</span> <span>{{data.text}}</span>
 										</div>
 										<div id="ACCEPTABLE" class="tab-pane fade">
 											<span>Stewardship:</span> <span style="margin-left:38px">Valerie Millingham - valeriemillingham@pivotal.io </span></br></br>
@@ -266,6 +267,95 @@
         </div>
     </div>
         <!-- /#page-content-wrapper -->
+
+
+
+
+
+
+
+<!-- Button trigger modal -->
+<!-- <button  data-toggle="modal" data-target="#myModalNorm">
+    Launch Normal Form
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Modal title
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                
+           <!--      <form role="form" ng-submit="addText(myText)">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Asset</label>
+                      <input type="text" class="form-control"
+                      id="property" placeholder="Enter asset property" ng-model="myText" />
+                  </div>
+                
+             
+                  <button type="submit" class="btn btn-primary"  >Submit</button>
+                </form> -->
+                  <form ng-submit="addText(myText)">
+                  <div class="form-group">
+                  		<label>Properties</label>
+				        <input type="text" ng-model="myText" >
+				       
+				   </div>
+				         <div class="form-group">
+                  		<label>Properties</label>
+				        <input type="text" ng-model="myText" >
+				       
+				   </div>
+				    <button type="submit">Add</button>
+				  </form>
+				                
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<!-- Post Info -->
+<!-- <div style='position:fixed;bottom:0;left:0; background:lightgray;width:100%;'>
+    About this SO Question:
+    <a href='http://stackoverflow.com/q/26562900/1366033'>
+        Twitter Bootstap - form in Modal fomatting
+    </a><br/>
+    Fork This Skeleton Here: 
+    <a href='http://jsfiddle.net/KyleMit/kcpma/'>
+        Bootstrap 3 Skeleton
+    </a><br/>
+</div> -->
+
+
 
     <!-- jQuery -->
     

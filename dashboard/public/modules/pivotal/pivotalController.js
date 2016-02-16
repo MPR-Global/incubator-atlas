@@ -226,7 +226,23 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
 
   $scope.updateResponse = function(){
 
-  }					
+  }		
+
+
+var arrayText = [ {text:'Feb 3, 2016 05:04',}];
+
+    $scope.addText = function(text) {
+   
+      if(text) {
+        var obj = {
+          text: text
+        };
+          arrayText.push(obj);
+          console.log(arrayText);
+           $scope.data=arrayText;
+        }
+        
+      } 
 
 
 }]);
