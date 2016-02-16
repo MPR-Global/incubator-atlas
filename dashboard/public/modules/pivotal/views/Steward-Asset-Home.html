@@ -62,7 +62,7 @@
                      </div>
                      <div class="row">
                         <button type="button" class="btn btn-primary" ng-repeat="tag in response.tags">{{tag.name}}</button> 
-                        <button type="button" class="btn1 btn-primary-outline">+</button>
+                        <button class="btn1 btn-primary-outline" data-toggle="modal" data-target=".bs-example-modal-lg"> + </button>
                      </div>
                   </div>
                <div class="container jumbotron" style="margin-left: -40px;padding-right:0px">
@@ -144,6 +144,45 @@
 
    </div>
 </div>
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+       <p>Add Tags</p>
+      </div>
+      <div class="modal-body">
+
+        <div class="tree well">
+           <ul>
+              <li class="parent_li">
+                 <span > Name : </span>
+                 <input type="text" ng-modal='newTagName'></input>
+              </li> 
+               <li class="parent_li">
+                 <span > Type : </span>
+                 <select > 
+                     <option title="Langauge" class="ng-binding ng-scope" value="Langauge">Langauge</option>
+                     <option title="Coding" class="ng-binding ng-scope" value="Coding">Coding</option>
+                     <option title="Text" class="ng-binding ng-scope" value="Text">Text</option>
+                 </select>
+              </li> 
+           </ul>
+        </div>
+
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addTag()">Add</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
    $("#menu-toggle").click(function(e) {
        e.preventDefault();
