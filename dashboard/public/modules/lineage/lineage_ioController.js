@@ -22,6 +22,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         var guidsList = [],
             $$ = angular.element;
 
+        $scope.lineageContent = [];
+
 
         function inVertObj(edgs) {
             var newEdgsObj = {};
@@ -69,7 +71,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                                 guidsList = res;
 
                                 $scope.lineageData = transformData(response.results);
-
+                                $scope.getNodeContent();
                                 if (callRender) {
                                     render();
                                 }
@@ -83,6 +85,9 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
 
         }
 
+        $scope.getNodeContent = function(childNode){
+
+        };
 
         function loadProcess(edges, vertices) {
 
@@ -93,6 +98,8 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                     urlCalls.push(DetailsResource.get({
                         id: guid
                     }).$promise);
+                }else{
+                    urlCalls.push(vertices[guid]);
                 }
 
             }
@@ -100,6 +107,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 .then(function(results) {
                     deferred.resolve(results);
                 });
+                
             return deferred.promise;
         }
 
@@ -142,6 +150,176 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
                 }
             }
         });
+
+
+        function renderGraph(data, container) {
+            var links = [
+
+                  {source: "Microsoft", target: "Amazon", type: "suit"},
+                  {source: "Microsoft", target: "HTC", type: "licensing"},
+                  {source: "Samsung", target: "Apple", type: "suit"},
+                  {source: "Motorola", target: "Apple", type: "suit"},
+                  {source: "Nokia", target: "Apple", type: "resolved"},
+                  {source: "HTC", target: "Apple", type: "suit"},
+                  {source: "Kodak", target: "Apple", type: "suit"},
+                  {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
+                  {source: "Microsoft", target: "Foxconn", type: "suit"},
+                  {source: "Oracle", target: "Google", type: "suit"},
+                  {source: "Apple", target: "HTC", type: "suit"},
+                  {source: "Microsoft", target: "Inventec", type: "suit"},
+                  {source: "Samsung", target: "Kodak", type: "resolved"},
+                  {source: "LG", target: "Kodak", type: "resolved"},
+                  {source: "RIM", target: "Kodak", type: "suit"},
+                  {source: "Sony", target: "LG", type: "suit"},
+                  {source: "Kodak", target: "LG", type: "resolved"},
+                  {source: "Apple", target: "Nokia", type: "resolved"},
+                  {source: "Qualcomm", target: "Nokia", type: "resolved"},
+                  {source: "Apple", target: "Motorola", type: "suit"},
+                  {source: "Microsoft", target: "Motorola", type: "suit"},
+                  {source: "Motorola", target: "Microsoft", type: "suit"},
+                  {source: "Huawei", target: "ZTE", type: "suit"},
+                  {source: "Ericsson", target: "ZTE", type: "suit"},
+                  {source: "Kodak", target: "Samsung", type: "resolved"},
+                  {source: "Apple", target: "Samsung", type: "suit"},
+                  {source: "Kodak", target: "RIM", type: "suit"},
+                  {source: "Nokia", target: "Qualcomm", type: "suit"}
+                ];
+                var element = d3.select(container.element),
+                widthg = Math.max(container.width, 1100),
+                heightg = Math.max((window.innerHeight - 400), 500);
+
+
+                var nodes = {};
+
+                function zoom() {
+                    svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                   // markerPath.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                  //  circle.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                    //text.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                }
+
+                // define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
+                var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+
+                // Compute the distinct nodes from the links.
+                links.forEach(function(link) {
+                  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+                  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+                });
+
+                var w = widthg,
+                    h = heightg;
+
+                var force = d3.layout.force()
+                    .nodes(d3.values(nodes))
+                    .links(links)
+                    .size([widthg, heightg])
+                    .linkDistance(90)
+                    .charge(-300)
+                    .on("tick", tick)
+                    .start();
+
+                var svg = d3.select(container.element).append("svg")
+                    .attr("width", w)
+                    .attr("height", h)
+                    .call(zoomListener);
+
+                // Per-type markers, as they don't inherit styles.
+                svg.append("svg:defs").selectAll("marker")
+                    .data(["suit", "licensing", "resolved"])
+                  .enter().append("svg:marker")
+                    .attr("id", String)
+                    .attr("viewBox", "0 -5 10 10")
+                    .attr("refX", 1.5)
+                    .attr("refY", -1.5)
+                    .attr("markerWidth", 6)
+                    .attr("markerHeight", 6)
+                    .attr("orient", "auto")
+                    .append("svg:path")
+                    .attr("d", "M0,-5L10,0L0,5");
+
+                var svgGroup = svg.append("g")
+                .attr("transform", "translate(0,0)");    
+
+                var path = svgGroup.selectAll("path.link")
+                    .data(force.links())
+                    .enter().append("svg:path")
+                    .attr("class", function(d) { return "link " + d.type; });
+
+                var markerPath = svgGroup.selectAll("path.marker")
+                    .data(force.links())
+                    .enter().append("svg:path")
+                    .attr("class", function(d) { return "marker_only " + d.type; })
+                    .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
+
+
+                var circle = svgGroup.selectAll("circle")
+                    .data(force.nodes())
+                  .enter().append("svg:circle")
+                    .attr("r", 6)
+                    .call(force.drag);
+
+                var text = svgGroup.selectAll("g")
+                    .data(force.nodes())
+                  .enter().append("svg:g");
+
+                // A copy of the text with a thick white stroke for legibility.
+                text.append("svg:text")
+                    .attr("x", 8)
+                    .attr("y", ".31em")
+                    .attr("class", "shadow")
+                    .text(function(d) { return d.name; });
+
+                text.append("svg:text")
+                    .attr("x", 8)
+                    .attr("y", ".31em")
+                    .text(function(d) { return d.name; });
+
+                // Use elliptical arc path segments to doubly-encode directionality.
+                function tick() {
+
+                  path.attr("d", function(d) {
+                    var dx = d.target.x - d.source.x,
+                        dy = d.target.y - d.source.y,
+                        dr = Math.sqrt(dx * dx + dy * dy);
+                    return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+                  });
+                    
+                  markerPath.attr("d", function(d) {
+                    var dx = d.target.x - d.source.x,
+                        dy = d.target.y - d.source.y,
+                        dr = Math.sqrt(dx * dx + dy * dy);
+
+                    // We know the center of the arc will be some distance perpendicular from the
+                    // link segment's midpoint. The midpoint is computed as:
+                    var endX = (d.target.x + d.source.x) / 2;
+                    var endY = (d.target.y + d.source.y) / 2;
+
+                    // Notice that the paths are the arcs generated by a circle whose 
+                    // radius is the same as the distance between the nodes. This simplifies the 
+                    // trig as we can simply apply the 30-60-90 triangle rule to find the difference
+                    // between the radius and the distance to the segment midpoint from the circle 
+                    // center.
+                    var len = dr - ((dr/2) * Math.sqrt(3));
+                    
+                    // Remember that is we have a line's slope then the perpendicular slope is the 
+                    // negative inverse.
+                    endX = endX + (dy * len/dr);
+                    endY = endY + (-dx * len/dr);
+                      
+                    return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + endX + "," + endY;
+                  });
+
+                  circle.attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                  });
+
+                  text.attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                  });
+                }
+
+        }
 
         function transformData(metaData) {
             var edges = metaData.values.edges,
@@ -221,7 +399,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             return starTingObj;
         }
 
-        function renderGraph(data, container) {
+        function renderGraph1(data, container) {
             // ************** Generate the tree diagram  *****************
             var element = d3.select(container.element),
                 widthg = Math.max(container.width, 1100),
@@ -256,7 +434,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             // define a d3 diagonal projection for use by the node paths later on.
             var diagonal = d3.svg.diagonal()
                 .projection(function(d) {
-                    return [d.y, d.x];
+                    return [d.y, d.x-2];
                 });
 
             // A recursive helper function for performing some setup by walking through all nodes
