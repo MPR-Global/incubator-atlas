@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         isDashboardDirectory = grunt.file.isDir('public'),
         modulesPath = 'public/';
     if (!isDashboardDirectory)
-        modulesPath = '../public/'
+        modulesPath = '../public/';
 
     grunt.loadNpmTasks('grunt-html2js');
 
@@ -54,11 +54,11 @@ module.exports = function(grunt) {
                 tasks: ['copy:dist']
             }
         },
-          html2js: { 
+        html2js: { 
             options: { 
                 base: 'public/',
                 rename : function (moduleName) {
-                              return '/' moduleName;
+                              return '/' + moduleName;
                             },
                 collapseBooleanAttributes: true,
                 collapseWhitespace: true,
@@ -189,8 +189,8 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default', ['devUpdate', 'html2js', 'bower', 'jshint', 'jsbeautifier:default']);
 
-     grunt.registerTask('server', ['html2js', 'jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
-     grunt.registerTask('build', ['html2js', 'copy:dist', 'minify']);
+    grunt.registerTask('server', ['html2js', 'jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
+    grunt.registerTask('build', ['html2js', 'copy:dist', 'minify']);
 
     grunt.registerTask('minify', 'Minify the all js', function() {
         var done = this.async();
