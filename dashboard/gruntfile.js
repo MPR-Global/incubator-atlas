@@ -30,6 +30,8 @@ module.exports = function(grunt) {
     if (!isDashboardDirectory)
         modulesPath = '../public/'
 
+    grunt.loadNpmTasks('grunt-html2js');
+
     grunt.initConfig({
         watch: {
             options: {
@@ -41,7 +43,7 @@ module.exports = function(grunt) {
             },
             html: {
                 files: ['public/**/*.html'],
-                tasks: ['copy:dist']
+                tasks: ['html2js', 'copy:dist']
             },
             css: {
                 files: ['public/**/*.css'],
@@ -52,9 +54,30 @@ module.exports = function(grunt) {
                 tasks: ['copy:dist']
             }
         },
+          html2js: { 
+            options: { 
+                base: 'public/',
+                rename : function (moduleName) {
+                              return '/' moduleName;
+                            },
+                collapseBooleanAttributes: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true,
+                removeComments: true,
+                removeEmptyAttributes: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true
+            },
+            main: {
+              src: ['public/**/*.html'],
+              dest: 'public/js/templates.js',
+              module: 'htmlTemplates'
+            },
+        },
         jshint: {
             all: {
-                src: ['gruntfile.js', 'package.json', 'server.js', 'server/**/*.js', 'public/**/*.js', '!public/lib/**', '!public/dist/**', '!public/**/app.min.js'],
+                src: ['gruntfile.js', 'package.json', 'server.js', 'server/**/*.js', 'public/**/*.js', '!public/lib/**', '!public/dist/**', '!public/**/app.min.js', '!public/**/templates.js'],
                 options: {
                     jshintrc: true
                 }
@@ -137,7 +160,7 @@ module.exports = function(grunt) {
             dist: {
                 expand: true,
                 cwd: modulesPath,
-                src: ['**', '!js/**/*.js', '!modules/**/*.js'],
+                src: ['**', '!js/**/*.js', '!modules/**/*.js', 'js/templates.js'],
                 dest: distPath
             }
         },
@@ -164,10 +187,10 @@ module.exports = function(grunt) {
     });
 
     require('load-grunt-tasks')(grunt);
-    grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
+    grunt.registerTask('default', ['devUpdate', 'html2js', 'bower', 'jshint', 'jsbeautifier:default']);
 
-    grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
-    grunt.registerTask('build', ['copy:dist', 'minify']);
+     grunt.registerTask('server', ['html2js', 'jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
+     grunt.registerTask('build', ['html2js', 'copy:dist', 'minify']);
 
     grunt.registerTask('minify', 'Minify the all js', function() {
         var done = this.async();
