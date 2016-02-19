@@ -26,6 +26,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.currentPage = 1;
         $scope.itemsPerPage = 10;
         $scope.filteredResults = [];
+        $scope.searchTypeModel = 'fulltext';
         $scope.resultRows = [];
         $scope.resultType = '';
         $scope.isObject = angular.isObject;
@@ -89,14 +90,16 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             });
         };
 
-        $scope.search = function(query) {
+        $scope.search = function(query, type) {
             $scope.results = [];
             NotificationService.reset();
             $scope.limit = 4;
             $scope.searchMessage = 'load-gif';
             $scope.$parent.query = query;
+            console.log('---->',type);
             SearchResource.search({
-                query: query
+                query: query,
+                searchType: type
             }, function searchSuccess(response) {
                 $scope.resultCount = response.count;
                 $scope.results = response.results;
@@ -285,7 +288,7 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         $scope.query = ($location.search()).query;
 
         if ($scope.query) {
-            $scope.search($scope.query);
+            $scope.search($scope.query, $scope.searchTypeModel);
         }
     }
 ]);

@@ -163,6 +163,30 @@ Search Bar design
     padding: 14px 20px;
 }
 
+/*
+.mainSearch .dropdown-menu{
+    text-align: left;
+    padding: 8px;
+    padding-top: 0px;
+    margin-top: 0px;
+    min-width: 95px;
+}
+
+.mainSearch .input-group-btn{
+    white-space: pre-line;
+}
+*/
+.mainSearch .search-type-large {
+    width: 112px!important;
+}
+
+.mainSearch select {
+    height: 50px!important;
+    padding-right: 0px;
+    margin-right: 0px;
+    width: 100px;
+    font-weight:bold;
+}
 /*=======================================================================================
 Tags on Home Page design
 =======================================================================================*/
