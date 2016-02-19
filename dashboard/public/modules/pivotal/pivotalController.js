@@ -200,13 +200,7 @@ angular.module('dgc.pivotal').controller('PivotalController', ['$scope', functio
             "dateTime": 'May 3, 2015 12:30 pm'
         }],
         "media": {
-            "photos": [{
-                "name": "play",
-                "imgUrl": "http: //play.png"
-            }, {
-                "name": "dance",
-                "imgUrl": "http://dance.png"
-            }],
+            "photos": [],
             "videos": [{
                 "name": "office",
                 "imgUrl": "http: //office.vob"
