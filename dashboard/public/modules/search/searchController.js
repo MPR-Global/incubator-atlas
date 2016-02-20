@@ -19,14 +19,12 @@
 
 angular.module('dgc.search').controller('SearchController', ['$scope', '$location', '$http', '$state', '$stateParams', 'lodash', 'SearchResource', 'DetailsResource', 'NotificationService',
     function($scope, $location, $http, $state, $stateParams, _, SearchResource, DetailsResource, NotificationService) {
-
         $scope.results = [];
         $scope.resultCount = 0;
         $scope.isCollapsed = true;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 10;
         $scope.filteredResults = [];
-        $scope.searchTypeModel = 'fulltext';
         $scope.resultRows = [];
         $scope.resultType = '';
         $scope.isObject = angular.isObject;
@@ -96,7 +94,6 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
             $scope.limit = 4;
             $scope.searchMessage = 'load-gif';
             $scope.$parent.query = query;
-            console.log('---->',type);
             SearchResource.search({
                 query: query,
                 searchType: type
@@ -284,11 +281,10 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         };
 
         $scope.searchQuery = $location.search();
-
+        $scope.searchTypeModel = $stateParams.searchType;
         $scope.query = ($location.search()).query;
-
-        if ($scope.query) {
-            $scope.search($scope.query, $scope.searchTypeModel);
+        if ($scope.query && $stateParams.searchType) {
+            $scope.search($scope.query, $stateParams.searchType);
         }
     }
 ]);

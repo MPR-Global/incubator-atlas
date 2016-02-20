@@ -31,7 +31,7 @@
                <input type="text" class="form-control" placeholder="Search: Table, DB, Column" data-ng-model="query" required>
               </input>
                <span class="input-group-btn">
-               <button class="btn btn-success" type="submit" data-ng-disabled="form.$invalid" ui-sref="search({ query: query })">
+               <button class="btn btn-success" type="submit" data-ng-disabled="form.$invalid" ui-sref="search({ query: query, searchType: searchTypeModel })">
                   <i class="glyphicon glyphicon-search white "></i>
                </button>
                </span>

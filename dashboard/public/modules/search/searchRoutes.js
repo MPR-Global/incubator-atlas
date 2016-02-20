@@ -22,6 +22,7 @@ angular.module('dgc.search').config(['$stateProvider',
     function($stateProvider) {
         $stateProvider.state('search', {
             url: '/search?query',
+            params: {searchType: 'fulltext'},
             templateUrl: '/modules/search/views/search.html',
             controller: 'SearchController'
         });
