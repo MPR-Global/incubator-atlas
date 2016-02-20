@@ -186,8 +186,24 @@ Search Bar design
     margin-right: 0px;
     width: 100px;
     font-weight:bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('../img/select_arrow.png') no-repeat;
+    background-size: 22px 22px;
 }
 
+.search-type-large select {
+   background-position: 72px 13px!important;
+}
+
+.search-type-small select{
+    background-position: 48px 13px!important;
+}
+
+.mainSearch  .search-type-small {
+    width: 88px!important
+}
 /*=======================================================================================
 Tags on Home Page design
 =======================================================================================*/
