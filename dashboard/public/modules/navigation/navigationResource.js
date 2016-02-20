@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.navigation').factory('NavigationResource', ['$resource','AtlasConfig', function($resource, AtlasConfig) {
+angular.module('dgc.navigation').factory('navigationResource', ['$resource','AtlasConfig', function($resource, AtlasConfig) {
     return $resource(AtlasConfig.API_ENDPOINTS.TRAITS_LIST, {}, {
         get: {
             'method': 'GET',

@@ -18,6 +18,6 @@
 
 'use strict';
 
-angular.module('dgc.about').factory('AboutResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
+angular.module('dgc.about').factory('aboutResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
     return $resource(AtlasConfig.API_ENDPOINTS.ABOUT, {});
 }]);

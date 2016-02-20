@@ -17,14 +17,14 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('DetailsController', ['$window', '$scope', '$state', '$stateParams', 'DetailsResource', 'SchemaResource',
-    function($window, $scope, $state, $stateParams, DetailsResource, SchemaResource) {
+angular.module('dgc.details').controller('detailsController', ['$window', '$scope', '$state', '$stateParams', 'detailsResource', 'SchemaResource',
+    function($window, $scope, $state, $stateParams, detailsResource, SchemaResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
         $scope.isLineage = false;
 
-        DetailsResource.get({
+        detailsResource.get({
             id: $stateParams.id
 
         }, function(data) {
@@ -35,7 +35,7 @@ angular.module('dgc.details').controller('DetailsController', ['$window', '$scop
 
             if (data && data.values) {
                 var getName = function(aaa, attr) {
-                    DetailsResource.get({
+                    detailsResource.get({
                         id: attr.id
                     }, function(data1) {
                         if (data1.values && data1.values.name) {

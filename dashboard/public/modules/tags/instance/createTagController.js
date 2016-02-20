@@ -17,13 +17,13 @@
  */
 'use strict';
 
-angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope', 'DetailsResource', '$modalInstance', 'typesList', 'lodash', 'TagsResource', '$stateParams', '$rootScope', 'TagClasses', 'NotificationService',
-    function($scope, DetailsResource, $modalInstance, typesList, _, TagsResource, $stateParams, $rootScope, Categories) {
+angular.module('dgc.tags.instance').controller('createTagController', ['$scope', 'detailsResource', '$modalInstance', 'typesList', 'lodash', 'tagsResource', '$stateParams', '$rootScope', 'tagClasses', 'notificationService',
+    function($scope, detailsResource, $modalInstance, typesList, _, tagsResource, $stateParams, $rootScope, categories) {
         if (typesList) {
             $scope.typesList = typesList;
         }
         var $$ = angular.element;
-        $scope.categoryList = Categories;
+        $scope.categoryList = categories;
         $scope.category = 'TRAIT';
         $scope.isSuccess = false;
         $scope.getAttributeDefinations = function() {
@@ -33,10 +33,10 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
         };
 
         $scope.getAttributeApi = function(tagName) {
-            TagsResource.get({
+            tagsResource.get({
                 id: tagName
             }, function(data) {
-                var instanceType = Categories[$scope.category].instanceInfo();
+                var instanceType = categories[$scope.category].instanceInfo();
                 if (instanceType) {
                     var traitTypes = angular.fromJson(data.definition)[instanceType];
 
@@ -66,7 +66,7 @@ angular.module('dgc.tags.instance').controller('CreateTagController', ['$scope',
                     "typeName": $scope.selectedType,
                     "values": $scope.propertiesList
                 };
-                DetailsResource.saveTag({
+                detailsResource.saveTag({
                     id: $stateParams.tId
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.tId) {

@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 
-<div data-ng-controller="HeaderController" class="row">
+<div data-ng-controller="headerController" class="row">
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-ng-click="isCollapsed = !isCollapsed">
             <span class="sr-only">Toggle navigation</span>
@@ -41,7 +41,7 @@
               <a  ng-if="!username" class="menulink" href="https://cwiki.apache.org/confluence/display/ATLAS/Atlas+Home" target="_blank">Help</a>
             </li>
             <li data-ui-sref-active="active">
-                <a  ng-if="!username" class="menulink" href="javascript:void(0)" ng-click="ShowAbout()">About</a>
+                <a  ng-if="!username" class="menulink" href="javascript:void(0)" ng-click="showAbout()">About</a>
             </li>
         </ul>
     </nav>

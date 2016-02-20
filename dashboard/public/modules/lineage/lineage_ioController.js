@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'LineageResource', 'd3', 'DetailsResource', '$q',
-    function($element, $scope, $state, $stateParams, _, LineageResource, d3, DetailsResource, $q) {
+angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$scope', '$state', '$stateParams', 'lodash', 'lineageResource', 'd3', 'detailsResource', '$q',
+    function($element, $scope, $state, $stateParams, _, lineageResource, d3, detailsResource, $q) {
         var guidsList = [],
             $$ = angular.element;
 
@@ -36,14 +36,14 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
         }
 
         function getCombinedLineageData(tableData, callRender) {
-            LineageResource.get({
+            lineageResource.get({
                 tableName: tableData.tableName,
                 type: 'outputs'
             }).$promise.then(
                 function lineageSuccess(response1) {
                     //  $scope.$emit('show_lineage');
                     $('#lineageGraph').removeClass('hide');
-                    LineageResource.get({
+                    lineageResource.get({
                         tableName: tableData.tableName,
                         type: 'inputs'
                     }).$promise.then(
@@ -102,7 +102,7 @@ angular.module('dgc.lineage').controller('Lineage_ioController', ['$element', '$
             var deferred = $q.defer();
             for (var guid in edges) {
                 if (!vertices.hasOwnProperty(guid)) {
-                    urlCalls.push(DetailsResource.get({
+                    urlCalls.push(detailsResource.get({
                         id: guid
                     }).$promise);
                 }

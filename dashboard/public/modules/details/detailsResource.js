@@ -18,7 +18,7 @@
 
 'use strict';
 
-angular.module('dgc.details').factory('DetailsResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
+angular.module('dgc.details').factory('detailsResource', ['$resource', 'AtlasConfig', function($resource, AtlasConfig) {
     return $resource(AtlasConfig.API_ENDPOINTS.GET_ENTITY +'/:id', {}, {
         get: {
             method: 'GET',
