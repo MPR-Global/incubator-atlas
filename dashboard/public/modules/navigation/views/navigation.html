@@ -19,11 +19,18 @@
 <div data-ng-controller="NavigationController" class="mainTags leftNavigation"> 
     <div>
        <h4 class="pull-left">Tags</h4>  
-       <a href ng-click="refreshTags()" class="pull-right"> <img src="../img/refresh.png" style="margin: 5px;" title="Refresh Tags" ></a>
-    </div>
-    </br>
+       <a href ng-click="refreshTags()" class="pull-right"> 
+          <img src="../img/refresh.png" style="margin: 5px;" title="Refresh Tags">
+       </a>
+       <form ng-submit="filterTags()">
+          <input type="text" style="width: 95%;" ng-model="filterTagText"> </input>
+          <input type="submit" id="submit" value="Submit" class="hide" />
+       </form> 
+    </div> 
     </br> 
-    <div class="list-group">
-       <a ng-repeat="nav in leftnav" ui-sref="search({ query: nav })" class="list-group-item limitSize" title="{{nav}}"><i class="fa fa-tag"></i> {{nav}} </a>
+    <div class="list-group">  
+       <a ng-repeat="nav in filtered = (leftnav | filter:tagFilter | limitTo:intialCount + 1)" ui-sref="search({ query: nav })" class="list-group-item limitSize" title="{{nav}}"><i class="fa fa-tag"></i> {{nav}} </a>
+
+       <a ng-click="showMore()" ng-class="filtered.length > intialCount ? 'show' : 'hide'"> Load more ... </a>
     </div>
 </div>

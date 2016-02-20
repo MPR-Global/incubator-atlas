@@ -20,14 +20,26 @@
 angular.module('dgc.navigation').controller('NavigationController', ['$scope', 'NavigationResource', '$cacheFactory',
     function($scope, NavigationResource, $cacheFactory) {
 
+        $scope.intialCount = 19;
+
         $scope.updateVar = function(event) {
             $scope.$$prevSibling.query = angular.element(event.target).text();
+        };
 
+        $scope.showMore = function(){
+            $scope.intialCount += 20;
         };
 
         $scope.$on('load_Traits', function() {
             $scope.leftnav = NavigationResource.get();
         });
+
+        $scope.filterTags = function(){
+            $scope.tagFilter =  $scope.filterTagText;
+            $scope.intialCount = 20;
+
+            console.log("filtered length  "+ $scope.filtered.length);
+        };
 
         setTimeout(function() {
          	var httpDefaultCache = $cacheFactory.get('$http');
@@ -38,6 +50,7 @@ angular.module('dgc.navigation').controller('NavigationController', ['$scope', '
         	var httpDefaultCache = $cacheFactory.get('$http');
         	httpDefaultCache.remove('/api/atlas/types?type=TRAIT');
         	$scope.leftnav = NavigationResource.get();
+            $scope.intialCount = 20;
         }; 
 
     }
