@@ -29,7 +29,7 @@ angular.module('dgc.search').config(['$stateProvider',
             parent: 'search',
             params: {
                 tId: null,
-                 frm : 'search'
+                frm: 'search'
             },
             onEnter: ['$stateParams', '$state', '$modal', 'navigationResource', function($stateParams, $state, $modal, navigationResource) {
                 $modal.open({

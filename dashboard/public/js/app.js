@@ -51,7 +51,7 @@ angular.module('dgc').factory('lodash', ['$window',
     }
 ]).factory('httpInterceptor', ['global', function(global) {
     return {
-        'request': function(config) { 
+        'request': function(config) {
             if (config.url && (config.url.indexOf(baseUrl) === 0 || config.url.indexOf(baseUrl) === 0)) {
                 config.params = config.params || {};
                 config.params['user.name'] = global.user;
@@ -99,9 +99,9 @@ angular.module('dgc').factory('lodash', ['$window',
         }
 
         if (typeof to.parent === 'undefined') {
-            if (to.name !== 'search') { 
+            if (to.name !== 'search') {
                 $rootScope.leftNav = true;
-            } else { 
+            } else {
                 $rootScope.leftNav = false;
             }
         }

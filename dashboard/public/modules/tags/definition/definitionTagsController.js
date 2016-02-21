@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.tags.definition').controller('definitionTagsController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'attributeDefinition', 'tagClasses', 'tagsResource', 'notificationService', 'navigationResource', '$cacheFactory','atlasConfig',
-    function($scope, $resource, $state, $stateParams, _, attributeDefinition, categories, tagsResource, notificationService, navigationResource, $cacheFactory,atlasConfig) {
+angular.module('dgc.tags.definition').controller('definitionTagsController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'attributeDefinition', 'tagClasses', 'tagsResource', 'notificationService', 'navigationResource', '$cacheFactory', 'atlasConfig',
+    function($scope, $resource, $state, $stateParams, _, attributeDefinition, categories, tagsResource, notificationService, navigationResource, $cacheFactory, atlasConfig) {
         $scope.categoryList = categories;
         $scope.category = 'TRAIT';
         $scope.tagModel = {
@@ -29,7 +29,7 @@ angular.module('dgc.tags.definition').controller('definitionTagsController', ['$
         $scope.typesList = navigationResource.get();
         $scope.newtagModel = angular.copy($scope.tagModel);
         $scope.addAttribute = function addAttribute() {
-        $scope.tagModel.attributeDefinitions.push(attributeDefinition.getModel());
+            $scope.tagModel.attributeDefinitions.push(attributeDefinition.getModel());
         };
 
         $scope.removeAttribute = function(index) {
@@ -40,17 +40,17 @@ angular.module('dgc.tags.definition').controller('definitionTagsController', ['$
             $scope.categoryInst = categories[$scope.category].clearTags();
         };
 
-        $scope.reset = function(){
+        $scope.reset = function() {
             $scope.tagModel = angular.copy($scope.newtagModel);
             $scope.selectedParent = undefined;
         };
 
-        $scope.refreshTags = function(){
+        $scope.refreshTags = function() {
             var httpDefaultCache = $cacheFactory.get('$http');
             httpDefaultCache.remove(atlasConfig.API_ENDPOINTS.TRAITS_LIST);
             $scope.typesList = navigationResource.get();
-        }; 
-        
+        };
+
         $scope.save = function saveTag(form) {
             $scope.savedTag = null;
             if (form.$valid) {

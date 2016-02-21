@@ -30,7 +30,7 @@ angular.module('dgc.details').config(['$stateProvider',
             parent: 'details',
             params: {
                 tId: null,
-                frm : 'details'
+                frm: 'details'
             },
             onEnter: ['$stateParams', '$state', '$modal', 'navigationResource', function($stateParams, $state, $modal, navigationResource) {
                 $modal.open({

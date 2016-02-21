@@ -55,16 +55,16 @@ angular.module('dgc.details').controller('detailsController', ['$window', '$scop
                     }
                     if (typeof data.values[aaa] === 'object' && angular.isArray(data.values[aaa]) === true) {
                         var arrObj = data.values[aaa];
-                        for(var a=0; a < arrObj.length; a++){
-                            if(typeof arrObj[a].id === 'string'){ 
+                        for (var a = 0; a < arrObj.length; a++) {
+                            if (typeof arrObj[a].id === 'string') {
                                 arrObj[a].name = arrObj[a].id;
                                 getName(arrObj[a], arrObj[a]);
                             }
-                        } 
+                        }
                     }
                 }
             }
- 
+
             $scope.details = data;
             if (data && data.values && data.values.name && data.values.name !== "") {
                 schemaResource.get({

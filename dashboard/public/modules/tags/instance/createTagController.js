@@ -59,7 +59,7 @@ angular.module('dgc.tags.instance').controller('createTagController', ['$scope',
             });
         };
         $scope.ok = function($event, tagDefinitionform) {
-             $scope.isSuccess = false;
+            $scope.isSuccess = false;
             if (tagDefinitionform.$valid) {
                 var requestObject = {
                     "jsonClass": "org.apache.atlas.typesystem.json.InstanceSerialization$_Struct",
@@ -71,14 +71,14 @@ angular.module('dgc.tags.instance').controller('createTagController', ['$scope',
                 }, requestObject).$promise.then(function(data) {
                     if (data.requestId !== undefined && data.GUID === $stateParams.tId) {
                         var tagName = $$("#tagDefinition").val();
-                        if($stateParams.frm && $stateParams.frm !== 'details'){ 
+                        if ($stateParams.frm && $stateParams.frm !== 'details') {
                             $rootScope.updateTags(true, {
                                 added: $scope.selectedType
                             });
                             $$("#" + $stateParams.tId).append("<a class='tab-search-tags ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }else if($stateParams.frm === 'details'){
-                            $$("#" + $stateParams.tId+"_schema").append("<a class='tab-search-tags ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
-                        }  
+                        } else if ($stateParams.frm === 'details') {
+                            $$("#" + $stateParams.tId + "_schema").append("<a class='tab-search-tags ng-binding ng-scope' data-ui-sref='search({query: " + tagName + "})' title='" + tagName + "' href='#!/search?query=" + tagName + "'>" + tagName + "<span> </span></a>");
+                        }
                     }
                     $scope.successmessage = 'Tag "' + $scope.selectedType + '" has been added to entity';
                     $scope.isSuccess = true;

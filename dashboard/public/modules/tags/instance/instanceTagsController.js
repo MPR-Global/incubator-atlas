@@ -58,7 +58,6 @@ angular.module('dgc.tags.instance').controller('instanceTagController', ['$scope
             }
         });
 
-
         $scope.openAddTag = function() {
             $state.go('addTag', {
                 tId: $scope.id

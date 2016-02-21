@@ -22,7 +22,6 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
         var guidsList = [],
             $$ = angular.element;
 
-
         function inVertObj(edgs) {
             var newEdgsObj = {};
 
@@ -257,7 +256,6 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                 root,
                 depthwidth = 10;
 
-
             var viewerWidth = widthg - 15,
                 viewerHeight = heightg,
                 center = [viewerWidth / 2, viewerHeight / 2];
@@ -298,7 +296,6 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
             }, function(d) {
                 return d.children && d.children.length > 0 ? d.children : null;
             });
-
 
             // sort the tree according to the node names
 
@@ -341,7 +338,6 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                     return null;
                 })
                 .call(tooltip);
-
 
             // Define the drag listeners for drag/drop behaviour of nodes.
             dragListener = d3.behavior.drag()
@@ -398,7 +394,6 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                 }
             }
 
-
             function expand(d) {
                 if (d._children) {
                     d.children = d._children;
@@ -438,7 +433,7 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
             // Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children.
 
             function centerNode(source) {
-                var scale =  zoomListener.scale();
+                var scale = zoomListener.scale();
                 var x = -source.y0;
                 var y = -source.x0;
                 x = x * scale - 130;
@@ -495,8 +490,10 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                 };
                 childCount(0, root);
                 //tree = tree.nodeSize([50, 100]);
-                tree = tree.separation(function(a, b) { return ((a.parent === root) && (b.parent === root)) ? 3 : 1; })
-                .size([viewerHeight, viewerWidth - 160]);
+                tree = tree.separation(function(a, b) {
+                        return ((a.parent === root) && (b.parent === root)) ? 3 : 1;
+                    })
+                    .size([viewerHeight, viewerWidth - 160]);
 
                 // Compute the new tree layout.
                 var nodes = tree.nodes(root).reverse();
@@ -714,28 +711,31 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
             // Simplest possible buttons
             var intervalID;
 
-            d3.selectAll('.zoom-buttons').on('mousedown', function(){
+            d3.selectAll('.zoom-buttons').on('mousedown', function() {
                 d3.event.preventDefault();
-                $scope.factor = (this.id === 'zoom_in') ? 1.1 : 1/1.1;
+                $scope.factor = (this.id === 'zoom_in') ? 1.1 : 1 / 1.1;
                 intervalID = setInterval(zoom_by, 40, $scope.factor);
-            }).on('mouseup', function(){
+            }).on('mouseup', function() {
                 d3.event.preventDefault();
                 clearInterval(intervalID);
                 intervalID = undefined;
             });
 
-            function zoom_by(factor){
+            function zoom_by(factor) {
                 var scale = zoomListener.scale(),
                     extent = zoomListener.scaleExtent(),
                     translate = zoomListener.translate(),
-                    x = translate[0], y = translate[1],
+                    x = translate[0],
+                    y = translate[1],
                     target_scale = scale * factor;
 
                 // If we're already at an extent, done
-                if (target_scale === extent[0] || target_scale === extent[1]) { return false; }
+                if (target_scale === extent[0] || target_scale === extent[1]) {
+                    return false;
+                }
                 // If the factor is too much, scale it down to reach the extent exactly
                 var clamped_target_scale = Math.max(extent[0], Math.min(extent[1], target_scale));
-                if (clamped_target_scale !== target_scale){
+                if (clamped_target_scale !== target_scale) {
                     target_scale = clamped_target_scale;
                     factor = target_scale / scale;
                 }
@@ -746,7 +746,7 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
 
                 // Enact the zoom immediately
                 zoomListener.scale(target_scale)
-                    .translate([x,y]);
+                    .translate([x, y]);
                 zoom();
             }
 
@@ -758,10 +758,14 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
             // Layout the tree initially and center on the root node.
             update(root);
             centerNode(root);
-            if(!$scope.initialHeight){
+            if (!$scope.initialHeight) {
                 $scope.initialHeight = angular.element('.lineage-viz').height();
             }
-            angular.element('.lineage-viz').resizable({minWidth:1150, maxWidth:1150, maxHeight: angular.element('.lineage-viz').height(), minHeight:50
+            angular.element('.lineage-viz').resizable({
+                minWidth: 1150,
+                maxWidth: 1150,
+                maxHeight: angular.element('.lineage-viz').height(),
+                minHeight: 50
             });
             $scope.requested = false;
             var couplingParent1 = tree.nodes(root).filter(function(d) {
