@@ -380,3 +380,8 @@ Tags on Home Page design
     margin-right: 15px;
     margin-left: -15px;
 }
+
+.see-more {
+    font-weight: bold;
+    font-size: 14px;
+}
