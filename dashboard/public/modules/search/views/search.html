@@ -68,7 +68,7 @@
                         </span>
                      </td>
                      <td>
-                        <div id="{{result['$id$'].id || result.guid}}" ng-show="!dataTransitioned" class="wordBreak"><a class="tabsearchanchor" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
+                        <div id="{{result['$id$'].id || result.guid}}" ng-show="!dataTransitioned" class="word-break"><a class="tab-search-tags" ng-repeat="(key, value) in result['$traits$']" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a></div>
                      </td>
                      <td class="add-tag"><img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['$id$'].id || result.guid)"></td>
                   </tr>
@@ -85,8 +85,8 @@
 
                         <span data-ng-if="res.toLowerCase().indexOf('name') != -1 && !result['id'] && !result['guid']">{{result[res]}}</span> 
                         
-                        <div data-ng-if="res == '$traits$'" class="wordBreak tags" id="{{result['id']|| result['guid']}}">
-                           <a class="tabsearchanchor" ng-repeat="(key, value) in result[res]" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a>
+                        <div data-ng-if="res == '$traits$'" class="word-break tags" id="{{result['id']|| result['guid']}}">
+                           <a class="tab-search-tags" ng-repeat="(key, value) in result[res]" data-ui-sref="search({query: key})" title="{{key}}">{{key}}<span> </span></a>
                         </div>
                         
                         <span data-ng-if="res == 'Tools'" class="add-tag"> <img ng-src="img/addTag.png" tooltip="Add Tag" ng-click="openAddTagHome(result['id']|| result['guid'])"> </span>
