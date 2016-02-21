@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.details').controller('detailsController', ['$window', '$scope', '$state', '$stateParams', 'detailsResource', 'SchemaResource',
-    function($window, $scope, $state, $stateParams, detailsResource, SchemaResource) {
+angular.module('dgc.details').controller('detailsController', ['$window', '$scope', '$state', '$stateParams', 'detailsResource', 'schemaResource',
+    function($window, $scope, $state, $stateParams, detailsResource, schemaResource) {
 
         $scope.tableName = false;
         $scope.isTable = false;
@@ -67,7 +67,7 @@ angular.module('dgc.details').controller('detailsController', ['$window', '$scop
  
             $scope.details = data;
             if (data && data.values && data.values.name && data.values.name !== "") {
-                SchemaResource.get({
+                schemaResource.get({
                     tableName: data.values.name
                 }, function(data1) {
                     if (data1.results) {

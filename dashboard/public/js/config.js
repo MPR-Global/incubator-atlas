@@ -21,7 +21,7 @@ var host = '',
     baseUrl = '/api/atlas/',
     apiHost = (host!=='') ? host + ':' + port + baseUrl : baseUrl ;
 
-angular.module('dgc').constant('AtlasConfig', { 
+angular.module('dgc').constant('atlasConfig', { 
     API_ENDPOINTS: {
         ABOUT: apiHost + 'admin/version',
         GET_ENTITY: apiHost + 'entities',

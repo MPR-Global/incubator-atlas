@@ -17,8 +17,8 @@
  */
 'use strict';
 
-angular.module('dgc.tags.definition').controller('definitionTagsController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'attributeDefinition', 'tagClasses', 'tagsResource', 'notificationService', 'navigationResource', '$cacheFactory','AtlasConfig',
-    function($scope, $resource, $state, $stateParams, _, attributeDefinition, categories, tagsResource, notificationService, navigationResource, $cacheFactory,AtlasConfig) {
+angular.module('dgc.tags.definition').controller('definitionTagsController', ['$scope', '$resource', '$state', '$stateParams', 'lodash', 'attributeDefinition', 'tagClasses', 'tagsResource', 'notificationService', 'navigationResource', '$cacheFactory','atlasConfig',
+    function($scope, $resource, $state, $stateParams, _, attributeDefinition, categories, tagsResource, notificationService, navigationResource, $cacheFactory,atlasConfig) {
         $scope.categoryList = categories;
         $scope.category = 'TRAIT';
         $scope.tagModel = {
@@ -47,7 +47,7 @@ angular.module('dgc.tags.definition').controller('definitionTagsController', ['$
 
         $scope.refreshTags = function(){
             var httpDefaultCache = $cacheFactory.get('$http');
-            httpDefaultCache.remove(AtlasConfig.API_ENDPOINTS.TRAITS_LIST);
+            httpDefaultCache.remove(atlasConfig.API_ENDPOINTS.TRAITS_LIST);
             $scope.typesList = navigationResource.get();
         }; 
         
@@ -65,7 +65,7 @@ angular.module('dgc.tags.definition').controller('definitionTagsController', ['$
                     .then(function tagCreateSuccess() {
                         notificationService.info('"' + $scope.tagModel.typeName + '" has been created', false);
                         var httpDefaultCache = $cacheFactory.get('$http');
-                        httpDefaultCache.remove(AtlasConfig.API_ENDPOINTS.TRAITS_LIST);
+                        httpDefaultCache.remove(atlasConfig.API_ENDPOINTS.TRAITS_LIST);
                         $scope.typesList = navigationResource.get();
                         $scope.reset();
                     }).catch(function tagCreateFailed(error) {
