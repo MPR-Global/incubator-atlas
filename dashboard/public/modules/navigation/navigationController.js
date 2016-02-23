@@ -35,7 +35,7 @@ angular.module('dgc.navigation').controller('NavigationController', ['$scope', '
         });
 
         $scope.filterTags = function(){
-            $scope.tagFilter =  $scope.filterTagText;
+           // $scope.tagFilter =  $scope.filterTagText;
             $scope.intialCount = 20;
 
             console.log("filtered length  "+ $scope.filtered.length);
