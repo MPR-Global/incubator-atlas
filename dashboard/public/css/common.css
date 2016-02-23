@@ -177,33 +177,30 @@ Search Bar design
 }
 */
 .mainSearch .search-type-large {
-    width: 112px!important;
+    width: 95px!important;
 }
 
 .mainSearch select {
     height: 50px!important;
     padding-right: 0px;
     margin-right: 0px;
-    width: 100px;
+    width: 83px;
     font-weight:bold;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url('../img/select_arrow.png') no-repeat;
+    cursor:pointer;
+    background: url('../img/select_arrow_img.png') no-repeat;
     background-size: 22px 22px;
+    background-position: 54px 13px!important;
 }
 
-.search-type-large select {
-   background-position: 72px 13px!important;
+.search-type-large .form-control:focus {
+     border-color: #ccc;
+     box-shadow: none;
+     outline: 0 none;
 }
 
-.search-type-small select{
-    background-position: 48px 13px!important;
-}
-
-.mainSearch  .search-type-small {
-    width: 88px!important
-}
 /*=======================================================================================
 Tags on Home Page design
 =======================================================================================*/

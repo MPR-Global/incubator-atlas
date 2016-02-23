@@ -21,10 +21,10 @@
    <div class="">
       <div class="row mainSearch">
          <form class="col-lg-12" name="form" novalidate>
-            <div class="col-lg-2" ng-class="{'search-type-small':(searchTypeModel === 'dsl'),'search-type-large':(searchTypeModel === 'fulltext')}">
-               <select class="form-control" ng-model="searchTypeModel">
+            <div class="col-lg-2 search-type-large">
+               <select class="form-control" ng-model="searchTypeModel" ng-change="searchTypeChanged()">
                   <option ng-selected = "{{searchTypeModel === 'dsl'}}" value="dsl">DSL</option>
-                  <option ng-selected = "{{searchTypeModel === 'fulltext'}}" value="fulltext">FullText</option>
+                  <option ng-selected = "{{searchTypeModel === 'fulltext'}}" value="fulltext">Text</option>
                </select>
             </div>
             <div class="input-group col-lg-10">

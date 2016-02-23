@@ -286,5 +286,11 @@ angular.module('dgc.search').controller('SearchController', ['$scope', '$locatio
         if ($scope.query && $stateParams.searchType) {
             $scope.search($scope.query, $stateParams.searchType);
         }
+
+        $scope.searchTypeChanged = function(){
+            if($scope.query){
+                $scope.search($scope.query, $scope.searchTypeModel);
+            }
+        };
     }
 ]);
