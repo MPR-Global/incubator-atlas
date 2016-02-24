@@ -34,11 +34,8 @@ angular.module('dgc.navigation').controller('NavigationController', ['$scope', '
             $scope.leftnav = NavigationResource.get();
         });
 
-        $scope.filterTags = function(){
-           // $scope.tagFilter =  $scope.filterTagText;
-            $scope.intialCount = 20;
-
-            console.log("filtered length  "+ $scope.filtered.length);
+        $scope.filterTags = function(){ 
+            $scope.intialCount = 20; 
         };
 
         setTimeout(function() {

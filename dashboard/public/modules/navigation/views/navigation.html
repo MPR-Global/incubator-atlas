@@ -23,7 +23,7 @@
           <img src="../img/refresh.png" style="margin: 5px;" title="Refresh Tags">
        </a>
        <form ng-submit="filterTags()">
-          <input type="text" class="filterTag" placeholder="Search for Tags…" ng-model="filterTagText" ng-keypress="filterTags()"> </input>
+          <input type="text" class="filterTag" placeholder="Search for Tags…" ng-model="tagFilter" ng-keydown="filterTags()"> </input>
           <input type="submit" id="submit" value="Submit" class="hide" />
        </form> 
     </div> 

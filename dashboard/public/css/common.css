@@ -203,7 +203,7 @@ Tags on Home Page design
 }
 
 .mainTags .listTag{
-    height: 700px;
+    height: 600px;
     overflow-y: scroll;
 }
 
