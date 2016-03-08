@@ -331,6 +331,7 @@ angular.module('dgc.lineage').controller('lineage_ioController', ['$element', '$
                 .attr("width", viewerWidth)
                 .attr("height", viewerHeight)
                 .attr("class", "overlay")
+                .attr("class","lineage-graph")
                 .call(zoomListener)
                 .call(zoomListener.event)
                 .on("dblclick.zoom", function() {
