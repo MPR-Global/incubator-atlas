@@ -31,7 +31,47 @@ module.exports = function(grunt) {
         modulesPath = '../public/'
 
     grunt.initConfig({
+         less: {
+            development: {
+                options: {
+                    paths: ["public/css"],
+                    cleancss: true
+                },
+                files: {
+                    "public/css/sticky-footer-navbar.less": "public/css/sticky-footer-navbar.css",
+                    "public/css/d3tip.less": "public/css/d3tip.css",
+                    "public/css/details.less": "public/css/details.css",
+                    "public/css/lineage.less": "public/css/lineage.css",
+                    "public/css/tags.less": "public/css/tags.css",
+                    "public/css/common.less": "public/css/common.css"
+                },
+
+            },
+            production: {
+                options: {
+                    paths: ["public/css"],
+                    cleancss: true
+                },
+                files: {
+                    "public/css/sticky-footer-navbar.less": "public/css/sticky-footer-navbar.css",
+                    "public/css/common.less": "public/css/common.css",
+                    "public/css/d3tip.less": "public/css/d3tip.css",
+                    "public/css/details.less": "public/css/details.css",
+                    "public/css/lineage.less": "public/css/lineage.css",
+                    "public/css/tags.less": "public/css/tags.css"
+                },
+
+            }
+        },
         watch: {
+                styles: {
+                       files: ["public/css/*"],
+                       tasks: ['less'],
+                       options: {
+                           livereload: true,
+                           nospaces: true
+                       }
+                   },
             options: {
                 livereload: 35729
             },
@@ -165,6 +205,9 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
     grunt.registerTask('default', ['devUpdate', 'bower', 'jshint', 'jsbeautifier:default']);
+
+     grunt.loadNpmTasks('grunt-contrib-less');
+     grunt.registerTask('default', ['less']);
 
     grunt.registerTask('server', ['jshint', 'clean', 'bower', 'copy:dist', 'minify', 'concurrent']);
     grunt.registerTask('build', ['copy:dist', 'minify']);
